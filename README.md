@@ -1,3 +1,3 @@
 # Grup 6
 
-### Pol González Miranda, Jon Jon Perea Garcia, Edgar Quirante Sánchez
+### Pol González Miranda, Jon Perea Garcia, Edgar Quirante Sánchez
