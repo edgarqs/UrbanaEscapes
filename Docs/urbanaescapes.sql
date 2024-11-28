@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS urbanaescapes;
 CREATE DATABASE IF NOT EXISTS urbanaescapes;
 USE urbanaescapes;
 
@@ -13,24 +14,24 @@ CREATE TABLE hotel (
 
 CREATE TABLE habitacions (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_hotel INT NOT NULL,
-    tipus ENUM('Estandar', 'Suite', 'Adaptada', 'Deluxe') NOT NULL,
-    llits ENUM(1,2,3,4) NOT NULL,
-    llits_supletoris ENUM(0,1,2) INT NOT NULL,
+    hotel_id INT NOT NULL,
+    tipus ENUM('estandar', 'suite', 'adaptada', 'deluxe') NOT NULL,
+    llits ENUM('1','2','3','4') NOT NULL,
+    llits_supletoris ENUM('0','1','2') NOT NULL,
     preu DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (id_hotel) REFERENCES hotel(id)
+    FOREIGN KEY (hotel_id) REFERENCES hotel(id)
 );
 
 CREATE TABLE serveis (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    servei VARCHAR(255) NOT NULL
+    nom VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE servei_habitacio (
-    id_habitacio INT NOT NULL,
-    id_servei INT NOT NULL,
-    FOREIGN KEY (id_habitacio) REFERENCES habitacions(id),
-    FOREIGN KEY (id_servei) REFERENCES serveis(id)
+    habitacio_id INT NOT NULL,
+    servei_id INT NOT NULL,
+    FOREIGN KEY (habitacio_id) REFERENCES habitacions(id),
+    FOREIGN KEY (servei_id) REFERENCES serveis(id)
 );
 
 CREATE TABLE usuaris (
@@ -41,12 +42,12 @@ CREATE TABLE usuaris (
 
 CREATE TABLE reserves (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_habitacio INT NOT NULL,
-    id_usuari INT NOT NULL,
+    habitacio_id INT NOT NULL,
+    usuari_id INT NOT NULL,
     data_entrada DATE NOT NULL,
     data_sortida DATE NOT NULL,
     preu_total DECIMAL(10, 2) NOT NULL,
-    estat ENUM('Pendent', 'Confirmada', 'Cancelada') NOT NULL,
-    FOREIGN KEY (id_habitacio) REFERENCES habitacions(id),
-    FOREIGN KEY (id_usuari) REFERENCES usuaris(id)
+    estat ENUM('pendent', 'confirmada', 'cancelada') NOT NULL,
+    FOREIGN KEY (habitacio_id) REFERENCES habitacions(id),
+    FOREIGN KEY (usuari_id) REFERENCES usuaris(id)
 );
