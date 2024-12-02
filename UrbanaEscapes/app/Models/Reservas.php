@@ -18,6 +18,7 @@ class Reservas extends Model
         'estat'
     ];
 
+    
 
     public function habitacion()
     {
