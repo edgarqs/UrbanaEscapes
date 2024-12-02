@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,8 +17,6 @@ class Reservas extends Model
         'estat'
     ];
 
-    
-
     public function habitacion()
     {
         return $this->belongsTo(Habitacion::class);
@@ -28,5 +25,24 @@ class Reservas extends Model
     public function usuari()
     {
         return $this->belongsTo(Usuari::class);
+    }
+
+    public static function countHabitacionesLliures($hotelId)
+    {
+        return Habitacion::whereDoesntHave('reservas')->where('hotel_id', $hotelId)->count();
+    }
+
+    public static function countHabitacionesPendientes($hotelId)
+    {
+        return Habitacion::whereHas('reservas', function($query) {
+            $query->where('estat', 'pendent');
+        })->where('hotel_id', $hotelId)->count();
+    }
+
+    public static function countHabitacionesConfirmadas($hotelId)
+    {
+        return Habitacion::whereHas('reservas', function($query) {
+            $query->where('estat', 'confirmada');
+        })->where('hotel_id', $hotelId)->count();
     }
 }

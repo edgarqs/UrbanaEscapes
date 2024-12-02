@@ -1,29 +1,22 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Habitacion extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
-        'tipus',
-        'llits',
-        'llits_supletoris',
-        'preu',
         'hotel_id',
+        'numero',
+        'tipo',
+        'precio'
     ];
 
-    public function hotel()
+    public function reservas()
     {
-        return $this->belongsTo(Hotel::class);
-    }
-
-    public function reserves()
-    {
-        return $this->hasMany(Reservas::class);
+        return $this->hasMany(Reservas::class, 'habitacion_id');
     }
 }
