@@ -15,11 +15,13 @@ class ReservasController extends Controller
         $hab_lliures = Reservas::countHabitacionesLliures($id);
         $hab_pendent = Reservas::countHabitacionesPendientes($id);
         $hab_ocupada = Reservas::countHabitacionesConfirmadas($id);
+        $habitacionsTotals = Hotel::find($id)->habitacions->count();
 
         return view('hotel.home', [
             'hab_lliures' => $hab_lliures,
             'hab_pendent' => $hab_pendent,
-            'hab_ocupada' => $hab_ocupada
+            'hab_ocupada' => $hab_ocupada,
+            'habitacionsTotals' => $habitacionsTotals
         ]);
     }
 }

@@ -1,23 +1,25 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="home">
-        
+    <div class="contenido">
+
+        <h1 class="h1">Gestió de l'hotel</h1>
+
         <div class="cards">
-            <div class="item">
-                <h1>Habitacions ocupades</h1>
-                <p>{{ $hab_ocupada }}</p>
+            <div class="card">
+                <h2 class="card-header">Habitacions Ocupades</h2>
+                <h3 class="counter-habitacions">{{ $hab_ocupada }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
             </div>
-            <div class="item">
-                <h1>Habitacions lliures</h1>
-                <p>{{ $hab_lliures }}</p>
+            <div class="card">
+                <h2 class="card-header">Habitacions Lliures</h2>
+                <h3 class="counter-habitacions">{{ $hab_lliures }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
             </div>
-            <div class="item">
-                <h1>Habitacions reservades</h1>
-                <p>{{ $hab_pendent }}</p> 
+            <div class="card">
+                <h2 class="card-header">Checkins Pendents</h2>
+                <h3 class="counter-habitacions">{{ $hab_pendent }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
             </div>
         </div>
 
-        
     </div>
+
 @endsection
