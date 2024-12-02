@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         // Creació habitacions
         $habitacionsNumber = $this->command->ask('Quantes habitacions vols crear?', 100);
-        Habitacion::factory($habitacionsNumber)->create();
+        $habitacions = Habitacion::factory($habitacionsNumber)->create();
         $this->command->info("  + Afegides $habitacionsNumber habitacions");
 
         // Creació usuaris
@@ -63,8 +63,17 @@ class DatabaseSeeder extends Seeder
         $this->command->info("  + Afegits els servis");
 
         // Creació reserves
+        //TODO:: Hacer que se creen reservas con habitaciones desde count en la base de datos
         $reservesNumber = $this->command->ask('Quantes reserves vols crear?', 50);
-        Reservas::factory($reservesNumber)->create();
+        $reserves = Reservas::factory($reservesNumber)->create();
+
+        // $habitacions->each(function ($habitacio, $reservesNumber) {
+        //     $reservas = Reservas::factory()->count($reservesNumber)->create();
+        //     $habitacio->reservas()->attach(
+        //         $reservas->pluck('id')->toArray()
+        //     );
+        // });
+
         $this->command->info("  + Afegides $reservesNumber reserves");
 
     }
