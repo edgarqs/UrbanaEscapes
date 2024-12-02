@@ -18,11 +18,12 @@ class ReservasFactory extends Factory
     {
         $faker = \Faker\Factory::create('es_ES');
         return [
-            'tipus' => $faker->randomElement(['estandar', 'deluxe', 'suite', 'adaptada']),
-            'llits' => $faker->randomElement(['1', '2', '3', '4']),
-            'llits_supletoris' => $faker->randomElement(['0', '1', '2']),
-            'preu' => $faker->randomFloat(2, 0, 1000),
-            'hotel_id' => random_int(1, 1),
+            'habitacion_id' => random_int(1, 100),
+            'usuari_id' => random_int(1, 50),
+            'data_entrada' => $faker->dateTimeThisYear(),
+            'data_sortida' => $faker->dateTimeThisYear(),
+            'preu_total' => $faker->randomFloat(2, 0, 1000),
+            'estat' => $faker->randomElement(['pendent', 'confirmada', 'cancelada']),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Habitacion;
+use App\Models\Reservas;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -60,6 +61,12 @@ class DatabaseSeeder extends Seeder
         // Importar les dades a la base de dades
         DB::table('serveis')->insert($serveis);
         $this->command->info("  + Afegits els servis");
+
+        // Creació reserves
+        $reservesNumber = $this->command->ask('Quantes reserves vols crear?', 50);
+        Reservas::factory($reservesNumber)->create();
+        $this->command->info("  + Afegides $reservesNumber reserves");
+
     }
 }
 
