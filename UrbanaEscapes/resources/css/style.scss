@@ -1,5 +1,215 @@
-$primaryColor: #ff0000;
+// Variables de color
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$tertiary-color: #e74c3c;
+$background-color: #f4f4f4;
+$text-color: #333;
+$link-color: $primary-color;
+$font-stack: "Poppins", sans-serif;
 
+// Variables de espaciado
+$base-spacing: 1rem;
+$large-spacing: 2rem;
+
+// Fuente y tipografía
+$heading-font: "Poppins", sans-serif;
+$body-font: "Poppins", sans-serif;
+
+// Reset de márgenes y paddings
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Estilos Globales
 body {
-  background-color: $primaryColor;
+    font-family: $body-font;
+    background-color: $background-color;
+    color: $text-color;
+    line-height: 1.6;
+    padding: $base-spacing;
+}
+
+// Títulos
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $heading-font;
+    font-weight: bold;
+    color: $text-color;
+    margin-bottom: $base-spacing;
+
+    // Estilos para cada nivel de título
+    &.h1 {
+        font-size: 2.5rem;
+    }
+
+    &.h2 {
+        font-size: 2rem;
+    }
+
+    &.h3 {
+        font-size: 1.75rem;
+    }
+
+    &.h4 {
+        font-size: 1.5rem;
+    }
+
+    &.h5 {
+        font-size: 1.25rem;
+    }
+
+    &.h6 {
+        font-size: 1rem;
+    }
+}
+
+// Párrafos
+p {
+    font-size: 1rem;
+    margin-bottom: $base-spacing;
+    line-height: 1.8;
+}
+
+// Enlaces
+a {
+    text-decoration: none;
+    color: $link-color;
+    transition: color 0.3s ease;
+
+    // &:hover {
+    //     color: darken($link-color, 10%);
+    // }
+}
+
+// Botones
+.button {
+    display: inline-block;
+    padding: $base-spacing 2rem;
+    font-size: 1rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &.primary {
+        background-color: $primary-color;
+        color: white;
+
+        // &:hover {
+        //     background-color: darken($primary-color, 10%);
+        // }
+    }
+
+    &.secondary {
+        background-color: $secondary-color;
+        color: white;
+
+        // &:hover {
+        //     background-color: darken($secondary-color, 10%);
+        // }
+    }
+
+    &.danger {
+        background-color: $tertiary-color;
+        color: white;
+
+        // &:hover {
+        //     background-color: darken($tertiary-color, 10%);
+        // }
+    }
+}
+
+// Tarjetas (Card)
+.cards {
+    padding: 50px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: auto;
+    grid-gap: 5rem;
+    width: 100%;
+    margin: 0 auto;
+
+    @media (max-width: 600px) {
+        grid-gap: 2rem;  // Reducir espacio entre tarjetas
+    }
+}
+
+.card {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: $large-spacing;
+    border: black 2px solid;
+
+    @media (max-width: 600px) {
+        padding: $base-spacing; // Menos padding en móvil
+    }
+}
+
+.card-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.card-body {
+    font-size: 1rem;
+    color: $text-color;
+}
+
+// Listas
+ul,
+ol {
+    margin-left: 1.5rem;
+    margin-bottom: $base-spacing;
+}
+
+// Media Queries (Diseño Responsive)
+@mixin respond-to($media) {
+    @if $media == phone {
+        @media (max-width: 600px) {
+            @content;
+        }
+    } @else if $media == tablet {
+        @media (max-width: 900px) {
+            @content;
+        }
+    }
+}
+
+// Ejemplo de uso de media query
+.container {
+    width: 80%;
+    margin: 0 auto;
+
+    @include respond-to(phone) {
+        width: 95%;
+    }
+
+    @include respond-to(tablet) {
+        width: 90%;
+    }
+}
+
+// CSS ESPECÍFICO PARA LA PÁGINA DE INICIO
+.counter-habitacions {
+    font-size: 50px !important;
+}
+.habitacions {
+    font-size: 20px;
+}
+
+.contenido {
+    padding: 50px 100px;
+    @media (max-width: 1150px) {
+        padding: $base-spacing; // Menos padding en móvil
+    }
 }
