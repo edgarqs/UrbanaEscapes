@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Habitacion;
+use App\Models\Reservas;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,16 +21,21 @@ class DatabaseSeeder extends Seeder
             $this->command->info("S'ha reconstruït la base de dades");
         }
 
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
+        // Creació d'hotels
         $hotel = \App\Models\Hotel::create(['nom' => 'The Kyoto', 'adreca' => 'Carrer Mariner, 32', 'ciutat' => 'Madrid', 'pais' => 'Espanya', 'email' => 'info@thekyoto.urbanaescapes.com', 'telefon' => '934567890']);
         $this->command->info("  + Creat hotel de proves $hotel->nom, $hotel->adreca");
 
+        // Creació habitacions
+        $habitacionsNumber = $this->command->ask('Quantes habitacions vols crear?', 100);
+        Habitacion::factory($habitacionsNumber)->create();
+        $this->command->info("  + Afegides $habitacionsNumber habitacions");
+
+        // Creació usuaris
+        $usuarisNumber = $this->command->ask('Quants usuaris vols crear?', 50);
+        \App\Models\Usuari::factory($usuarisNumber)->create();
+        $this->command->info("  + Afegits $usuarisNumber usuari(s)");
+
+        // Creació de serveis
         $serveis = [
             [
                 'nom' => 'Minibar',
@@ -54,12 +60,13 @@ class DatabaseSeeder extends Seeder
 
         // Importar les dades a la base de dades
         DB::table('serveis')->insert($serveis);
+        $this->command->info("  + Afegits els servis");
 
-        $this->command->info("  + Afegit els servis a la taula serveis");
+        // Creació reserves
+        $reservesNumber = $this->command->ask('Quantes reserves vols crear?', 50);
+        Reservas::factory($reservesNumber)->create();
+        $this->command->info("  + Afegides $reservesNumber reserves");
 
-        \App\Models\Usuari::factory(50)->create();
-
-        Habitacion::factory(50)->create();
     }
 }
 
