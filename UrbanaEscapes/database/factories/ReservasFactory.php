@@ -23,7 +23,7 @@ class ReservasFactory extends Factory
             'data_entrada' => $faker->dateTimeThisYear(),
             'data_sortida' => $faker->dateTimeThisYear(),
             'preu_total' => $faker->randomFloat(2, 0, 1000),
-            'estat' => $faker->randomElement(['lliure', 'ocupada', 'pendent']),
+            'estat' => $faker->randomElement(['confirmada','pendent']),
         ];
     }
 }
