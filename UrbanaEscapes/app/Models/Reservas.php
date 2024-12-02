@@ -28,8 +28,4 @@ class Reservas extends Model
     {
         return $this->belongsTo(Usuari::class);
     }
-
-
-
-
 }
