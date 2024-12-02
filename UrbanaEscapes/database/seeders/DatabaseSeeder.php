@@ -62,3 +62,4 @@ class DatabaseSeeder extends Seeder
         Habitacion::factory(50)->create();
     }
 }
+
