@@ -27,4 +27,10 @@ class Hotel extends Model
     {
         return $this->hasMany(Reservas::class);
     }
+
+    public function toggleComplete()
+    {
+        $this->completado = !$this->completado;
+        $this->save();
+    }
 }
