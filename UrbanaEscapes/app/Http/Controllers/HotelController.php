@@ -10,7 +10,7 @@ class HotelController extends Controller
     public function index()
     {
         $hotels = Hotel::all();
-        return view('hotel.index', ['hotels' => $hotels]);
+        return view('hotel.selector', ['hotels' => $hotels]);
     }
     public function create()
     {
@@ -28,6 +28,6 @@ class HotelController extends Controller
         ]);
 
         Hotel::create($dades);
-        return redirect()->route('hotel.index')->with('success', 'Hotel creat correctament');
+        return redirect()->route('hotel.selector')->with('success', 'Hotel creat correctament');
     }
 }
