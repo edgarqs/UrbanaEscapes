@@ -3,7 +3,7 @@
 @section('title', 'Crea Hotel')
 
 @section('content')
-<a href="{{ route('hotel.index') }}">Cancelar</a>
+<a href="{{ route('hotel.selector') }}">Cancelar</a>
 <div class="form">
     <form action="{{ route('hotel.store') }}" method="post">
         @csrf

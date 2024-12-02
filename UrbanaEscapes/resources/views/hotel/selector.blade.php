@@ -3,31 +3,19 @@
 @section('title', 'Hotels')
 
 @section('content')
-    <div class="index">
+    <div class="home">
         <a href="{{ route('hotel.create') }}" class="btn btn-primary">Crea Hotel</a>
     </div>
     <div class="hotels">
         <div class="selector">
-            <form>
-                <select name="hotel">
+            <form action="{{ route('hotel.home') }}" method="GET">
+                <select name="id">
                     @foreach ($hotels as $hotel)
                         <option value="{{ $hotel->id }}">{{ $hotel->nom }}</option>
                     @endforeach
                 </select>
+                <button type="submit">Selecciona</button>
             </form>
-        </div>
-
-        <div class="cards">
-            <div class="item">
-                <h1>Habitacions ocupades</h1>
-                
-            </div>
-            <div class="item">
-                <h1>Habitacions lliures</h1>
-            </div>
-            <div class="item">
-                <h1>Habitacions reservades</h1>
-            </div>
         </div>
     </div>
 @endsection
