@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('data_entrada');
             $table->date('data_sortida');
             $table->decimal('preu_total', 10, 2);
-            $table->enum('estat', ['pendent', 'confirmada', 'cancelada'])->default('pendent');
+            $table->enum('estat', ['confirmada', 'pendent'])->default('pendent');
             $table->timestamps();
         });
     }
