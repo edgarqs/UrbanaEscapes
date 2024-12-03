@@ -20,7 +20,7 @@ sudo apt-get install apache2
 A continuació instal·larem el servidor de base de dades MySQL:
 
 [source,bash]
-sudo apt-get install mysql-server
+sudo apt-get install default-mysql-server
 
 Per últim, instal·larem el llenguatge de programació PHP:
 
@@ -65,6 +65,30 @@ I finalment, actualitzarem els permisos:
 FLUSH PRIVILEGES;
 
 Ara farem l'instalacio del composer al projecte:
+
+Primer instalarem el composer:
+
+Primer descarrerguem el composer:
+
+[source,bash]
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
+Instal·lem el composer:
+
+[source,bash]
+php composer-setup.php
+
+Canviem els permisos del composer:
+
+[source,bash]
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+Finalment acabem la instal·lació del composer:
+
+[source,bash]
+php -r "unlink('composer-setup.php');"
+
+
 
 [source,bash]
 cd /var/www/html/projecte
