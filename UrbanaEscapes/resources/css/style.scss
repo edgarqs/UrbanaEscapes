@@ -147,7 +147,6 @@ a {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: $large-spacing;
-    padding-bottom: 10px;
 
     @media (max-width: 600px) {
         padding: $base-spacing; // Menos padding en móvil

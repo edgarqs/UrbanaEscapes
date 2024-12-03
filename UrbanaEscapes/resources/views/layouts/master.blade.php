@@ -20,7 +20,7 @@
             <img src="{{ asset('img/urbana_logo-sinFondo.png') }}" alt="">
             <ul>
                 <li><a href="{{ route('hotel.selector') }}" class="{{ Route::currentRouteNamed('hotel.home') ? 'active' : '' }}"><span class="material-symbols-outlined">analytics</span>Gestió de l'hotel</a></li>
-                <li class=".position-end"><a href="{{ route('hotel.selector') }}"><span class="material-symbols-outlined">arrow_back</span>Tornar</a></li>
+                <li><a href="{{ route('hotel.selector') }}"><span class="material-symbols-outlined">arrow_back</span>Tornar</a></li>
             </ul>
         </aside>
 
