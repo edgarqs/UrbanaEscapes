@@ -1,0 +1,123 @@
+=== Manual d'instalacio del servidor AWS
+
+Per instalar el servidor AWS cal seguir els següents passos:
+
+Un cop creada l'instància AWS, cal connectar-se a ella via SSH. Per fer-ho, cal descarregar la clau privada que s'ha creat durant la creació de la instància , seguidament utilitzarem Putty per connectar-nos a la instància.
+
+Un cop connectats a la instància, instalarem els paquets necessaris per poder executar el servidor.
+
+El primer pas és actualitzar la llista de paquets disponibles i actualitzar els paquets ja instal·lats:
+
+[source,bash]
+sudo apt-get update
+sudo apt-get upgrade
+
+Un cop actualitzats els paquets, instal·larem l'apache2, el servidor web que utilitzarem:
+
+[source,bash]
+sudo apt-get install apache2
+
+A continuació instal·larem el servidor de base de dades MySQL:
+
+[source,bash]
+sudo apt-get install mysql-server
+
+Per últim, instal·larem el llenguatge de programació PHP:
+
+[source,bash]
+sudo apt-get install php libapache2-mod-php php-mysql php8.2-curl php8.2-xml
+
+Ara instal·larem el gestor de versions Git:
+
+[source,bash]
+sudo apt-get install git
+
+Ara configurarem l'apache2 perquè carregui els fitxers de la carpeta /var/www/html/projecte:
+
+Editem el fitxer /etc/apache2/sites-available/000-default.conf:
+
+[source,bash]
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+I afegim les següents línies:
+
+[source,bash]
+DocumentRoot /var/www/html/projecte
+
+Finalment, reiniciem el servidor apache2:
+
+[source,bash]
+sudo service apache2 restart
+
+Clonem el repositori del projecte:
+
+[source,bash]
+cd /var/www/html
+sudo git clone (enllaç al teu repositori)
+
+Ara donarem permis d'escriptura a la carpeta /var/www/html/projecte:
+
+[source,bash]
+sudo chown -R www-data:www-data /var/www/html/grup6-hotel/UrbanaEscapes
+
+
+Instal·lació de la base de dades:
+
+[source,bash]
+sudo mysql -u root -p
+
+Crearem un usuari per la base de dades:
+
+[source,bash]
+CREATE USER 'C@pernic'@'localhost' IDENTIFIED BY 'C@pernic2324';
+
+Li donarem permisos a l'usuari:
+
+[source,bash]
+GRANT ALL PRIVILEGES ON * . * TO 'C@pernic'@'localhost';
+
+I finalment, actualitzarem els permisos:
+
+[source,bash]
+FLUSH PRIVILEGES;
+
+Ara farem l'instalacio del composer al projecte:
+
+[source,bash]
+cd /var/www/html/projecte
+sudo composer install
+
+Copiem el fitxer .env.example a .env:
+
+[source,bash]
+sudo cp .env.example .env
+
+Generem la clau de l'aplicació:
+
+[source,bash]
+sudo php artisan key:generate
+
+Abans de fer les migracions de la base de dades, caldrà configurar la base de dades. per fer-ho editarem el fitxer .env:
+
+[source,bash]
+sudo nano .env
+
+I actualitzarem les següents línies:
+
+[source,bash]
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=urbanaescapes
+DB_USERNAME=C@pernic
+DB_PASSWORD=C@pernic2324
+
+
+Finalment, farem les migracions de la base de dades:
+
+[source,bash]
+sudo php artisan migrate
+
+I ja tindrem el servidor instal·lat i configurat correctament.
+
+
