@@ -71,22 +71,22 @@ Primer instalarem el composer:
 Primer descarrerguem el composer:
 
 [source,bash]
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 
 Instal·lem el composer:
 
 [source,bash]
-php composer-setup.php
+sudo php composer-setup.php
 
 Canviem els permisos del composer:
 
 [source,bash]
-php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
 Finalment acabem la instal·lació del composer:
 
 [source,bash]
-php -r "unlink('composer-setup.php');"
+sudo php -r "unlink('composer-setup.php');"
 
 
 
