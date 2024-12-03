@@ -47,7 +47,7 @@ CREATE TABLE reserves (
     data_entrada DATE NOT NULL,
     data_sortida DATE NOT NULL,
     preu_total DECIMAL(10, 2) NOT NULL,
-    estat ENUM('pendent', 'confirmada', 'cancelada') NOT NULL,
+    estat ENUM('lliure', 'ocupada', 'pendent') NOT NULL,
     FOREIGN KEY (habitacio_id) REFERENCES habitacions(id),
     FOREIGN KEY (usuari_id) REFERENCES usuaris(id)
 );
