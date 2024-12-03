@@ -32,23 +32,6 @@ Ara instal·larem el gestor de versions Git:
 [source,bash]
 sudo apt-get install git
 
-Ara configurarem l'apache2 perquè carregui els fitxers de la carpeta /var/www/html/projecte:
-
-Editem el fitxer /etc/apache2/sites-available/000-default.conf:
-
-[source,bash]
-sudo nano /etc/apache2/sites-available/000-default.conf
-
-I afegim les següents línies:
-
-[source,bash]
-DocumentRoot /var/www/html/projecte
-
-Finalment, reiniciem el servidor apache2:
-
-[source,bash]
-sudo service apache2 restart
-
 Clonem el repositori del projecte:
 
 [source,bash]
@@ -117,6 +100,24 @@ Finalment, farem les migracions de la base de dades:
 
 [source,bash]
 sudo php artisan migrate
+
+
+Ara configurarem l'apache2 perquè carregui els fitxers de la carpeta /var/www/html/grup6-hotel/UrbanaEscapes.
+
+Editem el fitxer /etc/apache2/sites-available/000-default.conf:
+
+[source,bash]
+sudo nano /etc/apache2/sites-available/000-default.conf
+
+I afegim les següents línies:
+
+[source,bash]
+DocumentRoot /var/www/html/grup6-hotel/UrbanaEscapes/public/
+
+Finalment, reiniciem el servidor apache2:
+
+[source,bash]
+sudo service apache2 restart
 
 I ja tindrem el servidor instal·lat i configurat correctament.
 
