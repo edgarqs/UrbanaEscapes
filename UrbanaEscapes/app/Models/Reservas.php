@@ -8,6 +8,7 @@ class Reservas extends Model
 {
     use HasFactory;
 
+    
     protected $fillable = [
         'habitacion_id',
         'usuari_id',
