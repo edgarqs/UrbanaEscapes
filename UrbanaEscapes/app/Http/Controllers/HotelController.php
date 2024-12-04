@@ -32,8 +32,8 @@ class HotelController extends Controller
         $hotel = Hotel::create($dades);
 
 
-        $seederHabitacions = new DatabaseSeeder();
-        $seederHabitacions->HabitacionsSedder($hotel->id);
+        // $seederHabitacions = new DatabaseSeeder();
+        // $seederHabitacions->HabitacionsSedder($hotel->id);
         
 
         return redirect()->route('hotel.selector')->with('success', 'Hotel creat correctament');
