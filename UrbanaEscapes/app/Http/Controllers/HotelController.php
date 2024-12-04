@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Database\Seeders\DatabaseSeeder;
 
 class HotelController extends Controller
 {
+    
     public function index()
     {
         $hotels = Hotel::all();
@@ -27,7 +29,13 @@ class HotelController extends Controller
             'telefon' => 'required',
         ]);
 
-        Hotel::create($dades);
+        $hotel = Hotel::create($dades);
+
+
+        $seederHabitacions = new DatabaseSeeder();
+        $seederHabitacions->HabitacionsSedder($hotel->id);
+        
+
         return redirect()->route('hotel.selector')->with('success', 'Hotel creat correctament');
     }
 }
