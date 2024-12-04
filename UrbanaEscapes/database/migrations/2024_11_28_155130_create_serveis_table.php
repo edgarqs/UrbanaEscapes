@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('serveis', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
+            $table->float('preu');
             $table->timestamps();
         });
     }
@@ -23,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Eliminar primero las tablas que dependen de serveis
+        Schema::dropIfExists('habitacion_serveis');
         Schema::dropIfExists('serveis');
     }
 };
