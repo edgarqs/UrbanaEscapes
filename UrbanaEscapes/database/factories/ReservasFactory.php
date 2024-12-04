@@ -17,12 +17,16 @@ class ReservasFactory extends Factory
     public function definition(): array
     {
         $faker = \Faker\Factory::create('es_ES');
+        $dias = $faker->numberBetween(1, 15);
+        $data_entrada = $faker->dateTimeThisYear();
+        $data_sortida = (clone $data_entrada)->modify("+$dias days");
+
         return [
             'habitacion_id' => random_int(1, 100),
             'usuari_id' => random_int(1, 50),
-            'data_entrada' => $faker->dateTimeThisYear(),
-            'data_sortida' => $faker->dateTimeThisYear(),
-            'preu_total' => $faker->randomFloat(2, 0, 1000),
+            'data_entrada' => $data_entrada,
+            'data_sortida' => $data_sortida,
+            'preu_total' => $faker->randomFloat(2, 50, 500),
             'estat' => $faker->randomElement(['confirmada','pendent']),
         ];
     }
