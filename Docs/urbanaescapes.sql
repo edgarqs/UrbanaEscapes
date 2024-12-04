@@ -24,7 +24,8 @@ CREATE TABLE habitacions (
 
 CREATE TABLE serveis (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(255) NOT NULL
+    nom VARCHAR(255) NOT NULL,
+    preu DECIMAL(10, 2) NOT NULL
 );
 
 CREATE TABLE servei_habitacio (

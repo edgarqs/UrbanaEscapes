@@ -73,6 +73,14 @@ h5.h6,
 h6.h6 {
   font-size: 1rem;
 }
+h1.center,
+h2.center,
+h3.center,
+h4.center,
+h5.center,
+h6.center {
+  text-align: center;
+}
 
 p {
   font-size: 1rem;
@@ -82,21 +90,24 @@ p {
 
 a {
   text-decoration: none;
-  color: #3498db;
+  color: #1f75cb;
   transition: color 0.3s ease;
 }
 
 .button {
-  display: inline-block;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  text-align: center;
-  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #1f75cb;
+  color: white;
+  border: none;
   border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 .button.primary {
-  background-color: #3498db;
+  background-color: #1f75cb;
   color: white;
 }
 .button.secondary {
@@ -106,6 +117,12 @@ a {
 .button.danger {
   background-color: #2980b9;
   color: white;
+}
+.button.margin-top {
+  margin-top: 1rem;
+}
+.button:hover {
+  background-color: #1c64ac;
 }
 
 .cards {
@@ -214,6 +231,7 @@ ol {
   transition: background-color 0.3s ease;
   border-radius: 10px;
   width: 100%;
+  background-color: #e7e7e7;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -258,6 +276,34 @@ ol {
   .main-content {
     grid-column: 1/-1;
   }
+}
+.form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+}
+.form .form-group {
+  margin-bottom: 1.5rem;
+}
+.form .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+.form .form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+.form .form-group input:focus {
+  outline: none;
+  border-color: #1f75cb;
+  background-color: #f0f8ff;
 }
 
 /*# sourceMappingURL=style.css.map */
