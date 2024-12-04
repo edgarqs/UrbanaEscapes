@@ -94,6 +94,10 @@ a {
     // }
 }
 
+.text-danger {
+    color: #d53545;
+}
+
 // Botones
 .button {
     display: block;
@@ -365,9 +369,15 @@ ol {
             transition: all 0.3s ease;
 
             &:focus {
-                outline: none;
-                border-color: $primary-color;
-                background-color: #f0f8ff;
+                outline: none !important;
+                border-color: $primary-color !important;
+                background-color: #f0f8ff !important;
+                color: $text-color !important;
+            }
+
+            &.is-invalid {
+                background-color: #f8d7da;
+                color: #721c24;
             }
         }
     }

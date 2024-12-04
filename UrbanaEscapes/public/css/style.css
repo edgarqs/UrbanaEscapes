@@ -95,6 +95,10 @@ a {
   transition: color 0.3s ease;
 }
 
+.text-danger {
+  color: #d53545;
+}
+
 .button {
   display: block;
   width: 100%;
@@ -313,9 +317,14 @@ ol {
   transition: all 0.3s ease;
 }
 .form .form-group input:focus {
-  outline: none;
-  border-color: #1f75cb;
-  background-color: #f0f8ff;
+  outline: none !important;
+  border-color: #1f75cb !important;
+  background-color: #f0f8ff !important;
+  color: #333 !important;
+}
+.form .form-group input.is-invalid {
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
 /*# sourceMappingURL=style.css.map */
