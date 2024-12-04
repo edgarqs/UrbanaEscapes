@@ -18,7 +18,7 @@ class Serveis extends Model
 
     public function habitacions()
     {
-        return $this->belongsToMany(Habitacion::class);
+        return $this->belongsToMany(Habitacion::class, 'habitacion_serveis', 'serveis_id', 'habitacions_id');
     }
 
 }

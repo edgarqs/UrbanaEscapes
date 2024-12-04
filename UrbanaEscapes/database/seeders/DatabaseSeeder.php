@@ -51,6 +51,17 @@ class DatabaseSeeder extends Seeder
         Serveis::create(['nom' => 'Minibar', 'preu' => 15]);
         Serveis::create(['nom' => 'Cafetera', 'preu' => 10]);
 
+        //Asignacio serveis a habitacions
+        $habitacions = Habitacion::all();
+        $serveis = Serveis::all();
+        foreach ($habitacions as $habitacio) {
+            $randomServeis = $serveis->random(min($serveis->count(), rand(0, 5)))->pluck('id');
+            if ($randomServeis->isNotEmpty()) {
+                $habitacio->serveis()->attach($randomServeis);
+            }
+        }
+        $this->command->info("  + Serveis assignats a les habitacions");
+
         // Creació reserves
         $reservesNumber = $this->command->ask('Quantes reserves vols crear?', 50);
         Reservas::factory($reservesNumber)->create();
@@ -58,14 +69,35 @@ class DatabaseSeeder extends Seeder
         Log::info("Afegides reserves", ['reservesNumber' => $reservesNumber]);
     }
 
-    public function HabitacionsSedder($hotel_id)
-    {
-        $habitacionsNumber = 100;
-        Habitacion::factory($habitacionsNumber)->create(
-            [
-                'hotel_id' => $hotel_id
-            ]
-        );
-        Log::info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
-    }
+    // public function HabitacionsSedder($hotel_id)
+    // {
+    //     $habitacionsNumber = 100;
+    //     Habitacion::factory($habitacionsNumber)->create(
+    //         [
+    //             'hotel_id' => $hotel_id
+    //         ]
+    //     );
+    //     Log::info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
+
+    //     // Creació serveis
+    //     //Asignacio serveis a habitacions
+    //     $habitacions = Habitacion::all();
+    //     $serveis = Serveis::all();
+    //     foreach ($habitacions as $habitacio) {
+    //         $randomServeis = $serveis->random(min($serveis->count(), rand(0, 5)))->pluck('id');
+    //         if ($randomServeis->isNotEmpty()) {
+    //             $habitacio->serveis()->attach($randomServeis);
+    //         }
+    //     }
+
+    //     // Creació reserves
+    //     $reservesNumber = 50;
+    //     Reservas::factory($reservesNumber)->create(
+    //         [
+    //             'habitacion_id' => $habitacions->random()->id,
+    //         ]
+    //     );
+    //     Log::info("Afegides reserves", ['reservesNumber' => $reservesNumber]);
+
+    // }
 }
