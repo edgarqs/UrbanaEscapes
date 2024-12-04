@@ -3,7 +3,7 @@
 @section('content')
     <div class="contenido">
 
-        <h1 class="h1">Gestió de l'hotel</h1>
+        <h2 class="h2">Gestió de l'hotel</h2>
 
         <div class="cards">
             <div class="card">

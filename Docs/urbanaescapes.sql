@@ -24,7 +24,8 @@ CREATE TABLE habitacions (
 
 CREATE TABLE serveis (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nom VARCHAR(255) NOT NULL
+    nom VARCHAR(255) NOT NULL,
+    preu DECIMAL(10, 2) NOT NULL
 );
 
 CREATE TABLE servei_habitacio (
@@ -47,7 +48,7 @@ CREATE TABLE reserves (
     data_entrada DATE NOT NULL,
     data_sortida DATE NOT NULL,
     preu_total DECIMAL(10, 2) NOT NULL,
-    estat ENUM('pendent', 'confirmada', 'cancelada') NOT NULL,
+    estat ENUM('lliure', 'ocupada', 'pendent') NOT NULL,
     FOREIGN KEY (habitacio_id) REFERENCES habitacions(id),
     FOREIGN KEY (usuari_id) REFERENCES usuaris(id)
 );
