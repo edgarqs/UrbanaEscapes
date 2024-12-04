@@ -13,15 +13,15 @@
         </div>
         <div class="form-group">
             <label for="address">Direcció</label>
-            <input type="text" name="adreca" id="adreca" class="form-control" minlength="10" maxlength="40" required>
+            <input type="text" name="adreca" id="adreca" class="form-control" maxlength="40" required>
         </div>
         <div class="form-group">
             <label for="address">Ciutat</label>
-            <input type="text" name="ciutat" id="ciutat" class="form-control" minlength="10" maxlength="50" required>
+            <input type="text" name="ciutat" id="ciutat" class="form-control" maxlength="50" required>
         </div>
         <div class="form-group">
             <label for="address">Païs</label>
-            <input type="text" name="pais" id="pais" class="form-control" minlength="5" maxlength="23" required>
+            <input type="text" name="pais" id="pais" class="form-control" maxlength="23" required>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
