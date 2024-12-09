@@ -189,6 +189,16 @@ DB_DATABASE=urbanaescapes
 DB_USERNAME=C@pernic
 DB_PASSWORD=C@pernic2324
 
+Tornem a donar permisos a la carpeta:
+
+[source,bash]
+sudo chown -R www-data:www-data /var/www/html/projecte
+
+Tornem a fer composer install:
+
+[source,bash]
+sudo composer install
+
 
 Finalment, farem les migracions de la base de dades:
 
