@@ -87,7 +87,7 @@ Crearem un nou fitxer de configuració per l'aplicació:
 [source,bash]
 sudo nano /etc/nginx/sites-available/laravel.conf
 
-[source,bash]
+'''
 server {
     # Replace the example <domain> with your domain name or IP address
     listen 80;
@@ -133,6 +133,7 @@ server {
         deny all;
     }
 }
+'''
 
 Crearem un enllaç simbòlic per activar la configuració:
 
