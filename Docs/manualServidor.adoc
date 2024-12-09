@@ -15,7 +15,7 @@ sudo apt-get upgrade
 Un cop actualitzats els paquets, instal·larem l'apache2, el servidor web que utilitzarem:
 
 [source,bash]
-sudo apt-get install apache2
+sudo apt-get install nginx
 
 A continuació instal·larem el servidor de base de dades MySQL:
 
@@ -25,7 +25,7 @@ sudo apt-get install default-mysql-server
 Per últim, instal·larem el llenguatge de programació PHP:
 
 [source,bash]
-sudo apt-get install php libapache2-mod-php php-mysql php8.2-curl php8.2-xml
+sudo apt-get install -y php8.2-curl php8.2-mbstring php8.2-xml php8.2-fpm php8.2-mysql
 
 Ara instal·larem el gestor de versions Git:
 
@@ -66,8 +66,6 @@ FLUSH PRIVILEGES;
 
 Ara farem l'instalacio del composer al projecte:
 
-Primer instalarem el composer:
-
 Primer descarrerguem el composer:
 
 [source,bash]
@@ -76,19 +74,85 @@ sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 Instal·lem el composer:
 
 [source,bash]
-sudo php composer-setup.php
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
 
-Canviem els permisos del composer:
-
-[source,bash]
-sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-
-Finalment acabem la instal·lació del composer:
+Ara configurarem el servidor web:
 
 [source,bash]
-sudo php -r "unlink('composer-setup.php');"
+rm /etc/nginx/sites-enabled/default
 
+Crearem un nou fitxer de configuració per l'aplicació:
 
+[source,bash]
+sudo nano /etc/nginx/sites-available/laravel.conf
+
+```	
+
+server {
+    # Replace the example <domain> with your domain name or IP address
+    listen 80;
+    server_name [IP PUBLICA AWS];
+
+    root /var/www/html/grup6-hotel/UrbanaEscapes/public;
+    index index.html index.htm index.php;
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    access_log off;
+    error_log  /var/log/nginx/pterodactyl.app-error.log error;
+
+    # allow larger file uploads and longer script runtimes
+    client_max_body_size 100m;
+    client_body_timeout 120s;
+
+    sendfile off;
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param PHP_VALUE "upload_max_filesize = 100M \n post_max_size=100M";
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTP_PROXY "";
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
+```	
+
+Crearem un enllaç simbòlic per activar la configuració:
+
+[source,bash]
+sudo ln -s /etc/nginx/sites-available/laravel.conf /etc/nginx/sites-enabled/laravel.conf
+
+Reiniciarem el servidor nginx:
+
+[source,bash]
+sudo systemctl restart nginx
+
+Desactivarem el servidor apache2:
+
+[source,bash]
+sudo systemctl stop apache2
+sudo systemctl disable apache2
+sudo systemctl restart nginx
 
 [source,bash]
 cd /var/www/html/projecte
@@ -103,6 +167,11 @@ Generem la clau de l'aplicació:
 
 [source,bash]
 sudo php artisan key:generate
+sudo php artisan config:cache
+sudo php artisan route:cache
+sudo php artisan view:cache
+sudo php artisan event:cache
+sudo php artisan optimize
 
 Abans de fer les migracions de la base de dades, caldrà configurar la base de dades. per fer-ho editarem el fitxer .env:
 
@@ -112,6 +181,7 @@ sudo nano .env
 I actualitzarem les següents línies:
 
 [source,bash]
+APP_DEBUG=false
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -124,24 +194,6 @@ Finalment, farem les migracions de la base de dades:
 
 [source,bash]
 sudo php artisan migrate
-
-
-Ara configurarem l'apache2 perquè carregui els fitxers de la carpeta /var/www/html/grup6-hotel/UrbanaEscapes.
-
-Editem el fitxer /etc/apache2/sites-available/000-default.conf:
-
-[source,bash]
-sudo nano /etc/apache2/sites-available/000-default.conf
-
-I afegim les següents línies:
-
-[source,bash]
-DocumentRoot /var/www/html/grup6-hotel/UrbanaEscapes/public/
-
-Finalment, reiniciem el servidor apache2:
-
-[source,bash]
-sudo service apache2 restart
 
 I ja tindrem el servidor instal·lat i configurat correctament.
 
