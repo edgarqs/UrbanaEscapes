@@ -66,8 +66,6 @@ FLUSH PRIVILEGES;
 
 Ara farem l'instalacio del composer al projecte:
 
-Primer instalarem el composer:
-
 Primer descarrerguem el composer:
 
 [source,bash]
@@ -89,7 +87,7 @@ Crearem un nou fitxer de configuració per l'aplicació:
 [source,bash]
 sudo nano /etc/nginx/sites-available/laravel.conf
 
-[subs="attributes"]
+[source,nginx]
 server {
     # Replace the example <domain> with your domain name or IP address
     listen 80;
