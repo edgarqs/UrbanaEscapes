@@ -89,6 +89,7 @@ class DatabaseSeeder extends Seeder
     // Crea les habitacions al crear l'hotel amb el formulari
     public function HabitacionsSedder($hotel_id)
     {
+        // Crear 100 habitaciones para el hotel
         $habitacionsNumber = 100;
         Habitacion::factory($habitacionsNumber)->create(
             [
@@ -97,8 +98,7 @@ class DatabaseSeeder extends Seeder
         );
         Log::info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
 
-        // Creació serveis
-        //Asignacio serveis a habitacions
+        // Crear los servicios y asignarlos a las habitaciones del hotel
         $habitacions = Habitacion::where('hotel_id', $hotel_id)->get();
         $serveis = Serveis::all();
         foreach ($habitacions as $habitacio) {
@@ -107,5 +107,26 @@ class DatabaseSeeder extends Seeder
                 $habitacio->serveis()->attach($randomServeis);
             }
         }
+        Log::info("Serveis assignats a les habitacions", ['hotel_id' => $hotel_id]);
+
+        // Crear reservas para las habitaciones de este hotel
+        $reservesNumber = 50; // o puedes hacerlo dinámico dependiendo de tu necesidad
+        $habitacions = Habitacion::where('hotel_id', $hotel_id)->get();
+
+        foreach ($habitacions as $habitacio) {
+            for ($i = 0; $i < $reservesNumber; $i++) {
+                // Puedes definir la lógica de las fechas y precios de la reserva
+                Reservas::create([
+                    'habitacion_id' => $habitacio->id,
+                    'usuari_id' => Usuari::inRandomOrder()->first()->id,
+                    'data_entrada' => now()->addDays(rand(1, 30)),
+                    'data_sortida' => now()->addDays(rand(31, 60)),
+                    'preu_total' => rand(50, 200),
+                    'estat' => 'finalizada',
+                ]);
+            }
+        }
+
+        Log::info("Afegides reserves", ['hotel_id' => $hotel_id, 'reservesNumber' => $reservesNumber]);
     }
 }
