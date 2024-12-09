@@ -76,11 +76,7 @@ class DatabaseSeeder extends Seeder
 
             // Creación de reservas
             $reservesNumber = (int) $this->command->ask('Quantes reserves vols crear per al hotel ' . $hotel->nom . '?', 50);
-            Reservas::factory($reservesNumber)->create([
-                'habitacion_id' => $habitacions->random()->id,
-                'usuari_id' => Usuari::inRandomOrder()->first()->id,
-                'hotel_id' => $hotel->id
-            ]);
+            Reservas::factory($reservesNumber)->create();
 
             $this->command->info("  + Afegides $reservesNumber reserves al hotel: $hotel->nom");
             Log::info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel->id]);
@@ -108,5 +104,13 @@ class DatabaseSeeder extends Seeder
                 $habitacio->serveis()->attach($randomServeis);
             }
         }
+        Log::info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel_id]);
+
+        // Creació reserves
+        $reservesNumber = 50;
+        Reservas::factory($reservesNumber)->create();
+        Log::info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel_id]);
+        
+
     }
 }
