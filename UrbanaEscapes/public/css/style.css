@@ -149,7 +149,7 @@ a {
 .card {
   background-color: rgb(255, 255, 255);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 2rem;
   display: flex;
   flex-direction: column; /* Asegura que los elementos dentro de la tarjeta estén en columna */
@@ -222,7 +222,7 @@ ol {
   gap: 1rem;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   margin: 1rem;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 .sidebar h4 {
   text-align: center;

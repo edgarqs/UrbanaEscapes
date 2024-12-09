@@ -29,10 +29,10 @@ class HotelController extends Controller
             'telefon' => 'required|string|max:15',
         ]);
  
-        Hotel::create($dades);
+        $hotel = Hotel::create($dades);
 
-        // $seederHabitacions = new DatabaseSeeder();
-        // $seederHabitacions->HabitacionsSedder($hotel->id);
+        $seederHabitacions = new DatabaseSeeder();
+        $seederHabitacions->HabitacionsSedder($hotel->id);
         
 
         return redirect()->route('hotel.selector')->with('success', 'Hotel creat correctament');
