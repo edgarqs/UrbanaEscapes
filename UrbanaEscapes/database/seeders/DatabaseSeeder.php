@@ -110,7 +110,5 @@ class DatabaseSeeder extends Seeder
         $reservesNumber = 50;
         Reservas::factory($reservesNumber)->create();
         Log::info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel_id]);
-        
-
     }
 }
