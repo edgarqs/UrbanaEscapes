@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Habitacion;
+use App\Models\Usuari;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,12 +24,12 @@ class ReservasFactory extends Factory
         $data_sortida = (clone $data_entrada)->modify("+$dias days");
 
         return [
-            'habitacion_id' => random_int(1, 100),
-            'usuari_id' => random_int(1, 50),
+            'habitacion_id' => Habitacion::inRandomOrder()->first()->id, //? Selecciona un ID de habitación existente de forma aleatoria
+            'usuari_id' => Usuari::inRandomOrder()->first()->id, //? Seleciona un usuario existente
             'data_entrada' => $data_entrada,
             'data_sortida' => $data_sortida,
             'preu_total' => $faker->randomFloat(2, 50, 500),
-            'estat' => $faker->randomElement(['confirmada','pendent']),
+            'estat' => $faker->randomElement(['pend_checkin', 'pend_checkout', 'cancelada', 'finalizada']),
         ];
     }
 }

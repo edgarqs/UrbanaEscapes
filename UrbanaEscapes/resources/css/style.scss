@@ -12,6 +12,9 @@ $font-stack: "Poppins", sans-serif;
 $base-spacing: 1rem;
 $large-spacing: 2rem;
 
+// Otras Variables
+$card-border-radius: 10px;
+
 // Fuente y tipografía
 $heading-font: "Poppins", sans-serif;
 $body-font: "Poppins", sans-serif;
@@ -166,7 +169,7 @@ a {
 .card {
     background-color: rgb(255, 255, 255);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: $card-border-radius;
     padding: $large-spacing;
     display: flex;
     flex-direction: column; /* Asegura que los elementos dentro de la tarjeta estén en columna */
@@ -255,7 +258,7 @@ ol {
 
     // Añadir márgenes y bordes redondeados
     margin: $base-spacing;
-    border-radius: 15px;
+    border-radius: $card-border-radius;
 
     h4 {
         text-align: center;
@@ -278,7 +281,7 @@ ol {
                 padding: $base-spacing;
                 display: block;
                 transition: background-color 0.3s ease;
-                border-radius: 10px; // Bordes redondeados en hover
+                border-radius: $card-border-radius; // Bordes redondeados en hover
                 width: 100%;
                 background-color: #e7e7e7;
 
@@ -348,7 +351,7 @@ ol {
     max-width: 600px;
     margin: 2rem auto; // Centrar el formulario
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: $card-border-radius;
 
     .form-group {
         margin-bottom: 1.5rem;
