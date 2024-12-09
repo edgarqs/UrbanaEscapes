@@ -33,7 +33,7 @@ class HabitacionFactory extends Factory
                 $preu = $faker->randomFloat(2, 150, 200);
                 break;
             case 'adaptada':
-                $preu = $faker->randomFloat(2, 200, 250);
+                $preu = $faker->randomFloat(2, 100, 200);
                 break;
         }
         
