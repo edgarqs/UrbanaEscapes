@@ -9,6 +9,7 @@ use Database\Seeders\UsersSeeder;
 use Database\Seeders\HabitacionsSedder;
 use Database\Seeders\HotelSeeder;
 use App\Models\Reservas;
+use App\Models\Hotel;
 use App\Models\Serveis;
 use App\Models\Usuari;
 use Illuminate\Database\Seeder;
@@ -44,11 +45,14 @@ class DatabaseSeeder extends Seeder
     public function CreateHotelSedder($hotel_id)
     {
         $habitacionsNumber = 100;
-        Habitacion::factory($habitacionsNumber)->create(
-            [
-                'hotel_id' => $hotel_id
-            ]
-        );
+        $num_habitacio = 1;
+
+            for ($i = 0; $i < $habitacionsNumber; $i++) {
+                Habitacion::factory()->create([
+                    'hotel_id' => $hotel_id,
+                    'numHabitacion' => $num_habitacio++
+                ]);
+            }
         Log::info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
 
         // Creació serveis
