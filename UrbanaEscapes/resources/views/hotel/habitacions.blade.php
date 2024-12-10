@@ -12,9 +12,9 @@
 
     @foreach ($habitacions as $habitacio)
         <div class="card">
-            <h2 class="card-header">{{ $habitacio->numero }}</h2>
+            <h2 class="card-header">{{ $habitacio->numHabitacion }}</h2>
             <div class="card-body">
-                <p>{{ $habitacio->numHabitacion }}</p>
+                <p>{{ $habitacio->tipus }}</p>
             </div>
         </div>
     @endforeach
