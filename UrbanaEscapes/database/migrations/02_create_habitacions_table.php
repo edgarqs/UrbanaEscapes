@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('llits', ['1', '2', '3','4']);
             $table->enum('llits_supletoris', ['0', '1', '2']);
             $table->decimal('preu', 10, 2);
-            $table->integer('numHabitacio');
+            $table->integer('numHabitacion');
             $table->timestamps();
         });
     }

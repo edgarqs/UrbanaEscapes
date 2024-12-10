@@ -14,7 +14,7 @@
         <div class="card">
             <h2 class="card-header">{{ $habitacio->numero }}</h2>
             <div class="card-body">
-                <p>{{ $habitacio->numHabitacio }}</p>
+                <p>{{ $habitacio->numHabitacion }}</p>
             </div>
         </div>
     @endforeach
