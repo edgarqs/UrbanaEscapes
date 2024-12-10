@@ -2,7 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Habitacion;
+use App\Models\Serveis;
+use App\Models\Usuari;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Reservas>
@@ -16,14 +21,20 @@ class ReservasFactory extends Factory
      */
     public function definition(): array
     {
+        $habitacion_id = Habitacion::inRandomOrder()->first()->id;
         $faker = \Faker\Factory::create('es_ES');
+        $dias = $faker->numberBetween(1, 15);
+        $data_entrada = $faker->dateTimeThisYear();
+        $data_sortida = (clone $data_entrada)->modify("+$dias days");
+        $preu_total = Habitacion::getHabitacionPreu($habitacion_id)* $dias;
+        
         return [
-            'habitacion_id' => random_int(1, 100),
-            'usuari_id' => random_int(1, 50),
-            'data_entrada' => $faker->dateTimeThisYear(),
-            'data_sortida' => $faker->dateTimeThisYear(),
-            'preu_total' => $faker->randomFloat(2, 0, 1000),
-            'estat' => $faker->randomElement(['lliure', 'ocupada', 'pendent']),
+            'habitacion_id' => $habitacion_id, //? Selecciona un ID de habitación existente de forma aleatoria
+            'usuari_id' => Usuari::inRandomOrder()->first()->id, //? Seleciona un usuario existente
+            'data_entrada' => $data_entrada,
+            'data_sortida' => $data_sortida,
+            'preu_total' => $preu_total,
+            'estat' => $faker->randomElement(['pend_checkin', 'pend_checkout', 'cancelada', 'finalizada']),
         ];
     }
 }
