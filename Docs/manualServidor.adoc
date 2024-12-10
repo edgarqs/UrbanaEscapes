@@ -92,7 +92,7 @@ sudo nano /etc/nginx/sites-available/laravel.conf
 server {
     # Replace the example <domain> with your domain name or IP address
     listen 80;
-    server_name [IP PUBLICA AWS];
+    server_name _;
 
     root /var/www/html/grup6-hotel/UrbanaEscapes/public;
     index index.html index.htm index.php;
