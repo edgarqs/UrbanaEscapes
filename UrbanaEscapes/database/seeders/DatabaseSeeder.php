@@ -3,12 +3,16 @@
 namespace Database\Seeders;
 
 use App\Models\Habitacion;
+use Database\Seeders\ReservasSeeder;
+use Database\Seeders\ServeisSeeder;
+use Database\Seeders\UsersSeeder;
+use Database\Seeders\HabitacionsSedder;
+use Database\Seeders\HotelSeeder;
 use App\Models\Reservas;
 use App\Models\Serveis;
 use App\Models\Usuari;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB; // Para usar DB::
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,42 +27,21 @@ class DatabaseSeeder extends Seeder
             Log::info("S'ha reconstruït la base de dades");
         }
 
-        // Creació d'hotels
-        $hotel = \App\Models\Hotel::create(['nom' => 'The Kyoto', 'adreca' => 'Carrer Mariner, 32', 'ciutat' => 'Madrid', 'pais' => 'Espanya', 'email' => 'info@thekyoto.urbanaescapes.com', 'telefon' => '934567890']);
-        $this->command->info("  + Creat hotel de proves $hotel->nom, $hotel->adreca");
-        Log::info("Creat hotel de proves", ['hotel' => $hotel]);
-
-        //Creació habitacions
-        $habitacionsNumber = $this->command->ask('Quantes habitacions vols crear?', 100);
-        Habitacion::factory($habitacionsNumber)->create(
-            [
-                'hotel_id' => 1
-            ]
-        );
-        $this->command->info("  + Afegides $habitacionsNumber habitacions");
-        Log::info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
-
-        // Creació usuaris
-        $usuarisNumber = $this->command->ask('Quants usuaris vols crear?', 50);
-        Usuari::factory($usuarisNumber)->create();
-        $this->command->info("  + Afegits $usuarisNumber usuari(s)");
-        Log::info("Afegits usuaris", ['usuarisNumber' => $usuarisNumber]);
-
-        // Creació serveis
-        Serveis::create(['nom' => 'Microones', 'preu' => 5]);
-        Serveis::create(['nom' => 'TV', 'preu' => 30]);
-        Serveis::create(['nom' => 'Mascotas', 'preu' => 50]);
-        Serveis::create(['nom' => 'Minibar', 'preu' => 15]);
-        Serveis::create(['nom' => 'Cafetera', 'preu' => 10]);
-
-        // Creació reserves
-        $reservesNumber = $this->command->ask('Quantes reserves vols crear?', 50);
-        Reservas::factory($reservesNumber)->create();
-        $this->command->info("  + Afegides $reservesNumber reserves");
-        Log::info("Afegides reserves", ['reservesNumber' => $reservesNumber]);
+        $this -> call(HotelSeeder::class);
+        $this->call(HabitacionsSeeder::class);
+        $hotels = \App\Models\Hotel::all();
+        foreach ($hotels as $hotel) {
+            $this->command->info("Factory Hotel: $hotel->nom");
+            
+            $this->call(UsersSeeder::class);
+            
+            $this->call(ServeisSeeder::class);
+            $this->call(ReservasSeeder::class);
+        }
     }
 
-    public function HabitacionsSedder($hotel_id)
+    // Crea les habitacions al crear l'hotel amb el formulari
+    public function CreateHotelSedder($hotel_id)
     {
         $habitacionsNumber = 100;
         Habitacion::factory($habitacionsNumber)->create(
@@ -67,5 +50,22 @@ class DatabaseSeeder extends Seeder
             ]
         );
         Log::info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
+
+        // Creació serveis
+        //Asignacio serveis a habitacions
+        $habitacions = Habitacion::where('hotel_id', $hotel_id)->get();
+        $serveis = Serveis::all();
+        foreach ($habitacions as $habitacio) {
+            $randomServeis = $serveis->random(min($serveis->count(), rand(0, 5)))->pluck('id');
+            if ($randomServeis->isNotEmpty()) {
+                $habitacio->serveis()->attach($randomServeis);
+            }
+        }
+        Log::info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel_id]);
+
+        // Creació reserves
+        $reservesNumber = 50;
+        Reservas::factory($reservesNumber)->create();
+        Log::info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel_id]);
     }
 }

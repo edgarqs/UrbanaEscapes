@@ -30,28 +30,43 @@ class Reservas extends Model
         return $this->belongsTo(Usuari::class);
     }
 
+    // Habitacions lliures
     public static function countHabitacionesLliures($hotelId)
     {
-        $count = Habitacion::whereDoesntHave('reservas')->where('hotel_id', $hotelId)->count();
+        $count = Habitacion::where('hotel_id', $hotelId)
+            ->whereDoesntHave('reservas', function ($query) {
+                $query->whereIn('estat', ['pend_checkin', 'pend_checkout']);
+            })
+            ->count();
+    
         Log::info('Comptador d\'habitacions lliures', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
-    }
+    }    
 
+    // Habitacions pendents
     public static function countHabitacionesPendientes($hotelId)
     {
         $count = Habitacion::whereHas('reservas', function ($query) {
-            $query->where('estat', 'pendent');
+            $query->where('estat', 'pend_checkin');
         })->where('hotel_id', $hotelId)->count();
         Log::info('Comptador d\'habitacions pendents', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
     }
 
+    // Habitacions ocupades
     public static function countHabitacionesConfirmadas($hotelId)
     {
         $count = Habitacion::whereHas('reservas', function ($query) {
-            $query->where('estat', 'confirmada');
+            $query->where('estat', 'pend_checkout');
         })->where('hotel_id', $hotelId)->count();
         Log::info('Comptador d\'habitacions confirmades', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
+    }
+
+    // Todas las habitacions
+    public static function getHabitacionesTotals($hotelId)
+    {
+        $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
+        return $habitacions;
     }
 }
