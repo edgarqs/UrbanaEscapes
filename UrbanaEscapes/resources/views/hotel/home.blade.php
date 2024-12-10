@@ -7,22 +7,28 @@
         <h1 class="h1">Gestió de l'hotel</h1>
 
         <div class="cards">
-            <div class="card">
-                <h2 class="card-header">Habitacions Ocupades</h2>
-                <h3 class="counter-habitacions">{{ $hab_ocupada }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
-                <form action="{{ route('hotel.habitacions') }}" method="GET">
-                    <input type="hidden" name="id" value="{{ request()->query('id') }}">
-                    <button type="submit" class="button primary">Seleccionar</button>
-                </form>
-            </div>
-            <div class="card">
-                <h2 class="card-header">Habitacions Lliures</h2>
-                <h3 class="counter-habitacions">{{ $hab_lliures }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
-            </div>
-            <div class="card">
-                <h2 class="card-header">Checkins Pendents</h2>
-                <h3 class="counter-habitacions">{{ $hab_pendent }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
-            </div>
+
+            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id')]) }}">
+            <div class="card cardResumenHoteles">
+                    <h2 class="card-header">Habitacions Ocupades</h2>
+                    <h3 class="counter-habitacions">{{ $hab_ocupada }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
+                </div>
+            </a>
+
+            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id')]) }}" >
+            <div class="card cardResumenHoteles">
+                    <h2 class="card-header">Habitacions Lliures</h2>
+                    <h3 class="counter-habitacions">{{ $hab_lliures }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
+                </div>
+            </a>
+
+            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id')]) }}">
+            <div class="card cardResumenHoteles">
+                    <h2 class="card-header">Checkins Pendents</h2>
+                    <h3 class="counter-habitacions">{{ $hab_pendent }}&nbsp;<span class="habitacions">/{{ $habitacionsTotals }}</span></h3>
+                </div>
+            </a>
+
         </div>
 
     </div>
