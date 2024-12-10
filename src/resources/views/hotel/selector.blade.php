@@ -6,6 +6,12 @@
 
     <h1 class="h1">Sel·leciona l'hotel a consultar</h1>
 
+    @if (session()->has('status'))
+        <div class="w3-panel w3-pale-green">
+            <p> {{ session('status') }} </p>
+        </div>
+    @endif
+
     <div class="cards">
 
         @foreach ($hotels as $hotel)
