@@ -13,7 +13,8 @@ class Habitacion extends Model
         'hotel_id',
         'numero',
         'tipo',
-        'precio'
+        'precio',
+        'numHabitacion'
     ];
 
     public function reservas()

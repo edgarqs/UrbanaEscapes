@@ -175,6 +175,10 @@ a {
     grid-gap: 2rem;
   }
 }
+.cards.cardsHoteles {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 2rem;
+}
 
 .card {
   background-color: rgb(255, 255, 255);

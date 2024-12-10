@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Hotel;
 use App\Models\Reservas;
 use Illuminate\Http\Request;
+use App\Models\Habitacion;
 
 class ReservasController extends Controller
 {
@@ -23,5 +24,13 @@ class ReservasController extends Controller
             'hab_ocupada' => $hab_ocupada,
             'habitacionsTotals' => $habitacionsTotals
         ]);
+    }
+
+    public function habitacions(Request $request)
+    {
+        $idHotel = $request->query('id');
+        $habitacions = Habitacion::where('hotel_id', $idHotel)->paginate(100);
+    
+        return view('hotel.habitacions', ['idHotel' => $idHotel, 'habitacions' => $habitacions]);
     }
 }
