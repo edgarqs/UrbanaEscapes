@@ -189,12 +189,18 @@ a {
     border-radius: $card-border-radius;
     padding: $large-spacing;
     display: flex;
-    flex-direction: column; /* Asegura que los elementos dentro de la tarjeta estén en columna */
-    height: 100%; /* Asegura que la tarjeta ocupe el espacio disponible */
-    overflow: hidden; /* Para que el contenido no desborde visualmente */
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
 
     @media (max-width: 600px) {
         padding: $base-spacing; // Menos padding en móvil
+    }
+
+    &.cardResumenHoteles {
+        &:hover {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
     }
 }
 
