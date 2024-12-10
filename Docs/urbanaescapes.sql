@@ -19,7 +19,8 @@ CREATE TABLE habitacions (
     llits ENUM('1','2','3','4') NOT NULL,
     llits_supletoris ENUM('0','1','2') NOT NULL,
     preu DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (hotel_id) REFERENCES hotels(id)
+    numHabitacio INT NOT NULL,
+    FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
 );
 
 CREATE TABLE usuaris (
@@ -36,8 +37,8 @@ CREATE TABLE reservas (
     data_sortida DATE NOT NULL,
     preu_total DECIMAL(10, 2) NOT NULL,
     estat ENUM('pend_checkin', 'pend_checkout', 'cancelada', 'finalizada') NOT NULL,
-    FOREIGN KEY (habitacion_id) REFERENCES habitacions(id),
-    FOREIGN KEY (usuari_id) REFERENCES usuaris(id)
+    FOREIGN KEY (habitacion_id) REFERENCES habitacions(id) ON DELETE CASCADE,
+    FOREIGN KEY (usuari_id) REFERENCES usuaris(id) ON DELETE CASCADE
 );
 
 CREATE TABLE serveis (
@@ -47,8 +48,9 @@ CREATE TABLE serveis (
 );
 
 CREATE TABLE habitacion_serveis (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     habitacions_id INT NOT NULL,
     serveis_id INT NOT NULL,
-    FOREIGN KEY (habitacions_id) REFERENCES habitacions(id),
-    FOREIGN KEY (serveis_id) REFERENCES serveis(id)
+    FOREIGN KEY (habitacions_id) REFERENCES habitacions(id) ON DELETE CASCADE,
+    FOREIGN KEY (serveis_id) REFERENCES serveis(id) ON DELETE CASCADE
 );
