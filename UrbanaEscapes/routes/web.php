@@ -16,3 +16,6 @@ Route::get('/create', [HotelController::class, 'create'])
 
 Route::post('/create', [HotelController::class, 'guardarHotel'])
     ->name('hotel.store');
+
+Route::get('/hotel/habitacions/', [ReservasController::class, 'habitacions'])
+    ->name('hotel.habitacions');

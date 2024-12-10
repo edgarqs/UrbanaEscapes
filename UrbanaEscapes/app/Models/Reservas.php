@@ -62,4 +62,11 @@ class Reservas extends Model
         Log::info('Comptador d\'habitacions confirmades', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
     }
+
+    // Todas las habitacions
+    public static function getHabitacionesTotals($hotelId)
+    {
+        $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
+        return $habitacions;
+    }
 }

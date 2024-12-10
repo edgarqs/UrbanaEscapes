@@ -1,7 +1,7 @@
 // Variables de color
 $primary-color: #1f75cb;
 $primary-color-dark: #1f75cb61;
-//$secondary-color: #ffcc00;
+$secondary-color: #ffcc00;
 $tertiary-color: #2980b9;
 $background-color: #f4f4f4;
 $text-color: #333;
@@ -52,7 +52,7 @@ h6 {
     // Estilos para cada nivel de título
     &.h1 {
         font-size: 2.5rem;
-        
+
         @media (max-width: 600px) {
             font-size: 1.25rem;
         }
@@ -175,6 +175,11 @@ a {
 
     @media (max-width: 600px) {
         grid-gap: 2rem; // Reducir espacio entre tarjetas
+    }
+
+    &.cardsHoteles {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 2rem;
     }
 }
 
