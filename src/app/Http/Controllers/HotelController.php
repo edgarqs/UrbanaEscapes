@@ -35,6 +35,6 @@ class HotelController extends Controller
         $seederHabitacions->CreateHotelSedder($hotel->id);
         
 
-        return redirect()->route('hotel.selector')->with('success', 'Hotel creat correctament');
+        return redirect()->route('hotel.selector')->with('status', 'Hotel creat correctament');
     }
 }
