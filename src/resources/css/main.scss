@@ -9,13 +9,11 @@
 // Componentes
 @use 'components/buttons';
 @use 'components/cards';
-@use 'components/form';
+@use 'components/forms';
 
 // Layout
 @use 'layout/layout';
 @use 'layout/sidebar';
-@use 'layout/main-content';
 
 // Páginas específicas
 @use 'pages/home';
-@use 'pages/hotel-creation';

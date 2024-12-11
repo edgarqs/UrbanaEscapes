@@ -1,3 +1,6 @@
+@use '../abstracts/variables' as *;
+
+// Reset de márgenes y paddings
 *,
 *::before,
 *::after {
@@ -6,6 +9,7 @@
     box-sizing: border-box;
 }
 
+// Estilos Globales
 body {
     margin: 0;
     font-family: $body-font;
