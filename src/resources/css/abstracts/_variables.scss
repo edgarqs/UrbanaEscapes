@@ -1,20 +1,19 @@
 // Variables de color
-$primary-color: #1f75cb;
-$primary-color-dark: #1f75cb61;
-$secondary-color: #ffcc00;
-$tertiary-color: #2980b9;
+$primary-color: #1f75cb; //? Color principal usado en resaltado de botones, etc
+$primary-color-dark: #1a5d9f; //? Color principal oscuro usado para el hover de botones
+$error-color: #721c24;
 $background-color: #f4f4f4;
 $text-color: #333;
 $link-color: $primary-color;
-
-// Tipografía
 $font-stack: "Poppins", sans-serif;
-$heading-font: "Poppins", sans-serif;
-$body-font: "Poppins", sans-serif;
 
-// Espaciado
+// Variables de espaciado
 $base-spacing: 1rem;
 $large-spacing: 2rem;
 
-// Otros
+// Otras Variables
 $card-border-radius: 10px;
+
+// Fuente y tipografía
+$heading-font: "Poppins", sans-serif;
+$body-font: "Poppins", sans-serif;

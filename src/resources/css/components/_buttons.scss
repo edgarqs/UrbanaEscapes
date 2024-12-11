@@ -1,3 +1,6 @@
+@use '../abstracts/variables' as *;
+
+// Botones
 .button {
     display: block;
     width: 100%;
@@ -10,19 +13,17 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 
-    &:hover {
-        background-color: #1c64ac;
-    }
-
-    &.primary {
+    &--primary {
         background-color: $primary-color;
+        color: white;
+        margin-top: auto;
     }
 
-    &.secondary {
-        background-color: $secondary-color;
+    &--margin-top {
+        margin-top: $base-spacing;
     }
 
-    &.danger {
-        background-color: $tertiary-color;
+    &:hover {
+        background-color: $primary-color-dark;
     }
 }
