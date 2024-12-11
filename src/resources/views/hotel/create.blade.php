@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <button type="submit" class="button primary margin-top">Guardar</button>
+        <button type="submit" class="button button--primary button--margin-top">Guardar</button>
     </form>
 </div>
 @endsection

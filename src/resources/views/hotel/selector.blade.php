@@ -16,8 +16,8 @@
 
         @foreach ($hotels as $hotel)
             <div class="card">
-                <h2 class="card-header">{{ $hotel->nom }}</h2>
-                <div class="card-body">
+                <h2 class="card__header">{{ $hotel->nom }}</h2>
+                <div class="card__body">
                     <p>{{ $hotel->adreca }}<br>{{ $hotel->ciutat }}, {{ $hotel->pais }}</p>
                 </div>
                 <form action="{{ route('hotel.home') }}" method="GET">

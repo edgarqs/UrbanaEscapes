@@ -13,27 +13,17 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 
-    &.primary {
+    &--primary {
         background-color: $primary-color;
         color: white;
         margin-top: auto;
     }
 
-    &.secondary {
-        background-color: $secondary-color;
-        color: white;
-    }
-
-    &.danger {
-        background-color: $tertiary-color;
-        color: white;
-    }
-
-    &.margin-top {
+    &--margin-top {
         margin-top: $base-spacing;
     }
 
     &:hover {
-        background-color: #1c64ac;
+        background-color: $primary-color-dark;
     }
 }
