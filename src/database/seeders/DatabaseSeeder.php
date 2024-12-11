@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
+    /**
+     * Seed the application's database.
+     */
     public function run(): void
     {
         if ($this->command->confirm('Vols refrescar la base de dades?', true)) {
@@ -37,8 +40,6 @@ class DatabaseSeeder extends Seeder
             $this->call(ReservasSeeder::class);
         }
     }
-
-    // Crea les habitacions al crear l'hotel amb el formulari
     public function CreateHotelSedder($hotel_id)
     {
         $habitacionsNumber = 100;
