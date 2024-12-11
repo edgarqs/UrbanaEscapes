@@ -126,6 +126,7 @@ a {
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  justify-content: space-between;
 }
 @media (max-width: 600px) {
   .card {
