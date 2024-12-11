@@ -1,0 +1,19 @@
+@use '../abstracts/variables' as *;
+
+// CSS ESPECÍFICO PARA LA PÁGINA DE INICIO
+.counter__habitacions {
+    font-size: 50px !important;
+}
+.habitacions {
+    font-size: 20px;
+}
+
+// Contenido principal
+.main-content {
+    padding: $large-spacing;
+    padding-right: (
+        $large-spacing + $base-spacing
+    ); //? Añade espacio adicional a la derecha que contiene el menú lateral
+    background-color: $background-color;
+    overflow-y: auto; //? Si el contenido es largo, permite scroll sin que se mueva el menú lateral
+}

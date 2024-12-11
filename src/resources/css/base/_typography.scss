@@ -1,0 +1,77 @@
+@use "../abstracts/variables" as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $heading-font;
+    font-weight: bold;
+    color: $text-color;
+    margin-bottom: $base-spacing;
+
+    &.center {
+        text-align: center;
+    }
+}
+
+h1 {
+    font-size: 2.5rem;
+
+    // @media (max-width: 600px) {
+    //     font-size: 2rem;
+    // }
+}
+
+h2 {
+    font-size: 2rem;
+
+    // @media (max-width: 600px) {
+    //     font-size: 1.5rem;
+    // }
+}
+
+h3 {
+    font-size: 1.75rem;
+
+    // @media (max-width: 600px) {
+    //     font-size: 1rem;
+    // }
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+// Párrafos
+p {
+    font-size: 1rem;
+    margin-bottom: $base-spacing;
+    line-height: 1.8;
+}
+
+// Enlaces
+a {
+    text-decoration: none;
+    color: $link-color;
+    transition: color 0.3s ease;
+}
+
+.text-danger {
+    color: $error-color;
+}
+
+// // Listas
+// ul {
+//     margin-left: 1.5rem;
+//     margin-bottom: $base-spacing;
+// }

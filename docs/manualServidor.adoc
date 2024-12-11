@@ -1,0 +1,267 @@
+=== Manual d'instalacio del servidor AWS
+
+Per instalar el servidor AWS cal seguir els següents passos:
+
+Un cop creada l'instància AWS, cal connectar-se a ella via SSH. Per fer-ho, cal descarregar la clau privada que s'ha creat durant la creació de la instància , seguidament utilitzarem Putty per connectar-nos a la instància.
+
+Un cop connectats a la instància, instalarem els paquets necessaris per poder executar el servidor.
+
+El primer pas és actualitzar la llista de paquets disponibles i actualitzar els paquets ja instal·lats:
+
+[source,bash]
+sudo apt-get update
+sudo apt-get upgrade
+
+Un cop actualitzats els paquets, instal·larem l'apache2, el servidor web que utilitzarem:
+
+[source,bash]
+sudo apt-get install nginx
+
+A continuació instal·larem el servidor de base de dades MySQL:
+
+[source,bash]
+sudo apt-get install default-mysql-server
+
+Per últim, instal·larem el llenguatge de programació PHP:
+
+[source,bash]
+sudo apt-get install -y php8.2-curl php8.2-mbstring php8.2-xml php8.2-fpm php8.2-mysql
+
+Ara instal·larem el gestor de versions Git:
+
+[source,bash]
+sudo apt-get install git
+
+Clonem el repositori del projecte:
+
+[source,bash]
+cd /var/www/html
+sudo git clone (enllaç al teu repositori)
+
+Ara donarem permis d'escriptura a la carpeta /var/www/html/projecte:
+
+[source,bash]
+sudo chown -R www-data:www-data /var/www/html/grup6-hotel/UrbanaEscapes
+
+
+Instal·lació de la base de dades:
+
+[source,bash]
+sudo mysql -u root -p
+
+Crearem un usuari per la base de dades:
+
+[source,bash]
+CREATE USER 'C@pernic'@'localhost' IDENTIFIED BY 'C@pernic2324';
+
+Li donarem permisos a l'usuari:
+
+[source,bash]
+GRANT ALL PRIVILEGES ON * . * TO 'C@pernic'@'localhost';
+
+I finalment, actualitzarem els permisos:
+
+[source,bash]
+FLUSH PRIVILEGES;
+
+Ara farem l'instalacio del composer al projecte:
+
+Primer descarrerguem el composer:
+
+[source,bash]
+sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
+Instal·lem el composer:
+
+[source,bash]
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+
+Ara configurarem el servidor web:
+
+[source,bash]
+rm /etc/nginx/sites-enabled/default
+
+Crearem un nou fitxer de configuració per l'aplicació:
+
+[source,bash]
+sudo nano /etc/nginx/sites-available/laravel.conf
+
+```	
+
+server {
+    # Replace the example <domain> with your domain name or IP address
+    listen 80;
+    server_name _;
+
+    root /var/www/html/grup6-hotel/UrbanaEscapes/public;
+    index index.html index.htm index.php;
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    access_log off;
+    error_log  /var/log/nginx/pterodactyl.app-error.log error;
+
+    # allow larger file uploads and longer script runtimes
+    client_max_body_size 100m;
+    client_body_timeout 120s;
+
+    sendfile off;
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param PHP_VALUE "upload_max_filesize = 100M \n post_max_size=100M";
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTP_PROXY "";
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+
+```	
+
+Crearem un enllaç simbòlic per activar la configuració:
+
+[source,bash]
+sudo ln -s /etc/nginx/sites-available/laravel.conf /etc/nginx/sites-enabled/laravel.conf
+
+Reiniciarem el servidor nginx:
+
+[source,bash]
+sudo systemctl restart nginx
+
+Desactivarem el servidor apache2:
+
+[source,bash]
+sudo systemctl stop apache2
+sudo systemctl disable apache2
+sudo systemctl restart nginx
+
+[source,bash]
+cd /var/www/html/projecte
+sudo composer install
+
+Copiem el fitxer .env.example a .env:
+
+[source,bash]
+sudo cp .env.example .env
+
+Generem la clau de l'aplicació:
+
+[source,bash]
+sudo php artisan key:generate
+sudo php artisan config:cache
+sudo php artisan route:cache
+sudo php artisan view:cache
+sudo php artisan event:cache
+sudo php artisan optimize
+
+Abans de fer les migracions de la base de dades, caldrà configurar la base de dades. per fer-ho editarem el fitxer .env:
+
+[source,bash]
+sudo nano .env
+
+I actualitzarem les següents línies:
+
+[source,bash]
+APP_DEBUG=false
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=urbanaescapes
+DB_USERNAME=C@pernic
+DB_PASSWORD=C@pernic2324
+
+Tornem a donar permisos a la carpeta:
+
+[source,bash]
+sudo chown -R www-data:www-data /var/www/html/projecte
+
+Tornem a fer composer install:
+
+[source,bash]
+sudo composer install
+
+
+Finalment, farem les migracions de la base de dades:
+
+[source,bash]
+sudo php artisan migrate
+
+I ja tindrem el servidor instal·lat i configurat correctament.
+
+Ara afegirem el certificat SSL al servidor:
+
+Primer instal·larem el paquet openssl:
+
+[source,bash]
+sudo apt install openssl
+
+Crearem la carpeta on guardarem els certificats:
+
+[source,bash]
+sudo mkdir -p /etc/nginx/ssl
+
+Crearem el certificat:
+
+[source,bash]
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
+
+Crearem el certificat Diffie-Hellman:
+
+[source,bash]
+sudo openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
+
+
+Finalment, configurarem el servidor per utilitzar el certificat:
+
+Editem el fitxer de configuració del servidor:
+
+[source,bash]
+sudo nano /etc/nginx/sites-available/laravel.conf
+
+I afegim les següents línies:
+
+
+ssl_certificate /etc/nginx/ssl/selfsigned.crt;
+    ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
+    ssl_dhparam /etc/nginx/ssl/dhparam.pem; # Si creaste el archivo Diffie-Hellman
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+
+I modificarem la línia:
+
+[source,bash]
+listen 80;
+
+Per:
+
+[source,bash]
+listen 443 ssl;
+
+Reiniciarem el servidor nginx:
+
+[source,bash]
+sudo systemctl reload nginx
+
+I ja tindrem el servidor configurat amb el certificat SSL.
