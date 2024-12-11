@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="h1">Sel·leciona l'hotel a consultar</h1>
+    <h1>Sel·leciona l'hotel a consultar</h1>
 
     @if (session()->has('status'))
         <div class="w3-panel w3-pale-green">

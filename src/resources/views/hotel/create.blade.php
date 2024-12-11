@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="form card">
-    <h3 class="h3 center">Registrar nou hotel</h3>
+    <h3 class="center">Registrar nou hotel</h3>
     <form action="{{ route('hotel.store') }}" method="post">
         @csrf
         <!-- Primera fila -->

@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="h1">Habitacions</h1>
+    <h1>Habitacions</h1>
 
     {{-- <p>Hotel ID: {{ $idHotel }}</p> --}}
 

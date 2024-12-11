@@ -1,6 +1,5 @@
-@use '../abstracts/variables' as *;
+@use "../abstracts/variables" as *;
 
-// Títulos
 h1,
 h2,
 h3,
@@ -12,46 +11,45 @@ h6 {
     color: $text-color;
     margin-bottom: $base-spacing;
 
-    // Estilos para cada nivel de título
-    &.h1 {
-        font-size: 2.5rem;
-
-        // @media (max-width: 600px) {
-        //     font-size: 2rem;
-        // }
-    }
-
-    &.h2 {
-        font-size: 2rem;
-
-        // @media (max-width: 600px) {
-        //     font-size: 1.5rem;
-        // }
-    }
-
-    &.h3 {
-        font-size: 1.75rem;
-
-        // @media (max-width: 600px) {
-        //     font-size: 1rem;
-        // }
-    }
-
-    &.h4 {
-        font-size: 1.5rem;
-    }
-
-    &.h5 {
-        font-size: 1.25rem;
-    }
-
-    &.h6 {
-        font-size: 1rem;
-    }
-
     &.center {
         text-align: center;
     }
+}
+
+h1 {
+    font-size: 2.5rem;
+
+    // @media (max-width: 600px) {
+    //     font-size: 2rem;
+    // }
+}
+
+h2 {
+    font-size: 2rem;
+
+    // @media (max-width: 600px) {
+    //     font-size: 1.5rem;
+    // }
+}
+
+h3 {
+    font-size: 1.75rem;
+
+    // @media (max-width: 600px) {
+    //     font-size: 1rem;
+    // }
+}
+
+h4 {
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-size: 1.25rem;
+}
+
+h6 {
+    font-size: 1rem;
 }
 
 // Párrafos
