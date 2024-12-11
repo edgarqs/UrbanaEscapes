@@ -1,0 +1,28 @@
+.button {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #1c64ac;
+    }
+
+    &.primary {
+        background-color: $primary-color;
+    }
+
+    &.secondary {
+        background-color: $secondary-color;
+    }
+
+    &.danger {
+        background-color: $tertiary-color;
+    }
+}
