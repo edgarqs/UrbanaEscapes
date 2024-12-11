@@ -29,6 +29,7 @@
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+    justify-content: space-between;
 
     @media (max-width: 600px) {
         padding: $base-spacing; // Menos padding en móvil
