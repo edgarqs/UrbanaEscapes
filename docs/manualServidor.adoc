@@ -207,4 +207,61 @@ sudo php artisan migrate
 
 I ja tindrem el servidor instal·lat i configurat correctament.
 
+Ara afegirem el certificat SSL al servidor:
 
+Primer instal·larem el paquet openssl:
+
+[source,bash]
+sudo apt install openssl
+
+Crearem la carpeta on guardarem els certificats:
+
+[source,bash]
+sudo mkdir -p /etc/nginx/ssl
+
+Crearem el certificat:
+
+[source,bash]
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/selfsigned.key -out /etc/nginx/ssl/selfsigned.crt
+
+Crearem el certificat Diffie-Hellman:
+
+[source,bash]
+sudo openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
+
+
+Finalment, configurarem el servidor per utilitzar el certificat:
+
+Editem el fitxer de configuració del servidor:
+
+[source,bash]
+sudo nano /etc/nginx/sites-available/laravel.conf
+
+I afegim les següents línies:
+
+
+ssl_certificate /etc/nginx/ssl/selfsigned.crt;
+    ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
+    ssl_dhparam /etc/nginx/ssl/dhparam.pem; # Si creaste el archivo Diffie-Hellman
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+
+I modificarem la línia:
+
+[source,bash]
+listen 80;
+
+Per:
+
+[source,bash]
+listen 443 ssl;
+
+Reiniciarem el servidor nginx:
+
+[source,bash]
+sudo systemctl reload nginx
+
+I ja tindrem el servidor configurat amb el certificat SSL.
