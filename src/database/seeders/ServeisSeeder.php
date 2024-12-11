@@ -34,7 +34,7 @@ class ServeisSeeder extends DatabaseSeeder
                 $habitacio->serveis()->attach($randomServeis);
             }
             $this->command->info("  + Serveis assignats a les habitacions del hotel: $hotel->nom");
-            Log::info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel->id]);
+            Log::channel('info_log')->info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel->id]);
         }
     }
 }

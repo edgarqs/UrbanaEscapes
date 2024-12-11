@@ -26,7 +26,7 @@ class HabitacionsSeeder extends DatabaseSeeder
             }
 
             $this->command->info("  + Afegides $habitacionsNumber habitacions al hotel: $hotel->nom");
-            Log::info("Habitacions afegides", ['hotel_id' => $hotel->id, 'habitacions_number' => $habitacionsNumber]);
+            Log::channel('info_log')->info("Habitacions afegides", ['hotel_id' => $hotel->id, 'habitacions_number' => $habitacionsNumber]);
         }
     }
 }
