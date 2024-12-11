@@ -53,25 +53,25 @@ h6 {
     &.h1 {
         font-size: 2.5rem;
 
-        @media (max-width: 600px) {
-            font-size: 1.25rem;
-        }
+        // @media (max-width: 600px) {
+        //     font-size: 2rem;
+        // }
     }
 
     &.h2 {
         font-size: 2rem;
 
-        @media (max-width: 600px) {
-            font-size: 1rem;
-        }
+        // @media (max-width: 600px) {
+        //     font-size: 1.5rem;
+        // }
     }
 
     &.h3 {
         font-size: 1.75rem;
 
-        @media (max-width: 600px) {
-            font-size: 0.87rem;
-        }
+        // @media (max-width: 600px) {
+        //     font-size: 1rem;
+        // }
     }
 
     &.h4 {
@@ -103,10 +103,6 @@ a {
     text-decoration: none;
     color: $link-color;
     transition: color 0.3s ease;
-
-    // &:hover {
-    //     color: darken($link-color, 10%);
-    // }
 }
 
 .text-danger {
@@ -130,28 +126,16 @@ a {
         background-color: $primary-color;
         color: white;
         margin-top: auto;
-
-        // &:hover {
-        //     background-color: darken($primary-color, 10%);
-        // }
     }
 
     &.secondary {
         background-color: $secondary-color;
         color: white;
-
-        // &:hover {
-        //     background-color: darken($secondary-color, 10%);
-        // }
     }
 
     &.danger {
         background-color: $tertiary-color;
         color: white;
-
-        // &:hover {
-        //     background-color: darken($tertiary-color, 10%);
-        // }
     }
 
     &.margin-top {
@@ -213,7 +197,7 @@ a {
 }
 
 .card-body {
-    flex: 1; /* Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+    flex: 1; // Esto hace que el cuerpo de la tarjeta ocupe todo el espacio disponible
     font-size: 1rem;
     color: $text-color;
     word-wrap: break-word;
@@ -279,7 +263,7 @@ ol {
     gap: $base-spacing;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 
-    // Añadir márgenes y bordes redondeados
+    //? Añadir márgenes y bordes redondeados
     margin: $base-spacing;
     border-radius: $card-border-radius;
 
@@ -333,9 +317,9 @@ ol {
     padding: $large-spacing;
     padding-right: (
         $large-spacing + $base-spacing
-    ); // Añade espacio adicional a la derecha que contiene el menú lateral
+    ); //? Añade espacio adicional a la derecha que contiene el menú lateral
     background-color: $background-color;
-    overflow-y: auto; // Si el contenido es largo, permite scroll sin que se mueva el menú lateral
+    overflow-y: auto; //? Si el contenido es largo, permite scroll sin que se mueva el menú lateral
 }
 
 // Diseño responsivo
@@ -346,14 +330,12 @@ ol {
 
     .sidebar {
         grid-column: 1 / -1;
-        position: fixed; // Fija el menú para controlar su posición
+        position: fixed;
         top: 0;
         left: 0;
         height: 100vh;
         width: 250px; // Ancho fijo
-        transform: translateX(
-            -100%
-        ); // Oculta completamente el menú fuera de la pantalla
+        transform: translateX(-100%); // Oculta el menú fuera de la pantalla
         transition: transform 0.3s ease-in-out;
         z-index: 1000;
         margin: 0;
@@ -361,7 +343,9 @@ ol {
     }
 
     .sidebar.show {
-        transform: translateX(0); // Muestra el menú cuando está activo
+        transform: translateX(
+            0
+        ); // Muestra el menú cuando está activo (ordenadores)
     }
 
     .main-content {
@@ -372,7 +356,7 @@ ol {
 // PÀGINA CREACIÓ DE L'HOTEL -> https://www.programiz.com/css/form-styling
 .form {
     max-width: 600px;
-    margin: 2rem auto; // Centrar el formulario
+    margin: 0 auto; // Centrar el formulario
     padding: 2rem;
     border-radius: $card-border-radius;
 
@@ -406,5 +390,23 @@ ol {
                 color: #721c24;
             }
         }
+    }
+
+    .form-row {
+        display: flex;
+        gap: 1rem; // Espaciado entre columnas
+    }
+
+    .flex-fill {
+        flex: 1; //  Los campos ocupen el mismo espacio
+    }
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem; // Espaciado entre columnas
+
+    @media (max-width: 768px) {
+        flex-direction: column;
     }
 }
