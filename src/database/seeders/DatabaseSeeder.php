@@ -40,8 +40,6 @@ class DatabaseSeeder extends Seeder
             $this->call(ReservasSeeder::class);
         }
     }
-
-    // Crea les habitacions al crear l'hotel amb el formulari
     public function CreateHotelSedder($hotel_id)
     {
         $habitacionsNumber = 100;

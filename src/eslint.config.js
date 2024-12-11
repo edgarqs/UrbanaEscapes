@@ -5,12 +5,13 @@ import pluginJs from "@eslint/js";
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
+    files: ["*.js"],
     languageOptions: {
        globals: globals.browser 
       },
     rules: {
-            "no-unused-vars": "error",
-            "no-undef": "error"
+            "prefer-const": "warn",
+            "no-constant-binary-expression": "error"
         }
   },
   pluginJs.configs.recommended,
