@@ -13,10 +13,10 @@ class HotelSeeder extends DatabaseSeeder
    
     $hotel1 = \App\Models\Hotel::create(['nom' => 'The Kyoto', 'adreca' => 'Carrer Mariner, 32', 'ciutat' => 'Madrid', 'pais' => 'Espanya', 'email' => 'info@thekyoto.urbanaescapes.com', 'telefon' => '+34 934 56 78 90']);
     $this->command->info("  + Creat hotel de proves $hotel1->nom, $hotel1->adreca");
-    Log::info("Creat hotel de proves", ['hotel' => $hotel1]);
+    Log::channel('info_log')->info("Creat hotel de proves", ['hotel' => $hotel1]);
 
     $hotel2 = \App\Models\Hotel::create(['nom' => 'Hotel Oasis Khartoum', 'adreca' => 'Al-Mogran Street', 'ciutat' => 'Khartoum', 'pais' => 'Sudan', 'email' => 'info@khartoum.urbanaescapes.sd', 'telefon' => '+249 912 345 678']);
     $this->command->info("  + Creat hotel de proves $hotel2->nom, $hotel2->adreca");
-    Log::info("Creat hotel de proves", ['hotel' => $hotel2]);
+    Log::channel('info_log')->info("Creat hotel de proves", ['hotel' => $hotel2]);
 }
 }

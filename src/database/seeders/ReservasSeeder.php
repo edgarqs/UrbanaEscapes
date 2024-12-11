@@ -13,6 +13,6 @@ class ReservasSeeder extends DatabaseSeeder
         $reservasNumber = $this->command->ask('Quantes reserves vols crear?', 100);
         Reservas::factory($reservasNumber)->create();
         $this->command->info("  + Afegides $reservasNumber reserves");
-        Log::info("Reserves afegides", ['reservasNumber' => $reservasNumber]);
+        Log::channel('info_log')->info("Reserves afegides", ['reservasNumber' => $reservasNumber]);
     }
 }

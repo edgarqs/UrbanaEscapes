@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
         if ($this->command->confirm('Vols refrescar la base de dades?', true)) {
             $this->command->call('migrate:refresh');
             $this->command->info("S'ha reconstruït la base de dades");
-            Log::info("S'ha reconstruït la base de dades");
+            Log::channel('info_log')->info("S'ha reconstruït la base de dades");
         }
 
         $this -> call(HotelSeeder::class);
         $this->call(HabitacionsSeeder::class);
-        $hotels = \App\Models\Hotel::all();
+        $hotels = Hotel::all();
         foreach ($hotels as $hotel) {
             $this->command->info("Factory Hotel: $hotel->nom");
             
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
                     'numHabitacion' => $num_habitacio++
                 ]);
             }
-        Log::info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
+        Log::channel('info_log')->info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
 
         // Creació serveis
         //Asignacio serveis a habitacions
@@ -63,11 +63,11 @@ class DatabaseSeeder extends Seeder
                 $habitacio->serveis()->attach($randomServeis);
             }
         }
-        Log::info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel_id]);
+        Log::channel('info_log')->info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel_id]);
 
         // Creació reserves
         $reservesNumber = 50;
         Reservas::factory($reservesNumber)->create();
-        Log::info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel_id]);
+        Log::channel('info_log')->info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel_id]);
     }
 }

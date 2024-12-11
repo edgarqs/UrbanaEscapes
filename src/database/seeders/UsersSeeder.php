@@ -16,7 +16,7 @@ class UsersSeeder extends DatabaseSeeder
             $usuarisNumber = $this->command->ask('Quants usuaris vols crear per al hotel ' . $hotel->nom . '?', 50);
             Usuari::factory($usuarisNumber)->create();
             $this->command->info("  + Afegits $usuarisNumber usuari(s) al hotel: $hotel->nom");
-            Log::info("Afegits usuaris", ['usuarisNumber' => $usuarisNumber, 'hotel_id' => $hotel->id]);
+            Log::channel('info_log')->info("Afegits usuaris", ['usuarisNumber' => $usuarisNumber, 'hotel_id' => $hotel->id]);
         } else {
             $this->command->error('No s\'ha trobat cap hotel.');
         }
