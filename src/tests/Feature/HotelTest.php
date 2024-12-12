@@ -15,7 +15,7 @@ class HotelTest extends TestCase
     public function test_when_create_hotel_expect_redirect_to_selector_hotels(): void
     {
         $response=$this->get('/create');
-        $response->assertRedirectToRoute('/');
-        $response->assertOk();
+        $response->assertFound();
+        $response->assertRedirectToRoute('hotel.selector');
     }
 }
