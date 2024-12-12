@@ -1,3 +1,2 @@
 #! /bin/sh 
-./
 ./vendor/bin/phpstan analyse -l 3 app tests database
