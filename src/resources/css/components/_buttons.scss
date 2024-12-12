@@ -1,0 +1,29 @@
+@use '../abstracts/variables' as *;
+
+// Botones
+.button {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &--primary {
+        background-color: $primary-color;
+        color: white;
+        margin-top: auto;
+    }
+
+    &--margin-top {
+        margin-top: $base-spacing;
+    }
+
+    &:hover {
+        background-color: $primary-color-dark;
+    }
+}
