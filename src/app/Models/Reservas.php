@@ -41,7 +41,7 @@ class Reservas extends Model
     
         Log::info('Comptador d\'habitacions lliures', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
-    }    
+    }
 
     // Habitacions pendents
     public static function countHabitacionesPendientes($hotelId)
