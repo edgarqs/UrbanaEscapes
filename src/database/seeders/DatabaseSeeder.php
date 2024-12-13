@@ -33,15 +33,9 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
         $this->call(UsersSeeder::class);
         $this->call(HabitacionsSeeder::class);
-        $hotels = Hotel::all();
-        foreach ($hotels as $hotel) {
-            $this->command->info("Factory Hotel: $hotel->nom");
-
-            $this->call(UsersSeeder::class);
-
-            $this->call(ServeisSeeder::class);
-            $this->call(ReservasSeeder::class);
-        }
+        $this->call(ServeisSeeder::class);
+        $this->call(ReservasSeeder::class);
+        
     }
     public function CreateHotelSedder($hotel_id)
     {
@@ -72,5 +66,14 @@ class DatabaseSeeder extends Seeder
         $reservesNumber = 50;
         Reservas::factory($reservesNumber)->create();
         Log::channel('info_log')->info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel_id]);
+    
+
+        //Creacio usuari recepcionista
+
+        $recepcionista = Usuari::factory()->create([
+            'hotel_id' => $hotel_id,
+            'rol_id' => 2
+        ]);
+        Log::channel('info_log')->info("Afegit usuari recepcionista", ['hotel_id' => $hotel_id, 'usuari_id' => $recepcionista->id]);
     }
 }

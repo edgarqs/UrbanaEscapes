@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('llits_supletoris', ['0', '1', '2']);
             $table->decimal('preu', 10, 2);
             $table->integer('numHabitacion');
-            $table->enum('estat', ['lliure', 'ocupada']);
+            $table->enum('estat', ['lliure', 'ocupada','pendent']);
             $table->timestamps();
         });
     }

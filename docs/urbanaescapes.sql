@@ -20,7 +20,7 @@ CREATE TABLE habitacions (
     llits_supletoris ENUM('0','1','2') NOT NULL,
     preu DECIMAL(10, 2) NOT NULL,
     numHabitacio INT NOT NULL,
-    estat ENUM('lliure', 'ocupada') NOT NULL,
+    estat ENUM('lliure', 'ocupada','pendent') NOT NULL,
     FOREIGN KEY (hotel_id) REFERENCES hotels(id) ON DELETE CASCADE
 );
 
