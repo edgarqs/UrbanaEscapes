@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('login');
     }
 
     public function login(Request $request)
@@ -23,13 +23,12 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
             return redirect()->intended(route('hotel.selector'));
         }
 
-        session()->flash('status', 'Incorrect username or password!');
-
-        return redirect(route('login'));
+        return redirect(route('login'))->withErrors([
+            'nom' => 'Les credencials proporcionades no són correctes.',
+        ]);
     }
 
     public function logout()

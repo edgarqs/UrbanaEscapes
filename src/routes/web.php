@@ -10,13 +10,13 @@ Route::get('/', [HotelController::class, 'index'])
     ->name('hotel.selector')->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])
-    ->name('auth.login');
+    ->name('login');
 
 Route::post('/login', [LoginController::class, 'login'])
-    ->name('auth.login.post');
+    ->name('login.post');
 
 Route::get('/logout', [LoginController::class, 'logout'])
-    ->name('auth.logout');
+    ->name('logout');
 
 Route::get('/hotel/home/', [ReservasController::class, 'home'])
     ->name('hotel.home')->middleware('auth');

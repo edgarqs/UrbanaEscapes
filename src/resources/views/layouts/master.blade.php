@@ -25,7 +25,7 @@
                 
                 <li class="separacion"><a href="{{ route('hotel.selector') }}"><span class="material-symbols-outlined">arrow_back</span>Tornar</a></li>
 
-                <li><a href="{{ route('auth.logout') }}">Tancar la sessió</a></li>
+                <li><a href="{{ route('logout') }}">Tancar la sessió</a></li>
             </ul>
         </aside>
 

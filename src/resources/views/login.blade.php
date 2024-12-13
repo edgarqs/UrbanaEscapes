@@ -17,16 +17,13 @@
 
     <div class="form card">
         <h3 class="center">Iniciar Sessió</h3>
-        <form action="{{ route('auth.login.post') }}" method="post">
+        <form action="{{ route('login.post') }}" method="post">
             @csrf
             <!-- Primera fila -->
             <div class="form-row d-flex">
                 <div class="form-group flex-fill mr-3">
                     <label for="nom">Usuari</label>
-                    <input type="text" name="nom" id="nom" class="form-control" maxlength="30" placeholder="user@urbanaescapes.com" required>
-                    @if ($errors->has('nom'))
-                        <span class="w3-text-red"><strong>{{ $errors->first('nom') }}</strong></span>
-                    @endif
+                    <input type="text" name="nom" id="nom" class="form-control @if($errors->has('nom')) is-invalid @endif" value="{{ old('nom') }}" maxlength="30" placeholder="user@urbanaescapes.com" required>
                 </div>
             </div>
 
@@ -34,12 +31,18 @@
             <div class="form-row d-flex">
                 <div class="form-group flex-fill">
                     <label for="password">Contrasenya</label>
-                    <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" maxlength="50" required>
-                    @if ($errors->has('password'))
-                        <span class="w3-text-red"><strong>{{ $errors->first('password') }}</strong></span>
-                    @endif
+                    <input type="password" name="password" id="password" class="form-control @if($errors->has('nom')) is-invalid @endif" value="{{ old('password') }}" maxlength="50" required>
                 </div>
             </div>
+
+            @if ($errors->has('nom'))
+            <div class="error-container">
+                @error('nom')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            @endif
+
             <button type="submit" class="button button--primary button--margin-top">Iniciar Sessió</button>
         </form>
     </div>
