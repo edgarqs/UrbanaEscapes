@@ -16,7 +16,7 @@ class ReservasController extends Controller
         $hab_lliures = Reservas::countHabitacionesLliures($id);
         $hab_pendent = Reservas::countHabitacionesPendientes($id);
         $hab_ocupada = Reservas::countHabitacionesConfirmadas($id);
-        $habitacionsTotals = Hotel::find($id)->habitacions->count();
+        $habitacionsTotals = Reservas::getHabitacionesTotals($id);
 
         return view('hotel.home', [
             'hab_lliures' => $hab_lliures,
