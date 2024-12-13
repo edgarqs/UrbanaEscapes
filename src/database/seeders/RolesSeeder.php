@@ -15,7 +15,9 @@ class RolesSeeder extends DatabaseSeeder
         // Creación de roles
         $roles = [
             ['nom' => 'administrador'],
-            ['nom' => 'recepcionista']
+            ['nom' => 'recepcionista'],
+            ['nom' => 'client'],
+
         ];
         foreach ($roles as $rol) {
             Rol::create($rol);
