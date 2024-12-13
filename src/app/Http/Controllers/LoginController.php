@@ -23,11 +23,19 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended(route('hotel.selector'));
+
+            $user = Auth::user();
+
+            if ($user->rol_id == 1) {
+                return redirect()->intended(route('hotel.selector'));
+            } elseif ($user->rol_id == 2) {
+                return redirect()->intended(route('hotel.home', ['id' => $user->hotel_id]));
+            }
         }
 
         return redirect(route('login'))->withErrors([
             'nom' => 'Les credencials proporcionades no són correctes.',
+            'password' => 'Les credencials proporcionades no són correctes.',
         ]);
     }
 

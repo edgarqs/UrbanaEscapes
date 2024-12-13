@@ -15,7 +15,7 @@
 
 <body>
 
-    <div class="form card">
+    <div class="form card" id="login-form">
         <h3 class="center">Iniciar Sessió</h3>
         <form action="{{ route('login.post') }}" method="post">
             @csrf
