@@ -12,11 +12,18 @@ class Usuari extends Model
     protected $fillable = [
         'nom',
         'email',
+        'password',
+        'rol_id'
     ];
 
     public function reserves()
     {
         return $this->hasMany(Reservas::class);
+    }
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
     }
 
 }

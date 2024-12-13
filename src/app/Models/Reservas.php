@@ -17,7 +17,8 @@ class Reservas extends Model
         'data_entrada',
         'data_sortida',
         'preu_total',
-        'estat'
+        'estat',
+        'comentaris'
     ];
 
     public function habitacion()
