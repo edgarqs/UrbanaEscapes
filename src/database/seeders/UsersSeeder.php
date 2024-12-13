@@ -20,5 +20,15 @@ class UsersSeeder extends DatabaseSeeder
         } else {
             $this->command->error('No s\'ha trobat cap hotel.');
         }
+
+        foreach (Hotel::all() as $hotel) {
+            Usuari::create(['nom' => 'recepcio' . $hotel->id, 'email' => null, 'password' => 'recepcio', 'rol_id' => '2', 'hotel_id' => $hotel->id]);
+            $this->command->info("  + Afegit recepcionista a l'hotel: $hotel->nom");
+            Log::channel('info_log')->info("Afegits usuari(s) recepcionista al hotel", ['hotel_id' => $hotel->id]);
+        }
+
+        $usuariAdministrador = Usuari::create(['nom' => 'admin', 'email' => null, 'password' => 'admin', 'rol_id' => '1']);
+        $this->command->info("  + Creat usuari recepcionista $usuariAdministrador->nom");
+        Log::channel('info_log')->info("Afegit usuari administrador", ['usuari' => $usuariAdministrador]);
     }
 }
