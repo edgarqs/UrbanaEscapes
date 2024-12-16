@@ -7,7 +7,7 @@
     <h1>Sel·leciona l'hotel a consultar</h1>
 
     @if (session()->has('status'))
-        <div class="w3-panel w3-pale-green">
+        <div class="message-content message-content--success" id="status-message">
             <p> {{ session('status') }} </p>
         </div>
     @endif
