@@ -15,6 +15,13 @@
             <h2 class="card__header">{{ $habitacio->numHabitacion }}</h2>
             <div class="card__body">
                 <p>{{ $habitacio->tipus }}</p>
+                <p>Estat: {{ $habitacio->getEstat() }}</p>
+                @if ($habitacio->reservas()->where('estat', 'reservada')->exists() && $habitacio->estat !== 'ocupada')
+                    <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="button">Check-In</button>
+                    </form>
+                @endif
             </div>
         </div>
     @endforeach
