@@ -7,7 +7,11 @@
     <h1>Habitacions</h1>
 
     {{-- <p>Hotel ID: {{ $idHotel }}</p> --}}
-
+    @if (session('success'))
+    <div class="message-content message-content--success" id="status-message">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="cards cards--habitacions">
 
     @foreach ($habitacions as $habitacio)
