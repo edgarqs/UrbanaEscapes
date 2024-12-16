@@ -27,4 +27,9 @@ class Usuari extends Authenticatable
         return $this->belongsTo(Rol::class);
     }
 
+    public function hasRole(string $role): bool
+    {
+        return $this->rol && $this->rol->nom === $role;
+    }
+
 }
