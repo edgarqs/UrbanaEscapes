@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Usuari extends Model
+class Usuari extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'nom',
@@ -24,6 +25,11 @@ class Usuari extends Model
     public function rol()
     {
         return $this->belongsTo(Rol::class);
+    }
+
+    public function hasRole(string $role): bool
+    {
+        return $this->rol && $this->rol->nom === $role;
     }
 
 }

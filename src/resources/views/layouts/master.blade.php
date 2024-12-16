@@ -24,6 +24,8 @@
                 <li><a href="{{ route('hotel.create') }}" class="{{ Route::currentRouteNamed('hotel.create') ? 'active' : '' }}"><span class="material-symbols-outlined">add</span>Crear Hotel</a></li>
                 
                 <li class="separacion"><a href="{{ route('hotel.selector') }}"><span class="material-symbols-outlined">arrow_back</span>Tornar</a></li>
+
+                <li><a href="{{ route('logout') }}">Tancar la sessió</a></li>
             </ul>
         </aside>
 
