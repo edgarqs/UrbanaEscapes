@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Iconos Google Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    {{--* <link rel="stylesheet" href="{{ asset('css/main.css') }}"> No necesario con vite --}}
+    @vite(['resources/css/main.scss'])
     <link rel="icon" href="{{ asset('img/urbana.ico') }}" type="image/x-icon">
     <title>@yield('title')</title>
 </head>
@@ -23,6 +24,8 @@
                 <li><a href="{{ route('hotel.create') }}" class="{{ Route::currentRouteNamed('hotel.create') ? 'active' : '' }}"><span class="material-symbols-outlined">add</span>Crear Hotel</a></li>
                 
                 <li class="separacion"><a href="{{ route('hotel.selector') }}"><span class="material-symbols-outlined">arrow_back</span>Tornar</a></li>
+
+                <li><a href="{{ route('logout') }}">Tancar la sessió</a></li>
             </ul>
         </aside>
 
@@ -34,6 +37,7 @@
         </main>
     </div>
 
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

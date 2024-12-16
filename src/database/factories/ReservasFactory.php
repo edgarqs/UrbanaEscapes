@@ -34,7 +34,7 @@ class ReservasFactory extends Factory
             'data_entrada' => $data_entrada,
             'data_sortida' => $data_sortida,
             'preu_total' => $preu_total,
-            'estat' => $faker->randomElement(['pend_checkin', 'pend_checkout', 'cancelada', 'finalizada']),
+            'estat' => $faker->randomElement(['reservada', 'checkin', 'checkout', 'cancelada']),
         ];
     }
 }
