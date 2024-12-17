@@ -3,6 +3,7 @@
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HabitacionsController;
 use App\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Support\Facades\Route;
 
@@ -25,16 +26,19 @@ Route::get('/hotel/home/', [ReservasController::class, 'home'])
 
 Route::get('/create', [HotelController::class, 'create'])
     ->name('hotel.create')
-    ->middleware(['auth', EnsureUserHasRole::class.':administrador']);
+    ->middleware(['auth', EnsureUserHasRole::class . ':administrador']);
 
 Route::post('/create', [HotelController::class, 'guardarHotel'])
     ->name('hotel.store')
-    ->middleware(['auth', EnsureUserHasRole::class.':administrador']);
+    ->middleware(['auth', EnsureUserHasRole::class . ':administrador']);
 
 Route::get('/hotel/habitacions/', [ReservasController::class, 'habitacions'])
     ->name('hotel.habitacions')
     ->middleware('auth');
 
+Route::post('/habitacions/{id}/checkin', [HabitacionsController::class, 'checkin'])
+    ->name('habitacions.checkin');
+    
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
 });

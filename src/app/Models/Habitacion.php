@@ -37,4 +37,8 @@ class Habitacion extends Model
         return $preuTotal;
     }
 
+    public function getEstat()
+    {
+        return $this->estat;
+    }
 }
