@@ -37,11 +37,16 @@ Route::get('/hotel/habitacions/', [ReservasController::class, 'habitacions'])
     ->middleware('auth');
 
 Route::post('/habitacions/{id}/checkin', [HabitacionsController::class, 'checkin'])
-    ->name('habitacions.checkin');
+    ->name('habitacions.checkin')
+    ->middleware('auth');
 
 Route::post('/habitacions/{id}/checkout', [HabitacionsController::class, 'checkout'])
-    ->name('habitacions.checkout');
-    
+    ->name('habitacions.checkout')
+    ->middleware('auth');
+
+Route::get('/recepcio', [HotelController::class, 'showRecepcio'])
+    ->name('recepcio')
+    ->middleware('auth');
 
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';

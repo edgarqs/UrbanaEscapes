@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Database\Seeders\DatabaseSeeder;
+use App\Models\Habitacion;
+use App\Models\Reservas;
 
 class HotelController extends Controller
 {
@@ -36,5 +38,19 @@ class HotelController extends Controller
         
 
         return redirect()->route('hotel.selector')->with('status', 'Hotel creat correctament');
+    }
+
+    public function showRecepcio(Request $request)
+    {
+        $hotelId = $request->query('id');
+        $hotel = Hotel::findOrFail($hotelId);
+        $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
+        $reservas = Reservas::whereIn('habitacion_id', $habitacions->pluck('id'))->get();
+    
+        return view('recepcio.home', [
+            'hotel' => $hotel,
+            'habitacions' => $habitacions,
+            'reservas' => $reservas
+        ]);
     }
 }
