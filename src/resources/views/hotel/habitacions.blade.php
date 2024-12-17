@@ -26,6 +26,12 @@
                         <button type="submit" class="button">Check-In</button>
                     </form>
                 @endif
+                @if ($habitacio->reservas()->where('estat', 'checkin')->exists() && $habitacio->estat === 'ocupada')
+                    <form action="{{ route('habitacions.checkout', $habitacio->id) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="button">Check-Out</button>
+                    </form>
+                @endif
             </div>
         </div>
     @endforeach

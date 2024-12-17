@@ -38,7 +38,11 @@ Route::get('/hotel/habitacions/', [ReservasController::class, 'habitacions'])
 
 Route::post('/habitacions/{id}/checkin', [HabitacionsController::class, 'checkin'])
     ->name('habitacions.checkin');
+
+Route::post('/habitacions/{id}/checkout', [HabitacionsController::class, 'checkout'])
+    ->name('habitacions.checkout');
     
+
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
 });
