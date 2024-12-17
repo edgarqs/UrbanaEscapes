@@ -30,6 +30,6 @@ class HabitacionsController extends Controller
             $habitacio->save();
         }
 
-        return redirect()->back()->with('success', 'Check-In completat correctament per a l\'habitació número ' . $habitacio->numero);
+        return redirect()->back()->with('success', 'Check-In completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
     }
 }
