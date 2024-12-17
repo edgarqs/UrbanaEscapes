@@ -16,7 +16,7 @@ class ReservasSeeder extends DatabaseSeeder
 
         foreach ($hotels as $hotel) {
             $reservasNumber = $this->command->ask('Quantes reserves vols crear?', 100);
-            Reservas::factory($reservasNumber)->create();
+            Reservas::factory($reservasNumber)->updateOrCreate();
             $this->command->info("  + Afegides $reservasNumber reserves al hotel: $hotel->nom");
             Log::channel('info_log')->info("Reserves afegides", ['reservasNumber' => $reservasNumber],);
         }

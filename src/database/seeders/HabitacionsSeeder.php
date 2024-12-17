@@ -19,7 +19,7 @@ class HabitacionsSeeder extends DatabaseSeeder
             $num_habitacio = 1;
 
             for ($i = 0; $i < $habitacionsNumber; $i++) {
-                Habitacion::factory()->create([
+                Habitacion::factory()->updateOrCreate([
                     'hotel_id' => $hotel->id,
                     'numHabitacion' => $num_habitacio++
                 ]);
