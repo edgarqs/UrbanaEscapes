@@ -20,7 +20,7 @@ class RolesSeeder extends DatabaseSeeder
 
         ];
         foreach ($roles as $rol) {
-            Rol::updateOrCreate($rol);
+            Rol::create($rol);
         }
     }
 }

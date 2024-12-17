@@ -23,7 +23,7 @@ class ServeisSeeder extends DatabaseSeeder
             ['nom' => 'Cafetera', 'preu' => 10],
         ];
         foreach ($serveis as $servei) {
-            Serveis::updateOrCreate($servei);
+            Serveis::create($servei);
         }
 
         // Asignación de servicios a habitaciones

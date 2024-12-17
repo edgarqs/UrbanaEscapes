@@ -14,7 +14,7 @@ class UsersSeeder extends DatabaseSeeder
         $hotel = Hotel::first(); // Obtener el primer hotel
         if ($hotel) {
             $usuarisNumber = $this->command->ask('Quants usuaris vols crear per al hotel ' . $hotel->nom . '?', 50);
-            Usuari::factory($usuarisNumber)->updateOrCreate();
+            Usuari::factory($usuarisNumber)->create();
             $this->command->info("  + Afegits $usuarisNumber usuari(s) al hotel: $hotel->nom");
             Log::channel('info_log')->info("Afegits usuaris", ['usuarisNumber' => $usuarisNumber, 'hotel_id' => $hotel->id]);
         } else {
@@ -22,7 +22,7 @@ class UsersSeeder extends DatabaseSeeder
         }
 
         foreach (Hotel::all() as $hotel) {
-            Usuari::updateOrCreate([
+            Usuari::create([
                 'nom' => 'recepcio' . $hotel->id,
                 'email' => null,
                 'password' => Hash::make('recepcio'),
@@ -33,7 +33,7 @@ class UsersSeeder extends DatabaseSeeder
             Log::channel('info_log')->info("Afegits usuari(s) recepcionista al hotel", ['hotel_id' => $hotel->id]);
         }
 
-        $usuariAdministrador = Usuari::updateOrCreate([
+        $usuariAdministrador = Usuari::create([
             'nom' => 'admin',
             'email' => null,
             'password' => Hash::make('admin'),

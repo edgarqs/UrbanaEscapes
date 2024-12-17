@@ -49,4 +49,11 @@ class HabitacionsController extends Controller
 
         return redirect()->back()->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
     }
+
+    //? Devuelve la view de detalls-habitacio.blade.php
+    public function detalls($id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+        return view('components.detalls-habitacio', compact('habitacio'));
+    }
 }

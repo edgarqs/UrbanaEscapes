@@ -6,16 +6,15 @@
 
     <h1>Habitacions</h1>
 
-    {{-- <p>Hotel ID: {{ $idHotel }}</p> --}}
     @if (session('success'))
         <div class="message-content message-content--success" id="status-message">
             {{ session('success') }}
         </div>
     @endif
-    <div class="cards cards--habitacions">
 
+    <div class="cards cards--habitacions">
         @foreach ($habitacions as $habitacio)
-            <a class="card" href="{{ route('habitacions.detalls', ['id' => request()->query('id')]) }}">
+            <a class="card" onclick="showPopup({{ $habitacio->id }})">
                 <h2 class="card__header">{{ $habitacio->numHabitacion }}</h2>
                 <div class="card__body">
                     <p>{{ $habitacio->tipus }}</p>
@@ -35,12 +34,15 @@
                 </div>
             </a>
         @endforeach
-
     </div>
 
-
+    {{-- Popup de detalls-habitacio.blade.php --}}
+    <div id="popup" class="popup" style="display: none;">
+        <span class="close" onclick="hidePopup()">&times;</span>
+        <div id="popup-details"><!-- AQUÍ SE METE EL COMPONENT --></div>
+    </div>
+    
     {{-- Paginació --}}
-
     @if ($habitacions->count())
         <nav>
             {{ $habitacions->appends(['id' => $idHotel])->links() }}

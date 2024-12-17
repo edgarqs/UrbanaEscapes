@@ -1,0 +1,39 @@
+@use '../abstracts/variables' as *;
+
+.popup {
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: $card-border-radius;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    z-index: 1;
+    min-width: 30%;
+
+    p {
+        color: black;
+    }
+}
+
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+    color: black;
+}
+
+.details-list, .details-list ul {
+    list-style-type: none; /* Elimina los puntos de lista */
+    padding: 0;
+    margin: 0;
+}
+
+.details-list li {
+    margin-bottom: 10px;
+    color: black;
+}
