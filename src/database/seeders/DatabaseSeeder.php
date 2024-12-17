@@ -6,14 +6,11 @@ use App\Models\Habitacion;
 use Database\Seeders\ReservasSeeder;
 use Database\Seeders\ServeisSeeder;
 use Database\Seeders\UsersSeeder;
-use Database\Seeders\HabitacionsSedder;
 use Database\Seeders\HotelSeeder;
 use App\Models\Reservas;
-use App\Models\Hotel;
 use App\Models\Serveis;
 use App\Models\Usuari;
 use Illuminate\Database\Seeder;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
