@@ -69,6 +69,9 @@ class DatabaseSeeder extends Seeder
 
         $recepcionista = Usuari::factory()->create([
             'hotel_id' => $hotel_id,
+            'nom' => 'recepcio'. $hotel_id,
+            'password' => bcrypt('recepcio'. $hotel_id),
+            'email' => NULL,
             'rol_id' => 2
         ]);
         Log::channel('info_log')->info("Afegit usuari recepcionista", ['hotel_id' => $hotel_id, 'usuari_id' => $recepcionista->id]);
