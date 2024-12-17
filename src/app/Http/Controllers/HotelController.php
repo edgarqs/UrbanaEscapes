@@ -40,17 +40,5 @@ class HotelController extends Controller
         return redirect()->route('hotel.selector')->with('status', 'Hotel creat correctament');
     }
 
-    public function showRecepcio(Request $request)
-    {
-        $hotelId = $request->query('id');
-        $hotel = Hotel::findOrFail($hotelId);
-        $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
-        $reservas = Reservas::whereIn('habitacion_id', $habitacions->pluck('id'))->get();
     
-        return view('recepcio.home', [
-            'hotel' => $hotel,
-            'habitacions' => $habitacions,
-            'reservas' => $reservas
-        ]);
-    }
 }

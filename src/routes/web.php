@@ -44,7 +44,7 @@ Route::post('/habitacions/{id}/checkout', [HabitacionsController::class, 'checko
     ->name('habitacions.checkout')
     ->middleware('auth');
 
-Route::get('/recepcio', [HotelController::class, 'showRecepcio'])
+Route::get('/recepcio', [HabitacionsController::class, 'showRecepcio'])
     ->name('recepcio')
     ->middleware('auth');
 

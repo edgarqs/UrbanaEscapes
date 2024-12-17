@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Habitacion;
 use Illuminate\Http\Request;
+use App\Models\Hotel;
+use App\Models\Reservas;
 
 class HabitacionsController extends Controller
 {
@@ -48,5 +50,29 @@ class HabitacionsController extends Controller
         }
 
         return redirect()->back()->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
+    }
+
+    public function showRecepcio(Request $request)
+    {
+        $hotelId = $request->query('id');
+        $hotel = Hotel::findOrFail($hotelId);
+        $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
+        $reservas = Reservas::whereIn('habitacion_id', $habitacions->pluck('id'))->get();
+        
+
+        \Carbon\Carbon::setLocale('ca');
+        $today = \Carbon\Carbon::today();
+        $startDate = $today->copy()->subDays(5);
+        $endDate = $today->copy()->addDays(26);
+
+
+        
+        return view('recepcio.home', [
+            'hotel' => $hotel,
+            'habitacions' => $habitacions,
+            'reservas' => $reservas,
+            'startDate' =>$startDate,
+            'endDate' => $endDate
+        ]);
     }
 }
