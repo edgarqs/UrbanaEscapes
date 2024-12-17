@@ -6,10 +6,8 @@ use App\Models\Habitacion;
 use Database\Seeders\ReservasSeeder;
 use Database\Seeders\ServeisSeeder;
 use Database\Seeders\UsersSeeder;
-use Database\Seeders\HabitacionsSedder;
 use Database\Seeders\HotelSeeder;
 use App\Models\Reservas;
-use App\Models\Hotel;
 use App\Models\Serveis;
 use App\Models\Usuari;
 use Illuminate\Database\Seeder;
@@ -28,29 +26,25 @@ class DatabaseSeeder extends Seeder
             Log::channel('info_log')->info("S'ha reconstruït la base de dades");
         }
 
-        $this -> call(HotelSeeder::class);
+        $this->call(HotelSeeder::class);
+        $this->call(RolesSeeder::class);
+        $this->call(UsersSeeder::class);
         $this->call(HabitacionsSeeder::class);
-        $hotels = Hotel::all();
-        foreach ($hotels as $hotel) {
-            $this->command->info("Factory Hotel: $hotel->nom");
-            
-            $this->call(UsersSeeder::class);
-            
-            $this->call(ServeisSeeder::class);
-            $this->call(ReservasSeeder::class);
-        }
+        $this->call(ServeisSeeder::class);
+        $this->call(ReservasSeeder::class);
+        
     }
     public function CreateHotelSedder($hotel_id)
     {
         $habitacionsNumber = 100;
         $num_habitacio = 1;
 
-            for ($i = 0; $i < $habitacionsNumber; $i++) {
-                Habitacion::factory()->create([
-                    'hotel_id' => $hotel_id,
-                    'numHabitacion' => $num_habitacio++
-                ]);
-            }
+        for ($i = 0; $i < $habitacionsNumber; $i++) {
+            Habitacion::factory()->create([
+                'hotel_id' => $hotel_id,
+                'numHabitacion' => $num_habitacio++
+            ]);
+        }
         Log::channel('info_log')->info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
 
         // Creació serveis
@@ -69,5 +63,14 @@ class DatabaseSeeder extends Seeder
         $reservesNumber = 50;
         Reservas::factory($reservesNumber)->create();
         Log::channel('info_log')->info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel_id]);
+    
+
+        //Creacio usuari recepcionista
+
+        $recepcionista = Usuari::factory()->create([
+            'hotel_id' => $hotel_id,
+            'rol_id' => 2
+        ]);
+        Log::channel('info_log')->info("Afegit usuari recepcionista", ['hotel_id' => $hotel_id, 'usuari_id' => $recepcionista->id]);
     }
 }

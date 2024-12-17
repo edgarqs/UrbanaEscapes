@@ -14,7 +14,8 @@ class Habitacion extends Model
         'numero',
         'tipo',
         'precio',
-        'numHabitacion'
+        'numHabitacion',
+        'estat'
     ];
 
     public function reservas()
@@ -36,4 +37,8 @@ class Habitacion extends Model
         return $preuTotal;
     }
 
+    public function getEstat()
+    {
+        return $this->estat;
+    }
 }

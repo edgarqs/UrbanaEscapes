@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('habitacion_serveis', function (Blueprint $table) {
-            $table->id(); // Clave primaria
-            $table->unsignedBigInteger('habitacions_id'); // Relación con habitaciones
+            $table->id();
+            $table->unsignedBigInteger('habitacions_id');
             $table->foreign('habitacions_id')->references('id')->on('habitacions')->onDelete('cascade');
-            $table->unsignedBigInteger('serveis_id'); // Relación con servicios
+            $table->unsignedBigInteger('serveis_id');
             $table->foreign('serveis_id')->references('id')->on('serveis')->onDelete('cascade');
-            $table->timestamps(); // Opcional, para marcas de tiempo
+            $table->timestamps();
         });
     }
 

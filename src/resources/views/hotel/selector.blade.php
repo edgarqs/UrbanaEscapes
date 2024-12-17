@@ -6,9 +6,17 @@
 
     <h1>Sel·leciona l'hotel a consultar</h1>
 
+    {{-- Mensaje tras creación del hotel --}}
     @if (session()->has('status'))
-        <div class="w3-panel w3-pale-green">
+        <div class="message-content message-content--success" id="status-message">
             <p> {{ session('status') }} </p>
+        </div>
+    @endif
+
+    {{-- Mensaje de error --}}
+    @if ($errors->any())
+        <div class="message-content message-content--error" id="status-message">
+            <p>{{ $errors->first() }}</p>
         </div>
     @endif
 

@@ -12,8 +12,8 @@
 @use 'components/forms';
 
 // Layout
-@use 'layout/layout';
 @use 'layout/sidebar';
 
 // Páginas específicas
 @use 'pages/home';
+@use 'pages/login';

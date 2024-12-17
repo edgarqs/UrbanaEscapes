@@ -43,6 +43,7 @@ class HabitacionFactory extends Factory
             'llits_supletoris' => $faker->randomElement(['0', '1', '2']),
             'preu' => $preu,
             'hotel_id' => null,
+            'estat' => $faker->randomElement(['lliure', 'ocupada','pendent']),
         ];
     }
 }

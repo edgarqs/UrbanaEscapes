@@ -3,10 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\Habitacion;
-use App\Models\Serveis;
 use App\Models\Usuari;
-
+use App\Models\Reservas;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
 
 /**
@@ -21,20 +21,59 @@ class ReservasFactory extends Factory
      */
     public function definition(): array
     {
-        $habitacion_id = Habitacion::inRandomOrder()->first()->id;
         $faker = \Faker\Factory::create('es_ES');
+        $habitacion = Habitacion::inRandomOrder()->first();
         $dias = $faker->numberBetween(1, 15);
-        $data_entrada = $faker->dateTimeThisYear();
-        $data_sortida = (clone $data_entrada)->modify("+$dias days");
-        $preu_total = Habitacion::getHabitacionPreu($habitacion_id)* $dias;
-        
+        $dataEntrada = $faker->dateTimeBetween('-1 year', '+1 year');
+        $dataSortida = (clone $dataEntrada)->modify("+$dias days");
+
+        //? Calcular el preu total de la reserva amb serveis extra
+        $preuHabitacio = $habitacion->preu * $dias;
+        $preuServeis = $habitacion->serveis->sum('preu');
+        $preuTotal = $preuHabitacio + $preuServeis;
+
+        //? Verificar que no haya otra reserva en las mismas fechas
+        while (Reservas::where('habitacion_id', $habitacion->id)
+            ->where(function ($query) use ($dataEntrada, $dataSortida) {
+                $query->whereBetween('data_entrada', [$dataEntrada, $dataSortida])
+                    ->orWhereBetween('data_sortida', [$dataEntrada, $dataSortida]);
+            })->exists()
+        ) {
+            $dataEntrada = $faker->dateTimeBetween('-1 year', '+1 year');
+            $dataSortida = (clone $dataEntrada)->modify("+$dias days");
+        }
+
+        //? Estableix l'estat de la reserva según la fecha
+        if ($dataEntrada > Carbon::now()) {
+            $estatReserva = $faker->randomElement(['reservada', 'cancelada']);
+        } elseif ($dataSortida < Carbon::now()) {
+            $estatReserva = $faker->randomElement(['checkout', 'cancelada']);
+        } else {
+            $estatReserva = $faker->randomElement(['reservada', 'checkin', 'checkout', 'cancelada']);
+        }
+
+        //? Actualitza l'estat de l'habitació segons l'estat de la reserva (realista)
+        switch ($estatReserva) {
+            case 'reservada':
+                $habitacion->estat = 'pendent';
+                break;
+            case 'checkin':
+                $habitacion->estat = 'ocupada';
+                break;
+            case 'checkout':
+            case 'cancelada':
+                $habitacion->estat = 'lliure';
+                break;
+        }
+        $habitacion->save();
+
         return [
-            'habitacion_id' => $habitacion_id, //? Selecciona un ID de habitación existente de forma aleatoria
-            'usuari_id' => Usuari::inRandomOrder()->first()->id, //? Seleciona un usuario existente
-            'data_entrada' => $data_entrada,
-            'data_sortida' => $data_sortida,
-            'preu_total' => $preu_total,
-            'estat' => $faker->randomElement(['pend_checkin', 'pend_checkout', 'cancelada', 'finalizada']),
+            'habitacion_id' => $habitacion->id,
+            'usuari_id' => Usuari::inRandomOrder()->first()->id, //? Selecciona un usuario aleatorio
+            'data_entrada' => $dataEntrada,
+            'data_sortida' => $dataSortida,
+            'preu_total' => $preuTotal,
+            'estat' => $estatReserva,
         ];
     }
 }
