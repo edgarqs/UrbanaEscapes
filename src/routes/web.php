@@ -46,6 +46,10 @@ Route::get('/hotel/checkins', [ReservasController::class, 'checkins'])
     ->name('reservas.checkins')
     ->middleware('auth');
 
+    //? Para la view de habitacions.blade.php
+Route::get('/habitacions/{id}/detalls', [HabitacionsController::class, 'detalls'])
+    ->name('habitacions.detalls');
+
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
 });
