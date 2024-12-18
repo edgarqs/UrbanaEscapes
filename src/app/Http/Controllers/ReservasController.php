@@ -30,7 +30,7 @@ class ReservasController extends Controller
     {
         $idHotel = $request->query('id');
         $habitacions = Habitacion::where('hotel_id', $idHotel)->paginate(100);
-    
+
         return view('hotel.habitacions', ['idHotel' => $idHotel, 'habitacions' => $habitacions]);
     }
 
@@ -50,7 +50,7 @@ class ReservasController extends Controller
         return redirect()->back()->with('success', 'Check-In completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
     }
 
-    
+
     public function checkout($id)
     {
         $habitacio = Habitacion::findOrFail($id);
@@ -65,5 +65,22 @@ class ReservasController extends Controller
         }
 
         return redirect()->back()->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
+    }
+
+    public function checkins(Request $request)
+    {
+        $startDate = $request->query('start_date', now()->startOfDay());
+        $endDate = $request->query('end_date', now()->endOfDay());
+
+        $reservas = Reservas::where('estat', 'reservada')
+            ->whereBetween('data_entrada', [$startDate, $endDate])
+            ->with('usuari', 'habitacion')
+            ->get();
+
+        return view('hotel.checkins', [
+            'reservas' => $reservas,
+            'startDate' => $startDate,
+            'endDate' => $endDate
+        ]);
     }
 }
