@@ -47,7 +47,8 @@ class ReservasController extends Controller
             $habitacio->save();
         }
 
-        return redirect()->back()->with('success', 'Check-In completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
+        return redirect()->back()
+            ->with('success', 'Check-In completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
     }
 
 
@@ -64,7 +65,8 @@ class ReservasController extends Controller
             $habitacio->save();
         }
 
-        return redirect()->back()->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
+        return redirect()->back()
+            ->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
     }
 
     public function checkins(Request $request)
