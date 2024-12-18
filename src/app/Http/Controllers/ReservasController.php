@@ -33,4 +33,23 @@ class ReservasController extends Controller
     
         return view('hotel.habitacions', ['idHotel' => $idHotel, 'habitacions' => $habitacions]);
     }
+    
+    public function checkins(Request $request)
+    {
+        $startDate = $request->query('start_date', now()->startOfDay());
+        $endDate = $request->query('end_date', now()->endOfDay());
+    
+        $reservas = Reservas::where('estat', 'reservada')
+            ->whereBetween('data_entrada', [$startDate, $endDate])
+            ->with('usuari', 'habitacion')
+            ->get();
+    
+        return view('hotel.checkins', [
+            'reservas' => $reservas,
+            'startDate' => $startDate,
+            'endDate' => $endDate
+        ]);
+    }
+
+
 }
