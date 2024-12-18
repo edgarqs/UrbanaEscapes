@@ -36,11 +36,11 @@ Route::get('/hotel/habitacions/', [ReservasController::class, 'habitacions'])
     ->name('hotel.habitacions')
     ->middleware('auth');
 
-Route::post('/habitacions/{id}/checkin', [HabitacionsController::class, 'checkin'])
+Route::post('/habitacions/{id}/checkin', [ReservasController::class, 'checkin'])
     ->name('habitacions.checkin')
     ->middleware('auth');
 
-Route::post('/habitacions/{id}/checkout', [HabitacionsController::class, 'checkout'])
+Route::post('/habitacions/{id}/checkout', [ReservasController::class, 'checkout'])
     ->name('habitacions.checkout')
     ->middleware('auth');
 
