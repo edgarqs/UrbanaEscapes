@@ -29,7 +29,7 @@ class LoginController extends Controller
             if ($user->rol_id == 1) {
                 return redirect()->intended(route('hotel.selector'));
             } elseif ($user->rol_id == 2) {
-                return redirect()->intended(route('hotel.home', ['id' => $user->hotel_id]));
+                return redirect()->intended(route('recepcio', ['id' => $user->hotel_id]));
             }
         }
 

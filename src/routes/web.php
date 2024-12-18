@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HotelController::class, 'index'])
     ->name('hotel.selector')
-    ->middleware('auth');
+    ->middleware(['auth', EnsureUserHasRole::class . ':administrador']);
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])
     ->name('login');

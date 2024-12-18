@@ -22,6 +22,11 @@ class Reservas extends Model
         'comentaris'
     ];
 
+    protected $casts = [
+        'data_entrada' => 'datetime',
+        'data_sortida' => 'datetime',
+    ];
+
     public function habitacion()
     {
         return $this->belongsTo(Habitacion::class);
