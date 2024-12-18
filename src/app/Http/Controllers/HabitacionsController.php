@@ -17,39 +17,6 @@ class HabitacionsController extends Controller
         ]);
     }
 
-    public function checkin($id)
-    {
-        $habitacio = Habitacion::findOrFail($id);
-        $reserva = $habitacio->reservas()->where('estat', 'reservada')->first();
-
-        if ($reserva) {
-            $reserva->estat = 'checkin';
-            $reserva->save();
-
-            $habitacio->estat = 'ocupada';
-            $habitacio->save();
-        }
-
-        return redirect()->back()->with('success', 'Check-In completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
-    }
-
-    
-    public function checkout($id)
-    {
-        $habitacio = Habitacion::findOrFail($id);
-        $reserva = $habitacio->reservas()->where('estat', 'checkin')->first();
-
-        if ($reserva) {
-            $reserva->estat = 'checkout';
-            $reserva->save();
-
-            $habitacio->estat = 'lliure';
-            $habitacio->save();
-        }
-
-        return redirect()->back()->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
-    }
-
     //? Devuelve la view de detalls-habitacio.blade.php
     public function detalls($id)
     {
