@@ -33,7 +33,6 @@ class ReservasSeeder extends Seeder
                     'estat' => 'reservada',
                     'preu_total' => rand(100, 1000),
                     'comentaris' => 'Notes del client',
-                    'persones' => rand(1, $habitacio->llits), // Número de personas en la reserva basado en el número de camas
                 ]);
             }
 

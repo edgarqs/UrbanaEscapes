@@ -30,7 +30,7 @@
                 <p>Nom del client: {{ $reserva->usuari->nom }}</p>
                 <p>Duració de l'estada: {{ $reserva->data_entrada }} - {{ $reserva->data_sortida }}</p>
                 <p>Tipus d'habitació: {{ $reserva->habitacion->tipus }}</p>
-                <p>Ocupants de l'habitació: {{ $reserva->habitacion->llits }}</p>
+                <p>Ocupants de l'habitació: {{ $reserva->habitacion->llits + $reserva->habitacion->llits_supletoris }}</p>
                 <p>Habitació assignada: {{ $reserva->habitacion->numHabitacion }}</p>
                 <p>Estat de la reserva: {{ $reserva->estat }}</p>
                 <p>Preu de la reserva: {{ $reserva->preu_total }}€</p>
