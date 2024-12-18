@@ -41,8 +41,12 @@ Route::post('/habitacions/{id}/checkin', [HabitacionsController::class, 'checkin
 
 Route::post('/habitacions/{id}/checkout', [HabitacionsController::class, 'checkout'])
     ->name('habitacions.checkout');
+    
+Route::get('/hotel/checkins', [ReservasController::class, 'checkins'])
+    ->name('reservas.checkins')
+    ->middleware('auth');
 
-//? Para la view de habitacions.blade.php
+    //? Para la view de habitacions.blade.php
 Route::get('/habitacions/{id}/detalls', [HabitacionsController::class, 'detalls'])
     ->name('habitacions.detalls');
 
