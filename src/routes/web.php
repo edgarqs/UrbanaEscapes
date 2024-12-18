@@ -48,6 +48,8 @@ Route::get('/recepcio', [HabitacionsController::class, 'showRecepcio'])
     ->name('recepcio')
     ->middleware('auth');
 
+    Route::get('/refresh-calendar', 'HabitacionsController@refreshCalendar')->name('refresh-calendar');
+
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
 });
