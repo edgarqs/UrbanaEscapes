@@ -41,7 +41,10 @@ Route::post('/habitacions/{id}/checkin', [HabitacionsController::class, 'checkin
 
 Route::post('/habitacions/{id}/checkout', [HabitacionsController::class, 'checkout'])
     ->name('habitacions.checkout');
-    
+
+//? Para la view de habitacions.blade.php
+Route::get('/habitacions/{id}/detalls', [HabitacionsController::class, 'detalls'])
+    ->name('habitacions.detalls');
 
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
