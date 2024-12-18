@@ -71,12 +71,12 @@ function refreshCalendarBody(startDate) {
 }
 
 document.querySelector('#prevWeek').addEventListener('click', () => {
-    currentDate.setDate(currentDate.getDate() - 12);
+    currentDate.setDate(currentDate.getDate() - 7);
     generateWeekCalendar(currentDate);
 });
 
 document.querySelector('#nextWeek').addEventListener('click', () => {
-    currentDate.setDate(currentDate.getDate() + 12);
+    currentDate.setDate(currentDate.getDate() + 7);
     generateWeekCalendar(currentDate);
 });
 
