@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section('title', 'Llistat de Check-Ins')
@@ -30,9 +29,8 @@
             <div class="card__body">
                 <p>Nom del client: {{ $reserva->usuari->nom }}</p>
                 <p>Duració de l'estada: {{ $reserva->data_entrada }} - {{ $reserva->data_sortida }}</p>
-                <p>Tipus d'habitació: {{ $reserva->habitacion->tipo }}</p>
-                <p>Ocupants de l'habitació: {{ $reserva->habitacion->ocupants }}</p>
-                <p>Persones de la reserva: {{ $reserva->persones }}</p>
+                <p>Tipus d'habitació: {{ $reserva->habitacion->tipus }}</p>
+                <p>Ocupants de l'habitació: {{ $reserva->habitacion->llits }}</p>
                 <p>Habitació assignada: {{ $reserva->habitacion->numHabitacion }}</p>
                 <p>Estat de la reserva: {{ $reserva->estat }}</p>
                 <p>Preu de la reserva: {{ $reserva->preu_total }}€</p>
@@ -42,4 +40,4 @@
     @endforeach
 </div>
 
-@endsection
+@endsection     
