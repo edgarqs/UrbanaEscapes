@@ -1,21 +1,64 @@
-@use '../abstracts/variables' as *;
+@use "../abstracts/variables" as *;
 
 .popup {
+    display: grid;
+    place-items: center;
     position: fixed;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: $card-border-radius;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    background-color: white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
-    min-width: 30%;
+    transition: all 0.3s ease;
+}
 
-    p {
-        color: black;
+#popup-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    font-family: Arial, sans-serif;
+    position: relative;
+    top: 40px;
+
+    h3 {
+        grid-column: span 2; //? Para que ocupe las dos columnas
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+        text-align: center;
     }
+}
+
+.culumna-detalls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h5 {
+        margin: 0;
+        font-size: 1.2rem;
+        border-bottom: 2px solid #ddd; //? Pinta una línea debajo del título
+        padding-bottom: 5px;
+    }
+}
+
+.llista-detalls {
+    list-style: none;
+
+    li {
+        line-height: 1.5;
+    }
+}
+
+.li-espaciat {
+    margin-left: 30px;
 }
 
 .popup .close {
@@ -24,16 +67,5 @@
     right: 30px;
     font-size: 30px;
     cursor: pointer;
-    color: black;
-}
-
-.details-list, .details-list ul {
-    list-style-type: none; /* Elimina los puntos de lista */
-    padding: 0;
-    margin: 0;
-}
-
-.details-list li {
-    margin-bottom: 10px;
     color: black;
 }

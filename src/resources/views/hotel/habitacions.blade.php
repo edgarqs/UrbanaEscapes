@@ -38,7 +38,7 @@
 
     {{-- Popup de detalls-habitacio.blade.php --}}
     <div id="popup" class="popup" style="display: none;">
-        <span class="close" onclick="hidePopup()">&times;</span>
+        
         <div id="popup-details"><!-- AQUÍ SE METE EL COMPONENT --></div>
     </div>
     
