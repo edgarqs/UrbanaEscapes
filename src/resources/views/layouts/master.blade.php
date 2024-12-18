@@ -18,7 +18,7 @@
     <div class="layout">
         <!-- Menú lateral -->
         <aside class="sidebar">
-            <img src="{{ asset('img/urbana_logo-sinFondo.png') }}" alt="logo urbana escapes con icono de una cama" onclick="window.location.href='{{ route('hotel.selector') }}';">
+            <img src="{{ asset('img/urbana_logo-sinFondo.avif') }}" alt="logo urbana escapes con icono de una cama" onclick="window.location.href='{{ route('hotel.selector') }}';">
             <ul>
                 <li><a href="{{ route('hotel.selector') }}" class="{{ Route::currentRouteNamed('hotel.home') ? 'active' : '' }}"><span class="material-symbols-outlined">analytics</span>Gestió de l'hotel</a></li>
                 <li><a href="{{ route('hotel.create') }}" class="{{ Route::currentRouteNamed('hotel.create') ? 'active' : '' }}"><span class="material-symbols-outlined">add</span>Crear Hotel</a></li>

@@ -1,8 +1,15 @@
 @extends('layouts.master')
 
-@section('title', 'Recepció - {{ $hotel->nom }}')
+@section('title', 'Recepció')
 
 @section('content')
+    @php
+        \Carbon\Carbon::setLocale('ca');
+        $today = \Carbon\Carbon::today();
+        $startDate = $today->copy()->subDays(5);
+        $endDate = $today->copy()->addDays(26);
+        $days = $startDate->daysUntil($endDate)->toArray(); // Array de fechas
+    @endphp
     <div class="recepcio-calendar">
         <h1 class="hotel-title">{{ $hotel->nom }}</h1>
         <div class="room-calendar">
@@ -10,9 +17,9 @@
                 <!-- Encabezados -->
                 <thead>
                     <tr>
-                        <th class="room-header">Habitació</th>
-                        @foreach ($startDate->daysUntil($endDate) as $day)
-                            <th class="day-header">{{ $day->format('d M') }}</th>
+                        <th></th>
+                        @foreach ($days as $day)
+                            <th class="day-header">{{ $day->translatedFormat('D j') }}</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -21,31 +28,43 @@
                 <tbody>
                     @foreach ($habitacions as $habitacio)
                         <tr>
-                            <td class="room-cell">Habitació {{ $habitacio->numHabitacion }}</td>
+                            <td class="room-cell">{{ $habitacio->numHabitacion }}</td>
                             @php
-                                $mostrarNom = []; // Para rastrear si ya mostramos el nombre de un usuario en una reserva
+                                $remainingDays = $days; // Copia de días para procesar
                             @endphp
-                            @foreach ($startDate->daysUntil($endDate) as $currentDate)
+                            @while (!empty($remainingDays))
                                 @php
-                                    // Busca una reserva que abarque el día actual
-                                    $reserva = $reservas->first(function ($r) use ($habitacio, $currentDate) {
+                                    $currentDay = array_shift($remainingDays);
+                                    $reserva = $reservas->first(function ($r) use ($habitacio, $currentDay) {
                                         return $r->habitacion_id === $habitacio->id &&
-                                               $currentDate->between($r->data_entrada, $r->data_sortida->copy()->subDay());
+                                            $currentDay->between($r->data_entrada, $r->data_sortida->copy()->subDay());
                                     });
 
-                                    $mostrarNom[$reserva->id ?? null] = $mostrarNom[$reserva->id ?? null] ?? true;
+                                    if ($reserva) {
+                                        $colspan = 0;
+                                        foreach ($remainingDays as $day) {
+                                            if ($day->between($reserva->data_entrada, $reserva->data_sortida->copy()->subDay())) {
+                                                $colspan++;
+                                            } else {
+                                                break;
+                                            }
+                                        }
+                                        $colspan++;
+                                        $remainingDays = array_slice($remainingDays, $colspan - 1);
+                                    } else {
+                                        $colspan = 1;
+                                    }
                                 @endphp
-                                <td class="reservation-cell {{ $reserva ? 'reserved reservation-' . $reserva->id : 'available' }}">
-                                    @if ($reserva && $mostrarNom[$reserva->id])
+
+                                <td class="reservation-cell {{ $reserva ? 'reserved' : 'available' }}"
+                                    colspan="{{ $colspan }}">
+                                    @if ($reserva)
                                         <div class="reservation-details">
-                                            {{ $reserva->usuari->nom }}
+                                            <p>{{ $reserva->usuari->nom }}</p>
                                         </div>
-                                        @php
-                                            $mostrarNom[$reserva->id] = false; // Marca el nombre como mostrado
-                                        @endphp
                                     @endif
                                 </td>
-                            @endforeach
+                            @endwhile
                         </tr>
                     @endforeach
                 </tbody>
@@ -55,41 +74,24 @@
 @endsection
 
 <style>
+
     /* Estilo base */
-.reservation-cell {
-    text-align: center;
-    padding: 8px;
-    border: 1px solid #ddd;
-    font-weight: bold;
-}
+    .reservation-cell {
+        text-align: center;
+        padding: 8px;
+        font-weight: bold;
+        width: 100px;
+        height: 50px;
+        box-sizing: border-box;
+    }
 
-/* Estados de las celdas */
-.reservation-cell.available {
-    background-color: #ccffcc;
-    color: #006600;
-}
+    .reservation-cell.available {
+        background-color: #ccffcc;
+        border: 1px solid #ddd;
+    }
 
-.reservation-cell.reserved {
-    color: white;
-}
-
-/* Colores dinámicos para reservas */
-.reservation-1 {
-    background-color: #ff9999; /* Rojo claro */
-}
-
-.reservation-2 {
-    background-color: #99ccff; /* Azul claro */
-}
-
-.reservation-3 {
-    background-color: #ffcc99; /* Naranja claro */
-}
-
-.reservation-4 {
-    background-color: #ccff99; /* Verde claro */
-}
-
-/* Agrega más colores si tienes más reservas */
-
+    .reservation-cell.reserved {
+        background-color: #ffcccc;
+        border: 1px solid #ddd;
+    }
 </style>

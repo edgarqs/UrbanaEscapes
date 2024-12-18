@@ -59,20 +59,10 @@ class HabitacionsController extends Controller
         $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
         $reservas = Reservas::whereIn('habitacion_id', $habitacions->pluck('id'))->get();
         
-
-        \Carbon\Carbon::setLocale('ca');
-        $today = \Carbon\Carbon::today();
-        $startDate = $today->copy()->subDays(5);
-        $endDate = $today->copy()->addDays(26);
-
-
-        
         return view('recepcio.home', [
             'hotel' => $hotel,
             'habitacions' => $habitacions,
-            'reservas' => $reservas,
-            'startDate' =>$startDate,
-            'endDate' => $endDate
+            'reservas' => $reservas
         ]);
     }
 }
