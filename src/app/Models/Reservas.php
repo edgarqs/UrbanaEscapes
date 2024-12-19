@@ -11,7 +11,6 @@ class Reservas extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'habitacion_id',
         'usuari_id',
@@ -32,22 +31,6 @@ class Reservas extends Model
         return $this->belongsTo(Usuari::class);
     }
 
-    // Habitacions lliures
-    public static function countHabitacionesLliures($hotelId)
-    {
-        $count = Habitacion::where('estat', 'lliure')->where('hotel_id', $hotelId)->count();
-        Log::channel('info_log')->info('Comptador d\'habitacions lliures', ['hotel_id' => $hotelId, 'count' => $count]);
-        return $count;
-    }
-
-    // Habitacions pendents
-    public static function countHabitacionesPendientes($hotelId)
-    {
-        $count = Habitacion::where('estat', 'pendent')->where('hotel_id', $hotelId)->count();
-        Log::channel('info_log')->info('Comptador d\'habitacions pendents', ['hotel_id' => $hotelId, 'count' => $count]);
-        return $count;
-    }
-
     // Habitacions ocupades
     public static function countHabitacionesConfirmadas($hotelId)
     {
@@ -56,10 +39,30 @@ class Reservas extends Model
         return $count;
     }
 
-    // Todas las habitacions
+    // Habitacions lliures
+    public static function countHabitacionesLliures($hotelId)
+    {
+        $count = Habitacion::where('estat', 'lliure')->where('hotel_id', $hotelId)->count();
+        Log::channel('info_log')->info('Comptador d\'habitacions lliures', ['hotel_id' => $hotelId, 'count' => $count]);
+        return $count;
+    }
+
+    // Reserves amb estat "reservada"
+    public static function countReservasPendientes($hotelId)
+    {
+        $count = Reservas::whereHas('habitacion', function ($query) use ($hotelId) {
+            $query->where('hotel_id', $hotelId);
+        })->where('estat', 'reservada')->count();
+        
+        Log::channel('info_log')->info('Comptador de reserves pendents', ['hotel_id' => $hotelId, 'count' => $count]);
+        return $count;
+    }
+
+    // Totes les habitacions
     public static function getHabitacionesTotals($hotelId)
     {
         $habitacions = Habitacion::where('hotel_id', $hotelId)->get()->count();
+        Log::channel('info_log')->info('Comptador de totes les habitacions', ['hotel_id' => $hotelId, 'count' => $habitacions]);
         return $habitacions;
     }
 }

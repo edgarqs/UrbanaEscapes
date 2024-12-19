@@ -54,12 +54,10 @@ class ReservasFactory extends Factory
 
         //? Actualitza l'estat de l'habitació segons l'estat de la reserva (realista)
         switch ($estatReserva) {
-            case 'reservada':
-                $habitacion->estat = 'pendent';
-                break;
             case 'checkin':
                 $habitacion->estat = 'ocupada';
                 break;
+            case 'reservada':
             case 'checkout':
             case 'cancelada':
                 $habitacion->estat = 'lliure';
