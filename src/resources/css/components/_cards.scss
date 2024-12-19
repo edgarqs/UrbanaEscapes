@@ -57,24 +57,3 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
 }
-
-// MENSAJES
-.message-content {
-    position: fixed;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: $card-border-radius;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    z-index: 1;
-
-    &--error {
-        background-color: $error-color;
-    }
-
-    &--success {
-        background-color: $succes-color;
-    }
-}

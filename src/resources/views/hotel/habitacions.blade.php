@@ -7,7 +7,7 @@
     <h1>Habitacions</h1>
 
     @if (session('success'))
-        <div class="message-content message-content--success" id="status-message">
+        <div class="message-content message-content--info" id="status-message">
             {{ session('success') }}
         </div>
     @endif
@@ -38,10 +38,10 @@
 
     {{-- Popup de detalls-habitacio.blade.php --}}
     <div id="popup" class="popup" style="display: none;">
-        <span class="close" onclick="hidePopup()">&times;</span>
+
         <div id="popup-details"><!-- AQUÍ SE METE EL COMPONENT --></div>
     </div>
-    
+
     {{-- Paginació --}}
     @if ($habitacions->count())
         <nav>

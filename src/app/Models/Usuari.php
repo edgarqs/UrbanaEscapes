@@ -14,7 +14,8 @@ class Usuari extends Authenticatable
         'nom',
         'email',
         'password',
-        'rol_id'
+        'rol_id',
+        'hotel_id'
     ];
 
     public function reserves()
@@ -25,6 +26,11 @@ class Usuari extends Authenticatable
     public function rol()
     {
         return $this->belongsTo(Rol::class);
+    }
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
     }
 
     public function hasRole(string $role): bool

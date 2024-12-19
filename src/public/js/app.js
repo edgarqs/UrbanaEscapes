@@ -9,14 +9,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Mostra el popup amb els detalls de la habitació
-function showPopup(habitacioId) {
-    fetch(`/habitacions/${habitacioId}/detalls`)
-        .then((response) => response.text())
-        .then((html) => {
-            document.querySelector("#popup-details").innerHTML = html;
-            document.querySelector("#popup").style.display = "block";
-        });
-}
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+        var flashMessage = document.querySelector("#status-message");
+        if (flashMessage) {
+            flashMessage.classList.add("message-content--hidden");
+            setTimeout(() => flashMessage.style.display = "none", 500); // Esperar transición
+        }
+    }, 10000); // 10 segundos
+});
+
 
 function hidePopup() {
     document.querySelector("#popup").style.display = "none";

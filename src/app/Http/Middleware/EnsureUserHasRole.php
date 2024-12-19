@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\Hotel;
 
 class EnsureUserHasRole
 {
@@ -16,7 +17,10 @@ class EnsureUserHasRole
     public function handle(Request $request, Closure $next, string $role): Response
     {
         if (! $request->user() || ! $request->user()->hasRole($role)) {
-            return redirect('/')->withErrors('No tens permisos per accedir a aquesta pàgina');
+
+            $hotelId = $request->user()->hotel_id;
+
+            return redirect()->route('recepcio',['id' => $hotelId] )->withErrors('No tens permisos per accedir a aquesta pàgina');
         }
 
         return $next($request);
