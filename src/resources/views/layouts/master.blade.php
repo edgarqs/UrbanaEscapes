@@ -10,7 +10,7 @@
     {{--* <link rel="stylesheet" href="{{ asset('css/main.css') }}"> No necesario con vite --}}
     @vite(['resources/css/main.scss'])
     <link rel="icon" href="{{ asset('img/urbana.ico') }}" type="image/x-icon">
-    <title>@yield('title')</title>
+    <title>@yield('title') | uEscapes</title>
 </head>
 
 <body>

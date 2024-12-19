@@ -10,7 +10,7 @@
     {{-- * <link rel="stylesheet" href="{{ asset('css/main.css') }}"> No necesario con vite --}}
     @vite(['resources/css/main.scss'])
     <link rel="icon" href="{{ asset('img/urbana.ico') }}" type="image/x-icon">
-    <title>Login | UrbanaEscapes</title>
+    <title>Login | uEscapes</title>
 </head>
 
 <body>

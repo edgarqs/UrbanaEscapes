@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Llistat de Check-Ins')
+@section('title', 'Check-Ins')
 
 @section('content')
 
