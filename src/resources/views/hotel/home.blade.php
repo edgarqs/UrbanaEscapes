@@ -1,9 +1,11 @@
 @extends('layouts.master')
 
+@section('title', $hotel->nom)
+
 @section('content')
     <div class="contenido">
 
-        <h1>Gestió de l'hotel</h1>
+        <h1>Gestió: {{ $hotel->nom }}</h1>
 
         <div class="cards">
 

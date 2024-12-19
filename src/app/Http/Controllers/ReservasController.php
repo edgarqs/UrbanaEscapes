@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Reservas;
 use Illuminate\Http\Request;
 use App\Models\Habitacion;
+use App\Models\Hotel;
 
 class ReservasController extends Controller
 {
     public function home(Request $request)
     {
         $id = $request->query('id');
+        $hotel = Hotel::findOrFail($id); //? Busca el hotel amb l'id que li passem per paràmetre
 
         $habitacionsOcupades = Reservas::countHabitacionesConfirmadas($id);
         $habitacionsLliures = Reservas::countHabitacionesLliures($id);
@@ -18,6 +20,7 @@ class ReservasController extends Controller
         $habitacionsTotals = Reservas::getHabitacionesTotals($id);
 
         return view('hotel.home', [
+            'hotel' => $hotel,
             'habitacionsOcupades' => $habitacionsOcupades,
             'habitacionsLliures' => $habitacionsLliures,
             'checkinsPendents' => $checkinsPendents,

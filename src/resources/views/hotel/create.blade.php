@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Crea Hotel')
+@section('title', 'Nou Hotel')
 
 @section('content')
 
