@@ -2,7 +2,10 @@
 
 // Botones
 .button {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     width: 100%;
     padding: 0.8rem;
     background-color: $primary-color;
@@ -15,6 +18,18 @@
 
     &--primary {
         background-color: $primary-color;
+        color: white;
+        margin-top: auto;
+    }
+
+    &--green {
+        background-color: $succes-color;
+        color: white;
+        margin-top: auto;
+    }
+
+    &--red {
+        background-color: $error-color;
         color: white;
         margin-top: auto;
     }

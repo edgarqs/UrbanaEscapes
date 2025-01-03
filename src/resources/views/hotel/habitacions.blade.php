@@ -22,13 +22,13 @@
                     @if ($habitacio->reservas()->where('estat', 'reservada')->exists() && $habitacio->estat !== 'ocupada')
                         <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="button">Check-In</button>
+                            <button type="submit" class="button button--green"><span class="material-symbols-outlined">login</span>Check-In</button>
                         </form>
                     @endif
                     @if ($habitacio->reservas()->where('estat', 'checkin')->exists() && $habitacio->estat === 'ocupada')
                         <form action="{{ route('habitacions.checkout', $habitacio->id) }}" method="POST">
                             @csrf
-                            <button type="submit" class="button">Check-Out</button>
+                            <button type="submit" class="button button--red"><span class="material-symbols-outlined">logout</span>Check-Out</button>
                         </form>
                     @endif
                 </div>

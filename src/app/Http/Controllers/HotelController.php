@@ -39,6 +39,11 @@ class HotelController extends Controller
 
         return redirect()->route('hotel.selector')->with('status', 'Hotel creat correctament');
     }
-
     
+    //? Formulario de creación de datos del hotel
+    public function formHotelDetalls()
+    {
+        return view('hotel.crearDetalls');
+    }
+
 }

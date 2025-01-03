@@ -59,3 +59,8 @@ Route::get('/habitacions/{id}/detalls', [HabitacionsController::class, 'detalls'
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
 });
+
+//? Formulario detalles del hotel (tras crearlo)
+Route::get('/hotel/create-detalls', [HotelController::class, 'formHotelDetalls'])
+    ->name('hotel.crearDetalls')
+    ->middleware('auth');
