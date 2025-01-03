@@ -39,4 +39,32 @@ class HabitacionsController extends Controller
             'reservas' => $reservas
         ]);
     }
+
+    public function refreshCalendar(Request $request)
+    {
+        $startDate = $request->query('start_date');
+        $hotelId = $request->query('id');
+
+        $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
+        $reservas = $this->getReservasByDate($hotelId, $startDate);
+
+        return response()->json([
+            'habitacions' => $habitacions,
+            'reservas' => $reservas,
+            'startDate' => $startDate
+        ]);
+    }
+
+    private function getReservasByDate($hotelId, $startDate)
+    {
+        $startDate = \Carbon\Carbon::parse($startDate);
+        $endDate = $startDate->copy()->addDays(30);
+
+        return Reservas::whereHas('habitacion', function ($query) use ($hotelId) {
+            $query->where('hotel_id', $hotelId);
+        })
+        ->whereDate('data_entrada', '<=', $endDate)
+        ->whereDate('data_sortida', '>=', $startDate)
+        ->get();
+    }
 }
