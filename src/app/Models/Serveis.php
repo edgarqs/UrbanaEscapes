@@ -33,6 +33,9 @@ class Serveis extends Model
         foreach ($serveis as $servei) {
             $preuTotal += $servei->preu;
         }
+        
+        Log::channel('info_log')->info('Preu total dels serveis per habitació', ['habitacio_id' => $habitacio_id, 'preu_total' => $preuTotal]);
+
         return $preuTotal;
     }
 }
