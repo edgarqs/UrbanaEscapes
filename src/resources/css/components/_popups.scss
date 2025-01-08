@@ -13,6 +13,26 @@
     transition: all 0.3s ease;
 }
 
+.messages-content {
+    display: flex;
+    flex-direction: column;
+
+    .messages {
+        padding: 1rem 2rem;
+        border-radius: $card-border-radius;
+        border: 2px solid $error-color;
+        background-color: rgba(255, 185, 185, 0.875);
+        //? Para q se vea bien el icono
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    span {
+        font-size: 2rem;
+    }
+}
+
 #popup-details {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -91,6 +111,6 @@
     }
 
     &--info {
-        background-color: #1E3A8A;
+        background-color: #1e3a8a;
     }
 }

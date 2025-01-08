@@ -26,29 +26,24 @@ class DatabaseSeeder extends Seeder
             Log::channel('info_log')->info("S'ha reconstruït la base de dades");
         }
 
-        $this->call(HotelSeeder::class);
         $this->call(RolesSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(HabitacionsSeeder::class);
         $this->call(ServeisSeeder::class);
-        $this->call(ReservasSeeder::class);
-        
     }
-    public function CreateHotelSedder($hotel_id)
+    public function CreateHotelSedder($hotel_id, $num_clients, $num_habitacions, $num_reserves)
     {
-        $habitacionsNumber = 100;
+        // Crear habitaciones
         $num_habitacio = 1;
-
-        for ($i = 0; $i < $habitacionsNumber; $i++) {
+        for ($i = 0; $i < $num_habitacions; $i++) {
             Habitacion::factory()->create([
                 'hotel_id' => $hotel_id,
                 'numHabitacion' => $num_habitacio++
             ]);
         }
-        Log::channel('info_log')->info("Afegides habitacions", ['habitacionsNumber' => $habitacionsNumber]);
+        Log::channel('info_log')->info("Afegides habitacions", ['habitacionsNumber' => $num_habitacions]);
 
         // Creació serveis
-        //Asignacio serveis a habitacions
+        // Asignacio serveis a habitacions
         $habitacions = Habitacion::where('hotel_id', $hotel_id)->get();
         $serveis = Serveis::all();
         foreach ($habitacions as $habitacio) {
@@ -60,20 +55,23 @@ class DatabaseSeeder extends Seeder
         Log::channel('info_log')->info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel_id]);
 
         // Creació reserves
-        $reservesNumber = 50;
-        Reservas::factory($reservesNumber)->create();
-        Log::channel('info_log')->info("Afegides reserves", ['reservesNumber' => $reservesNumber, 'hotel_id' => $hotel_id]);
-    
+        Reservas::factory($num_reserves)->create();
+        Log::channel('info_log')->info("Afegides reserves", ['reservesNumber' => $num_reserves, 'hotel_id' => $hotel_id]);
 
-        //Creacio usuari recepcionista
-
+        // Creació usuari recepcionista
         $recepcionista = Usuari::factory()->create([
             'hotel_id' => $hotel_id,
-            'nom' => 'recepcio'. $hotel_id,
-            'password' => bcrypt('recepcio'. $hotel_id),
+            'nom' => 'recepcio' . $hotel_id,
+            'password' => bcrypt('recepcio' . $hotel_id),
             'email' => NULL,
             'rol_id' => 2
         ]);
         Log::channel('info_log')->info("Afegit usuari recepcionista", ['hotel_id' => $hotel_id, 'usuari_id' => $recepcionista->id]);
+
+        // Crear usuarios adicionales si es necesario
+        Usuari::factory($num_clients)->create([
+            'hotel_id' => $hotel_id,
+        ]);
+        Log::channel('info_log')->info("Afegits clients", ['num_clients' => $num_clients]);
     }
 }
