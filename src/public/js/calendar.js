@@ -42,7 +42,12 @@ function renderCalendar(data) {
     data.habitacions.forEach(habitacio => {
         const row = document.createElement('tr');
         const cell = document.createElement('td');
-        cell.textContent = habitacio.numHabitacion;
+        const link = document.createElement('a');
+        link.href = `/reserves/${habitacio.numHabitacion}`;
+        link.textContent = habitacio.numHabitacion;
+        
+        cell.appendChild(link);
+
         row.appendChild(cell);
 
         let remainingDays = Array.from({ length: 31 }, (_, i) => {
