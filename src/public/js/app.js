@@ -1,7 +1,7 @@
 // Oculta els missatges flash passats 10 segons
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
-        var flashMessage = document.querySelector("#status-message");
+        let flashMessage = document.querySelector("#status-message");
         if (flashMessage) {
             flashMessage.style.display = "none";
         }
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Mostra el popup amb els detalls de la habitació
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
-        var flashMessage = document.querySelector("#status-message");
+        let flashMessage = document.querySelector("#status-message");
         if (flashMessage) {
             flashMessage.classList.add("message-content--hidden");
             setTimeout(() => flashMessage.style.display = "none", 500); // Esperar transición

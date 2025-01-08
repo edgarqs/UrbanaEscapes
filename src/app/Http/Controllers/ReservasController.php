@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservas;
-use Illuminate\Http\Request;
-use App\Models\Habitacion;
 use App\Models\Hotel;
+use App\Models\Usuari;
+use App\Models\Reservas;
+use App\Models\Habitacion;
+use Illuminate\Http\Request;
 
 class ReservasController extends Controller
 {
@@ -33,7 +34,7 @@ class ReservasController extends Controller
         $paginacioHabitacions = env('PAGINACIO_HABITACIONS', 100);
         $idHotel = $request->query('id');
         $habitacions = Habitacion::where('hotel_id', $idHotel)->paginate($paginacioHabitacions);
-    
+
         return view('hotel.habitacions', ['idHotel' => $idHotel, 'habitacions' => $habitacions]);
     }
 
@@ -87,5 +88,19 @@ class ReservasController extends Controller
             'startDate' => $startDate,
             'endDate' => $endDate
         ]);
+    }
+
+    public function index($habitacionId)
+    {
+        $usuaris = Usuari::all();
+        $habitacio = Habitacion::findOrFail($habitacionId);
+        return view('recepcio.reservas', ['habitacionId' => $habitacionId, 'usuaris' => $usuaris, 'habitacio' => $habitacio]);
+    }
+
+
+    public function store(Request $request, $habitacionId)
+    {
+        return redirect()->route('recepcio')
+            ->with('success', 'Reserva completada correctament');
     }
 }
