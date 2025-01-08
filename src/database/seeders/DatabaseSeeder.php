@@ -26,12 +26,9 @@ class DatabaseSeeder extends Seeder
             Log::channel('info_log')->info("S'ha reconstruït la base de dades");
         }
 
-        $this->call(HotelSeeder::class);
         $this->call(RolesSeeder::class);
         $this->call(UsersSeeder::class);
-        $this->call(HabitacionsSeeder::class);
         $this->call(ServeisSeeder::class);
-        $this->call(ReservasSeeder::class);
     }
     public function CreateHotelSedder($hotel_id, $num_clients, $num_habitacions, $num_reserves)
     {
