@@ -56,6 +56,10 @@ Route::get('/hotel/checkins', [ReservasController::class, 'checkins'])
 Route::get('/habitacions/{id}/detalls', [HabitacionsController::class, 'detalls'])
     ->name('habitacions.detalls');
 
+Route::get('/refresh-calendar', [HabitacionsController::class, 'refreshCalendar'])
+    ->name('refresh.calendar')
+    ->middleware('auth');
+
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
 });
