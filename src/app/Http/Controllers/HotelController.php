@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Database\Seeders\DatabaseSeeder;
-use App\Models\Habitacion;
-use App\Models\Reservas;
 
 class HotelController extends Controller
 {
-    
+
     public function index()
     {
         $hotels = Hotel::all();
@@ -29,21 +27,36 @@ class HotelController extends Controller
             'pais' => 'required|string|max:23',
             'email' => 'required|email|max:50',
             'telefon' => 'required|string|max:15',
+            'clients' => 'required|integer',
+            'habitacions' => 'required|integer',
+            'reserves' => 'required|integer',
         ]);
- 
-        $hotel = Hotel::create($dades);
 
-        $seederHabitacions = new DatabaseSeeder();
-        $seederHabitacions->CreateHotelSedder($hotel->id);
-        
+        $hotel = Hotel::create([
+            'nom' => $dades['nom'],
+            'adreca' => $dades['adreca'],
+            'ciutat' => $dades['ciutat'],
+            'pais' => $dades['pais'],
+            'email' => $dades['email'],
+            'telefon' => $dades['telefon'],
+        ]);
 
-        return redirect()->route('hotel.selector')->with('status', 'Hotel creat correctament');
+        $numClients = $dades['clients'];
+        $numHabitacions = $dades['habitacions'];
+        $numReserves = $dades['reserves'];
+
+        $seeder = new DatabaseSeeder();
+        $seeder->CreateHotelSedder($hotel->id, $numClients, $numHabitacions, $numReserves);
+
+        return redirect()->route('hotel.home', ['id' => $hotel->id])
+            ->with('status', 'Hotel creat correctament i dades del hotel creades correctament');
     }
-    
-    //? Formulario de creación de datos del hotel
+
+    // Formulario de creación de datos del hotel
     public function formHotelDetalls()
     {
-        return view('hotel.crearDetalls');
+        $hotelNom = session('hotel_nom');
+        $hotelId = session('hotel_id');
+        return view('hotel.crearDetalls', ['hotelNom' => $hotelNom, 'hotelId' => $hotelId]);
     }
-
 }
