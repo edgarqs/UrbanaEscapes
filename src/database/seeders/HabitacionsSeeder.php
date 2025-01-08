@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Reservas;
 use Illuminate\Support\Facades\Log;
-use App\Models\Usuari;
 use App\Models\Hotel;
 use App\Models\Habitacion;
 

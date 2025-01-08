@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Rol;
 
-use Illuminate\Support\Facades\Log;
-
 class RolesSeeder extends DatabaseSeeder
 {
 

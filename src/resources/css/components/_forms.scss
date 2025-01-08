@@ -7,6 +7,11 @@
     padding: 2rem;
     border-radius: $card-border-radius;
 
+    h3 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
     .form-group {
         margin-bottom: 1.5rem;
 
