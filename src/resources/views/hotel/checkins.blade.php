@@ -17,6 +17,18 @@
             <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
         </div>
         <div class="form-group">
+            <label for="status">Estat d'habitació</label>
+            <select name="status" id="status" class="form-control">
+                <option value="">Tots</option>
+                <option value="ocupada" {{ request('status') == 'ocupada' ? 'selected' : '' }}>Ocupada</option>
+                <option value="lliure" {{ request('status') == 'lliure' ? 'selected' : '' }}>Lliure</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="search">Nom del client o Número de reserva</label>
+            <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}">
+        </div>
+        <div class="form-group">
             <button type="submit" class="button">Filtrar</button>
         </div>
     </div>
@@ -40,4 +52,4 @@
     @endforeach
 </div>
 
-@endsection     
+@endsection
