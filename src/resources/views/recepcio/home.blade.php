@@ -21,3 +21,18 @@
     </table>
     <script src="{{ asset('js/calendar.js') }}"></script>
 @endsection
+
+<style>
+    .reservation-cell.reserved {
+        background-color: rgb(209, 127, 127); /* Color de fondo para reservas */
+    }
+    .reservation-cell.available {
+        background-color: lightgreen; /* Color de fondo para disponibilidad */
+    }
+    .fixed-width-cell {
+        width: auto;
+        white-space: nowrap;
+        text-align: center;
+        align-items: center;
+    }
+</style>

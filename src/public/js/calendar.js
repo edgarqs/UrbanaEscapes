@@ -57,7 +57,6 @@ function renderCalendar(data) {
                 const entrada = new Date(r.data_entrada);
                 const sortida = new Date(r.data_sortida);
                 const current = new Date(currentDay);
-                console.log('Comparing dates:', entrada, sortida, current); // Verificar las fechas
                 return r.habitacion_id === habitacio.id && entrada <= current && current <= sortida;
             });
 
@@ -72,13 +71,14 @@ function renderCalendar(data) {
             }
 
             const cell = document.createElement('td');
-            cell.className = `reservation-cell ${reserva ? 'reserved' : 'available'}`;
+            cell.className = `reservation-cell ${reserva ? 'reserved' : 'available'} fixed-width-cell`;
             cell.colSpan = colspan;
 
-            if (reserva && reserva.usuari) {
+            if (reserva) {
                 const details = document.createElement('div');
                 details.className = 'reservation-details';
-                details.innerHTML = `<p>${reserva.usuari.nom}</p>`;
+                const usuari = data.usuaris.find(u => u.id === reserva.usuari_id); 
+                details.innerHTML = `<p>${usuari ? usuari.nom : reserva.usuari_id}</p>`;
                 cell.appendChild(details);
             }
             
