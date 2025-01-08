@@ -70,4 +70,28 @@ class Reservas extends Model
         Log::channel('info_log')->info('Comptador de totes les habitacions', ['hotel_id' => $hotelId, 'count' => $habitacions]);
         return $habitacions;
     }
+
+    public static function getCheckinsFiltrats($filters)
+{
+    $query = self::query();
+
+    $filterConditions = [
+        'start_date' => fn($query, $value) => $query->whereDate('data_entrada', '>=', $value),
+        'end_date' => fn($query, $value) => $query->whereDate('data_sortida', '<=', $value),
+        'status' => fn($query, $value) => $query->whereHas('habitacion', fn($q) => $q->where('estat', $value)),
+        'search' => fn($query, $value) => $query->where(function ($q) use ($value) {
+            $q->whereHas('usuari', fn($q2) => $q2->where('nom', 'like', "%$value%"))
+              ->orWhere('id', 'like', "%$value%");
+        }),
+    ];
+
+    foreach ($filters as $key => $value) {
+        if (!empty($value) && isset($filterConditions[$key])) {
+            $filterConditions[$key]($query, $value);
+        }
+    }
+
+    return $query->get();
+}
+
 }

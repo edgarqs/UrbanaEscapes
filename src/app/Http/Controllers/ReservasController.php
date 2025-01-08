@@ -74,14 +74,15 @@ class ReservasController extends Controller
     }
 
     public function checkins(Request $request)
-    {
-        $startDate = $request->query('start_date', now()->startOfDay());
-        $endDate = $request->query('end_date', now()->endOfDay());
+{
+    $filters = [
+        'start_date' => $request->get('start_date'),
+        'end_date' => $request->get('end_date'),
+        'status' => $request->get('status'),
+        'search' => $request->get('search'),
+    ];
 
-        $reservas = Reservas::where('estat', 'reservada')
-            ->whereBetween('data_entrada', [$startDate, $endDate])
-            ->with('usuari', 'habitacion')
-            ->get();
+    $reservas = Reservas::getCheckinsFiltrats($filters);
 
         return view('hotel.checkins', [
             'reservas' => $reservas,
@@ -103,4 +104,5 @@ class ReservasController extends Controller
         return redirect()->route('recepcio')
             ->with('success', 'Reserva completada correctament');
     }
+}
 }
