@@ -84,11 +84,7 @@ class ReservasController extends Controller
 
     $reservas = Reservas::getCheckinsFiltrats($filters);
 
-        return view('hotel.checkins', [
-            'reservas' => $reservas,
-            'startDate' => $startDate,
-            'endDate' => $endDate
-        ]);
+        return view('hotel.checkins', compact('reservas'));
     }
 
     public function index($habitacionId)
@@ -105,4 +101,4 @@ class ReservasController extends Controller
             ->with('success', 'Reserva completada correctament');
     }
 }
-}
+
