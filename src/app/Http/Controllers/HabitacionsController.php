@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hotel;
+use App\Models\Usuari;
+use App\Models\Reservas;
 use App\Models\Habitacion;
 use Illuminate\Http\Request;
-use App\Models\Hotel;
-use App\Models\Reservas;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Foundation\Auth\User;
 
 class HabitacionsController extends Controller
 {
@@ -32,11 +35,43 @@ class HabitacionsController extends Controller
         $hotel = Hotel::findOrFail($hotelId);
         $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
         $reservas = Reservas::whereIn('habitacion_id', $habitacions->pluck('id'))->get();
-        
+
         return view('recepcio.home', [
             'hotel' => $hotel,
             'habitacions' => $habitacions,
             'reservas' => $reservas
         ]);
+    }
+
+    public function refreshCalendar(Request $request)
+    {
+        $startDate = $request->query('start_date');
+        $hotelId = $request->query('id');
+
+        $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
+        $reservas = $this->getReservasByDate($hotelId, $startDate);
+        $usuaris = Usuari::all();
+
+        
+
+        return response()->json([
+            'habitacions' => $habitacions,
+            'reservas' => $reservas,
+            'usuaris' => $usuaris,
+            'startDate' => $startDate
+        ]);
+    }
+
+    private function getReservasByDate($hotelId, $startDate)
+    {
+        $startDate = \Carbon\Carbon::parse($startDate);
+        $endDate = $startDate->copy()->addDays(30);
+
+        return Reservas::whereHas('habitacion', function ($query) use ($hotelId) {
+            $query->where('hotel_id', $hotelId);
+        })
+            ->whereDate('data_entrada', '<=', $endDate)
+            ->whereDate('data_sortida', '>=', $startDate)
+            ->get();
     }
 }
