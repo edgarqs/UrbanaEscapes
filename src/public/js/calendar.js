@@ -19,6 +19,7 @@ function generateWeekCalendar(date) {
 
     weekDays.forEach(day => {
         const headerCell = document.createElement('th');
+        headerCell.className = 'th-day';
         headerCell.textContent = `${day.toLocaleString('es', { weekday: 'short' })} ${day.getDate()}`;
         headerRow.appendChild(headerCell);
     });
