@@ -3,67 +3,101 @@
 @section('title', 'Recepció')
 
 @section('content')
-<div class="nav">
-    <h3>Afegir reserva</h3>
-    <button onclick="window.location='{{ route('recepcio', ['id' => auth()->user()->hotel_id]  ) }}'">Tornar</button>
-</div>
-<form action="{{ route('reserves.store', ['habitacionId' => $habitacionId]) }}" method="post">
-    @csrf
-    <h4>Dades del client</h4>
-    <div class="form-group-1">
-        <div class="usuariRegistrat">
+    <div class="nav">
+        <h3>Afegir reserva</h3>
+        <button onclick="window.location='{{ route('recepcio', ['id' => auth()->user()->hotel_id]) }}'">Tornar</button>
+    </div>
+    <form action="{{ route('reserves.store', ['habitacionId' => $habitacionId]) }}" method="post">
+        @csrf
+        <h4>Dades del client</h4>
+        <div class="usuariSelector">
+            <label for="tipus_usuari">Tipus d'usuari</label>
+            <select class="form-control" id="tipus_usuari" name="tipus_usuari" onchange="mostrarFormUsuari()">
+                <option value="">Selecciona una opció</option>
+                <option value="registrat">Usuari registrat</option>
+                <option value="nou">Usuari nou</option>
+            </select>
+        </div>
+        <div class="form-group usuariRegistrat" style="display:none;">
             <label for="usuari_registrat">Usuari registrat</label>
-            
             <div class="formUsuariRegistrat">
                 <select class="form-control" id="usuari_id" name="usuari_id">
-                    {{-- IF dels usuaris selector --}}
                     @foreach ($usuaris as $usuari)
+                        <option value=" "></option>
                         <option value="{{ $usuari->id }}">{{ $usuari->nom }}</option>
                     @endforeach
                 </select>
             </div>
         </div>
-        <div class="usuariNou">
-            <label for="usuari_nou">Usuari nou</label>
-            
+        <div class="form-group usuariNou" style="display:none;">
             <div class="form-group">
                 <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom" required>
-            </div>
+                <input type="text" class="form-control" id="nom" name="nom">
 
-            <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email">
             </div>
         </div>
-    </div>
+        <div class="form-group">
+            <div class="dadesHabitacio">
+                <h4>Dades de l'habitació</h4>
+                <p>Habitació: {{ $habitacio->numHabitacion }}</p>
+                <p>Tipus: {{ $habitacio->tipus }}</p>
+                <p>Preu: {{ $habitacio->preu }}€</p>
+                <p>Num.llits: {{ $habitacio->llits }}</p>
+                <p>Num.llits supletoris: {{ $habitacio->llits_supletoris }}</p>
+            </div>
+            <div class="serveisHabitacio">
+                <h4>Serveis</h5>
+                    <ul class="list-group">
+                        @foreach ($serveis as $servei)
+                        <li class="form-check-label" for="servei{{ $servei->id }}">
+                            {{ $servei->nom }}: {{ $servei->preu }}€
+                            <input class="form-check-input" type="checkbox" value="{{ $servei->id }}"
+                                id="servei{{ $servei->id }}" name="serveis[]">
+                        </li>
+                        @endforeach
+                    </ul>
+            </div>
+            <div>
 
-    <h4>Dades de l'habitació</h4>
-    <div class="form-group">
-        <p>Habitació: {{ $habitacio->numHabitacion }}</p>
-        <p>Tipus: {{ $habitacio->tipus }}</p>
-        <p>Preu: {{ $habitacio->preu }}€</p>
-        <p>Num.llits: {{ $habitacio->llits }}</p>
-        <p>Num.llits supletoris: {{ $habitacio->llits_supletoris }}</p>
-    </div>
+            </div>
+        </div>
+        </div>
 
-    <h4>Dades de la reserva</h4>
-    <div class="form-group">
-        <label for="data_inici">Data inici</label>
-        <input type="date" class="form-control" id="data_inici" name="data_inici" required>
+        <div class="form-group">
+            <div class="reserva">
+                <h4>Dades de la reserva</h4>
+                <div class="inici">
+                    <label for="data_inici">Data inici</label>
+                    <input type="date" class="form-control" id="data_inici" name="data_inici"
+                        value="{{ $diaActual }}" required>
+                </div>
 
-        <label for="data_fi">Data fi</label>
-        <input type="date" class="form-control" id="data_fi" name="data_fi" required>
-    </div>
+                <div class="fi">
+                    <label for="data_fi">Data fi</label>
+                    <input type="date" class="form-control" id="data_fi" name="data_fi" required>
+                </div>
+            </div>
 
-    <div class="submit">
-        <button type="submit" class="btn btn-primary">Afegir reserva</button>
-    </div>
+            <div class="observacions">
+                <h4>Observacions</h4>
+                <div class="form-group">
+                    <textarea class="form-control" id="observacions" name="observacions" rows="3"></textarea>
+                </div>
+            </div>
 
-</form>
+        </div>
+
+
+
+        <div class="submit">
+            <button type="submit" class="btn btn-primary">Afegir reserva</button>
+        </div>
+
+    </form>
 
 @endsection
-
 <style>
     .nav {
         display: flex;
@@ -71,10 +105,29 @@
         align-items: center;
     }
 
-    .form-group-1 {
-        display: flex;
-        align-items: center;
+    .usuariSelector {
+        padding-bottom: 20px;
     }
+
+    .form-group {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .list-group {
+        flex-direction: column;
+    }
+
+    .form-check-label {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-check-input {
+        margin-left: 10px;
+    }
+
+
     .submit {
         display: flex;
         justify-content: center;

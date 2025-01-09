@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use App\Models\Usuari;
+use App\Models\Serveis;
 use App\Models\Reservas;
 use App\Models\Habitacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ReservasController extends Controller
 {
@@ -91,7 +93,9 @@ class ReservasController extends Controller
     {
         $usuaris = Usuari::all();
         $habitacio = Habitacion::findOrFail($habitacionId);
-        return view('recepcio.reservas', ['habitacionId' => $habitacionId, 'usuaris' => $usuaris, 'habitacio' => $habitacio]);
+        $serveis = Serveis::all();
+        $diaActual = Carbon::now()->format('Y-m-d');
+        return view('recepcio.reservas', ['habitacionId' => $habitacionId, 'usuaris' => $usuaris, 'habitacio' => $habitacio, 'serveis' => $serveis, 'diaActual' => $diaActual]);
     }
 
 
