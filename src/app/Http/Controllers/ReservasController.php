@@ -20,12 +20,17 @@ class ReservasController extends Controller
         $checkinsPendents = Reservas::countReservasPendientes($id);
         $habitacionsTotals = Reservas::getHabitacionesTotals($id);
 
+        $habitacionsOcupadesPercentatge = round(($habitacionsOcupades / $habitacionsTotals) * 100);
+        $habitacionsLliuresPercentatge = round(($habitacionsLliures / $habitacionsTotals) * 100);
+
         return view('hotel.home', [
             'hotel' => $hotel,
             'habitacionsOcupades' => $habitacionsOcupades,
             'habitacionsLliures' => $habitacionsLliures,
             'checkinsPendents' => $checkinsPendents,
-            'habitacionsTotals' => $habitacionsTotals
+            'habitacionsTotals' => $habitacionsTotals,
+            'habitacionsOcupadesPercentatge' => $habitacionsOcupadesPercentatge,
+            'habitacionsLliuresPercentatge' => $habitacionsLliuresPercentatge,
         ]);
     }
 
@@ -74,15 +79,15 @@ class ReservasController extends Controller
     }
 
     public function checkins(Request $request)
-{
-    $filters = [
-        'start_date' => $request->get('start_date'),
-        'end_date' => $request->get('end_date'),
-        'status' => $request->get('status'),
-        'search' => $request->get('search'),
-    ];
+    {
+        $filters = [
+            'start_date' => $request->get('start_date'),
+            'end_date' => $request->get('end_date'),
+            'status' => $request->get('status'),
+            'search' => $request->get('search'),
+        ];
 
-    $reservas = Reservas::getCheckinsFiltrats($filters);
+        $reservas = Reservas::getCheckinsFiltrats($filters);
 
         return view('hotel.checkins', compact('reservas'));
     }
@@ -101,4 +106,3 @@ class ReservasController extends Controller
             ->with('success', 'Reserva completada correctament');
     }
 }
-
