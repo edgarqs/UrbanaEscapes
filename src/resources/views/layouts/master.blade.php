@@ -40,17 +40,16 @@
                 <!-- Crear Hotel -->
                 <li>
                     @if (auth()->user()->hasRole('administrador'))
-                    <li>
                         <a href="{{ route('hotel.create') }}"
                             class="{{ Route::currentRouteNamed('hotel.create') ? 'active' : '' }}"><span
                                 class="material-symbols-outlined">add</span>Crear Hotel</a>
-                    </li>
-                    @elseif (auth()->user()->hasRole('recepcionista'))
-                    <a href="{{ route('recepcio', ['id' => auth()->user()->hotel_id]) }}"
-                        class="{{ Route::currentRouteNamed('recepcio') ? 'active' : '' }}">
-                        <span class="material-symbols-outlined">event</span>Recepció
-                    </a>
-                    @endif
+                </li>
+            @elseif (auth()->user()->hasRole('recepcionista'))
+                <a href="{{ route('recepcio', ['id' => auth()->user()->hotel_id]) }}"
+                    class="{{ Route::currentRouteNamed('recepcio') ? 'active' : '' }}">
+                    <span class="material-symbols-outlined">event</span>Recepció
+                </a>
+                @endif
                 </li>
 
 
