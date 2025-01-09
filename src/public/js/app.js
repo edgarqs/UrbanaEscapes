@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 10000); // 10 segundos
 });
 
+function showPopup(habitacioId) {
+    // Hacer una llamada AJAX para obtener los detalles de la habitación
+    fetch(`/habitacions/${habitacioId}/detalls`)
+        .then(response => response.text())
+        .then(data => {
+            // Insertar el contenido en el popup
+            document.querySelector("#popup-details").innerHTML = data;
+            // Mostrar el popup
+            document.querySelector("#popup").style.display = "grid";
+        })
+        .catch(error => console.error('Error:', error));
+}
 
 function hidePopup() {
     document.querySelector("#popup").style.display = "none";
