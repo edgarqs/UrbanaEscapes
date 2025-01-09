@@ -32,6 +32,13 @@ class DatabaseSeeder extends Seeder
     }
     public function CreateHotelSedder($hotel_id, $num_clients, $num_habitacions, $num_reserves)
     {
+
+        // Crear usuarios adicionales si es necesario
+        Usuari::factory($num_clients)->create([
+            'hotel_id' => $hotel_id,
+        ]);
+        Log::channel('info_log')->info("Afegits clients", ['num_clients' => $num_clients]);
+
         // Crear habitaciones
         $num_habitacio = 1;
         for ($i = 0; $i < $num_habitacions; $i++) {
@@ -67,11 +74,6 @@ class DatabaseSeeder extends Seeder
             'rol_id' => 2
         ]);
         Log::channel('info_log')->info("Afegit usuari recepcionista", ['hotel_id' => $hotel_id, 'usuari_id' => $recepcionista->id]);
-
-        // Crear usuarios adicionales si es necesario
-        Usuari::factory($num_clients)->create([
-            'hotel_id' => $hotel_id,
-        ]);
-        Log::channel('info_log')->info("Afegits clients", ['num_clients' => $num_clients]);
+        
     }
 }
