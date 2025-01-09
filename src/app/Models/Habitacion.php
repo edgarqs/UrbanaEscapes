@@ -44,4 +44,12 @@ class Habitacion extends Model
     {
         return $this->estat;
     }
+
+    public function getReservaActual()
+   {
+       return $this->reservas()->whereDate('data_entrada', '<=', now())
+           ->whereDate('data_sortida', '>=', now())->first();
+   }
+
+
 }
