@@ -17,7 +17,7 @@ class ReservasFactory extends Factory
         $faker = \Faker\Factory::create('es_ES');
         $habitacion = Habitacion::inRandomOrder()->first();
         $dias = $faker->numberBetween(1, 15);
-        $dataEntrada = $faker->dateTimeBetween('-1 year', '+1 year');
+        $dataEntrada = $faker->dateTimeBetween('-4 months', '+4 months');
         $dataSortida = (clone $dataEntrada)->modify("+$dias days");
 
         // Calcular el preu total de la reserva amb serveis extra
@@ -32,28 +32,28 @@ class ReservasFactory extends Factory
                     ->orWhereBetween('data_sortida', [$dataEntrada, $dataSortida]);
             })->exists()
         ) {
-            $dataEntrada = $faker->dateTimeBetween('-1 year', '+1 year');
+            $dataEntrada = $faker->dateTimeBetween('-4 months', '+4 months');
             $dataSortida = (clone $dataEntrada)->modify("+$dias days");
         }
 
         // Estableix l'estat de la reserva según la fecha
         if ($dataEntrada > Carbon::now()) {
-            $estatReserva = $faker->randomElement(['reservada', 'cancelada']);
+            $estatReserva = $faker->randomElement(['Reservada', 'Cancelada']);
         } elseif ($dataSortida < Carbon::now()) {
-            $estatReserva = $faker->randomElement(['checkout', 'cancelada']);
+            $estatReserva = $faker->randomElement(['Checkout', 'Cancelada']);
         } else {
-            $estatReserva = $faker->randomElement(['reservada', 'checkin', 'checkout', 'cancelada']);
+            $estatReserva = $faker->randomElement(['Reservada', 'Checkin', 'Checkout', 'Cancelada']);
         }
 
         // Actualitza l'estat de l'habitació segons l'estat de la reserva (realista)
         switch ($estatReserva) {
-            case 'checkin':
-                $habitacion->estat = 'ocupada';
+            case 'Checkin':
+                $habitacion->estat = 'Ocupada';
                 break;
-            case 'reservada':
-            case 'checkout':
-            case 'cancelada':
-                $habitacion->estat = 'lliure';
+            case 'Reservada':
+            case 'Checkout':
+            case 'Cancelada':
+                $habitacion->estat = 'Lliure';
                 break;
         }
         $habitacion->save();
