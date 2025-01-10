@@ -74,4 +74,40 @@ class HabitacionsController extends Controller
             ->whereDate('data_sortida', '>=', $startDate)
             ->get();
     }
+
+    public function checkin(Request $request, $id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+        $reserva = $habitacio->reservas()->where('estat', 'Reservada')->orderBy('data_entrada')->first();
+
+        if ($reserva && $habitacio->estat === 'Lliure') {
+            $reserva->estat = 'Checkin';
+            $reserva->save();
+
+            $habitacio->estat = 'Ocupada';
+            $habitacio->save();
+
+            return redirect()->back()->with('success', 'Check-In completat correctament.');
+        }
+
+        return redirect()->back()->with('error', 'No s\'ha pogut completar el Check-In.');
+    }
+
+    public function checkout(Request $request, $id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+        $reserva = $habitacio->reservas()->where('estat', 'Checkin')->first();
+
+        if ($reserva && $habitacio->estat === 'Ocupada') {
+            $reserva->estat = 'Checkout';
+            $reserva->save();
+
+            $habitacio->estat = 'Lliure';
+            $habitacio->save();
+
+            return redirect()->back()->with('success', 'Check-Out completat correctament.');
+        }
+
+        return redirect()->back()->with('error', 'No s\'ha pogut completar el Check-Out.');
+    }
 }
