@@ -38,7 +38,7 @@
                             </form>
                         @endif
                         @if ($habitacio->estat === 'Lliure')
-                            <form action="{{ route('habitacions.manteniment', $habitacio->id) }} method='POST">
+                            <form action="{{ route('habitacions.manteniment', $habitacio->id) }}" method="POST">
                                 @csrf
                                 <button class="button button--orange">
                                     <span class="material-symbols-outlined">mop</span>

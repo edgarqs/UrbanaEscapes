@@ -87,7 +87,7 @@ class HabitacionsController extends Controller
             $habitacio->estat = 'Ocupada';
             $habitacio->save();
 
-            return redirect()->back()->with('success', 'Check-In completat correctament.');
+            return redirect()->back()->with('success', 'Check-In completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
         }
 
         return redirect()->back()->with('error', 'No s\'ha pogut completar el Check-In.');
@@ -105,7 +105,7 @@ class HabitacionsController extends Controller
             $habitacio->estat = 'Lliure';
             $habitacio->save();
 
-            return redirect()->back()->with('success', 'Check-Out completat correctament.');
+            return redirect()->back()->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
         }
 
         return redirect()->back()->with('error', 'No s\'ha pogut completar el Check-Out.');

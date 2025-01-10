@@ -35,7 +35,7 @@ Route::post('/create', [HotelController::class, 'guardarHotel'])
     ->name('hotel.store')
     ->middleware(['auth', EnsureUserHasRole::class . ':administrador']);
 
-//? Página de habitacions
+//? Página de habitacions y botones
 Route::get('/hotel/habitacions/', [ReservasController::class, 'habitacions'])
     ->name('hotel.habitacions')
     ->middleware('auth');
@@ -46,6 +46,10 @@ Route::post('/habitacions/{id}/checkin', [ReservasController::class, 'checkin'])
 
 Route::post('/habitacions/{id}/checkout', [ReservasController::class, 'checkout'])
     ->name('habitacions.checkout')
+    ->middleware('auth');
+
+Route::post('/habitacions/{id}/manteniment', [ReservasController::class, 'manteniment'])
+    ->name('habitacions.manteniment')
     ->middleware('auth');
 
 //? Página de recepcio
@@ -69,18 +73,17 @@ Route::get('/refresh-calendar', [HabitacionsController::class, 'refreshCalendar'
 //! Form de reserves
 
 Route::get('/reserves/{habitacionId}', [ReservasController::class, 'index'])
-->name('reserves.index')
-->middleware('auth');
+    ->name('reserves.index')
+    ->middleware('auth');
 
 Route::post('/reserves/{habitacionId}', [ReservasController::class, 'store'])
-->name('reserves.store')
-->middleware('auth');
+    ->name('reserves.store')
+    ->middleware('auth');
 
 Route::get('/reserves/afegir', [ReservasController::class, 'crearReserva'])
-->name('reserves.afegir');
+    ->name('reserves.afegir');
 
 
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
 });
-

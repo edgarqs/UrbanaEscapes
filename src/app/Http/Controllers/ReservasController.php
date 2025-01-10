@@ -80,6 +80,19 @@ class ReservasController extends Controller
             ->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
     }
 
+    public function manteniment($id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+
+        if ($habitacio->estat === 'Lliure') {
+            $habitacio->estat = 'Bloquejada';
+            $habitacio->save();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Habitació Nº ' . $habitacio->numHabitacion . ' posada en manteniment.');
+    }
+
     public function checkins(Request $request)
     {
         $filters = [
