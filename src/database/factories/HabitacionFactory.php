@@ -20,19 +20,19 @@ class HabitacionFactory extends Factory
     public function definition(): array
     {
         $faker = \Faker\Factory::create('es_ES');
-        $tipus = $faker->randomElement(['estandar', 'deluxe', 'suite', 'adaptada']);
+        $tipus = $faker->randomElement(['Estandar', 'Deluxe', 'Suite', 'Adaptada']);
 
         switch ($tipus) {
-            case 'estandar':
+            case 'Estandar':
                 $preu = $faker->randomFloat(2, 50, 100);
                 break;
-            case 'deluxe':
+            case 'Deluxe':
                 $preu = $faker->randomFloat(2, 100, 150);
                 break;
-            case 'suite':
+            case 'Suite':
                 $preu = $faker->randomFloat(2, 150, 200);
                 break;
-            case 'adaptada':
+            case 'Adaptada':
                 $preu = $faker->randomFloat(2, 100, 200);
                 break;
         }
@@ -43,7 +43,7 @@ class HabitacionFactory extends Factory
             'llits_supletoris' => $faker->randomElement(['0', '1', '2']),
             'preu' => $preu,
             'hotel_id' => null,
-            'estat' => $faker->randomElement(['lliure', 'ocupada']),
+            // 'estat' => $faker->randomElement(['Lliure', 'Ocupada', 'Bloquejada']),
         ];
     }
 }

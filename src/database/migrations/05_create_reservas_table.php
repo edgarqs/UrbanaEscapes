@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('data_entrada');
             $table->date('data_sortida');
             $table->decimal('preu_total', 10, 2);
-            $table->enum('estat', ['reservada', 'checkin', 'checkout', 'cancelada'])->default('reservada');
+            $table->enum('estat', ['Reservada', 'Checkin', 'Checkout', 'Cancelada'])->default('Reservada');
             $table->string('comentaris')->nullable();
             $table->timestamps();
         });

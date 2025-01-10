@@ -40,7 +40,7 @@ class Reservas extends Model
     // Habitacions ocupades
     public static function countHabitacionesConfirmadas($hotelId)
     {
-        $count = Habitacion::where('estat', 'ocupada')->where('hotel_id', $hotelId)->count();
+        $count = Habitacion::where('estat', 'Ocupada')->where('hotel_id', $hotelId)->count();
         Log::channel('info_log')->info('Comptador d\'habitacions confirmades', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
     }
@@ -48,7 +48,7 @@ class Reservas extends Model
     // Habitacions lliures
     public static function countHabitacionesLliures($hotelId)
     {
-        $count = Habitacion::where('estat', 'lliure')->where('hotel_id', $hotelId)->count();
+        $count = Habitacion::where('estat', 'Lliure')->where('hotel_id', $hotelId)->count();
         Log::channel('info_log')->info('Comptador d\'habitacions lliures', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
     }
@@ -58,8 +58,8 @@ class Reservas extends Model
     {
         $count = Reservas::whereHas('habitacion', function ($query) use ($hotelId) {
             $query->where('hotel_id', $hotelId);
-        })->where('estat', 'reservada')->count();
-
+        })->where('estat', 'Reservada')->count();
+        
         Log::channel('info_log')->info('Comptador de reserves pendents', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
     }

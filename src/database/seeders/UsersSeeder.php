@@ -25,7 +25,7 @@ class UsersSeeder extends DatabaseSeeder
             Usuari::create([
                 'nom' => 'recepcio' . $hotel->id,
                 'email' => null,
-                'password' => Hash::make('recepcio'),
+                'password' => Hash::make('recepcio' . $hotel->id),
                 'rol_id' => '2',
                 'hotel_id' => $hotel->id,
             ]);
