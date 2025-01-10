@@ -19,18 +19,28 @@
                 <div class="card__body">
                     <p>{{ $habitacio->tipus }}</p>
                     <p>Estat: {{ $habitacio->getEstat() }}</p>
-                    @if ($habitacio->reservas()->where('estat', 'reservada')->exists() && $habitacio->estat !== 'ocupada')
-                        <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="button button--green"><span class="material-symbols-outlined">login</span>Check-In</button>
-                        </form>
-                    @endif
-                    @if ($habitacio->reservas()->where('estat', 'checkin')->exists())
-                        <form action="{{ route('habitacions.checkout', $habitacio->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="button button--red"><span class="material-symbols-outlined">logout</span>Check-Out</button>
-                        </form>
-                    @endif
+                    <div class="contenedor-dosBotones">
+                        {{-- Botón de checkin o botón de checkout --}}
+                        @if ($habitacio->reservas()->where('estat', 'Reservada')->exists() && $habitacio->estat === 'Lliure')
+                            <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="button button--green">
+                                    <span class="material-symbols-outlined">login</span>Check-In
+                                </button>
+                            </form>
+                        @endif
+                        @if ($habitacio->reservas()->where('estat', 'Checkin')->exists() && $habitacio->estat === 'Ocupada')
+                            <form action="{{ route('habitacions.checkout', $habitacio->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="button button--red">
+                                    <span class="material-symbols-outlined">logout</span>Check-Out
+                                </button>
+                            </form>
+                        @endif
+                        <button class="button button--orange">
+                            <span class="material-symbols-outlined">mop</span>
+                        </button>
+                    </div>
                 </div>
             </a>
         @endforeach
@@ -38,7 +48,6 @@
 
     {{-- Popup de detalls-habitacio.blade.php --}}
     <div id="popup" class="popup" style="display: none;">
-
         <div id="popup-details"><!-- AQUÍ SE METE EL COMPONENT --></div>
     </div>
 

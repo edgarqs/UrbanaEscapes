@@ -32,7 +32,6 @@ class ReservasSeeder extends Seeder
                     'habitacion_id' => $habitacio->id,
                     'estat' => 'reservada',
                     'preu_total' => rand(100, 1000),
-                    'comentaris' => 'Notes del client',
                 ]);
             }
 

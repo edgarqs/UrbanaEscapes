@@ -8,7 +8,7 @@
         <li><b>Serveis adicionals:</b>
             @if ($habitacio->serveis->isEmpty())
                 <ul>
-                    <li class="text-cursiva">No hi han serveis adicionals.</li>
+                    <li class="li-espaciat text-cursiva">Sense serveis adicionals.</li>
                 </ul>
             @else
                 <ul>
@@ -22,16 +22,33 @@
     </ul>
 </div>
 <div class="culumna-detalls">
-    <h5>Reserva actual</h5>
-    <ul class="llista-detalls">
-        @if ($habitacio->reservas->isEmpty())
-            <li class="text-cursiva">No hi han reserves actuals.</li>
-        @else
-            @php
-                $reservaActual = $habitacio->reservas->first();
-            @endphp
+    @php
+        $reservaActual = $habitacio->reservas()->where('estat', 'Checkin')->first();
+        $proximaReserva = $habitacio->reservas()->where('estat', 'Reservada')->orderBy('data_entrada')->first();
+    @endphp
+
+    @if ($reservaActual)
+        <h5>Reserva Actual</h5>
+        <ul class="llista-detalls">
             <li><b>Nom:</b> {{ $reservaActual->usuari->nom }}</li>
             <li><b>ID Reserva:</b> {{ $reservaActual->id }}</li>
-        @endif
-    </ul>
+            <li><b>Data Entrada:</b> {{ $reservaActual->data_entrada }}</li>
+            <li><b>Data Sortida:</b> {{ $reservaActual->data_sortida }}</li>
+            <li><b>Preu Total:</b> {{ $reservaActual->preu_total }}€</li>
+        </ul>
+    @elseif ($proximaReserva && $habitacio->estat === 'Lliure')
+        <h5>Próxima Reserva</h5>
+        <ul class="llista-detalls">
+            <li><b>Nom:</b> {{ $proximaReserva->usuari->nom }}</li>
+            <li><b>ID Reserva:</b> {{ $proximaReserva->id }}</li>
+            <li><b>Data Entrada:</b> {{ $proximaReserva->data_entrada }}</li>
+            <li><b>Data Sortida:</b> {{ $proximaReserva->data_sortida }}</li>
+            <li><b>Preu Total:</b> {{ $proximaReserva->preu_total }}€</li>
+        </ul>
+    @else
+        <h5>Reserva actual</h5>
+        <ul class="llista-detalls">
+            <li class="text-cursiva">No hi han reserves actuals.</li>
+        </ul>
+    @endif
 </div>

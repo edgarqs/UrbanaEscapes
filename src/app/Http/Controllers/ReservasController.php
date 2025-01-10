@@ -49,10 +49,10 @@ class ReservasController extends Controller
         $reserva = $habitacio->reservas()->where('estat', 'reservada')->first();
 
         if ($reserva) {
-            $reserva->estat = 'checkin';
+            $reserva->estat = 'Checkin';
             $reserva->save();
 
-            $habitacio->estat = 'ocupada';
+            $habitacio->estat = 'Ocupada';
             $habitacio->save();
         }
 
@@ -67,10 +67,10 @@ class ReservasController extends Controller
         $reserva = $habitacio->reservas()->where('estat', 'checkin')->first();
 
         if ($reserva) {
-            $reserva->estat = 'checkout';
+            $reserva->estat = 'Checkout';
             $reserva->save();
 
-            $habitacio->estat = 'lliure';
+            $habitacio->estat = 'Bloquejada';
             $habitacio->save();
         }
 

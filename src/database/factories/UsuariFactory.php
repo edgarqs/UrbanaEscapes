@@ -22,7 +22,8 @@ class UsuariFactory extends Factory
         return [
             'nom' => $faker->name(),
             'email' => $faker->unique()->safeEmail(),
-            'password' => bcrypt('password')
+            'dni' => $faker->unique()->dni(),
+            'rol_id' => 3,
         ];
     }
 }
