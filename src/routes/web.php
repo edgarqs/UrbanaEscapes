@@ -66,17 +66,21 @@ Route::get('/refresh-calendar', [HabitacionsController::class, 'refreshCalendar'
     ->name('refresh.calendar')
     ->middleware('auth');
 
+//! Form de reserves
+
+Route::get('/reserves/{habitacionId}', [ReservasController::class, 'index'])
+->name('reserves.index')
+->middleware('auth');
+
+Route::post('/reserves/{habitacionId}', [ReservasController::class, 'store'])
+->name('reserves.store')
+->middleware('auth');
+
+Route::get('/reserves/afegir', [ReservasController::class, 'crearReserva'])
+->name('reserves.afegir');
+
+
 Route::fallback(function () {
     return 'Oooops!! ERROR 404';
 });
 
-
-//! Form de reserves
-
-Route::get('/reserves/{habitacionId}', [ReservasController::class, 'index'])
-    ->name('reserves.index')
-    ->middleware('auth');
-
-Route::post('/reserves/{habitacionId}', [ReservasController::class, 'store'])
-    ->name('reserves.store')
-    ->middleware('auth');

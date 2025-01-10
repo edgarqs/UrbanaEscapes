@@ -76,15 +76,15 @@ class ReservasController extends Controller
     }
 
     public function checkins(Request $request)
-{
-    $filters = [
-        'start_date' => $request->get('start_date'),
-        'end_date' => $request->get('end_date'),
-        'status' => $request->get('status'),
-        'search' => $request->get('search'),
-    ];
+    {
+        $filters = [
+            'start_date' => $request->get('start_date'),
+            'end_date' => $request->get('end_date'),
+            'status' => $request->get('status'),
+            'search' => $request->get('search'),
+        ];
 
-    $reservas = Reservas::getCheckinsFiltrats($filters);
+        $reservas = Reservas::getCheckinsFiltrats($filters);
 
         return view('hotel.checkins', compact('reservas'));
     }
@@ -95,14 +95,81 @@ class ReservasController extends Controller
         $habitacio = Habitacion::findOrFail($habitacionId);
         $serveis = Serveis::all();
         $diaActual = Carbon::now()->format('Y-m-d');
-        return view('recepcio.reservas', ['habitacionId' => $habitacionId, 'usuaris' => $usuaris, 'habitacio' => $habitacio, 'serveis' => $serveis, 'diaActual' => $diaActual]);
+        $diaSeguent = Carbon::now()->addDays(1)->format('Y-m-d');
+        $preuPerDies = Reservas::calcularPreuPerDies($habitacio, $diaActual, $diaSeguent);
+
+        return view('recepcio.reservas', [
+            'habitacionId' => $habitacionId,
+            'usuaris' => $usuaris,
+            'habitacio' => $habitacio,
+            'serveis' => $serveis,
+            'diaActual' => $diaActual,
+            'diaSeguent' => $diaSeguent,
+            'preuPerDies' => $preuPerDies
+        ]);
     }
 
 
     public function store(Request $request, $habitacionId)
     {
-        return redirect()->route('recepcio')
+        // Verificar si el usuario ya está registrado
+        $usuari = Usuari::where('email', $request->input('email'))->first();
+        $hotelId = Habitacion::findOrFail($habitacionId)->hotel_id;
+        
+        if (!$usuari) {
+            // Si el usuario no está registrado, crear un nuevo usuario
+            $usuari = Usuari::factory()->create([
+                'nom' => $request->input('nom'),
+                'email' => $request->input('email'),
+                'rol_id' => 3,
+                'hotel_id' => $hotelId
+            ]);
+        }
+
+        // Guardar el ID del usuario para pasarlo a la validación
+        $usuariId = $usuari->id;
+
+        // Validar el formulario
+        $validatedData = $request->validate([
+            'data_inici' => 'required|date',
+            'data_fi' => 'required|date|after_or_equal:data_inici',
+            'serveis' => 'array',
+            'serveis.*' => 'exists:serveis,id',
+        ]);
+
+        // Comprobar si la habitación está ocupada
+        $habitacioOcupada = Reservas::where('habitacion_id', $habitacionId)
+            ->where('data_entrada', '<=', $validatedData['data_fi'])
+            ->where('data_sortida', '>=', $validatedData['data_inici'])
+            ->exists();
+
+        if ($habitacioOcupada) {
+            return redirect()->back()
+                ->with('error', 'La habitació ja està ocupada en aquestes dates');
+        }
+
+
+        $habitacio = Habitacion::findOrFail($habitacionId);
+        $serveis = $validatedData['serveis'] ?? [];
+        $habitacio->serveis()->sync($serveis);
+
+        Reservas::create([
+            'habitacion_id' => $habitacionId,
+            'usuari_id' => $usuariId,
+            'data_entrada' => $validatedData['data_inici'],
+            'data_sortida' => $validatedData['data_fi'],
+            'preu_total' => Reservas::calcularPreuTotal($serveis, $habitacio, $validatedData['data_inici'], $validatedData['data_fi']),
+            'estat' => 'reservada',
+            'comentaris' => $request->input('comentaris')
+        ]);
+
+        return redirect()->route('recepcio', ['id' => $hotelId])
             ->with('success', 'Reserva completada correctament');
     }
+
+    public function crearReserva()
+{
+    return view('recepcio.afegirReserva');
 }
 
+}

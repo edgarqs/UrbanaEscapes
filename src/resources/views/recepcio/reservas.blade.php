@@ -3,6 +3,11 @@
 @section('title', 'Recepció')
 
 @section('content')
+    @if (session('error'))
+        <div class="message-content message-content--error" id="status-message">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="nav">
         <h3>Afegir reserva</h3>
         <button onclick="window.location='{{ route('recepcio', ['id' => auth()->user()->hotel_id]) }}'">Tornar</button>
@@ -22,8 +27,8 @@
             <label for="usuari_registrat">Usuari registrat</label>
             <div class="formUsuariRegistrat">
                 <select class="form-control" id="usuari_id" name="usuari_id">
+                    <option value=" "></option>
                     @foreach ($usuaris as $usuari)
-                        <option value=" "></option>
                         <option value="{{ $usuari->id }}">{{ $usuari->nom }}</option>
                     @endforeach
                 </select>
@@ -31,6 +36,9 @@
         </div>
         <div class="form-group usuariNou" style="display:none;">
             <div class="form-group">
+                <label for="dni">DNI</label>
+                <input type="text" class="form-control" id="dni" name="dni">
+
                 <label for="nom">Nom</label>
                 <input type="text" class="form-control" id="nom" name="nom">
 
@@ -51,17 +59,15 @@
                 <h4>Serveis</h5>
                     <ul class="list-group">
                         @foreach ($serveis as $servei)
-                        <li class="form-check-label" for="servei{{ $servei->id }}">
-                            {{ $servei->nom }}: {{ $servei->preu }}€
-                            <input class="form-check-input" type="checkbox" value="{{ $servei->id }}"
-                                id="servei{{ $servei->id }}" name="serveis[]">
-                        </li>
+                            <li class="form-check-label" for="servei{{ $servei->id }}">
+                                {{ $servei->nom }}: {{ $servei->preu }}€
+                                <input class="form-check-input" type="checkbox" value="{{ $servei->id }}"
+                                    id="servei{{ $servei->id }}" name="serveis[]">
+                            </li>
                         @endforeach
                     </ul>
             </div>
-            <div>
-
-            </div>
+            <div></div>
         </div>
         </div>
 
@@ -76,24 +82,26 @@
 
                 <div class="fi">
                     <label for="data_fi">Data fi</label>
-                    <input type="date" class="form-control" id="data_fi" name="data_fi" required>
+                    <input type="date" class="form-control" id="data_fi" name="data_fi" value="{{ $diaSeguent }}"
+                        required>
                 </div>
             </div>
 
-            <div class="observacions">
-                <h4>Observacions</h4>
+            <div class="comentaris">
+                <h4>Comentaris</h4>
                 <div class="form-group">
-                    <textarea class="form-control" id="observacions" name="observacions" rows="3"></textarea>
+                    <textarea class="form-control" id="observacions" name="comentaris" rows="3"></textarea>
                 </div>
             </div>
+
+            <div></div>
 
         </div>
-
-
 
         <div class="submit">
             <button type="submit" class="btn btn-primary">Afegir reserva</button>
         </div>
+
 
     </form>
 
