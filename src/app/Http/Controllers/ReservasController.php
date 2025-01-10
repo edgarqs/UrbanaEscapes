@@ -100,7 +100,7 @@ class ReservasController extends Controller
         $reservas = Reservas::getCheckinsFiltrats($filters);
 
         return view('hotel.checkins', compact('reservas'));
-    }
+    }}
 
     public function index($habitacionId)
     {
