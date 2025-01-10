@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('email')->nullable()->unique();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('dni')->nullable()->unique();
             $table->foreignId('rol_id')->nullable()->constrained('rols');
             $table->foreignId('hotel_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();

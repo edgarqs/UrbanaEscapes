@@ -53,11 +53,12 @@
                 </li>
 
 
-                <!-- Tornar (/) -->
+                {{-- <!-- Tornar (/) -->
                 @if (auth()->user()->hasRole('administrador'))
                     <li class="separacion"><a href="{{ route('hotel.selector') }}"><span
                                 class="material-symbols-outlined">arrow_back</span>Tornar</a></li>
-                @endif
+                @endif --}}
+
                 <!-- Tancar sessió -->
                 <li><a href="{{ route('logout') }}"><span class="material-symbols-outlined">logout</span>Tancar la
                         sessió</a></li>
