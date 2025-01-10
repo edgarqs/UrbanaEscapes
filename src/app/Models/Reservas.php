@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DateTime;
 use Illuminate\Support\Facades\Log;
 use App\Models\Habitacion;
 
@@ -72,26 +73,51 @@ class Reservas extends Model
     }
 
     public static function getCheckinsFiltrats($filters)
-{
-    $query = self::query();
+    {
+        $query = self::query();
 
-    $filterConditions = [
-        'start_date' => fn($query, $value) => $query->whereDate('data_entrada', '>=', $value),
-        'end_date' => fn($query, $value) => $query->whereDate('data_sortida', '<=', $value),
-        'status' => fn($query, $value) => $query->whereHas('habitacion', fn($q) => $q->where('estat', $value)),
-        'search' => fn($query, $value) => $query->where(function ($q) use ($value) {
-            $q->whereHas('usuari', fn($q2) => $q2->where('nom', 'like', "%$value%"))
-              ->orWhere('id', 'like', "%$value%");
-        }),
-    ];
+        $filterConditions = [
+            'start_date' => fn($query, $value) => $query->whereDate('data_entrada', '>=', $value),
+            'end_date' => fn($query, $value) => $query->whereDate('data_sortida', '<=', $value),
+            'status' => fn($query, $value) => $query->whereHas('habitacion', fn($q) => $q->where('estat', $value)),
+            'search' => fn($query, $value) => $query->where(function ($q) use ($value) {
+                $q->whereHas('usuari', fn($q2) => $q2->where('nom', 'like', "%$value%"))
+                    ->orWhere('id', 'like', "%$value%");
+            }),
+        ];
 
-    foreach ($filters as $key => $value) {
-        if (!empty($value) && isset($filterConditions[$key])) {
-            $filterConditions[$key]($query, $value);
+        foreach ($filters as $key => $value) {
+            if (!empty($value) && isset($filterConditions[$key])) {
+                $filterConditions[$key]($query, $value);
+            }
         }
+
+        return $query->get();
     }
 
-    return $query->get();
-}
+    public static function calcularPreuPerDies($habitacio, $diaActual, $diaSeguent)
+    {
+        $preuPerDies = 0;
+        $dataInici = new Datetime($diaActual);
+        $dataFi = new Datetime($diaSeguent);
+        $dies = $dataInici->diff($dataFi)->days;
+        $preuPerDies = $habitacio->preu * $dies;
 
+        return $preuPerDies;
+    }
+
+    public static function calcularPreuTotal($serveis, $habitacio,$diaInicial, $diaFinal)
+    {
+        $preuTotal = 0;
+        $preuPerDia = $habitacio->preu;
+        $dataInici = new Datetime($diaInicial);
+        $dataFi = new Datetime($diaFinal);
+        $diesTotal = $dataInici->diff($dataFi)->days;
+        foreach ($serveis as $serveiId) {
+            $servei = Serveis::find($serveiId);
+            $preuPerDia += $servei->preu ;
+        }
+        $preuTotal += $preuPerDia * $diesTotal;
+        return $preuTotal;
+    }
 }

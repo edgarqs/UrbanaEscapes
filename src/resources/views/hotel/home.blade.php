@@ -38,9 +38,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('reservas.checkins') }}" class="button">
-                Llistat de Check-Ins Pendents
-            </a>
+            
 
         </div>
 
