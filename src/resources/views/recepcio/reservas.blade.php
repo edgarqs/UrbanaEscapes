@@ -15,29 +15,10 @@
     <form action="{{ route('reserves.store', ['habitacionId' => $habitacionId]) }}" method="post">
         @csrf
         <h4>Dades del client</h4>
-        <div class="usuariSelector">
-            <label for="tipus_usuari">Tipus d'usuari</label>
-            <select class="form-control" id="tipus_usuari" name="tipus_usuari" onchange="mostrarFormUsuari()">
-                <option value="">Selecciona una opció</option>
-                <option value="registrat">Usuari registrat</option>
-                <option value="nou">Usuari nou</option>
-            </select>
-        </div>
-        <div class="form-group usuariRegistrat" style="display:none;">
-            <label for="usuari_registrat">Usuari registrat</label>
-            <div class="formUsuariRegistrat">
-                <select class="form-control" id="usuari_id" name="usuari_id">
-                    <option value=" "></option>
-                    @foreach ($usuaris as $usuari)
-                        <option value="{{ $usuari->id }}">{{ $usuari->nom }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="form-group usuariNou" style="display:none;">
+        <div class="form-group usuariNou">
             <div class="form-group">
                 <label for="dni">DNI</label>
-                <input type="text" class="form-control" id="dni" name="dni">
+                <input type="text" class="form-control" id="dni" name="dni" required>
 
                 <label for="nom">Nom</label>
                 <input type="text" class="form-control" id="nom" name="nom">

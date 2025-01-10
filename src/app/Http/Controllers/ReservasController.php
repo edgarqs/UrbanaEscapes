@@ -126,7 +126,7 @@ class ReservasController extends Controller
     public function store(Request $request, $habitacionId)
     {
         // Verificar si el usuario ya está registrado
-        $usuari = Usuari::where('email', $request->input('email'))->first();
+        $usuari = Usuari::where('dni', $request->input('dni'))->first();
         $hotelId = Habitacion::findOrFail($habitacionId)->hotel_id;
         
         if (!$usuari) {
@@ -135,6 +135,7 @@ class ReservasController extends Controller
                 'nom' => $request->input('nom'),
                 'email' => $request->input('email'),
                 'rol_id' => 3,
+                'dni' => $request->input('dni'),
                 'hotel_id' => $hotelId
             ]);
         }
