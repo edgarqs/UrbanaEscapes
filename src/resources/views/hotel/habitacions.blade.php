@@ -37,9 +37,14 @@
                                 </button>
                             </form>
                         @endif
-                        <button class="button button--orange">
-                            <span class="material-symbols-outlined">mop</span>
-                        </button>
+                        @if ($habitacio->estat === 'Lliure')
+                            <form action="{{ route('habitacions.manteniment', $habitacio->id) }} method='POST">
+                                @csrf
+                                <button class="button button--orange">
+                                    <span class="material-symbols-outlined">mop</span>
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </a>
