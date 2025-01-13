@@ -12,13 +12,13 @@ Route::get('/', [HotelController::class, 'index'])
     ->middleware(['auth', EnsureUserHasRole::class . ':administrador']);
 
 //? Página y post de login y logout
-Route::get('/login', [AuthCOntroller::class, 'showLoginForm'])
+Route::get('/login', [AuthController::class, 'showLoginForm'])
     ->name('login');
 
-Route::post('/login', [AuthCOntroller::class, 'login'])
+Route::post('/login', [AuthController::class, 'login'])
     ->name('login.post');
 
-Route::get('/logout', [AuthCOntroller::class, 'logout'])
+Route::get('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 //? Página de inicio del hotel
