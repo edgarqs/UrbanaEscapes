@@ -78,6 +78,12 @@ function renderCalendar(data) {
 
             const cell = document.createElement('td');
             cell.className = `reservation-cell ${reserva ? 'reserved' : 'available'} fixed-width-cell`;
+            cell.addEventListener('click', () => {
+                if (reserva) {
+                    document.querySelector("#popup").style.display = "grid";
+                }
+            }
+            );
             cell.colSpan = colspan;
 
             if (reserva) {
