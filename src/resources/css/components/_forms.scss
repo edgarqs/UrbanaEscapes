@@ -12,6 +12,20 @@
         overflow-wrap: break-word;
     }
 
+    &--todaLaPagina {
+        max-width: 100% !important;
+    }
+
+    .contenedor-doble {
+        display: flex;
+        justify-content: space-between;
+        gap: 50px;
+
+        .subcontenedor-flex {
+            flex: 1;
+        }
+    }
+
     .form-group {
         margin-bottom: 1.5rem;
 

@@ -8,36 +8,93 @@
             {{ session('error') }}
         </div>
     @endif
-    <div class="nav">
-        <h3>Afegir reserva</h3>
-        <button onclick="window.location='{{ route('recepcio', ['id' => auth()->user()->hotel_id]) }}'">Tornar</button>
-    </div>
-    <form action="{{ route('reserves.store', ['habitacionId' => $habitacionId]) }}" method="post">
-        @csrf
-        <h4>Dades del client</h4>
-        <div class="form-group usuariNou">
-            <div class="form-group">
-                <label for="dni">DNI</label>
-                <input type="text" class="form-control" id="dni" name="dni" required>
 
-                <label for="nom">Nom</label>
-                <input type="text" class="form-control" id="nom" name="nom">
+    <div class="form form--todaLaPagina card">
+        <h3 class="center">Afegir reserva</h3>
+        <form>
+            @csrf
 
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
+            <h4>Dades del client</h4>
+            <div class="form-row d-flex">
+                <div class="form-group flex-fill mr-3">
+                    <label for="dni">DNI</label>
+                    <input type="text" name="dni" id="dni" class="form-control @error('dni') is-invalid @enderror"
+                        value="{{ old('dni') }}" maxlength="50" required>
+                    @error('dni')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group flex-fill">
+                    <label for="nom">Nom y cognoms</label>
+                    <input type="text" name="nom" id="nom"
+                        class="form-control @error('nom') is-invalid @enderror" value="{{ old('nom') }}" maxlength="23"
+                        required>
+                    @error('nom')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group flex-fill">
+                    <label for="email">Correu electrònic</label>
+                    <input type="email" name="email" id="email"
+                        class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" maxlength="50"
+                        required>
+                    @error('email')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="dadesHabitacio">
-                <h4>Dades de l'habitació</h4>
-                <p>Habitació: {{ $habitacio->numHabitacion }}</p>
-                <p>Tipus: {{ $habitacio->tipus }}</p>
-                <p>Preu: {{ $habitacio->preu }}€</p>
-                <p>Num.llits: {{ $habitacio->llits }}</p>
-                <p>Num.llits supletoris: {{ $habitacio->llits_supletoris }}</p>
-            </div>
-            <div class="serveisHabitacio">
-                <h4>Serveis</h5>
+
+            <div class="contenedor-doble">
+                <div class="subcontenedor-flex">
+                    <h4>Dades de l'habitació</h4>
+                    <div class="form-row d-flex">
+                        <div class="form-group flex-fill mr-3">
+                            <label for="numHabitacio">Nº Habitació</label>
+                            <input type="text" name="numHabitacio" id="numHabitacio"
+                                value="{{ $habitacio->numHabitacion }}" required disabled>
+                            @error('numHabitacio')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group flex-fill">
+                            <label for="tipusHabitacio">Tipus</label>
+                            <input type="text" name="tipusHabitacio" id="tipusHabitacio" value="{{ $habitacio->tipus }}"
+                                required disabled>
+                            @error('tipusHabitacio')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group flex-fill">
+                            <label for="preuHabitacio">Preu base</label>
+                            <input type="text" name="preuHabitacio" id="preuHabitacio" value="{{ $habitacio->preu }} €"
+                                required disabled>
+                            @error('preuHabitacio')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-row d-flex">
+                        <div class="form-group flex-fill">
+                            <label for="llits">Llits</label>
+                            <input type="text" name="llits" id="llits" value="{{ $habitacio->llits }}" required
+                                disabled>
+                            @error('llits')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group flex-fill">
+                            <label for="llitsSupletoris">Llits Supletoris</label>
+                            <input type="text" name="llitsSupletoris" id="llitsSupletoris"
+                                value="{{ $habitacio->llits_supletoris }}" required disabled>
+                            @error('llitsSupletoris')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subcontenedor-flex">
+                    <h4>Serveis adicionals</h4>
                     <ul class="list-group">
                         @foreach ($serveis as $servei)
                             <li class="form-check-label" for="servei{{ $servei->id }}">
@@ -47,79 +104,43 @@
                             </li>
                         @endforeach
                     </ul>
-            </div>
-            <div></div>
-        </div>
-        </div>
-
-        <div class="form-group">
-            <div class="reserva">
-                <h4>Dades de la reserva</h4>
-                <div class="inici">
-                    <label for="data_inici">Data inici</label>
-                    <input type="date" class="form-control" id="data_inici" name="data_inici"
-                        value="{{ $diaActual }}" required>
-                </div>
-
-                <div class="fi">
-                    <label for="data_fi">Data fi</label>
-                    <input type="date" class="form-control" id="data_fi" name="data_fi" value="{{ $diaSeguent }}"
-                        required>
                 </div>
             </div>
 
-            <div class="comentaris">
-                <h4>Comentaris</h4>
-                <div class="form-group">
-                    <textarea class="form-control" id="observacions" name="comentaris" rows="3"></textarea>
+            <div class="contenedor-doble">
+                <div class="subcontenedor-flex">
+                    <h4>Dades de la reserva</h4>
+                    <div class="form-row d-flex">
+                        <div class="form-group flex-fill">
+                            <label for="dataIniciReserva">Data Inici</label>
+                            <input type="date" name="dataIniciReserva" id="dataIniciReserva" value="{{ $diaActual }}"
+                                required>
+                            @error('dataIniciReserva')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group flex-fill">
+                            <label for="dataFiReserva">Data Fi</label>
+                            <input type="date" name="dataFiReserva" id="dataFiReserva" value="{{ $diaSeguent }}"
+                                required>
+                            @error('dataFiReserva')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group flex-fill">
+                        <label for="comentaris">Comentaris</label>
+                        <input type="text" name="comentaris" id="comentaris"
+                            class="form-control @error('comentaris') is-invalid @enderror"
+                            value="{{ old('comentaris') }}" required>
+                        @error('comentaris')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
             </div>
-
-            <div></div>
-
-        </div>
-
-        <div class="submit">
-            <button type="submit" class="btn btn-primary">Afegir reserva</button>
-        </div>
-
-
-    </form>
+            <button type="submit" class="button button--primary button--margin-top">Registrar reserva</button>
+        </form>
+    </div>
 
 @endsection
-<style>
-    .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .usuariSelector {
-        padding-bottom: 20px;
-    }
-
-    .form-group {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .list-group {
-        flex-direction: column;
-    }
-
-    .form-check-label {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .form-check-input {
-        margin-left: 10px;
-    }
-
-
-    .submit {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-    }
-</style>
