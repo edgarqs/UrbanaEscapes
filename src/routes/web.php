@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ReservasController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HabitacionsController;
 use App\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Support\Facades\Route;
@@ -12,13 +12,13 @@ Route::get('/', [HotelController::class, 'index'])
     ->middleware(['auth', EnsureUserHasRole::class . ':administrador']);
 
 //? Página y post de login y logout
-Route::get('/login', [LoginController::class, 'showLoginForm'])
+Route::get('/login', [AuthCOntroller::class, 'showLoginForm'])
     ->name('login');
 
-Route::post('/login', [LoginController::class, 'login'])
+Route::post('/login', [AuthCOntroller::class, 'login'])
     ->name('login.post');
 
-Route::get('/logout', [LoginController::class, 'logout'])
+Route::get('/logout', [AuthCOntroller::class, 'logout'])
     ->name('logout');
 
 //? Página de inicio del hotel
