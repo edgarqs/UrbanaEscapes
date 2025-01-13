@@ -201,7 +201,16 @@ class ReservasController extends Controller
 
     public function crearReserva()
     {
+        $habitacions = Habitacion::all();
+        $usuaris = Usuari::all();
+        $serveis = Serveis::all();
+        $tipusHabitacions = Habitacion::getTipusHabitacions();
         
-        return view('recepcio.afegirReserva');
+        return view('recepcio.afegirReserva', [
+            'habitacions' => $habitacions,
+            'usuaris' => $usuaris,
+            'serveis' => $serveis,
+            'tipusHabitacions' => $tipusHabitacions
+        ]);
     }
 }
