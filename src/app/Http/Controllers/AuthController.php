@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
     public function showLoginForm()
     {
@@ -15,8 +15,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'nom' => 'required|string',
-            'password' => 'required|string',
+            'nom' => 'required|string|max:30|regex:/^[A-Za-z0-9_.-]+$/',
+            'password' => 'required|string|max:50',
         ]);
 
         $credentials = $request->only('nom', 'password');
@@ -39,10 +39,12 @@ class LoginController extends Controller
         ]);
     }
 
-    public function logout()
-    {
-        session()->flush();
-        Auth::logout();
+    public function logout(Request $request) {
+
+        $request->user()->tokens()->delete();
+
+        session()->flush(); 
+        Auth::logout(); 
 
         return redirect('login');
     }
