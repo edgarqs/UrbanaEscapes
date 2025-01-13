@@ -14,7 +14,8 @@ class Habitacion extends Model
         'numero',
         'tipo',
         'precio',
-        'numHabitacion'
+        'numHabitacion',
+        'estat'
     ];
 
     public function reservas()
@@ -33,7 +34,14 @@ class Habitacion extends Model
         
         $preuServeis = Serveis::preuTotalServeisPerHabitacio($habitacion_id);
         $preuTotal = $habitacion->preu + $preuServeis;
+
+        Log::channel('info_log')->info('Preu total de la habitació', ['habitacio_id' => $habitacion_id, 'preu_total' => $preuTotal]);
+
         return $preuTotal;
     }
 
+    public function getEstat()
+    {
+        return $this->estat;
+    }
 }

@@ -22,6 +22,8 @@ class UsuariFactory extends Factory
         return [
             'nom' => $faker->name(),
             'email' => $faker->unique()->safeEmail(),
+            'dni' => $faker->unique()->dni(),
+            'rol_id' => 3,
         ];
     }
 }

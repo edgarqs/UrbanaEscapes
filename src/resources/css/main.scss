@@ -10,10 +10,12 @@
 @use 'components/buttons';
 @use 'components/cards';
 @use 'components/forms';
+@use 'components/popups';
 
 // Layout
-@use 'layout/layout';
 @use 'layout/sidebar';
 
 // Páginas específicas
 @use 'pages/home';
+@use 'pages/login';
+@use 'pages/recepcio';

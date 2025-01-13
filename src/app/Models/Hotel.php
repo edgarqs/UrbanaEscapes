@@ -29,6 +29,11 @@ class Hotel extends Model
         return $this->hasMany(Reservas::class);
     }
 
+    public function usuaris()
+    {
+        return $this->hasMany(Usuari::class);
+    }
+
     public function toggleComplete()
     {
         $this->completado = !$this->completado;
