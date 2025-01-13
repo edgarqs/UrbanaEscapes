@@ -113,19 +113,11 @@ class ReservasController extends Controller
             'end_date' => $request->get('end_date'),
             'status' => $request->get('status'),
             'search' => $request->get('search'),
-        ]; {
-            $filters = [
-                'start_date' => $request->get('start_date'),
-                'end_date' => $request->get('end_date'),
-                'status' => $request->get('status'),
-                'search' => $request->get('search'),
-            ];
+        ];
 
-            $reservas = Reservas::getCheckinsFiltrats($filters);
-            $reservas = Reservas::getCheckinsFiltrats($filters);
+        $reservas = Reservas::getCheckinsFiltrats($filters);
 
-            return view('hotel.checkins', compact('reservas'));
-        }
+        return view('hotel.checkins', compact('reservas'));
     }
 
     public function index($habitacionId)
@@ -209,6 +201,7 @@ class ReservasController extends Controller
 
     public function crearReserva()
     {
+        
         return view('recepcio.afegirReserva');
     }
 }
