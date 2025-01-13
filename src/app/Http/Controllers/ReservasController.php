@@ -80,6 +80,32 @@ class ReservasController extends Controller
             ->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
     }
 
+    public function bloquejar($id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+
+        if ($habitacio->estat === 'Lliure') {
+            $habitacio->estat = 'Bloquejada';
+            $habitacio->save();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Habitació Nº ' . $habitacio->numHabitacion . ' posada en manteniment.');
+    }
+
+    public function desbloquejar($id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+
+        if ($habitacio->estat === 'Bloquejada') {
+            $habitacio->estat = 'Lliure';
+            $habitacio->save();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Habitació Nº ' . $habitacio->numHabitacion . ' desbloquejada.');
+    }
+
     public function checkins(Request $request)
     {
         $filters = [
@@ -87,20 +113,20 @@ class ReservasController extends Controller
             'end_date' => $request->get('end_date'),
             'status' => $request->get('status'),
             'search' => $request->get('search'),
-        ];
-    {
-        $filters = [
-            'start_date' => $request->get('start_date'),
-            'end_date' => $request->get('end_date'),
-            'status' => $request->get('status'),
-            'search' => $request->get('search'),
-        ];
+        ]; {
+            $filters = [
+                'start_date' => $request->get('start_date'),
+                'end_date' => $request->get('end_date'),
+                'status' => $request->get('status'),
+                'search' => $request->get('search'),
+            ];
 
-        $reservas = Reservas::getCheckinsFiltrats($filters);
-        $reservas = Reservas::getCheckinsFiltrats($filters);
+            $reservas = Reservas::getCheckinsFiltrats($filters);
+            $reservas = Reservas::getCheckinsFiltrats($filters);
 
-        return view('hotel.checkins', compact('reservas'));
-    }}
+            return view('hotel.checkins', compact('reservas'));
+        }
+    }
 
     public function index($habitacionId)
     {
@@ -128,7 +154,7 @@ class ReservasController extends Controller
         // Verificar si el usuario ya está registrado
         $usuari = Usuari::where('dni', $request->input('dni'))->first();
         $hotelId = Habitacion::findOrFail($habitacionId)->hotel_id;
-        
+
         if (!$usuari) {
             // Si el usuario no está registrado, crear un nuevo usuario
             $usuari = Usuari::factory()->create([
@@ -182,8 +208,7 @@ class ReservasController extends Controller
     }
 
     public function crearReserva()
-{
-    return view('recepcio.afegirReserva');
-}
-
+    {
+        return view('recepcio.afegirReserva');
+    }
 }
