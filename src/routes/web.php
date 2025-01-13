@@ -48,8 +48,12 @@ Route::post('/habitacions/{id}/checkout', [ReservasController::class, 'checkout'
     ->name('habitacions.checkout')
     ->middleware('auth');
 
-Route::post('/habitacions/{id}/manteniment', [ReservasController::class, 'manteniment'])
-    ->name('habitacions.manteniment')
+Route::post('/habitacions/{id}/bloquejar', [ReservasController::class, 'bloquejar'])
+    ->name('habitacions.bloquejar')
+    ->middleware('auth');
+
+Route::post('/habitacions/{id}/desbloquejar', [ReservasController::class, 'desbloquejar'])
+    ->name('habitacions.desbloquejar')
     ->middleware('auth');
 
 //? Página de recepcio

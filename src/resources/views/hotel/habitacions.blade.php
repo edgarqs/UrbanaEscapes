@@ -37,8 +37,16 @@
                                 </button>
                             </form>
                         @endif
+                        @if ($habitacio->estat === 'Bloquejada')
+                            <form action="{{ route('habitacions.desbloquejar', $habitacio->id) }}" method="POST">
+                                @csrf
+                                <button class="button button--primary">
+                                    <span class="material-symbols-outlined">lock_open</span>Desbloquejar
+                                </button>
+                            </form>
+                        @endif
                         @if ($habitacio->estat === 'Lliure')
-                            <form action="{{ route('habitacions.manteniment', $habitacio->id) }}" method="POST">
+                            <form action="{{ route('habitacions.bloquejar', $habitacio->id) }}" method="POST">
                                 @csrf
                                 <button class="button button--orange">
                                     <span class="material-symbols-outlined">mop</span>
