@@ -36,7 +36,14 @@ function hidePopup() {
     document.querySelector("#popup").style.display = "none";
 }
 
-
+// Cerrar el popup cuando se hace clic fuera de él
+window.onclick = function(event) {
+    const modal = document.getElementById('popup');
+    const backdrop = document.getElementById('popup-backdrop');
+    if (event.target === modal || event.target === backdrop) {
+        hidePopup();
+    }
+}
 
 // Formulari usuaris reserva rapida
 function mostrarFormUsuari() {
