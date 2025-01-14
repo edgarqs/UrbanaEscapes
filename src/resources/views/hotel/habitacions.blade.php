@@ -12,6 +12,11 @@
         </div>
     @endif
 
+    {{-- Dialog de habitaciones --}}
+    <dialog id="dialog-reservas">
+        <h1>Test Dialog</h1>
+    </dialog>
+
     <div class="cards cards--habitacions">
         @foreach ($habitacions as $habitacio)
             <a class="card" onclick="showPopup({{ $habitacio->id }})">
