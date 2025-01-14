@@ -157,7 +157,7 @@ class ReservasController extends Controller
 
         if (!$usuari) {
             // Si el usuario no está registrado, crear un nuevo usuario
-            $usuari = Usuari::factory()->create([
+            $usuari = Usuari::create([
                 'nom' => $request->input('nom'),
                 'email' => $request->input('email'),
                 'rol_id' => 3,
@@ -187,7 +187,6 @@ class ReservasController extends Controller
             return redirect()->back()
                 ->with('error', 'La habitació ja està ocupada en aquestes dates');
         }
-
 
         $habitacio = Habitacion::findOrFail($habitacionId);
         $serveis = $validatedData['serveis'] ?? [];

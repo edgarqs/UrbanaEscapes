@@ -11,7 +11,7 @@
 
     <div class="form form--todaLaPagina card">
         <h3 class="center">Afegir reserva</h3>
-        <form>
+        <form action="{{ route('reserves.store', ['habitacionId' => $habitacio->id]) }}" method="post">
             @csrf
 
             <h4>Dades del client</h4>
@@ -99,7 +99,7 @@
                         <div class="checkbox">
                             <ul>
                                 @foreach ($serveis as $servei)
-                                    <li><input type="checkbox" name="servei{{ $servei->id }}" id="servei{{ $servei->id }}" value="{{ $servei->id }}"><label for="servei{{ $servei->id }}">{{ $servei->nom }} <span class="text-cursiva">(+{{ $servei->preu }} €)</span></label></li>
+                                    <li><input type="checkbox" name="serveis[]" id="servei{{ $servei->id }}" value="{{ $servei->id }}"><label for="servei{{ $servei->id }}">{{ $servei->nom }} <span class="text-cursiva">(+{{ $servei->preu }} €)</span></label></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -113,17 +113,17 @@
                     <div class="form-row d-flex">
                         <div class="form-group flex-fill">
                             <label for="dataIniciReserva">Data Inici</label>
-                            <input type="date" name="dataIniciReserva" id="dataIniciReserva" value="{{ $diaActual }}"
+                            <input type="date" name="data_inici" id="dataIniciReserva" value="{{ $diaActual }}"
                                 required>
-                            @error('dataIniciReserva')
+                            @error('data_inici')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group flex-fill">
                             <label for="dataFiReserva">Data Fi</label>
-                            <input type="date" name="dataFiReserva" id="dataFiReserva" value="{{ $diaSeguent }}"
+                            <input type="date" name="data_fi" id="dataFiReserva" value="{{ $diaSeguent }}"
                                 required>
-                            @error('dataFiReserva')
+                            @error('data_fi')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
