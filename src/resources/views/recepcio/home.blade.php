@@ -54,5 +54,10 @@
             @endforeach
         </tbody>
     </table>
+    
+    {{-- Popup de detalls-habitacio.blade.php --}}
+    <div id="popup" class="popup" style="display: none;">
+        <div id="popup-details"><!-- AQUÍ SE METE EL COMPONENT --></div>
+    </div>
     <script src="{{ asset('js/calendar.js') }}"></script>
 @endsection
