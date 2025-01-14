@@ -81,6 +81,10 @@ Route::get('/reserves/afegir', [ReservasController::class, 'crearReserva'])
     ->name('recepcio.afegirReserva')
     ->middleware('auth');
 
+Route::post('/reserves/afegir', [ReservasController::class, 'guardarReserva'])
+    ->name('recepcio.guardarReserva')
+    ->middleware('auth');
+
 Route::get('/reserves/{habitacionId}', [ReservasController::class, 'index'])
     ->name('reserves.index')
     ->middleware('auth');
