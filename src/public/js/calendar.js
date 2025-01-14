@@ -81,6 +81,8 @@ function renderCalendar(data) {
             cell.addEventListener('click', () => {
                 if (reserva) {
                     document.querySelector("#popup").style.display = "grid";
+                }else{
+                    window.location.href = `/reserves/${habitacio.numHabitacion}`;
                 }
             }
             );
