@@ -26,13 +26,25 @@
                     <p>Estat: {{ $habitacio->getEstat() }}</p>
                     <div class="contenedor-dosBotones">
                         {{-- Botón de checkin o botón de checkout --}}
+                        @php
+                            $hoy = \Carbon\Carbon::today()->format('Y-m-d');
+                        @endphp
                         @if ($habitacio->reservas()->where('estat', 'Reservada')->exists() && $habitacio->estat === 'Lliure')
-                            <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="button button--green">
-                                    <span class="material-symbols-outlined">login</span>Check-In
-                                </button>
-                            </form>
+                            @php
+                                $reservaHoy = $habitacio
+                                    ->reservas()
+                                    ->where('estat', 'Reservada')
+                                    ->where('data_entrada', $hoy)
+                                    ->first();
+                            @endphp
+                            @if ($reservaHoy)
+                                <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="button button--green">
+                                        <span class="material-symbols-outlined">login</span>Check-In
+                                    </button>
+                                </form>
+                            @endif
                         @endif
                         @if ($habitacio->reservas()->where('estat', 'Checkin')->exists() && $habitacio->estat === 'Ocupada')
                             <form action="{{ route('habitacions.checkout', $habitacio->id) }}" method="POST">

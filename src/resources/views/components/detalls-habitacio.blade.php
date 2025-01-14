@@ -26,7 +26,7 @@
     @php
         $reservaActual = $habitacio->reservas()->where('estat', 'Checkin')->first();
         $proximaReserva = $habitacio->reservas()->where('estat', 'Reservada')->orderBy('data_entrada')->first();
-        $today = \Carbon\Carbon::today()->format('Y-m-d');
+        $hoy = \Carbon\Carbon::today()->format('Y-m-d');
     @endphp
 
     @if ($reservaActual)
@@ -59,7 +59,7 @@
         {{-- Botón de checkin o botón de checkout --}}
         @if ($habitacio->reservas()->where('estat', 'Reservada')->exists() && $habitacio->estat === 'Lliure')
             @php
-                $reservaHoy = $habitacio->reservas()->where('estat', 'Reservada')->where('data_entrada', $today)->first();
+                $reservaHoy = $habitacio->reservas()->where('estat', 'Reservada')->where('data_entrada', $hoy)->first();
             @endphp
             @if ($reservaHoy)
                 <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
