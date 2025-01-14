@@ -9,7 +9,7 @@
 
         <div class="cards">
 
-            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id')]) }}">
+            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id'), 'estat' => 'Ocupada']) }}">
                 <div class="card card--resum-hotels">
                     <h2 class="card__header">Habitacions Ocupades</h2>
                     <div class="counter">
@@ -20,7 +20,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id')]) }}">
+            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id'), 'estat' => 'Lliure']) }}">
                 <div class="card card--resum-hotels">
                     <h2 class="card__header">Habitacions Lliures</h2>
                     <div class="counter">
@@ -31,7 +31,7 @@
                 </div>
             </a>
 
-            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id')]) }}">
+            <a href="{{ route('reservas.checkins', ['id' => request()->query('id')]) }}">
                 <div class="card card--resum-hotels">
                     <h2 class="card__header">Checkins Pendents</h2>
                     <h3 class="counter__habitacions">{{ $checkinsPendents }}</h3>
