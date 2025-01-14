@@ -148,7 +148,8 @@ class ReservasController extends Controller
         $hotelId = Habitacion::findOrFail($habitacionId)->hotel_id;
 
         if (!$usuari) {
-            $usuari = Usuari::factory()->create([
+            // Si el usuario no está registrado, crear un nuevo usuario
+            $usuari = Usuari::create([
                 'nom' => $request->input('nom'),
                 'email' => $request->input('email'),
                 'rol_id' => 3,
@@ -174,7 +175,6 @@ class ReservasController extends Controller
             return redirect()->back()
                 ->with('error', 'La habitació ja està ocupada en aquestes dates');
         }
-
 
         $habitacio = Habitacion::findOrFail($habitacionId);
         $serveis = $validatedData['serveis'] ?? [];
