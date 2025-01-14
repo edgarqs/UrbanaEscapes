@@ -63,7 +63,7 @@ class ReservasFactory extends Factory
 
         return [
             'habitacion_id' => $habitacion->id,
-            'usuari_id' => Usuari::inRandomOrder()->first()->id,
+            'usuari_id' => Usuari::where('rol_id', 3)->inRandomOrder()->first()->id,
             'data_entrada' => $dataEntrada,
             'data_sortida' => $dataSortida,
             'preu_total' => $preuTotal,

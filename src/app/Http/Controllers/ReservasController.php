@@ -23,8 +23,14 @@ class ReservasController extends Controller
         $checkinsPendents = Reservas::countReservasPendientes($id);
         $habitacionsTotals = Reservas::getHabitacionesTotals($id);
 
-        $habitacionsOcupadesPercentatge = round(($habitacionsOcupades / $habitacionsTotals) * 100);
-        $habitacionsLliuresPercentatge = round(($habitacionsLliures / $habitacionsTotals) * 100);
+        if ($habitacionsOcupades === 0 || $habitacionsLliures === 0) {
+            $habitacionsOcupadesPercentatge = 0;
+            $habitacionsLliuresPercentatge = 0;
+        }
+        else {
+            $habitacionsOcupadesPercentatge = round(($habitacionsOcupades / $habitacionsTotals) * 100);
+            $habitacionsLliuresPercentatge = round(($habitacionsLliures / $habitacionsTotals) * 100);
+        }
 
         return view('hotel.home', [
             'hotel' => $hotel,
