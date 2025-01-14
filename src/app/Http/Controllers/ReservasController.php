@@ -9,6 +9,7 @@ use App\Models\Reservas;
 use App\Models\Habitacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ReservasController extends Controller
 {
@@ -113,19 +114,11 @@ class ReservasController extends Controller
             'end_date' => $request->get('end_date'),
             'status' => $request->get('status'),
             'search' => $request->get('search'),
-        ]; {
-            $filters = [
-                'start_date' => $request->get('start_date'),
-                'end_date' => $request->get('end_date'),
-                'status' => $request->get('status'),
-                'search' => $request->get('search'),
-            ];
+        ];
 
-            $reservas = Reservas::getCheckinsFiltrats($filters);
-            $reservas = Reservas::getCheckinsFiltrats($filters);
+        $reservas = Reservas::getCheckinsFiltrats($filters);
 
-            return view('hotel.checkins', compact('reservas'));
-        }
+        return view('hotel.checkins', compact('reservas'));
     }
 
     public function index($habitacionId)
@@ -151,7 +144,6 @@ class ReservasController extends Controller
 
     public function store(Request $request, $habitacionId)
     {
-        // Verificar si el usuario ya está registrado
         $usuari = Usuari::where('dni', $request->input('dni'))->first();
         $hotelId = Habitacion::findOrFail($habitacionId)->hotel_id;
 
@@ -166,10 +158,7 @@ class ReservasController extends Controller
             ]);
         }
 
-        // Guardar el ID del usuario para pasarlo a la validación
         $usuariId = $usuari->id;
-
-        // Validar el formulario
         $validatedData = $request->validate([
             'data_inici' => 'required|date',
             'data_fi' => 'required|date|after_or_equal:data_inici',
@@ -177,7 +166,6 @@ class ReservasController extends Controller
             'serveis.*' => 'exists:serveis,id',
         ]);
 
-        // Comprobar si la habitación está ocupada
         $habitacioOcupada = Reservas::where('habitacion_id', $habitacionId)
             ->where('data_entrada', '<=', $validatedData['data_fi'])
             ->where('data_sortida', '>=', $validatedData['data_inici'])
@@ -208,6 +196,16 @@ class ReservasController extends Controller
 
     public function crearReserva()
     {
-        return view('recepcio.afegirReserva');
+        $habitacions = Habitacion::all();
+        $usuaris = Usuari::all();
+        $serveis = Serveis::all();
+        $tipusHabitacions = Habitacion::getTipusHabitacions();
+        
+        return view('recepcio.afegirReserva', [
+            'habitacions' => $habitacions,
+            'usuaris' => $usuaris,
+            'serveis' => $serveis,
+            'tipusHabitacions' => $tipusHabitacions
+        ]);
     }
 }

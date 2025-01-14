@@ -35,3 +35,7 @@ function showPopup(habitacioId) {
 function hidePopup() {
     document.querySelector("#popup").style.display = "none";
 }
+
+function updateValue(val) {
+    document.querySelector('#preu-value').textContent = val;
+}
