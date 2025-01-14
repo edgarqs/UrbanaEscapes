@@ -24,7 +24,7 @@
                         @if ($habitacio->reservas()->where('estat', 'Reservada')->exists() && $habitacio->estat === 'Lliure')
                             <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="button button--green">
+                                <button type="submit" class="button button--green no-popup">
                                     <span class="material-symbols-outlined">login</span>Check-In
                                 </button>
                             </form>
@@ -32,7 +32,7 @@
                         @if ($habitacio->reservas()->where('estat', 'Checkin')->exists() && $habitacio->estat === 'Ocupada')
                             <form action="{{ route('habitacions.checkout', $habitacio->id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="button button--red">
+                                <button type="submit" class="button button--red no-popup">
                                     <span class="material-symbols-outlined">logout</span>Check-Out
                                 </button>
                             </form>
@@ -40,7 +40,7 @@
                         @if ($habitacio->estat === 'Bloquejada')
                             <form action="{{ route('habitacions.desbloquejar', $habitacio->id) }}" method="POST">
                                 @csrf
-                                <button class="button button--primary">
+                                <button class="button button--primary no-popup">
                                     <span class="material-symbols-outlined">lock_open</span>Desbloquejar
                                 </button>
                             </form>
@@ -48,7 +48,7 @@
                         @if ($habitacio->estat === 'Lliure')
                             <form action="{{ route('habitacions.bloquejar', $habitacio->id) }}" method="POST">
                                 @csrf
-                                <button class="button button--orange">
+                                <button class="button button--orange no-popup">
                                     <span class="material-symbols-outlined">mop</span>
                                 </button>
                             </form>
