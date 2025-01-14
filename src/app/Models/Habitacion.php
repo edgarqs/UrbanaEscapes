@@ -51,5 +51,10 @@ class Habitacion extends Model
            ->whereDate('data_sortida', '>=', now())->first();
    }
 
+   public static function getTipusHabitacions()
+   {
+       return Habitacion::select('tipus')->distinct()->get();
+   }
+
 
 }
