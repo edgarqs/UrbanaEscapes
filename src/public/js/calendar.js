@@ -43,9 +43,11 @@ function renderCalendar(data) {
     data.habitacions.forEach(habitacio => {
         const row = document.createElement('tr');
         const cell = document.createElement('td');
+        cell.onclick = () => {
+            window.location.href = `/reserves/${habitacio.numHabitacion}`;
+        }
         const link = document.createElement('a');
-        link.href = `/reserves/${habitacio.numHabitacion}`;
-        link.textContent = habitacio.numHabitacion;
+        cell.textContent = habitacio.numHabitacion;
         
         cell.appendChild(link);
 
@@ -80,7 +82,13 @@ function renderCalendar(data) {
             cell.className = `reservation-cell ${reserva ? 'reserved' : 'available'} fixed-width-cell`;
             cell.addEventListener('click', () => {
                 if (reserva) {
-                    document.querySelector("#popup").style.display = "grid";
+                    fetch(`/habitacions/${habitacio.id}/detalls`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.querySelector("#popup-details").innerHTML = data;
+                            document.querySelector("#popup").style.display = "grid";
+                        })
+                        .catch(error => console.error('Error:', error));
                 }else{
                     window.location.href = `/reserves/${habitacio.numHabitacion}`;
                 }

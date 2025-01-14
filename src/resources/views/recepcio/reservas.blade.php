@@ -132,14 +132,14 @@
                         <label for="comentaris">Comentaris</label>
                         <input type="text" name="comentaris" id="comentaris"
                             class="form-control @error('comentaris') is-invalid @enderror"
-                            value="{{ old('comentaris') }}" required>
+                            value="{{ old('comentaris') }}">
                         @error('comentaris')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
             </div>
-            <button type="submit" class="button button--primary button--margin-top">Registrar reserva</button>
+            <button type="submit" class="button button--green button--margin-top">Registrar reserva</button>
         </form>
     </div>
 

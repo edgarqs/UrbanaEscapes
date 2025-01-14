@@ -16,7 +16,7 @@ class ReservasController extends Controller
     public function home(Request $request)
     {
         $id = $request->query('id');
-        $hotel = Hotel::findOrFail($id); //? Busca el hotel amb l'id que li passem per paràmetre
+        $hotel = Hotel::findOrFail($id);
 
         $habitacionsOcupades = Reservas::countHabitacionesConfirmadas($id);
         $habitacionsLliures = Reservas::countHabitacionesLliures($id);
@@ -47,7 +47,15 @@ class ReservasController extends Controller
     {
         $paginacioHabitacions = env('PAGINACIO_HABITACIONS', 100);
         $idHotel = $request->query('id');
-        $habitacions = Habitacion::where('hotel_id', $idHotel)->paginate($paginacioHabitacions);
+        $estat = $request->query('estat');
+        
+        $habitacions = Habitacion::where('hotel_id', $idHotel);
+
+        if ($estat) {
+            $habitacions = $habitacions->where('estat', $estat);
+        }
+
+        $habitacions = $habitacions->paginate($paginacioHabitacions);
 
         return view('hotel.habitacions', ['idHotel' => $idHotel, 'habitacions' => $habitacions]);
     }
