@@ -36,6 +36,29 @@ function hidePopup() {
     document.querySelector("#popup").style.display = "none";
 }
 
-function updateValue(val) {
-    document.querySelector('#preu-value').textContent = val;
+// Cerrar el popup cuando se hace clic fuera de él
+window.onclick = function(event) {
+    const modal = document.getElementById('popup');
+    const backdrop = document.getElementById('popup-backdrop');
+    if (event.target === modal || event.target === backdrop) {
+        hidePopup();
+    }
+}
+
+// Formulari usuaris reserva rapida
+function mostrarFormUsuari() {
+    let tipusUsuari = document.querySelector('#tipus_usuari').value;
+    let usuariRegistrat = document.querySelector('.usuariRegistrat');
+    let usuariNou = document.querySelector('.usuariNou');
+    
+    if (tipusUsuari === 'registrat') {
+        usuariRegistrat.style.display = 'block';
+        usuariNou.style.display = 'none';
+    } else if (tipusUsuari === 'nou') {
+        usuariRegistrat.style.display = 'none';
+        usuariNou.style.display = 'block';
+    } else {
+        usuariRegistrat.style.display = 'none';
+        usuariNou.style.display = 'none';
+    }
 }
