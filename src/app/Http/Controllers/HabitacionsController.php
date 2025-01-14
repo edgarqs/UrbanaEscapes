@@ -34,12 +34,14 @@ class HabitacionsController extends Controller
         $hotelId = $request->query('id');
         $hotel = Hotel::findOrFail($hotelId);
         $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
-        $reservas = Reservas::whereIn('habitacion_id', $habitacions->pluck('id'))->get();
+        $reserva = Reservas::whereIn('habitacion_id', $habitacions->pluck('id'))->get();
+        $reserves = $this->getReservasByDate($hotelId, now());
 
         return view('recepcio.home', [
             'hotel' => $hotel,
             'habitacions' => $habitacions,
-            'reservas' => $reservas
+            'reserva' => $reserva,
+            'reserves' => $reserves
         ]);
     }
 
