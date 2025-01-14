@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function showPopup(habitacioId) {
     // Verificar si el clic proviene de un botón con la clase 'no-popup'
-    if (target.closest('.no-popup')) {
+    if (event.target.closest('.no-popup')) {
         return;
     }
 
@@ -29,26 +29,16 @@ function showPopup(habitacioId) {
     fetch(`/habitacions/${habitacioId}/detalls`)
         .then(response => response.text())
         .then(data => {
-            // Verificar si el elemento #popup-details existe
-            const popupDetails = document.querySelector("#popup-details");
-            if (popupDetails) {
-                // Insertar el contenido en el popup
-                popupDetails.innerHTML = data;
-                // Mostrar el popup
-                document.querySelector("#popup").style.display = "grid";
-            } else {
-                console.error('Elemento #popup-details no encontrado');
-            }
+            // Insertar el contenido en el popup
+            document.querySelector("#popup-details").innerHTML = data;
+            // Mostrar el popup
+            document.querySelector("#popup").style.display = "grid";
         })
         .catch(error => console.error('Error:', error));
 }
 
 function hidePopup() {
     document.querySelector("#popup").style.display = "none";
-}
-
-function updateValue(val) {
-    document.querySelector('#preu-value').textContent = val;
 }
 
 // Cerrar el popup cuando se hace clic fuera de él
