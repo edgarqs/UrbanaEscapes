@@ -26,6 +26,7 @@
     @php
         $reservaActual = $habitacio->reservas()->where('estat', 'Checkin')->first();
         $proximaReserva = $habitacio->reservas()->where('estat', 'Reservada')->orderBy('data_entrada')->first();
+        $today = \Carbon\Carbon::today()->format('Y-m-d');
     @endphp
 
     @if ($reservaActual)
@@ -53,17 +54,21 @@
         </ul>
     @endif
 </div>
-
 <div>
     <div class="contenedor-dosBotones">
         {{-- Botón de checkin o botón de checkout --}}
         @if ($habitacio->reservas()->where('estat', 'Reservada')->exists() && $habitacio->estat === 'Lliure')
-            <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="button button--green">
-                    <span class="material-symbols-outlined">login</span>Check-In
-                </button>
-            </form>
+            @php
+                $reservaHoy = $habitacio->reservas()->where('estat', 'Reservada')->where('data_entrada', $today)->first();
+            @endphp
+            @if ($reservaHoy)
+                <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="button button--green">
+                        <span class="material-symbols-outlined">login</span>Check-In
+                    </button>
+                </form>
+            @endif
         @endif
         @if ($habitacio->reservas()->where('estat', 'Checkin')->exists() && $habitacio->estat === 'Ocupada')
             <form action="{{ route('habitacions.checkout', $habitacio->id) }}" method="POST">

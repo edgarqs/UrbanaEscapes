@@ -80,7 +80,13 @@ function renderCalendar(data) {
             cell.className = `reservation-cell ${reserva ? 'reserved' : 'available'} fixed-width-cell`;
             cell.addEventListener('click', () => {
                 if (reserva) {
-                    document.querySelector("#popup").style.display = "grid";
+                    fetch(`/habitacions/${habitacio.id}/detalls`)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.querySelector("#popup-details").innerHTML = data;
+                            document.querySelector("#popup").style.display = "grid";
+                        })
+                        .catch(error => console.error('Error:', error));
                 }else{
                     window.location.href = `/reserves/${habitacio.numHabitacion}`;
                 }
