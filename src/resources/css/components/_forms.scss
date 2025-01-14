@@ -55,6 +55,13 @@
                 background-color: #f8d7da;
                 color: #721c24;
             }
+
+            &.disabledInformacio {
+                border-color: $succes-color;
+                background-color: #28a74615;
+                cursor: not-allowed;
+                color: $text-color !important;
+            }
         }
     }
 

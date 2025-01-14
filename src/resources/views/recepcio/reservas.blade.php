@@ -50,7 +50,7 @@
                     <div class="form-row d-flex">
                         <div class="form-group flex-fill mr-3">
                             <label for="numHabitacio">Nº Habitació</label>
-                            <input type="text" name="numHabitacio" id="numHabitacio"
+                            <input type="text" class="disabledInformacio" name="numHabitacio" id="numHabitacio"
                                 value="{{ $habitacio->numHabitacion }}" required disabled>
                             @error('numHabitacio')
                                 <div class="text-danger">{{ $message }}</div>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="form-group flex-fill">
                             <label for="tipusHabitacio">Tipus</label>
-                            <input type="text" name="tipusHabitacio" id="tipusHabitacio" value="{{ $habitacio->tipus }}"
+                            <input type="text" class="disabledInformacio" name="tipusHabitacio" id="tipusHabitacio" value="{{ $habitacio->tipus }}"
                                 required disabled>
                             @error('tipusHabitacio')
                                 <div class="text-danger">{{ $message }}</div>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="form-group flex-fill">
                             <label for="preuHabitacio">Preu base</label>
-                            <input type="text" name="preuHabitacio" id="preuHabitacio" value="{{ $habitacio->preu }} €"
+                            <input type="text" class="disabledInformacio" name="preuHabitacio" id="preuHabitacio" value="{{ $habitacio->preu }} €"
                                 required disabled>
                             @error('preuHabitacio')
                                 <div class="text-danger">{{ $message }}</div>
@@ -76,7 +76,7 @@
                     <div class="form-row d-flex">
                         <div class="form-group flex-fill">
                             <label for="llits">Llits</label>
-                            <input type="text" name="llits" id="llits" value="{{ $habitacio->llits }}" required
+                            <input type="text" class="disabledInformacio" name="llits" id="llits" value="{{ $habitacio->llits }}" required
                                 disabled>
                             @error('llits')
                                 <div class="text-danger">{{ $message }}</div>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="form-group flex-fill">
                             <label for="llitsSupletoris">Llits Supletoris</label>
-                            <input type="text" name="llitsSupletoris" id="llitsSupletoris"
+                            <input type="text" class="disabledInformacio" name="llitsSupletoris" id="llitsSupletoris"
                                 value="{{ $habitacio->llits_supletoris }}" required disabled>
                             @error('llitsSupletoris')
                                 <div class="text-danger">{{ $message }}</div>
@@ -95,15 +95,15 @@
 
                 <div class="subcontenedor-flex">
                     <h4>Serveis adicionals</h4>
-                    <ul class="list-group">
-                        @foreach ($serveis as $servei)
-                            <li class="form-check-label" for="servei{{ $servei->id }}">
-                                {{ $servei->nom }}: {{ $servei->preu }}€
-                                <input class="form-check-input" type="checkbox" value="{{ $servei->id }}"
-                                    id="servei{{ $servei->id }}" name="serveis[]">
-                            </li>
-                        @endforeach
-                    </ul>
+                    <div class="checkbox-contenedor">
+                        <div class="checkbox">
+                            <ul>
+                                @foreach ($serveis as $servei)
+                                    <li><input type="checkbox" name="servei{{ $servei->id }}" id="servei{{ $servei->id }}" value="{{ $servei->id }}"><label for="servei{{ $servei->id }}">{{ $servei->nom }} <span class="text-cursiva">(+{{ $servei->preu }} €)</span></label></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
