@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('adreca');
             $table->string('ciutat');
             $table->string('pais');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('telefon');
             $table->timestamps();
         });
