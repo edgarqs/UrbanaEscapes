@@ -63,7 +63,7 @@ Route::get('/recepcio', [HabitacionsController::class, 'showRecepcio'])
     ->middleware('auth', CheckHotelAccess::class);
 
 //? Página de checkins
-Route::get('/hotel/checkins', [ReservasController::class, 'checkins'])
+Route::get('/hotel/checkins/', [ReservasController::class, 'checkinsPendents'])
     ->name('reservas.checkins')
     ->middleware('auth');
 

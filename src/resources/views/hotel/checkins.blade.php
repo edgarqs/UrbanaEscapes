@@ -4,52 +4,58 @@
 
 @section('content')
 
-<h1>Llistat de Check-Ins Pendents</h1>
+    <h1>Llistat de Check-Ins Pendents</h1>
 
-<form method="GET" action="{{ route('reservas.checkins') }}">
-    <div class="form-row">
-        <div class="form-group">
-            <label for="start_date">Data Inici</label>
-            <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request('start_date') }}">
-        </div>
-        <div class="form-group">
-            <label for="end_date">Data Fi</label>
-            <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
-        </div>
-        <div class="form-group">
-            <label for="status">Estat d'habitació</label>
-            <select name="status" id="status" class="form-control">
-                <option value="">Tots</option>
-                <option value="ocupada" {{ request('status') == 'ocupada' ? 'selected' : '' }}>Ocupada</option>
-                <option value="lliure" {{ request('status') == 'lliure' ? 'selected' : '' }}>Lliure</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="search">Nom del client o Número de reserva</label>
-            <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}">
-        </div>
-        <div class="form-group">
-            <button type="submit" class="button">Filtrar</button>
-        </div>
-    </div>
-</form>
-
-<div class="cards">
-    @foreach ($reservas as $reserva)
-        <div class="card">
-            <h2 class="card__header">Reserva ID: {{ $reserva->id }}</h2>
-            <div class="card__body">
-                <p>Nom del client: {{ $reserva->usuari->nom }}</p>
-                <p>Duració de l'estada: {{ $reserva->data_entrada }} - {{ $reserva->data_sortida }}</p>
-                <p>Tipus d'habitació: {{ $reserva->habitacion->tipus }}</p>
-                <p>Ocupants de l'habitació: {{ $reserva->habitacion->llits + $reserva->habitacion->llits_supletoris }}</p>
-                <p>Habitació assignada: {{ $reserva->habitacion->numHabitacion }}</p>
-                <p>Estat de la reserva: {{ $reserva->estat }}</p>
-                <p>Preu de la reserva: {{ $reserva->preu_total }}€</p>
-                <p>Notes: {{ $reserva->comentaris }}</p>
+    <div class="filtros-reservas">
+        <form method="GET" action="{{ route('reservas.checkins') }}">
+            @csrf
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="data_entrada">Data Entrada</label>
+                    <input type="date" name="data_entrada" id="data_entrada" class="form-control"
+                        value="{{ $dataEntrada }}">
+                </div>
+                <div class="form-group">
+                    <label for="data_sortida">Data Sortida</label>
+                    <input type="date" name="data_sortida" id="data_sortida" class="form-control"
+                        value="{{ $dataSortida }}">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="button">Filtrar</button>
+                </div>
             </div>
-        </div>
-    @endforeach
-</div>
+        </form>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Reserva Nº</th>
+                    <th>Client</th>
+                    <th>Duració</th>
+                    <th>Tipus Habitació</th>
+                    <th>Nº Habitació</th>
+                    <th>Estat Reserva</th>
+                    <th>Preu Total</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($reservas as $reserva)
+                    <tr>
+                        <td>{{ $reserva->id }}</td>
+                        <td>{{ $reserva->usuari->nom }}</td>
+                        <td>{{ $reserva->data_entrada->diffInDays($reserva->data_sortida) }} dies</td>
+                        <td>{{ $reserva->habitacion->tipus }}</td>
+                        <td>{{ $reserva->habitacion ? $reserva->habitacion->numHabitacion : 'No assignada' }}</td>
+                        <td>{{ $reserva->estat }}</td>
+                        <td>{{ $reserva->preu_total }}</td>
+                        <td>{{ $reserva->comentaris }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
 @endsection

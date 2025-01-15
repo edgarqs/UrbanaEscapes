@@ -1,0 +1,36 @@
+@use "../abstracts/variables" as *;
+
+.filtros-reservas {
+    width: 50%;
+    margin-bottom: 30px;
+
+    button {
+        width: 50%;
+        margin-top: 35px;
+    }
+
+    .form-group {
+        width: 100%;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    input {
+        width: 100%;
+        padding: 0.8rem;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+
+        &:focus {
+            outline: none !important;
+            border-color: $primary-color !important;
+            background-color: #f0f8ff !important;
+            color: $text-color !important;
+        }
+    }
+}
