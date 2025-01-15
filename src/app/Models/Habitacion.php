@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,8 @@ class Habitacion extends Model
         'numero',
         'tipo',
         'precio',
-        'numHabitacion'
+        'numHabitacion',
+        'estat'
     ];
 
     public function reservas()
@@ -30,10 +32,37 @@ class Habitacion extends Model
     public static function getHabitacionPreu($habitacion_id)
     {
         $habitacion = Habitacion::select('preu')->where('id', $habitacion_id)->first();
-        
+
         $preuServeis = Serveis::preuTotalServeisPerHabitacio($habitacion_id);
         $preuTotal = $habitacion->preu + $preuServeis;
+
+        Log::channel('info_log')->info('Preu total de la habitació', ['habitacio_id' => $habitacion_id, 'preu_total' => $preuTotal]);
+
         return $preuTotal;
     }
 
+    public function getEstat()
+    {
+        return $this->estat;
+    }
+
+    public function getReservaActual()
+    {
+        return $this->reservas()->whereDate('data_entrada', '<=', now())
+            ->whereDate('data_sortida', '>=', now())->first();
+    }
+
+    public static function getTipusHabitacions()
+    {
+        return Habitacion::select('tipus')->distinct()->get();
+    }
+
+    public static function sumaCapacitatLlits($id)
+    {
+        $llits = Habitacion::select('llits')->where('id', $id)->first()->llits;
+        $llitsSupletoris = Habitacion::select('llits_supletoris')->where('id', $id)->first()->llits_supletoris;
+
+        $capacitat = $llits + $llitsSupletoris;
+        return $capacitat;
+    }
 }

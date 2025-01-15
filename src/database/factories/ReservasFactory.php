@@ -3,38 +3,71 @@
 namespace Database\Factories;
 
 use App\Models\Habitacion;
-use App\Models\Serveis;
 use App\Models\Usuari;
-
+use App\Models\Reservas;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Carbon\Carbon;
 
-
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Reservas>
- */
 class ReservasFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = Reservas::class;
+
     public function definition(): array
     {
-        $habitacion_id = Habitacion::inRandomOrder()->first()->id;
         $faker = \Faker\Factory::create('es_ES');
+        $habitacion = Habitacion::inRandomOrder()->first();
         $dias = $faker->numberBetween(1, 15);
-        $data_entrada = $faker->dateTimeThisYear();
-        $data_sortida = (clone $data_entrada)->modify("+$dias days");
-        $preu_total = Habitacion::getHabitacionPreu($habitacion_id)* $dias;
-        
+        $dataEntrada = $faker->dateTimeBetween('-4 months', '+4 months');
+        $dataSortida = (clone $dataEntrada)->modify("+$dias days");
+
+        // Calcular el preu total de la reserva amb serveis extra
+        $preuHabitacio = $habitacion->preu * $dias;
+        $preuServeis = $habitacion->serveis->sum('preu');
+        $preuTotal = $preuHabitacio + $preuServeis;
+
+        // Verificar que no haya otra reserva en las mismas fechas a menos que el estado sea "Cancelada"
+        while (Reservas::where('habitacion_id', $habitacion->id)
+            ->where(function ($query) use ($dataEntrada, $dataSortida) {
+                $query->where(function ($query) use ($dataEntrada, $dataSortida) {
+                    $query->whereBetween('data_entrada', [$dataEntrada, $dataSortida])
+                        ->orWhereBetween('data_sortida', [$dataEntrada, $dataSortida])
+                        ->orWhere(function ($query) use ($dataEntrada, $dataSortida) {
+                            $query->where('data_entrada', '<', $dataEntrada)
+                                  ->where('data_sortida', '>', $dataSortida);
+                        });
+                })
+                    ->where('estat', '!=', 'Cancelada');
+            })->exists()
+        ) {
+            $dataEntrada = $faker->dateTimeBetween('-4 months', '+4 months');
+            $dataSortida = (clone $dataEntrada)->modify("+$dias days");
+        }
+
+        // Estableix l'estat de la reserva según la fecha
+        if ($dataSortida < Carbon::now()) {
+            $estatReserva = $faker->randomElement(['Checkout', 'Cancelada']);
+        } elseif ($dataEntrada <= Carbon::now() && $dataSortida >= Carbon::now()) {
+            $estatReserva = 'Checkin';
+        } else {
+            $estatReserva = $faker->randomElement(['Reservada', 'Cancelada']);
+        }
+
+        // Actualitza l'estat de l'habitació segons l'estat de la reserva
+        if ($estatReserva == 'Checkin') {
+            $habitacion->estat = 'Ocupada';
+        } elseif ($estatReserva == 'Checkout' || $estatReserva == 'Cancelada') {
+            $habitacion->estat = 'Lliure';
+        }
+
+        $habitacion->save();
+
         return [
-            'habitacion_id' => $habitacion_id, //? Selecciona un ID de habitación existente de forma aleatoria
-            'usuari_id' => Usuari::inRandomOrder()->first()->id, //? Seleciona un usuario existente
-            'data_entrada' => $data_entrada,
-            'data_sortida' => $data_sortida,
-            'preu_total' => $preu_total,
-            'estat' => $faker->randomElement(['pend_checkin', 'pend_checkout', 'cancelada', 'finalizada']),
+            'habitacion_id' => $habitacion->id,
+            'usuari_id' => Usuari::where('rol_id', 3)->inRandomOrder()->first()->id,
+            'data_entrada' => $dataEntrada,
+            'data_sortida' => $dataSortida,
+            'preu_total' => $preuTotal,
+            'estat' => $estatReserva,
         ];
     }
 }

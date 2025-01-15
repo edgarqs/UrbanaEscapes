@@ -4,28 +4,36 @@
 
 @section('content')
 
-    <h1>Sel·leciona l'hotel a consultar</h1>
+    <h1>Selecciona l'hotel a consultar</h1>
 
+    {{-- Mensaje tras creación del <hotel --}}
     @if (session()->has('status'))
-        <div class="w3-panel w3-pale-green">
+        <div class="message-content message-content--success" id="status-message">
             <p> {{ session('status') }} </p>
         </div>
     @endif
 
-    <div class="cards">
+    {{-- Mensaje de error --}}
+    @if ($errors->any())
+        <div class="message-content message-content--error" id="status-message">
+            <p>{{ $errors->first() }}</p>
+        </div>
+    @endif
 
-        @foreach ($hotels as $hotel)
-            <div class="card">
-                <h2 class="card__header">{{ $hotel->nom }}</h2>
-                <div class="card__body">
-                    <p>{{ $hotel->adreca }}<br>{{ $hotel->ciutat }}, {{ $hotel->pais }}</p>
+    @if ($hotels->isEmpty())
+        <div class="messages-content">
+            <p class="messages"><span class="material-symbols-outlined">error</span>No hi han hotels per consultar. <a href="{{ route('hotel.create') }}">Crea el primer hotel.</a></p>
+        </div>
+    @else
+        <div class="cards">
+            @foreach ($hotels as $hotel)
+                <div class="card">
+                    <h2>{{ $hotel->nom }}</h2>
+                    <p>{{ $hotel->adreca }}</p>
+                    <a href="{{ route('hotel.home', ['id' => $hotel->id]) }}" class="button">Consultar</a>
                 </div>
-                <form action="{{ route('hotel.home') }}" method="GET">
-                    <input type="hidden" name="id" value="{{ $hotel->id }}">
-                    <button type="submit" class="button primary">Seleccionar</button>
-                </form>
-            </div>
-        @endforeach
-    </div>
+            @endforeach
+        </div>
+    @endif
 
 @endsection

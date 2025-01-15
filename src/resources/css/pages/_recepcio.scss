@@ -1,0 +1,63 @@
+@use '../abstracts/variables' as *;
+
+table {
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    width: 10px !important;
+    height: 10px !important;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+th.th-day {
+    background-color: #f3f3f3;
+    font-weight: bold;
+    text-align: center;
+}
+
+td.reservation-cell.reserved {
+    background-color: rgb(209, 127, 127);
+    color: white;
+    white-space: nowrap; // Deshabilitat el salts de línea
+    word-break: break-all; // Si no cap, la paraula es talla
+    overflow: hidden;
+    text-align: center;
+}
+
+td.reservation-cell.available {
+    background-color: lightgreen;
+    color: black;
+}
+
+.reservation-details {
+    text-align: center;
+    font-size: 12px;
+}
+
+.calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    .button-calendar {
+        align-items: center;
+        justify-content: center;
+        width: 18%;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+}

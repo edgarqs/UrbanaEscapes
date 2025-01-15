@@ -3,34 +3,264 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use App\Models\Usuari;
+use App\Models\Serveis;
 use App\Models\Reservas;
-use Illuminate\Http\Request;
 use App\Models\Habitacion;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ReservasController extends Controller
 {
     public function home(Request $request)
     {
         $id = $request->query('id');
+        $hotel = Hotel::findOrFail($id);
 
-        $hab_lliures = Reservas::countHabitacionesLliures($id);
-        $hab_pendent = Reservas::countHabitacionesPendientes($id);
-        $hab_ocupada = Reservas::countHabitacionesConfirmadas($id);
-        $habitacionsTotals = Hotel::find($id)->habitacions->count();
+        $habitacionsOcupades = Reservas::countHabitacionesConfirmadas($id);
+        $habitacionsLliures = Reservas::countHabitacionesLliures($id);
+        $checkinsPendents = Reservas::countReservasPendientes($id);
+        $habitacionsTotals = Reservas::getHabitacionesTotals($id);
+
+        if ($habitacionsOcupades === 0 || $habitacionsLliures === 0) {
+            $habitacionsOcupadesPercentatge = 0;
+            $habitacionsLliuresPercentatge = 0;
+        } else {
+            $habitacionsOcupadesPercentatge = round(($habitacionsOcupades / $habitacionsTotals) * 100);
+            $habitacionsLliuresPercentatge = round(($habitacionsLliures / $habitacionsTotals) * 100);
+        }
 
         return view('hotel.home', [
-            'hab_lliures' => $hab_lliures,
-            'hab_pendent' => $hab_pendent,
-            'hab_ocupada' => $hab_ocupada,
-            'habitacionsTotals' => $habitacionsTotals
+            'hotel' => $hotel,
+            'habitacionsOcupades' => $habitacionsOcupades,
+            'habitacionsLliures' => $habitacionsLliures,
+            'checkinsPendents' => $checkinsPendents,
+            'habitacionsTotals' => $habitacionsTotals,
+            'habitacionsOcupadesPercentatge' => $habitacionsOcupadesPercentatge,
+            'habitacionsLliuresPercentatge' => $habitacionsLliuresPercentatge,
         ]);
     }
 
     public function habitacions(Request $request)
     {
+        $paginacioHabitacions = env('PAGINACIO_HABITACIONS', 100);
         $idHotel = $request->query('id');
-        $habitacions = Habitacion::where('hotel_id', $idHotel)->paginate(100);
-    
+        $estat = $request->query('estat');
+
+        $habitacions = Habitacion::where('hotel_id', $idHotel);
+
+        if ($estat) {
+            $habitacions = $habitacions->where('estat', $estat);
+        }
+
+        $habitacions = $habitacions->paginate($paginacioHabitacions);
+
         return view('hotel.habitacions', ['idHotel' => $idHotel, 'habitacions' => $habitacions]);
+    }
+
+    public function checkin($id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+        $reserva = $habitacio->reservas()->where('estat', 'reservada')->first();
+
+        if ($reserva) {
+            $reserva->estat = 'Checkin';
+            $reserva->save();
+
+            $habitacio->estat = 'Ocupada';
+            $habitacio->save();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Check-In completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
+    }
+
+
+    public function checkout($id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+        $reserva = $habitacio->reservas()->where('estat', 'checkin')->first();
+
+        if ($reserva) {
+            $reserva->estat = 'Checkout';
+            $reserva->save();
+
+            $habitacio->estat = 'Bloquejada';
+            $habitacio->save();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
+    }
+
+    public function bloquejar($id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+
+        if ($habitacio->estat === 'Lliure') {
+            $habitacio->estat = 'Bloquejada';
+            $habitacio->save();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Habitació Nº ' . $habitacio->numHabitacion . ' posada en manteniment.');
+    }
+
+    public function desbloquejar($id)
+    {
+        $habitacio = Habitacion::findOrFail($id);
+
+        if ($habitacio->estat === 'Bloquejada') {
+            $habitacio->estat = 'Lliure';
+            $habitacio->save();
+        }
+
+        return redirect()->back()
+            ->with('success', 'Habitació Nº ' . $habitacio->numHabitacion . ' desbloquejada.');
+    }
+
+    public function checkinsPendents(Request $request)
+{
+    $idHotel = $request->query('id');
+    $dataEntrada = $request->query('data_entrada', Carbon::today()->format('Y-m-d'));
+    $dataSortida = $request->query('data_sortida');
+
+    $reservas = Reservas::whereHas('habitacion', function ($query) use ($idHotel) {
+        $query->where('hotel_id', $idHotel);
+    })
+    ->where('estat', 'Reservada')
+    ->whereDate('data_entrada', '>=', $dataEntrada);
+
+    if ($dataSortida) {
+        $reservas->whereDate('data_sortida', '<=', $dataSortida);
+    } else {
+        $reservas->whereDate('data_entrada', '=', $dataEntrada);
+    }
+
+    $reservas = $reservas->with('habitacion')->orderBy('id')->get();
+
+    return view('hotel.checkins', [
+        'idHotel' => $idHotel,
+        'reservas' => $reservas,
+        'dataEntrada' => $dataEntrada,
+        'dataSortida' => $dataSortida
+    ]);
+}
+
+    public function index($habitacionId)
+    {
+        $usuaris = Usuari::all();
+        $habitacio = Habitacion::findOrFail($habitacionId);
+        $serveis = Serveis::all();
+        $diaActual = Carbon::now()->format('Y-m-d');
+        $diaSeguent = Carbon::now()->addDays(1)->format('Y-m-d');
+        $preuPerDies = Reservas::calcularPreuPerDies($habitacio, $diaActual, $diaSeguent);
+
+        return view('recepcio.reservas', [
+            'habitacionId' => $habitacionId,
+            'usuaris' => $usuaris,
+            'habitacio' => $habitacio,
+            'serveis' => $serveis,
+            'diaActual' => $diaActual,
+            'diaSeguent' => $diaSeguent,
+            'preuPerDies' => $preuPerDies
+        ]);
+    }
+
+
+    public function store(Request $request, $habitacionId)
+    {
+        $usuari = Usuari::where('dni', $request->input('dni'))->first();
+        $hotelId = Habitacion::findOrFail($habitacionId)->hotel_id;
+
+        if (!$usuari) {
+            // Si el usuario no está registrado, crear un nuevo usuario
+            $usuari = Usuari::create([
+                'nom' => $request->input('nom'),
+                'email' => $request->input('email'),
+                'rol_id' => 3,
+                'dni' => $request->input('dni'),
+                'hotel_id' => $hotelId
+            ]);
+        }
+
+        $usuariId = $usuari->id;
+        $validatedData = $request->validate([
+            'data_inici' => 'required|date',
+            'data_fi' => 'required|date|after_or_equal:data_inici',
+            'serveis' => 'array',
+            'serveis.*' => 'exists:serveis,id',
+        ]);
+
+        $habitacioOcupada = Reservas::where('habitacion_id', $habitacionId)
+            ->where('data_entrada', '<=', $validatedData['data_fi'])
+            ->where('data_sortida', '>=', $validatedData['data_inici'])
+            ->exists();
+
+        if ($habitacioOcupada) {
+            return redirect()->back()
+                ->with('error', 'La habitació ja està ocupada en aquestes dates');
+        }
+
+        $habitacio = Habitacion::findOrFail($habitacionId);
+        $serveis = $validatedData['serveis'] ?? [];
+        $habitacio->serveis()->sync($serveis);
+
+        Reservas::create([
+            'habitacion_id' => $habitacionId,
+            'usuari_id' => $usuariId,
+            'data_entrada' => $validatedData['data_inici'],
+            'data_sortida' => $validatedData['data_fi'],
+            'preu_total' => Reservas::calcularPreuTotal($serveis, $habitacio, $validatedData['data_inici'], $validatedData['data_fi']),
+            'estat' => 'reservada',
+            'comentaris' => $request->input('comentaris')
+        ]);
+
+        return redirect()->route('recepcio', ['id' => $hotelId])
+            ->with('success', 'Reserva completada correctament');
+    }
+
+    public function crearReserva(Request $request)
+    {
+        $tipusHabitacions = Habitacion::distinct()->select('tipus')->get();
+        $filtros = [
+            'tipus' => $request->get('tipus'),
+            'status' => $request->get('status'),
+            'llits' => $request->get('llits'),
+            'preu' => $request->get('preu')
+        ];
+
+        $query = Habitacion::query();
+
+        // Aplicar filtros
+        if ($filtros['tipus']) {
+            $query->where('tipus', $filtros['tipus']);
+        }
+        if ($filtros['status']) {
+            $query->where('estat', $filtros['status']);
+        }
+        if ($filtros['llits']) {
+            $filtros['llits'] = (int) $filtros['llits'];
+    
+            if ($filtros['llits'] == 5) {
+                // Filtra habitaciones con capacidad >= 5
+                $query->whereRaw('llits + llits_supletoris >= ?', [5]);
+            } else {
+                // Filtra habitaciones con capacidad exacta (resto de nums)
+                $query->whereRaw('llits + llits_supletoris = ?', [$filtros['llits']]);
+            }
+        }
+        if ($filtros['preu']) {
+            $query->where('preu', '<=', $filtros['preu']);
+        }
+
+        $habitacions = $query->get();
+
+        return view('recepcio.afegirReserva', [
+            'habitacions' => $habitacions,
+            'tipusHabitacions' => $tipusHabitacions,
+            'filtros' => $filtros
+        ]);
     }
 }

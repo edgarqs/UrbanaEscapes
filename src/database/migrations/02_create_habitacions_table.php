@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('habitacions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
-            $table->enum('tipus', ['estandar', 'deluxe', 'suite','adaptada']);
-            $table->enum('llits', ['1', '2', '3','4']);
-            $table->enum('llits_supletoris', ['0', '1', '2']);
+            $table->enum('tipus', ['Estandar', 'Deluxe', 'Suite','Adaptada']);
+            $table->integer('llits');
+            $table->integer('llits_supletoris');
             $table->decimal('preu', 10, 2);
             $table->integer('numHabitacion');
+            $table->enum('estat', ['Lliure', 'Ocupada', 'Bloquejada'])->default('Lliure');
             $table->timestamps();
         });
     }

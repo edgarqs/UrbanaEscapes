@@ -7,6 +7,25 @@
     padding: 2rem;
     border-radius: $card-border-radius;
 
+    h3 {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    &--todaLaPagina {
+        max-width: 100% !important;
+    }
+
+    .contenedor-doble {
+        display: flex;
+        justify-content: space-between;
+        gap: 50px;
+
+        .subcontenedor-flex {
+            flex: 1;
+        }
+    }
+
     .form-group {
         margin-bottom: 1.5rem;
 
@@ -35,6 +54,13 @@
             &.is-invalid {
                 background-color: #f8d7da;
                 color: #721c24;
+            }
+
+            &.disabledInformacio {
+                border-color: $succes-color;
+                background-color: #28a74615;
+                cursor: not-allowed;
+                color: $text-color !important;
             }
         }
     }

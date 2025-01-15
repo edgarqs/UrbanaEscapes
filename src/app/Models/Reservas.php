@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DateTime;
 use Illuminate\Support\Facades\Log;
+use App\Models\Habitacion;
 
 class Reservas extends Model
 {
     use HasFactory;
-
 
     protected $fillable = [
         'habitacion_id',
@@ -17,7 +18,13 @@ class Reservas extends Model
         'data_entrada',
         'data_sortida',
         'preu_total',
-        'estat'
+        'estat',
+        'comentaris'
+    ];
+
+    protected $casts = [
+        'data_entrada' => 'datetime',
+        'data_sortida' => 'datetime',
     ];
 
     public function habitacion()
@@ -30,43 +37,74 @@ class Reservas extends Model
         return $this->belongsTo(Usuari::class);
     }
 
-    // Habitacions lliures
-    public static function countHabitacionesLliures($hotelId)
-    {
-        $count = Habitacion::where('hotel_id', $hotelId)
-            ->whereDoesntHave('reservas', function ($query) {
-                $query->whereIn('estat', ['pend_checkin', 'pend_checkout']);
-            })
-            ->count();
-    
-        Log::info('Comptador d\'habitacions lliures', ['hotel_id' => $hotelId, 'count' => $count]);
-        return $count;
-    }    
-
-    // Habitacions pendents
-    public static function countHabitacionesPendientes($hotelId)
-    {
-        $count = Habitacion::whereHas('reservas', function ($query) {
-            $query->where('estat', 'pend_checkin');
-        })->where('hotel_id', $hotelId)->count();
-        Log::info('Comptador d\'habitacions pendents', ['hotel_id' => $hotelId, 'count' => $count]);
-        return $count;
-    }
-
     // Habitacions ocupades
     public static function countHabitacionesConfirmadas($hotelId)
     {
-        $count = Habitacion::whereHas('reservas', function ($query) {
-            $query->where('estat', 'pend_checkout');
-        })->where('hotel_id', $hotelId)->count();
-        Log::info('Comptador d\'habitacions confirmades', ['hotel_id' => $hotelId, 'count' => $count]);
+        $count = Habitacion::where('estat', 'Ocupada')->where('hotel_id', $hotelId)->count();
+        Log::channel('info_log')->info('Comptador d\'habitacions confirmades', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
     }
 
-    // Todas las habitacions
+    // Habitacions lliures
+    public static function countHabitacionesLliures($hotelId)
+    {
+        $count = Habitacion::where('estat', 'Lliure')->where('hotel_id', $hotelId)->count();
+        Log::channel('info_log')->info('Comptador d\'habitacions lliures', ['hotel_id' => $hotelId, 'count' => $count]);
+        return $count;
+    }
+
+    // Reserves amb estat "reservada"
+    public static function countReservasPendientes($hotelId)
+    {
+        $count = Reservas::whereHas('habitacion', function ($query) use ($hotelId) {
+            $query->where('hotel_id', $hotelId);
+        })->where('estat', 'Reservada')->count();
+
+        Log::channel('info_log')->info('Comptador de reserves pendents', ['hotel_id' => $hotelId, 'count' => $count]);
+        return $count;
+    }
+
+    // Totes les habitacions
     public static function getHabitacionesTotals($hotelId)
     {
-        $habitacions = Habitacion::where('hotel_id', $hotelId)->get();
+        $habitacions = Habitacion::where('hotel_id', $hotelId)->get()->count();
+        Log::channel('info_log')->info('Comptador de totes les habitacions', ['hotel_id' => $hotelId, 'count' => $habitacions]);
         return $habitacions;
+    }
+
+    public static function getCheckinsPendents($hotelId)
+    {
+        return Reservas::whereHas('habitacion', function ($query) use ($hotelId) {
+            $query->where('hotel_id', $hotelId);
+        })
+            ->where('estat', 'Reservada')
+            ->orderBy('id')
+            ->get();
+    }
+
+    public static function calcularPreuPerDies($habitacio, $diaActual, $diaSeguent)
+    {
+        $preuPerDies = 0;
+        $dataInici = new Datetime($diaActual);
+        $dataFi = new Datetime($diaSeguent);
+        $dies = $dataInici->diff($dataFi)->days;
+        $preuPerDies = $habitacio->preu * $dies;
+
+        return $preuPerDies;
+    }
+
+    public static function calcularPreuTotal($serveis, $habitacio, $diaInicial, $diaFinal)
+    {
+        $preuTotal = 0;
+        $preuPerDia = $habitacio->preu;
+        $dataInici = new Datetime($diaInicial);
+        $dataFi = new Datetime($diaFinal);
+        $diesTotal = $dataInici->diff($dataFi)->days;
+        foreach ($serveis as $serveiId) {
+            $servei = Serveis::find($serveiId);
+            $preuPerDia += $servei->preu;
+        }
+        $preuTotal += $preuPerDia * $diesTotal;
+        return $preuTotal;
     }
 }

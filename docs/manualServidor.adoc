@@ -199,6 +199,15 @@ Tornem a fer composer install:
 [source,bash]
 sudo composer install
 
+Ara instalarem Vite:
+
+[source,bash]
+sudo npm install vite
+
+Fem build dels assets:
+
+[source,bash]
+sudo npm run dev
 
 Finalment, farem les migracions de la base de dades:
 
