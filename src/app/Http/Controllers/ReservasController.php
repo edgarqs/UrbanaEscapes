@@ -26,8 +26,7 @@ class ReservasController extends Controller
         if ($habitacionsOcupades === 0 || $habitacionsLliures === 0) {
             $habitacionsOcupadesPercentatge = 0;
             $habitacionsLliuresPercentatge = 0;
-        }
-        else {
+        } else {
             $habitacionsOcupadesPercentatge = round(($habitacionsOcupades / $habitacionsTotals) * 100);
             $habitacionsLliuresPercentatge = round(($habitacionsLliures / $habitacionsTotals) * 100);
         }
@@ -48,7 +47,7 @@ class ReservasController extends Controller
         $paginacioHabitacions = env('PAGINACIO_HABITACIONS', 100);
         $idHotel = $request->query('id');
         $estat = $request->query('estat');
-        
+
         $habitacions = Habitacion::where('hotel_id', $idHotel);
 
         if ($estat) {
@@ -123,14 +122,14 @@ class ReservasController extends Controller
 
     public function checkins(Request $request)
     {
-        $filters = [
+        $filtros = [
             'start_date' => $request->get('start_date'),
             'end_date' => $request->get('end_date'),
             'status' => $request->get('status'),
             'search' => $request->get('search'),
         ];
 
-        $reservas = Reservas::getCheckinsFiltrats($filters);
+        $reservas = Reservas::getCheckinsFiltrats($filtros);
 
         return view('hotel.checkins', compact('reservas'));
     }
@@ -208,18 +207,46 @@ class ReservasController extends Controller
             ->with('success', 'Reserva completada correctament');
     }
 
-    public function crearReserva()
+    public function crearReserva(Request $request)
     {
-        $habitacions = Habitacion::all();
-        $usuaris = Usuari::all();
-        $serveis = Serveis::all();
-        $tipusHabitacions = Habitacion::getTipusHabitacions();
-        
+        $tipusHabitacions = Habitacion::distinct()->select('tipus')->get();
+        $filtros = [
+            'tipus' => $request->get('tipus'),
+            'status' => $request->get('status'),
+            'llits' => $request->get('llits'),
+            'preu' => $request->get('preu')
+        ];
+
+        $query = Habitacion::query();
+
+        // Aplicar filtros
+        if ($filtros['tipus']) {
+            $query->where('tipus', $filtros['tipus']);
+        }
+        if ($filtros['status']) {
+            $query->where('estat', $filtros['status']);
+        }
+        if ($filtros['llits']) {
+            $filtros['llits'] = (int) $filtros['llits'];
+    
+            if ($filtros['llits'] == 5) {
+                // Filtra habitaciones con capacidad >= 5
+                $query->whereRaw('llits + llits_supletoris >= ?', [5]);
+            } else {
+                // Filtra habitaciones con capacidad exacta (resto de nums)
+                $query->whereRaw('llits + llits_supletoris = ?', [$filtros['llits']]);
+            }
+        }
+        if ($filtros['preu']) {
+            $query->where('preu', '<=', $filtros['preu']);
+        }
+
+        $habitacions = $query->get();
+
         return view('recepcio.afegirReserva', [
             'habitacions' => $habitacions,
-            'usuaris' => $usuaris,
-            'serveis' => $serveis,
-            'tipusHabitacions' => $tipusHabitacions
+            'tipusHabitacions' => $tipusHabitacions,
+            'filtros' => $filtros
         ]);
     }
 }
