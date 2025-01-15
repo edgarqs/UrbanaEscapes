@@ -65,7 +65,7 @@ Route::get('/recepcio', [HabitacionsController::class, 'showRecepcio'])
 //? Página de checkins
 Route::get('/hotel/checkins/', [ReservasController::class, 'checkinsPendents'])
     ->name('reservas.checkins')
-    ->middleware('auth');
+    ->middleware('auth', CheckHotelAccess::class);
 
 //? Para la view de habitacions.blade.php
 Route::get('/habitacions/{id}/detalls', [HabitacionsController::class, 'detalls'])
