@@ -9,6 +9,7 @@
     <div class="filtros-reservas">
         <form method="GET" action="{{ route('reservas.checkins') }}">
             @csrf
+            <input type="hidden" name="id" value="{{ $idHotel }}">
             <div class="form-row">
                 <div class="form-group">
                     <label for="data_entrada">Data Entrada</label>
