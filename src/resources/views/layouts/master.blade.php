@@ -53,9 +53,12 @@
                 </li>
                 <!-- Checkins pendents -->
                 <li>
-                    <a href="{{ route('reservas.checkins') }}" class="{{ Route::currentRouteNamed('reservas.checkins') ? 'active' : '' }}">
-                        <span class="material-symbols-outlined">check_box</span>Pròximes reservas
-                    </a>
+                    @if (auth()->user()->hasRole('recepcionista'))
+                        <a href="{{ route('reservas.checkins', ['id' => auth()->user()->hotel_id]) }}"
+                            class="{{ Route::currentRouteNamed('reservas.checkins') ? 'active' : '' }}">
+                            <span class="material-symbols-outlined">check_box</span>Pròximes reservas
+                        </a>
+                    @endif
                 </li>
                 <!-- Tornar (/) -->
                 @if (auth()->user()->hasRole('administrador'))
