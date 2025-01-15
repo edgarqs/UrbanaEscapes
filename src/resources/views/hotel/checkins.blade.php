@@ -4,6 +4,12 @@
 
 @section('content')
 
+    @if (session('error'))
+        <div class="message-content message-content--error" id="status-message">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <h1>Llistat de Check-Ins Pendents</h1>
 
     <div class="filtros-reservas">
