@@ -22,6 +22,7 @@ return [
     'file' => 'El camp :attribute ha de ser un fitxer.',
     'url' => 'El camp :attribute no té un format d\'URL vàlid.',
     'timezone' => 'El camp :attribute ha de ser una zona horària vàlida.',
+    'after_or_equal' => 'El camp :attribute ha de ser una data posterior o igual a :date.',
 
     // Noms dels camps (formulari creació d'hotel)
     'attributes' => [

@@ -171,27 +171,30 @@ class ReservasController extends Controller
 
     public function store(Request $request, $habitacionId)
     {
+        $validatedData = $request->validate([
+            'dni' => 'required|string|max:10',
+            'nom' => 'required|string|max:50',
+            'data_inici' => 'required|date',
+            'data_fi' => 'required|date|after_or_equal:data_inici',
+            'serveis' => 'array',
+            'serveis.*' => 'exists:serveis,id',
+            'comentaris' => 'nullable|string|max:255'
+        ]);
+
         $usuari = Usuari::where('dni', $request->input('dni'))->first();
         $hotelId = Habitacion::findOrFail($habitacionId)->hotel_id;
 
         if (!$usuari) {
             // Si el usuario no está registrado, crear un nuevo usuario
             $usuari = Usuari::create([
-                'nom' => $request->input('nom'),
-                'email' => $request->input('email'),
+                'nom' => $validatedData['nom'],
                 'rol_id' => 3,
-                'dni' => $request->input('dni'),
+                'dni' => $validatedData['dni'],
                 'hotel_id' => $hotelId
             ]);
         }
 
         $usuariId = $usuari->id;
-        $validatedData = $request->validate([
-            'data_inici' => 'required|date',
-            'data_fi' => 'required|date|after_or_equal:data_inici',
-            'serveis' => 'array',
-            'serveis.*' => 'exists:serveis,id',
-        ]);
 
         $habitacioOcupada = Reservas::where('habitacion_id', $habitacionId)
             ->where('data_entrada', '<=', $validatedData['data_fi'])

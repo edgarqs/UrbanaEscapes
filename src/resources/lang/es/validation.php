@@ -23,6 +23,7 @@ return [
     'file' => 'El campo :attribute debe ser un archivo.',
     'url' => 'El campo :attribute no tiene un formato de URL válido.',
     'timezone' => 'El campo :attribute debe ser una zona horaria válida.',
+    'after_or_equal' => 'El campo :attribute debe ser una fecha posterior o igual a :date.',
 
     // Nombres de los campos personalizados (formulario creación de hotel)
     'attributes' => [
