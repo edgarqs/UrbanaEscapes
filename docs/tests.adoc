@@ -1,0 +1,151 @@
+= Documentació de Proves
+
+
+====
+**ID de la prova:** P-Login-01
+
+**Nom de la prova:** Validació login. 
+
+**Pantalla afectada:** Pantalla de login usuari administrador.
+  
+**Objectiu:** Verificar que inicia sessió amb els credencials correctes d’administrador.
+
+**Precondicions:** L’usuari ja ha d’estar a la base de dades.  
+====
+
+.Passos a seguir:
+. Crear rols i usuari.
+. Verificar si es por accedir al login (/login).
+. Fa login amb les credencials correctes.
+. Verifica si redirecciona a la home (/).
+
+**Resultat esperat:** Comprova les credencials i redirecciona si son correctes.
+
+**Resultat obtingut:** Redirecciona correctament.
+
+**Estat:** Superada. ✅
+
+**Evidències:** Adjuntes. 
+
+image::./img-tests/P-Login-01-02.png[]
+---
+
+
+====
+**ID de la prova:** P-Login-02  
+
+**Nom de la prova:** Validació login sense usuari registrat.  
+
+**Pantalla afectada:** Pantalla de login.  
+
+**Objectiu:** Verificar que no inicia sessió amb els credencials d’un usuari que no està a la base de dades.  
+
+**Precondicions:** Cap.  
+====
+
+.Passos a seguir:
+. Verificar si es por accedir al login (/login).
+. Fa login amb les credencials random.
+. Mostra missatge d’error.
+
+**Resultat esperat:** Comprova les credencials i mostra missatge d’error.  
+
+**Resultat obtingut:** Mostra el missatge correctament.  
+
+**Estat:** Superada.  
+
+**Evidències:** Adjuntes.  
+
+image::./img-tests/P-Login-01-02.png[]
+---
+
+[NOTE]
+====
+**ID de la prova:** P-Login-03  
+
+**Nom de la prova:** Validació login d’usuari recepcionista.  
+
+**Pantalla afectada:** Pantalla de login.  
+
+**Objectiu:** Verificar que inicia sessió amb els credencials correctes de l’usuari recepció.  
+
+**Precondicions:** L’usuari admin ha d’estar a la base de dades i ha d’haver creat un hotel.  
+====
+
+.Passos a seguir:
+. Crear rols, usuari admin i l’hotel de prova.
+. Verificar si es por accedir al login (/login).
+. Fa login amb les credencials correctes de recepció.
+. Verifica si redirecciona a la home del recepcionista (/recepcio?id=1).
+
+**Resultat esperat:** Comprova les credencials i redirecciona si son correctes.  
+
+**Resultat obtingut:** Redirecciona correctament.  
+
+**Estat:** Superada.  
+
+**Evidències:** Adjuntes.  
+
+image::./img-tests/P-Login-03.png[]
+---
+
+[NOTE]
+====
+**ID de la prova:** P-Hotel-01  
+
+**Nom de la prova:** Crear hotel.  
+
+**Pantalla afectada:** Pantalla de creació d’un hotel.  
+
+**Objectiu:** Verificar que l’administrador pot crear un hotel.  
+
+**Precondicions:** L’usuari “admin” ja ha d’estar a la base de dades.  
+====
+
+.Passos a seguir:
+. Crear rols i usuaris.
+. Fa login amb les credencials de l'administrador.
+. Redirecciona a la pantalla de crear un hotel.
+. Crea un hotel amb dades random.
+. Redirecciona al home del hotel.
+
+**Resultat esperat:** Comprova les credencials, crea l’hotel i redirecciona al home. 
+
+**Resultat obtingut:** Logeja, crea l’hotel i redirecciona correctament.  
+
+**Estat:** Superada.  
+
+**Evidències:** Adjuntes. 
+
+image::./img-tests/P-Hotel-01.png[]
+---
+
+[NOTE]
+====
+**ID de la prova:** P-Hotel-02  
+
+**Nom de la prova:** Crear hotel sense algun camp.  
+
+**Pantalla afectada:** Pantalla de creació d’un hotel.  
+
+**Objectiu:** Verificar que l’administrador no pot crear un hotel sense algun camp.
+
+**Precondicions:** L’usuari “admin” ja ha d’estar a la base de dades.  
+====
+
+.Passos a seguir:
+. Crear rols i usuaris.
+. Fa login amb les credencials de l'administrador.
+. Redirecciona a la pantalla de crear un hotel.
+. Intenta crear un hotel sense algun camp.
+. Mostra un missatge d’error.
+
+**Resultat esperat:** Comprova les credencials i mostra el missatge d’error.  
+
+**Resultat obtingut:** Logeja i mostra el missatge correctament.  
+
+**Estat:** Superada.  
+
+**Evidències:** Adjuntes.
+
+image::./img-tests/P-Hotel-02.png[]

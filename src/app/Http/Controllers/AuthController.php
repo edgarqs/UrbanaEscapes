@@ -33,7 +33,7 @@ class AuthController extends Controller
             }
         }
 
-        return redirect(route('login'))->withErrors([
+        return redirect()->back()->withInput()->withErrors([
             'nom' => 'Les credencials proporcionades no són correctes.',
             'password' => 'Les credencials proporcionades no són correctes.',
         ]);
