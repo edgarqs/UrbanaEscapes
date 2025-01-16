@@ -23,7 +23,7 @@ class CheckHotelAccess
             $hotelId = $request->query('id');
 
             if ($user->hotel_id != $hotelId) {
-                return redirect()->route('recepcio',['id' => $user->hotel_id] )->with('error', 'No tens accés a aquesta pàgina');
+                return back()->with('error', 'No tens accés a aquesta pàgina');
             }
         }
         

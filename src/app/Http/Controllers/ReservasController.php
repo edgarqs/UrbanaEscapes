@@ -120,18 +120,32 @@ class ReservasController extends Controller
             ->with('success', 'Habitació Nº ' . $habitacio->numHabitacion . ' desbloquejada.');
     }
 
-    public function checkins(Request $request)
+    public function checkinsPendents(Request $request)
     {
-        $filtros = [
-            'start_date' => $request->get('start_date'),
-            'end_date' => $request->get('end_date'),
-            'status' => $request->get('status'),
-            'search' => $request->get('search'),
-        ];
+        $idHotel = $request->query('id');
+        $dataEntrada = $request->query('data_entrada', Carbon::today()->format('Y-m-d'));
+        $dataSortida = $request->query('data_sortida');
 
-        $reservas = Reservas::getCheckinsFiltrats($filtros);
+        $reservas = Reservas::whereHas('habitacion', function ($query) use ($idHotel) {
+            $query->where('hotel_id', $idHotel);
+        })
+            ->where('estat', 'Reservada')
+            ->whereDate('data_entrada', '>=', $dataEntrada);
 
-        return view('hotel.checkins', compact('reservas'));
+        if ($dataSortida) {
+            $reservas->whereDate('data_sortida', '<=', $dataSortida);
+        } else {
+            $reservas->whereDate('data_entrada', '=', $dataEntrada);
+        }
+
+        $reservas = $reservas->with('habitacion')->orderBy('id')->get();
+
+        return view('hotel.checkins', [
+            'idHotel' => $idHotel,
+            'reservas' => $reservas,
+            'dataEntrada' => $dataEntrada,
+            'dataSortida' => $dataSortida
+        ]);
     }
 
     public function index($habitacionId)
@@ -228,7 +242,7 @@ class ReservasController extends Controller
         }
         if ($filtros['llits']) {
             $filtros['llits'] = (int) $filtros['llits'];
-    
+
             if ($filtros['llits'] == 5) {
                 // Filtra habitaciones con capacidad >= 5
                 $query->whereRaw('llits + llits_supletoris >= ?', [5]);
