@@ -17,7 +17,7 @@
             <h4>Dades del client</h4>
             <div class="form-row d-flex">
                 <div class="form-group flex-fill mr-3">
-                    <label for="dni">DNI</label>
+                    <label for="dni">Document d'identitat <i>(DNI/NIE/NIF)</i></label>
                     <input type="text" name="dni" id="dni"
                         class="form-control @error('dni') is-invalid @enderror" value="{{ old('dni') }}" maxlength="50"
                         required>
@@ -28,13 +28,13 @@
                 <div class="form-group flex-fill">
                     <label for="nom">Nom y cognoms</label>
                     <input type="text" name="nom" id="nom"
-                        class="form-control @error('nom') is-invalid @enderror" value="{{ old('nom') }}" maxlength="23"
+                        class="form-control @error('nom') is-invalid @enderror" value="{{ old('nom') }}" maxlength="50"
                         required>
                     @error('nom')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group flex-fill">
+                {{-- <div class="form-group flex-fill">
                     <label for="email">Correu electrònic</label>
                     <input type="email" name="email" id="email"
                         class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" maxlength="50"
@@ -42,7 +42,7 @@
                     @error('email')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
-                </div>
+                </div> --}}
             </div>
 
             <div class="contenedor-doble">

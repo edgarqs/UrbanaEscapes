@@ -14,6 +14,7 @@ class Usuari extends Authenticatable
         'nom',
         'email',
         'password',
+        'dni',
         'rol_id',
         'hotel_id'
     ];

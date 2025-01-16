@@ -178,7 +178,7 @@ class ReservasController extends Controller
             // Si el usuario no está registrado, crear un nuevo usuario
             $usuari = Usuari::create([
                 'nom' => $request->input('nom'),
-                'email' => $request->input('email'),
+                // 'email' => $request->input('email'),
                 'rol_id' => 3,
                 'dni' => $request->input('dni'),
                 'hotel_id' => $hotelId
