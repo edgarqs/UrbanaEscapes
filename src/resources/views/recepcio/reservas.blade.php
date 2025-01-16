@@ -18,8 +18,9 @@
             <div class="form-row d-flex">
                 <div class="form-group flex-fill mr-3">
                     <label for="dni">DNI</label>
-                    <input type="text" name="dni" id="dni" class="form-control @error('dni') is-invalid @enderror"
-                        value="{{ old('dni') }}" maxlength="50" required>
+                    <input type="text" name="dni" id="dni"
+                        class="form-control @error('dni') is-invalid @enderror" value="{{ old('dni') }}" maxlength="50"
+                        required>
                     @error('dni')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
@@ -58,16 +59,16 @@
                         </div>
                         <div class="form-group flex-fill">
                             <label for="tipusHabitacio">Tipus</label>
-                            <input type="text" class="disabledInformacio" name="tipusHabitacio" id="tipusHabitacio" value="{{ $habitacio->tipus }}"
-                                required disabled>
+                            <input type="text" class="disabledInformacio" name="tipusHabitacio" id="tipusHabitacio"
+                                value="{{ $habitacio->tipus }}" required disabled>
                             @error('tipusHabitacio')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group flex-fill">
                             <label for="preuHabitacio">Preu base</label>
-                            <input type="text" class="disabledInformacio" name="preuHabitacio" id="preuHabitacio" value="{{ $habitacio->preu }} €"
-                                required disabled>
+                            <input type="text" class="disabledInformacio" name="preuHabitacio" id="preuHabitacio"
+                                value="{{ $habitacio->preu }} €" required disabled>
                             @error('preuHabitacio')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -76,8 +77,8 @@
                     <div class="form-row d-flex">
                         <div class="form-group flex-fill">
                             <label for="llits">Llits</label>
-                            <input type="text" class="disabledInformacio" name="llits" id="llits" value="{{ $habitacio->llits }}" required
-                                disabled>
+                            <input type="text" class="disabledInformacio" name="llits" id="llits"
+                                value="{{ $habitacio->llits }}" required disabled>
                             @error('llits')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -99,7 +100,10 @@
                         <div class="checkbox">
                             <ul>
                                 @foreach ($serveis as $servei)
-                                    <li><input type="checkbox" name="serveis[]" id="servei{{ $servei->id }}" value="{{ $servei->id }}"><label for="servei{{ $servei->id }}">{{ $servei->nom }} <span class="text-cursiva">(+{{ $servei->preu }} €)</span></label></li>
+                                    <li><input type="checkbox" name="serveis[]" id="servei{{ $servei->id }}"
+                                            value="{{ $servei->id }}"><label
+                                            for="servei{{ $servei->id }}">{{ $servei->nom }} <span
+                                                class="text-cursiva">(+{{ $servei->preu }} €)</span></label></li>
                                 @endforeach
                             </ul>
                         </div>

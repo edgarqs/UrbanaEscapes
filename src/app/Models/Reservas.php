@@ -59,7 +59,7 @@ class Reservas extends Model
         $count = Reservas::whereHas('habitacion', function ($query) use ($hotelId) {
             $query->where('hotel_id', $hotelId);
         })->where('estat', 'Reservada')->count();
-        
+
         Log::channel('info_log')->info('Comptador de reserves pendents', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
     }
@@ -72,27 +72,14 @@ class Reservas extends Model
         return $habitacions;
     }
 
-    public static function getCheckinsFiltrats($filters)
+    public static function getCheckinsPendents($hotelId)
     {
-        $query = self::query();
-
-        $filterConditions = [
-            'start_date' => fn($query, $value) => $query->whereDate('data_entrada', '>=', $value),
-            'end_date' => fn($query, $value) => $query->whereDate('data_sortida', '<=', $value),
-            'status' => fn($query, $value) => $query->whereHas('habitacion', fn($q) => $q->where('estat', $value)),
-            'search' => fn($query, $value) => $query->where(function ($q) use ($value) {
-                $q->whereHas('usuari', fn($q2) => $q2->where('nom', 'like', "%$value%"))
-                    ->orWhere('id', 'like', "%$value%");
-            }),
-        ];
-
-        foreach ($filters as $key => $value) {
-            if (!empty($value) && isset($filterConditions[$key])) {
-                $filterConditions[$key]($query, $value);
-            }
-        }
-
-        return $query->get();
+        return Reservas::whereHas('habitacion', function ($query) use ($hotelId) {
+            $query->where('hotel_id', $hotelId);
+        })
+            ->where('estat', 'Reservada')
+            ->orderBy('id')
+            ->get();
     }
 
     public static function calcularPreuPerDies($habitacio, $diaActual, $diaSeguent)
@@ -106,7 +93,7 @@ class Reservas extends Model
         return $preuPerDies;
     }
 
-    public static function calcularPreuTotal($serveis, $habitacio,$diaInicial, $diaFinal)
+    public static function calcularPreuTotal($serveis, $habitacio, $diaInicial, $diaFinal)
     {
         $preuTotal = 0;
         $preuPerDia = $habitacio->preu;
@@ -115,7 +102,7 @@ class Reservas extends Model
         $diesTotal = $dataInici->diff($dataFi)->days;
         foreach ($serveis as $serveiId) {
             $servei = Serveis::find($serveiId);
-            $preuPerDia += $servei->preu ;
+            $preuPerDia += $servei->preu;
         }
         $preuTotal += $preuPerDia * $diesTotal;
         return $preuTotal;

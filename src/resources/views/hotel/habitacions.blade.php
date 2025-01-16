@@ -4,13 +4,19 @@
 
 @section('content')
 
-    <h1>Habitacions</h1>
-
     @if (session('success'))
         <div class="message-content message-content--info" id="status-message">
             {{ session('success') }}
         </div>
     @endif
+    @if (session('error'))
+        <div class="message-content message-content--error" id="status-message">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <h1>Habitacions</h1>
+
 
     <div class="cards cards--habitacions">
         @foreach ($habitacions as $habitacio)
