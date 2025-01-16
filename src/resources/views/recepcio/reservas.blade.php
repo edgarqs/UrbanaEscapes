@@ -19,7 +19,7 @@
                 <div class="form-group flex-fill mr-3">
                     <label for="dni">Document d'identitat <i>(DNI/NIE/NIF)</i></label>
                     <input type="text" name="dni" id="dni"
-                        class="form-control @error('dni') is-invalid @enderror" value="{{ old('dni') }}" maxlength="50"
+                        class="form-control @error('dni') is-invalid @enderror" value="{{ old('dni') }}" maxlength="10"
                         required>
                     @error('dni')
                         <div class="text-danger">{{ $message }}</div>
@@ -34,15 +34,6 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                {{-- <div class="form-group flex-fill">
-                    <label for="email">Correu electrònic</label>
-                    <input type="email" name="email" id="email"
-                        class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" maxlength="50"
-                        required>
-                    @error('email')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div> --}}
             </div>
 
             <div class="contenedor-doble">
@@ -100,10 +91,11 @@
                         <div class="checkbox">
                             <ul>
                                 @foreach ($serveis as $servei)
-                                    <li><input type="checkbox" name="serveis[]" id="servei{{ $servei->id }}"
-                                            value="{{ $servei->id }}"><label
-                                            for="servei{{ $servei->id }}">{{ $servei->nom }} <span
-                                                class="text-cursiva">(+{{ $servei->preu }} €)</span></label></li>
+                                    <li>
+                                        <input type="checkbox" name="serveis[]" id="servei{{ $servei->id }}" value="{{ $servei->id }}"
+                                            {{ in_array($servei->id, old('serveis', [])) ? 'checked' : '' }}>
+                                        <label for="servei{{ $servei->id }}">{{ $servei->nom }} <span class="text-cursiva">(+{{ $servei->preu }} €)</span></label>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -116,17 +108,16 @@
                     <h4>Dades de la reserva</h4>
                     <div class="form-row d-flex">
                         <div class="form-group flex-fill">
-                            <label for="dataIniciReserva">Data Inici</label>
-                            <input type="date" name="data_inici" id="dataIniciReserva" value="{{ $diaActual }}"
+                            <label for="data_inici">Data Inici</label>
+                            <input type="date" name="data_inici" id="data_inici" class="@error('data_inici') is-invalid @enderror" value="{{ old('data_inici') ?? $diaActual }}"
                                 required>
                             @error('data_inici')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group flex-fill">
-                            <label for="dataFiReserva">Data Fi</label>
-                            <input type="date" name="data_fi" id="dataFiReserva" value="{{ $diaSeguent }}"
-                                required>
+                            <label for="data_fi">Data Fi</label>
+                            <input type="date" name="data_fi" id="data_fi" class="@error('data_fi') is-invalid @enderror" value="{{ old('data_fi') ?? $diaSeguent }}" required>
                             @error('data_fi')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -136,7 +127,7 @@
                         <label for="comentaris">Comentaris</label>
                         <input type="text" name="comentaris" id="comentaris"
                             class="form-control @error('comentaris') is-invalid @enderror"
-                            value="{{ old('comentaris') }}">
+                            value="{{ old('comentaris') }}" maxlength="255">
                         @error('comentaris')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
