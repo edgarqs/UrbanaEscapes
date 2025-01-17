@@ -25,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         // Eliminar primero las tablas que dependen de serveis
-        Schema::dropIfExists('habitacion_serveis');
+        Schema::dropIfExists('reservas_serveis');
         Schema::dropIfExists('serveis');
     }
 };

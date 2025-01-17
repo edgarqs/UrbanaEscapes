@@ -9,6 +9,8 @@
         </div>
     @endif
     <meta hidden name="hotel-id" content="{{ $hotel->id }}">
+
+    <x-detalls-habitacio :habitacio="$habitacio" :reserves="$reserves" />
     <h1 class="hotel-title">{{ $hotel->nom }}</h1>
     <div class="calendar-navigation">
         <button class="button-calendar" id="prevWeek">← 7 dias enrere</button>

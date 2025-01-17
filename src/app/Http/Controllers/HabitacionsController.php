@@ -26,7 +26,11 @@ class HabitacionsController extends Controller
     public function detalls($id)
     {
         $habitacio = Habitacion::findOrFail($id);
-        return view('components.detalls-habitacio', compact('habitacio'));
+        $reserves = Reservas::where('habitacion_id', $id)->get();
+        return view('components.detalls-habitacio', [
+            'habitacio' => $habitacio,
+            'reserves' => $reserves
+        ]);
     }
 
     public function showRecepcio(Request $request)

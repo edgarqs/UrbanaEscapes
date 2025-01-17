@@ -11,8 +11,17 @@ export default [
       },
     rules: {
             "prefer-const": "warn",
-            "no-constant-binary-expression": "error"
-        }
+            "no-constant-binary-expression": "error",
+            "quotes": ["error", "single"]
+        },
+    "env": {
+            "browser": true,
+            "commonjs": true,
+            "es2021": true
+        },
+    "parserOptions": {
+            "ecmaVersion": "latest"
+        },
   },
   pluginJs.configs.recommended,
 ];

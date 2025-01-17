@@ -4,7 +4,11 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "prepare": "husky"
+    "lint": "eslint .",
+    "test": "jest",
+    "prepare": "husky install",
+    "pre-commit": "npm run lint ",
+    "pre-push": "php artisan test"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

@@ -6,13 +6,13 @@
         <li><b>Tipus:</b> {{ $habitacio->tipus }}</li>
         <li><b>Estat:</b> {{ $habitacio->getEstat() }}</li>
         <li><b>Serveis adicionals:</b>
-            @if ($habitacio->serveis->isEmpty())
+            @if ($reserves->serveis->isEmpty())
                 <ul>
                     <li class="li-espaciat text-cursiva">Sense serveis adicionals.</li>
                 </ul>
             @else
                 <ul>
-                    @foreach ($habitacio->serveis as $servei)
+                    @foreach ($reserves->serveis as $servei)
                         <li class="li-espaciat">{{ $servei->nom }} <span class="text-cursiva">( {{ $servei->preu }}€
                                 )</span></li>
                     @endforeach
@@ -37,6 +37,13 @@
             <li><b>Data Entrada:</b> {{ date('Y-m-d', strtotime($reservaActual->data_entrada)) }}</li>
             <li><b>Data Sortida:</b> {{ date('Y-m-d', strtotime($reservaActual->data_sortida)) }}</li>
             <li><b>Preu Total:</b> {{ $reservaActual->preu_total }}€</li>
+            <li><b>Serveis:</b>
+                <ul>
+                    @foreach ($reservaActual->serveis as $servei)
+                        <li>{{ $servei->nom }} ({{ $servei->preu }}€)</li>
+                    @endforeach
+                </ul>
+            </li>
         </ul>
     @elseif ($proximaReserva && $habitacio->estat === 'Lliure')
         <h5>Próxima Reserva</h5>
@@ -46,6 +53,13 @@
             <li><b>Data Entrada:</b> {{ date('Y-m-d', strtotime($proximaReserva->data_entrada)) }}</li>
             <li><b>Data Sortida:</b> {{ date('Y-m-d', strtotime($proximaReserva->data_sortida)) }}</li>
             <li><b>Preu Total:</b> {{ $proximaReserva->preu_total }}€</li>
+            <li><b>Serveis:</b>
+                <ul>
+                    @foreach ($proximaReserva->serveis as $servei)
+                        <li>{{ $servei->nom }} ({{ $servei->preu }}€)</li>
+                    @endforeach
+                </ul>
+            </li>
         </ul>
     @else
         <h5>Reserva actual</h5>

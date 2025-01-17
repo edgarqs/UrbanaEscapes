@@ -212,7 +212,9 @@ class ReservasController extends Controller
                 ->with('error', 'La habitació ja està ocupada en aquestes dates');
         }
 
-        $habitacio = Habitacion::findOrFail($habitacionId);
+        $reservaId = $request->input('reserva_id');
+
+        $habitacio = Reservas::findOrFail($reservaId);
         $serveis = $validatedData['serveis'] ?? [];
         $habitacio->serveis()->sync($serveis);
 

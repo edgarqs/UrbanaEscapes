@@ -32,6 +32,11 @@ class Reservas extends Model
         return $this->belongsTo(Habitacion::class);
     }
 
+    public function serveis()
+    {
+        return $this->belongsToMany(Serveis::class, 'reservas_serveis', 'reservas_id', 'serveis_id');
+    }
+
     public function usuari()
     {
         return $this->belongsTo(Usuari::class);
