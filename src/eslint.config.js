@@ -14,12 +14,12 @@ export default [
             "no-constant-binary-expression": "error",
             "quotes": ["error", "single"]
         },
-    "env": {
+    env: {
             "browser": true,
             "commonjs": true,
             "es2021": true
         },
-    "parserOptions": {
+    parserOptions: {
             "ecmaVersion": "latest"
         },
   },
