@@ -126,6 +126,12 @@ class ReservasController extends Controller
         $dataEntrada = $request->query('data_entrada', Carbon::today()->format('Y-m-d'));
         $dataSortida = $request->query('data_sortida');
 
+        // Validar que data_sortida no sea anterior a data_entrada
+        if ($dataSortida && $dataSortida < $dataEntrada) {
+            return redirect()->back()
+                ->with('error', 'La data de sortida no pot ser anterior a la data d\'entrada.');
+        }
+
         $reservas = Reservas::whereHas('habitacion', function ($query) use ($idHotel) {
             $query->where('hotel_id', $idHotel);
         })

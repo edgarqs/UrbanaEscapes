@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <label for="data_sortida">Data Sortida</label>
-                    <input type="date" name="data_sortida" id="data_sortida" class="form-control"
+                    <input type="date" name="data_sortida" id="data_sortida" class="form-control @error('data_sortida') is-invalid @enderror"
                         value="{{ $dataSortida }}">
                 </div>
                 <div class="form-group">
