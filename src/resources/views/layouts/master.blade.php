@@ -68,12 +68,10 @@
                 @endif
 
                 <!-- Tornar (/) -->
-                @if (auth()->user()->hasRole('administrador'))
-                    <li>
-                        <a href="{{ route('hotel.selector') }}"><span
-                                class="material-symbols-outlined">arrow_back</span>Tornar</a>
-                    </li>
-                @endif
+                <li>
+                    <a href="javascript:window.history.back();"><span
+                            class="material-symbols-outlined">arrow_back</span>Tornar</a>
+                </li>
 
                 <!-- Tancar sessió -->
                 <li>
