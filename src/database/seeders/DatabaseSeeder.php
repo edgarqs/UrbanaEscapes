@@ -49,7 +49,6 @@ class DatabaseSeeder extends Seeder
         }
         Log::channel('info_log')->info("Afegides habitacions", ['habitacionsNumber' => $num_habitacions]);
 
-        
         // Creació reserves
         Reservas::factory($num_reserves)->create();
         Log::channel('info_log')->info("Afegides reserves", ['reservesNumber' => $num_reserves, 'hotel_id' => $hotel_id]);

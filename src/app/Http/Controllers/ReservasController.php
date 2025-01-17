@@ -214,19 +214,20 @@ class ReservasController extends Controller
 
         $reservaId = $request->input('reserva_id');
 
-        $habitacio = Reservas::findOrFail($reservaId);
+        $reservas = Reservas::findOrFail($reservaId);
         $serveis = $validatedData['serveis'] ?? [];
-        $habitacio->serveis()->sync($serveis);
+        $reservas->serveis()->sync($serveis);
 
         Reservas::create([
             'habitacion_id' => $habitacionId,
             'usuari_id' => $usuariId,
             'data_entrada' => $validatedData['data_inici'],
             'data_sortida' => $validatedData['data_fi'],
-            'preu_total' => Reservas::calcularPreuTotal($serveis, $habitacio, $validatedData['data_inici'], $validatedData['data_fi']),
+            'preu_total' => Reservas::calcularPreuTotal($serveis, $reservas, $validatedData['data_inici'], $validatedData['data_fi']),
             'estat' => 'reservada',
             'comentaris' => $request->input('comentaris')
         ]);
+
 
         return redirect()->route('recepcio', ['id' => $hotelId])
             ->with('success', 'Reserva completada correctament');

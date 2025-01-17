@@ -45,7 +45,7 @@ class HabitacionsController extends Controller
             'hotel' => $hotel,
             'habitacions' => $habitacions,
             'reserva' => $reserva,
-            'reserves' => $reserves
+            'reserves' => $reserves,
         ]);
     }
 

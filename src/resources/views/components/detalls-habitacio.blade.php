@@ -5,20 +5,6 @@
     <ul class="llista-detalls">
         <li><b>Tipus:</b> {{ $habitacio->tipus }}</li>
         <li><b>Estat:</b> {{ $habitacio->getEstat() }}</li>
-        <li><b>Serveis adicionals:</b>
-            @if ($reserves->serveis->isEmpty())
-                <ul>
-                    <li class="li-espaciat text-cursiva">Sense serveis adicionals.</li>
-                </ul>
-            @else
-                <ul>
-                    @foreach ($reserves->serveis as $servei)
-                        <li class="li-espaciat">{{ $servei->nom }} <span class="text-cursiva">( {{ $servei->preu }}€
-                                )</span></li>
-                    @endforeach
-                </ul>
-            @endif
-        </li>
         <li><b>Capacitat persones:</b> {{ $habitacio->llits + $habitacio->llits_supletoris }}</li>
     </ul>
 </div>
