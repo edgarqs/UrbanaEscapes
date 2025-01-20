@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('habitacion_serveis', function (Blueprint $table) {
+        Schema::create('reservas_serveis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('habitacions_id');
-            $table->foreign('habitacions_id')->references('id')->on('habitacions')->onDelete('cascade');
+            $table->unsignedBigInteger('reservas_id');
+            $table->foreign('reservas_id')->references('id')->on('reservas')->onDelete('cascade');
             $table->unsignedBigInteger('serveis_id');
             $table->foreign('serveis_id')->references('id')->on('serveis')->onDelete('cascade');
             $table->timestamps();

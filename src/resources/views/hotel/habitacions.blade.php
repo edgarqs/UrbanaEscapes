@@ -35,6 +35,22 @@
                         @php
                             $hoy = \Carbon\Carbon::today()->format('Y-m-d');
                         @endphp
+                        @if ($habitacio->estat === 'Bloquejada')
+                        <form action="{{ route('habitacions.desbloquejar', $habitacio->id) }}" method="POST">
+                            @csrf
+                            <button class="button button--primary">
+                                <span class="material-symbols-outlined">lock_open</span>Desbloquejar
+                            </button>
+                        </form>
+                    @endif
+                    @if ($habitacio->estat === 'Lliure')
+                        <form action="{{ route('habitacions.bloquejar', $habitacio->id) }}" method="POST">
+                            @csrf
+                            <button class="button button--orange">
+                                <span class="material-symbols-outlined">mop</span>
+                            </button>
+                        </form>
+                    @endif
                         @if ($habitacio->reservas()->where('estat', 'Reservada')->exists() && $habitacio->estat === 'Lliure')
                             @php
                                 $reservaHoy = $habitacio
@@ -59,6 +75,14 @@
                                     <span class="material-symbols-outlined">logout</span>Check-Out
                                 </button>
                             </form>
+                        @endif
+                        @if ($habitacio->reservas()->where('estat', 'Checkin')->exists() && $habitacio->estat === 'Bloquejada')
+                        <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="button button--green">
+                                <span class="material-symbols-outlined">login</span>Check-In
+                            </button>
+                        </form>
                         @endif
                     </div>
                 </div>
