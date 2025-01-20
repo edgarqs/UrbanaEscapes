@@ -98,7 +98,7 @@
     {{-- Paginació --}}
     @if ($habitacions->count())
         <nav>
-            {{ $habitacions->appends(['id' => $idHotel])->links() }}
+            {{ $habitacions->appends(request()->query())->links() }}
         </nav>
     @endif
 
