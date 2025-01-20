@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use DateTime;
 use Illuminate\Support\Facades\Log;
@@ -32,6 +33,11 @@ class Reservas extends Model
         return $this->belongsTo(Habitacion::class);
     }
 
+    public function serveis()
+    {
+        return $this->belongsToMany(Serveis::class, 'reservas_serveis', 'reservas_id', 'serveis_id');
+    }
+
     public function usuari()
     {
         return $this->belongsTo(Usuari::class);
@@ -50,6 +56,13 @@ class Reservas extends Model
     {
         $count = Habitacion::where('estat', 'Lliure')->where('hotel_id', $hotelId)->count();
         Log::channel('info_log')->info('Comptador d\'habitacions lliures', ['hotel_id' => $hotelId, 'count' => $count]);
+        return $count;
+    }
+
+    public static function countHabitacionesBloquejades($hotelId)
+    {
+        $count = Habitacion::where('estat', 'Bloquejada')->where('hotel_id', $hotelId)->count();
+        Log::channel('info_log')->info('Comptador d\'habitacions bloquejades', ['hotel_id' => $hotelId, 'count' => $count]);
         return $count;
     }
 
@@ -96,6 +109,9 @@ class Reservas extends Model
     public static function calcularPreuTotal($serveis, $habitacio, $diaInicial, $diaFinal)
     {
         $preuTotal = 0;
+        if (is_string($habitacio)) {
+            $habitacio = Habitacion::find($habitacio);
+        }
         $preuPerDia = $habitacio->preu;
         $dataInici = new Datetime($diaInicial);
         $dataFi = new Datetime($diaFinal);
