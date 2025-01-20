@@ -4,7 +4,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:laravel": "php artisan test"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
