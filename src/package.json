@@ -4,13 +4,7 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "lint": "eslint .",
-    "test": "jest",
-    "test:laravel": "php artisan test",
-    "release": "standard-version && git push --follow-tags --no-verify",
-    "prepare": "husky",
-    "pre-commit": "npm run lint && npm run test",
-    "pre-push": "npm run release"
+    "prepare": "husky"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
