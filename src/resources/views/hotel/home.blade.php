@@ -33,13 +33,12 @@
                 </div>
             </a>
 
-            <a href="{{ route('reservas.checkins', ['id' => request()->query('id')]) }}">
+            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id'), 'estat' => 'Bloquejada']) }}">
                 <div class="card card--resum-hotels">
-                    <h2 class="card__header">Checkins Pendents</h2>
-                    <h3 class="counter__habitacions">{{ $checkinsPendents }}</h3>
+                    <h2 class="card__header">Habitacions bloquejades</h2>
+                    <h3 class="counter__habitacions">{{ $habitacionsBloquejades  }}</h3>
                 </div>
             </a>
-
         </div>
 
         @if (auth()->user()->hasRole('administrador'))
