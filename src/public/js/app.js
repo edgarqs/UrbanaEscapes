@@ -32,10 +32,10 @@ function showPopup(habitacioId) {
                 // Mostrar el popup
                 document.querySelector("#popup").style.display = "grid";
             } else {
-                console.error('Elemento #popup-details no encontrado');
+                // console.error('Elemento #popup-details no encontrado');
             }
         })
-        .catch(error => console.error('Error:', error));
+        // .catch(error => console.error('Error:', error));
 }
 
 function hidePopup() {

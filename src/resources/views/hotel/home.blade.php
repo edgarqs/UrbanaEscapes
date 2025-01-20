@@ -15,7 +15,8 @@
                     <div class="counter">
                         <h3 class="counter__habitacions">{{ $habitacionsOcupades }}&nbsp;<span
                                 class="habitacions">/{{ $habitacionsTotals }}</span></h3>
-                        <h3 class="counter__percentatges">{{ $habitacionsOcupadesPercentatge }}<span class="habitacions">%</span></h3>
+                        <h3 class="counter__percentatges">{{ $habitacionsOcupadesPercentatge }}<span
+                                class="habitacions">%</span></h3>
                     </div>
                 </div>
             </a>
@@ -26,21 +27,38 @@
                     <div class="counter">
                         <h3 class="counter__habitacions">{{ $habitacionsLliures }}&nbsp;<span
                                 class="habitacions">/{{ $habitacionsTotals }}</span></h3>
-                        <h3 class="counter__percentatges">{{ $habitacionsLliuresPercentatge }}<span class="habitacions">%</span></h3>
+                        <h3 class="counter__percentatges">{{ $habitacionsLliuresPercentatge }}<span
+                                class="habitacions">%</span></h3>
                     </div>
                 </div>
             </a>
 
-            <a href="{{ route('reservas.checkins', ['id' => request()->query('id')]) }}">
+            <a href="{{ route('hotel.habitacions', ['id' => request()->query('id'), 'estat' => 'Bloquejada']) }}">
                 <div class="card card--resum-hotels">
-                    <h2 class="card__header">Checkins Pendents</h2>
-                    <h3 class="counter__habitacions">{{ $checkinsPendents }}</h3>
+                    <h2 class="card__header">Habitacions bloquejades</h2>
+                    <h3 class="counter__habitacions">{{ $habitacionsBloquejades  }}</h3>
                 </div>
             </a>
-
-            
-
         </div>
+
+        @if (auth()->user()->hasRole('administrador'))
+            <div class="cards">
+
+                <a href="{{ route('recepcio', ['id' => request()->query('id')]) }}">
+                    <div class="card card--resum-hotels card--botons-gestioHotel">
+                        <h2 class="card__header"><span class="material-symbols-outlined">event</span> Recepció</h2>
+                    </div>
+                </a>
+
+                <a href="{{ route('reservas.checkins', ['id' => request()->query('id')]) }}">
+                    <div class="card card--resum-hotels card--botons-gestioHotel">
+                        <h2 class="card__header"><span class="material-symbols-outlined">check_box</span> Pròximes Reserves
+                        </h2>
+                    </div>
+                </a>
+
+            </div>
+        @endif
 
     </div>
 @endsection

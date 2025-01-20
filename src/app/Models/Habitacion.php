@@ -23,24 +23,6 @@ class Habitacion extends Model
     {
         return $this->hasMany(Reservas::class, 'habitacion_id');
     }
-
-    public function serveis()
-    {
-        return $this->belongsToMany(Serveis::class, 'habitacion_serveis', 'habitacions_id', 'serveis_id');
-    }
-
-    public static function getHabitacionPreu($habitacion_id)
-    {
-        $habitacion = Habitacion::select('preu')->where('id', $habitacion_id)->first();
-
-        $preuServeis = Serveis::preuTotalServeisPerHabitacio($habitacion_id);
-        $preuTotal = $habitacion->preu + $preuServeis;
-
-        Log::channel('info_log')->info('Preu total de la habitació', ['habitacio_id' => $habitacion_id, 'preu_total' => $preuTotal]);
-
-        return $preuTotal;
-    }
-
     public function getEstat()
     {
         return $this->estat;
