@@ -4,19 +4,14 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "lint": "eslint .",
-    "test": "jest",
-    "release": "standard-version && git push --follow-tags --no-verify",
-    "prepare": "husky",
-    "pre-commit": "npm run lint && npm run test",
-    "pre-push": "php artisan test"
+    "prepare": "cd .. && husky src/.husky"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.6.1",
-    "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/js": "^9.18.0",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.4",
     "concurrently": "^9.0.1",
+    "globals": "^15.14.0",
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "laravel-vite-plugin": "^1.1.1",
