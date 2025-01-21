@@ -14,27 +14,12 @@ class HotelSelectorTest extends TestCase
     
     public function test_admin_can_select_hotel()
     {
-        Rol::create(['nom' => 'administrador']);
-        Rol::create(['nom' => 'recepcionista']);
-        Rol::create(['nom' => 'client']);
 
-        Usuari::create([
-            'nom' => 'admin',
-            'email' => null,
-            'password' => bcrypt('admin'),
-            'rol_id' => 1
-        ]);
+        $response = $this->actingAs($this->admin())->get('/create');
 
-        $this->get('/login')->assertOk();
+        $response->assertOk();
 
-        $response = $this->post('/login', [
-            'nom' => 'admin',
-            'password' => 'admin',
-        ]);
-
-        $response->assertRedirect('/');
-
-        $response = $this->post('/create', [
+        $response = $this->actingAs($this->admin())->post('/create', [
             'nom' => 'Hotel Test',
             'adreca' => 'Carrer Test, 1',
             'ciutat' => 'Test',
@@ -46,14 +31,14 @@ class HotelSelectorTest extends TestCase
             'reserves' => 50,
         ]);
 
-        $response->assertRedirect('/');
-
-        $this->get('/')->assertOk();
-
-        $response = $this->post('/', [
-            'hotel_id' => 1,
-        ]);
-        
         $response->assertRedirect('/hotel/home?id=1');
+
+        $response = $this->actingAs($this->admin())->get('/');
+        $response->assertOk();
+
+        $response->assertSeeText('Hotel Test');
+
+
+
     }
 }
