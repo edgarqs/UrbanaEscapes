@@ -29,12 +29,18 @@ function showPopup(habitacioId) {
     fetch(`/habitacions/${habitacioId}/detalls`)
         .then(response => response.text())
         .then(data => {
-            // Insertar el contenido en el popup
-            document.querySelector("#popup-details").innerHTML = data;
-            // Mostrar el popup
-            document.querySelector("#popup").style.display = "grid";
+            // Verificar si el elemento #popup-details existe
+            const popupDetails = document.querySelector("#popup-details");
+            if (popupDetails) {
+                // Insertar el contenido en el popup
+                popupDetails.innerHTML = data;
+                // Mostrar el popup
+                document.querySelector("#popup").style.display = "grid";
+            } else {
+                // console.error('Elemento #popup-details no encontrado');
+            }
         })
-        .catch(error => console.error('Error:', error));
+        // .catch(error => console.error('Error:', error));
 }
 
 function hidePopup() {

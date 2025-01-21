@@ -1,3 +1,4 @@
-#! /bin/sh 
-./vendor/bin/phpstan analyse -l 3 app tests database
-./vendor/bin/phpunit
+# cd src/public && npx eslint js/*.js
+# cd src/public && npx eslint css/*.css
+# ./src/vendor/bin/phpstan analyse -l 3 src/app src/tests src/database
+# cd src && php artisan test

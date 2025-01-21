@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     <label for="data_sortida">Data Sortida</label>
-                    <input type="date" name="data_sortida" id="data_sortida" class="form-control"
+                    <input type="date" name="data_sortida" id="data_sortida" class="form-control @error('data_sortida') is-invalid @enderror"
                         value="{{ $dataSortida }}">
                 </div>
                 <div class="form-group">
@@ -35,7 +35,7 @@
     </div>
 
     <div>
-        <table>
+        <table class="tabla-reservas">
             <thead>
                 <tr>
                     <th>Reserva Nº</th>
@@ -51,14 +51,30 @@
             <tbody>
                 @foreach ($reservas as $reserva)
                     <tr>
-                        <td>{{ $reserva->id }}</td>
-                        <td>{{ $reserva->usuari->nom }}</td>
-                        <td>{{ $reserva->data_entrada->diffInDays($reserva->data_sortida) }} dies</td>
-                        <td>{{ $reserva->habitacion->tipus }}</td>
-                        <td>{{ $reserva->habitacion ? $reserva->habitacion->numHabitacion : 'No assignada' }}</td>
-                        <td>{{ $reserva->estat }}</td>
-                        <td>{{ $reserva->preu_total }}</td>
-                        <td>{{ $reserva->comentaris }}</td>
+                        <td>
+                            <p>{{ $reserva->id }}</p>
+                        </td>
+                        <td>
+                            <p>{{ $reserva->usuari->nom }}</p>
+                        </td>
+                        <td>
+                            <p>{{ $reserva->data_entrada->diffInDays($reserva->data_sortida) }} dies</p>
+                        </td>
+                        <td>
+                            <p>{{ $reserva->habitacion->tipus }}</p>
+                        </td>
+                        <td>
+                            <p>{{ $reserva->habitacion ? $reserva->habitacion->numHabitacion : 'No assignada' }}</p>
+                        </td>
+                        <td>
+                            <p class="status status-{{ strtolower($reserva->estat) }}">{{ $reserva->estat }}</p>
+                        </td>
+                        <td>
+                            <p>{{ $reserva->preu_total }} €</p>
+                        </td>
+                        <td>
+                            <p>{{ $reserva->comentaris }}</p>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

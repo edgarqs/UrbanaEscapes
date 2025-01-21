@@ -27,6 +27,25 @@
                     <p>Estat: {{ $habitacio->getEstat() }}</p>
                     <div class="contenedor-dosBotones">
                         {{-- Botón de checkin o botón de checkout --}}
+                        @php
+                            $hoy = \Carbon\Carbon::today()->format('Y-m-d');
+                        @endphp
+                        @if ($habitacio->estat === 'Bloquejada')
+                        <form action="{{ route('habitacions.desbloquejar', $habitacio->id) }}" method="POST">
+                            @csrf
+                            <button class="button button--primary">
+                                <span class="material-symbols-outlined">lock_open</span>Desbloquejar
+                            </button>
+                        </form>
+                    @endif
+                    @if ($habitacio->estat === 'Lliure')
+                        <form action="{{ route('habitacions.bloquejar', $habitacio->id) }}" method="POST">
+                            @csrf
+                            <button class="button button--orange">
+                                <span class="material-symbols-outlined">mop</span>
+                            </button>
+                        </form>
+                    @endif
                         @if ($habitacio->reservas()->where('estat', 'Reservada')->exists() && $habitacio->estat === 'Lliure')
                             <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
                                 @csrf
@@ -43,21 +62,13 @@
                                 </button>
                             </form>
                         @endif
-                        @if ($habitacio->estat === 'Bloquejada')
-                            <form action="{{ route('habitacions.desbloquejar', $habitacio->id) }}" method="POST">
-                                @csrf
-                                <button class="button button--primary no-popup">
-                                    <span class="material-symbols-outlined">lock_open</span>Desbloquejar
-                                </button>
-                            </form>
-                        @endif
-                        @if ($habitacio->estat === 'Lliure')
-                            <form action="{{ route('habitacions.bloquejar', $habitacio->id) }}" method="POST">
-                                @csrf
-                                <button class="button button--orange no-popup">
-                                    <span class="material-symbols-outlined">mop</span>
-                                </button>
-                            </form>
+                        @if ($habitacio->reservas()->where('estat', 'Checkin')->exists() && $habitacio->estat === 'Bloquejada')
+                        <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="button button--green">
+                                <span class="material-symbols-outlined">login</span>Check-In
+                            </button>
+                        </form>
                         @endif
                     </div>
                 </div>
@@ -73,7 +84,7 @@
     {{-- Paginació --}}
     @if ($habitacions->count())
         <nav>
-            {{ $habitacions->appends(['id' => $idHotel])->links() }}
+            {{ $habitacions->appends(request()->query())->links() }}
         </nav>
     @endif
 

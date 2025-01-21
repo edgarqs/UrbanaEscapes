@@ -12,8 +12,6 @@ class ServeisSeeder extends DatabaseSeeder
 
     public function run(): void
     {
-        $hotels = Hotel::all();
-        
         // Creación de servicios
         $serveis = [
             ['nom' => 'Microones', 'preu' => 5],
@@ -24,17 +22,6 @@ class ServeisSeeder extends DatabaseSeeder
         ];
         foreach ($serveis as $servei) {
             Serveis::create($servei);
-        }
-
-        // Asignación de servicios a habitaciones
-        foreach ($hotels as $hotel) {
-            $habitacions = Habitacion::where('hotel_id', $hotel->id)->get();
-            foreach ($habitacions as $habitacio) {
-                $randomServeis = Serveis::inRandomOrder()->take(rand(1, 3))->pluck('id');
-                $habitacio->serveis()->attach($randomServeis);
-            }
-            $this->command->info("  + Serveis assignats a les habitacions del hotel: $hotel->nom");
-            Log::channel('info_log')->info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel->id]);
         }
     }
 }

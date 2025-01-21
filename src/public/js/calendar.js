@@ -31,7 +31,7 @@ function fetchCalendarData(startDate, hotelId) {
     return fetch(`/refresh-calendar?start_date=${startDate.toISOString().split('T')[0]}&id=${hotelId}`)
         .then(response => response.json())
         .catch(error => {
-            console.error('Error fetching calendar data:', error);
+            // console.error('Error fetching calendar data:', error);
             throw error;
         });
 }
@@ -88,7 +88,7 @@ function renderCalendar(data) {
                             document.querySelector("#popup-details").innerHTML = data;
                             document.querySelector("#popup").style.display = "grid";
                         })
-                        .catch(error => console.error('Error:', error));
+                        // .catch(error => console.error('Error:', error));
                 }else{
                     window.location.href = `/reserves/${habitacio.numHabitacion}`;
                 }
@@ -116,10 +116,10 @@ function refreshCalendarBody(startDate) {
     
     fetchCalendarData(startDate, hotelId)
         .then(data => {
-            console.log('Data received:', data); // Verificar los datos recibidos
+            // console.log('Data received:', data); // Verificar los datos recibidos
             renderCalendar(data);
         })
-        .catch(error => console.error('Error fetching calendar data:', error));
+        // .catch(error => console.error('Error fetching calendar data:', error));
 }
 
 document.querySelector('#prevWeek').addEventListener('click', () => {

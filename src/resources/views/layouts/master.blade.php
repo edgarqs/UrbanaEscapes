@@ -37,37 +37,47 @@
                 </li>
 
 
-                <!-- Crear Hotel -->
-                <li>
-                    @if (auth()->user()->hasRole('administrador'))
+                <!-- Crear Hotel (admin) -->
+                @if (auth()->user()->hasRole('administrador'))
+                    <li>
                         <a href="{{ route('hotel.create') }}"
                             class="{{ Route::currentRouteNamed('hotel.create') ? 'active' : '' }}"><span
-                                class="material-symbols-outlined">add</span>Crear Hotel</a>
-                </li>
-            @elseif (auth()->user()->hasRole('recepcionista'))
-                <a href="{{ route('recepcio', ['id' => auth()->user()->hotel_id]) }}"
-                    class="{{ Route::currentRouteNamed('recepcio') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined">event</span>Recepció
-                </a>
+                                class="material-symbols-outlined">add</span>Crear Hotel
+                        </a>
+                    </li>
                 @endif
-                </li>
+
+                <!-- Recepció (recepcionista) -->
+                @if (auth()->user()->hasRole('recepcionista'))
+                    <li>
+                        <a href="{{ route('recepcio', ['id' => auth()->user()->hotel_id]) }}"
+                            class="{{ Route::currentRouteNamed('recepcio') ? 'active' : '' }}">
+                            <span class="material-symbols-outlined">event</span>Recepció
+                        </a>
+                    </li>
+                @endif
+
                 <!-- Checkins pendents -->
-                <li>
-                    @if (auth()->user()->hasRole('recepcionista'))
+                @if (auth()->user()->hasRole('recepcionista'))
+                    <li>
                         <a href="{{ route('reservas.checkins', ['id' => auth()->user()->hotel_id]) }}"
                             class="{{ Route::currentRouteNamed('reservas.checkins') ? 'active' : '' }}">
                             <span class="material-symbols-outlined">check_box</span>Pròximes reservas
                         </a>
-                    @endif
-                </li>
-                <!-- Tornar (/) -->
-                @if (auth()->user()->hasRole('administrador'))
-                    <li class="separacion"><a href="{{ route('hotel.selector') }}"><span
-                                class="material-symbols-outlined">arrow_back</span>Tornar</a></li>
+                    </li>
                 @endif
+
+                <!-- Tornar (/) -->
+                <li>
+                    <a href="javascript:window.history.back();"><span
+                            class="material-symbols-outlined">arrow_back</span>Tornar</a>
+                </li>
+
                 <!-- Tancar sessió -->
-                <li><a href="{{ route('logout') }}"><span class="material-symbols-outlined">logout</span>Tancar la
-                        sessió</a></li>
+                <li>
+                    <a href="{{ route('logout') }}"><span class="material-symbols-outlined">logout</span>Tancar la
+                        sessió</a>
+                </li>
             </ul>
         </aside>
 

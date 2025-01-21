@@ -23,7 +23,7 @@
             <div class="form-row d-flex">
                 <div class="form-group flex-fill mr-3">
                     <label for="nom">Usuari</label>
-                    <input type="text" name="nom" id="nom" class="form-control @if($errors->has('nom')) is-invalid @endif" value="{{ old('nom') }}" maxlength="30" placeholder="user@urbanaescapes.com" required>
+                    <input type="text" name="nom" id="nom" class="form-control @error('nom') is-invalid @enderror" value="{{ old('nom') }}" maxlength="30" placeholder="user@urbanaescapes.com" required>
                 </div>
             </div>
 
@@ -31,7 +31,7 @@
             <div class="form-row d-flex">
                 <div class="form-group flex-fill">
                     <label for="password">Contrasenya</label>
-                    <input type="password" name="password" id="password" class="form-control @if($errors->has('nom')) is-invalid @endif" value="{{ old('password') }}" maxlength="50" required>
+                    <input type="password" name="password" id="password" class="form-control @error('nom') is-invalid @enderror" value="{{ old('password') }}" maxlength="50" required>
                 </div>
             </div>
 

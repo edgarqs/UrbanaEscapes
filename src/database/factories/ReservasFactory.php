@@ -22,8 +22,8 @@ class ReservasFactory extends Factory
 
         // Calcular el preu total de la reserva amb serveis extra
         $preuHabitacio = $habitacion->preu * $dias;
-        $preuServeis = $habitacion->serveis->sum('preu');
-        $preuTotal = $preuHabitacio + $preuServeis;
+        // $preuServeis = $habitacion->serveis->sum('preu');
+        // $preuTotal = $preuHabitacio + $preuServeis;
 
         // Verificar que no haya otra reserva en las mismas fechas a menos que el estado sea "Cancelada"
         while (Reservas::where('habitacion_id', $habitacion->id)
@@ -66,7 +66,7 @@ class ReservasFactory extends Factory
             'usuari_id' => Usuari::where('rol_id', 3)->inRandomOrder()->first()->id,
             'data_entrada' => $dataEntrada,
             'data_sortida' => $dataSortida,
-            'preu_total' => $preuTotal,
+            'preu_total' => $preuHabitacio,
             'estat' => $estatReserva,
         ];
     }
