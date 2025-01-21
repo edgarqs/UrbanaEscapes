@@ -18,11 +18,6 @@
     <h1>Habitacions</h1>
 
 
-    {{-- Dialog de habitaciones --}}
-    <dialog id="dialog-reservas">
-        <h1>Test Dialog</h1>
-    </dialog>
-
     <div class="cards cards--habitacions">
         @foreach ($habitacions as $habitacio)
             <a class="card" onclick="showPopup({{ $habitacio->id }})">
@@ -52,26 +47,17 @@
                         </form>
                     @endif
                         @if ($habitacio->reservas()->where('estat', 'Reservada')->exists() && $habitacio->estat === 'Lliure')
-                            @php
-                                $reservaHoy = $habitacio
-                                    ->reservas()
-                                    ->where('estat', 'Reservada')
-                                    ->where('data_entrada', $hoy)
-                                    ->first();
-                            @endphp
-                            @if ($reservaHoy)
-                                <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="button button--green">
-                                        <span class="material-symbols-outlined">login</span>Check-In
-                                    </button>
-                                </form>
-                            @endif
+                            <form action="{{ route('habitacions.checkin', $habitacio->id) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="button button--green no-popup">
+                                    <span class="material-symbols-outlined">login</span>Check-In
+                                </button>
+                            </form>
                         @endif
                         @if ($habitacio->reservas()->where('estat', 'Checkin')->exists() && $habitacio->estat === 'Ocupada')
                             <form action="{{ route('habitacions.checkout', $habitacio->id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="button button--red">
+                                <button type="submit" class="button button--red no-popup">
                                     <span class="material-symbols-outlined">logout</span>Check-Out
                                 </button>
                             </form>
