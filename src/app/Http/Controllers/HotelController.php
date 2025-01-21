@@ -32,6 +32,11 @@ class HotelController extends Controller
             'reserves' => 'required|integer',
         ]);
 
+        // Modificado: verificar si el email ya existe en la base de datos
+        if (Hotel::where('email', $dades['email'])->exists()) {
+            return redirect()->back()->withErrors(['email' => 'L\'email ja existeix.'])->withInput();
+        }
+
         $hotel = Hotel::create([
             'nom' => $dades['nom'],
             'adreca' => $dades['adreca'],
