@@ -7,9 +7,11 @@
     <title>Document</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-black text-white flex">
+<body>
 
     <div id="app" class="m-auto"></div>
+
+    <h1>{{ __('test') }}</h1>
 
     @vite('resources/js/app.js')
 </body>
