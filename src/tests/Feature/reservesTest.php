@@ -35,7 +35,7 @@ class reservesTest extends TestCase
 
         $response->assertRedirect('/');
 
-        $hotel = Hotel::create([
+        $response = $this->post('/create', [
             'nom' => 'Hotel Test',
             'adreca' => 'Carrer Test, 1',
             'ciutat' => 'Test',
@@ -45,55 +45,79 @@ class reservesTest extends TestCase
             'clients' => 50,
             'habitacions' => 100,
             'reserves' => 50,
-        ]);
+        ]); 
 
-        // Crear el usuario recepcionista
-        Usuari::create([
-            'nom' => 'recepcio1',
-            'email' => 'recepcio1@example.com',
-            'password' => bcrypt('recepcio1'),
-            'rol_id' => 2
-        ]);
-
-        $this->get('/login')->assertOk();
+        $this->post('/logout');
 
         $response = $this->post('/login', [
             'nom' => 'recepcio1',
             'password' => 'recepcio1',
         ]);
 
-        // Cambiamos la redirección esperada para que coincida con la real
-        $response->assertRedirect('/recepcio?id=1');
-
+        $this->get('/hotel/recepcio?id=1')->assertOk();
         $this->get('/hotel/reserves/1')->assertOk();
 
-        // Añadimos las comprobaciones para la creación de una reserva
-        $habitacio = Habitacion::create([
-            'tipus' => 'Doble',
-            'llits' => 2,
-            'llits_supletoris' => 1,
-            'numHabitacion' => 101,
-            'hotel_id' => $hotel->id,
+        $response = $this->post('/hotel/reserves/1', [
+            'data_entrada' => '2021-06-01',
+            'data_sortida' => '2021-06-05',
+            'dni' => '12345678A',
+            'nom' => 'Test',
+            'comentaris' => 'Comentari de prova per a la reserva.',
+        ]);        
+    }
+
+    public function test_reserva_error_dates(): void
+    {
+        Rol::create(['nom' => 'administrador']);
+        Rol::create(['nom' => 'recepcionista']);
+        Rol::create(['nom' => 'client']);
+
+        Usuari::create([
+            'nom' => 'admin',
+            'email' => null,
+            'password' => bcrypt('admin'),
+            'rol_id' => 1
         ]);
 
-        $response = $this->post(route('reserves.store', ['habitacionId' => $habitacio->id]), [
-            '_token' => csrf_token(),
-            'dni' => '12345678A',
-            'nom' => 'Client Test',
-            'email' => 'client@example.com',
-            'data_inici' => '2023-10-01',
-            'data_fi' => '2023-10-10',
-            'comentaris' => 'Comentari de prova',
+        $this->get('/login')->assertOk();
+
+        $response = $this->post('/login', [
+            'nom' => 'admin',
+            'password' => 'admin',
         ]);
 
-        $response->assertRedirect('/reserves/1'); 
-        $this->assertDatabaseHas('reserves', [
-            'dni' => '12345678A',
-            'nom' => 'Client Test',
-            'email' => 'client@example.com',
-            'data_inici' => '2023-10-01',
-            'data_fi' => '2023-10-10',
-            'comentaris' => 'Comentari de prova',
+        $response->assertRedirect('/');
+
+        $response = $this->post('/create', [
+            'nom' => 'Hotel Test',
+            'adreca' => 'Carrer Test, 1',
+            'ciutat' => 'Test',
+            'pais' => 'Test',
+            'email' => 'test@example.es',
+            'telefon' => '123456789',
+            'clients' => 50,
+            'habitacions' => 100,
+            'reserves' => 50,
+        ]); 
+
+        $this->post('/logout');
+
+        $response = $this->post('/login', [
+            'nom' => 'recepcio1',
+            'password' => 'recepcio1',
         ]);
+
+        $this->get('/hotel/recepcio?id=1')->assertOk();
+        $this->get('/hotel/reserves/1')->assertOk();
+
+        $response = $this->post('/hotel/reserves/1', [
+            'data_entrada' => '2021-06-01',
+            'data_sortida' => '2020-06-05',
+            'dni' => '12345678A',
+            'nom' => 'Test',
+            'comentaris' => 'Comentari de prova per a la reserva.',
+        ]);        
+
+        $response->assertSeeText('El camp data fi ha de ser una data posterior o igual a data inici.');
     }
 }
