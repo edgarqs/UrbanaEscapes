@@ -9,7 +9,7 @@
 </head>
 <body class="bg-black text-white flex">
 
-    <div id="app" class="m-auto"></div>
+    <div id="hero" class="m-auto"></div>
 
     @vite('resources/js/app.js')
 </body>
