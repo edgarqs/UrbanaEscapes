@@ -20,6 +20,7 @@ class ReservasController extends Controller
 
         $habitacionsOcupades = Reservas::countHabitacionesConfirmadas($id);
         $habitacionsLliures = Reservas::countHabitacionesLliures($id);
+        $habitacionsBloquejades = Reservas::countHabitacionesBloquejades($id);
         $checkinsPendents = Reservas::countReservasPendientes($id);
         $habitacionsTotals = Reservas::getHabitacionesTotals($id);
 
@@ -35,6 +36,7 @@ class ReservasController extends Controller
             'hotel' => $hotel,
             'habitacionsOcupades' => $habitacionsOcupades,
             'habitacionsLliures' => $habitacionsLliures,
+            'habitacionsBloquejades' => $habitacionsBloquejades,
             'checkinsPendents' => $checkinsPendents,
             'habitacionsTotals' => $habitacionsTotals,
             'habitacionsOcupadesPercentatge' => $habitacionsOcupadesPercentatge,
@@ -126,6 +128,12 @@ class ReservasController extends Controller
         $dataEntrada = $request->query('data_entrada', Carbon::today()->format('Y-m-d'));
         $dataSortida = $request->query('data_sortida');
 
+        // Validar que data_sortida no sea anterior a data_entrada
+        if ($dataSortida && $dataSortida < $dataEntrada) {
+            return redirect()->back()
+                ->with('error', 'La data de sortida no pot ser anterior a la data d\'entrada.');
+        }
+
         $reservas = Reservas::whereHas('habitacion', function ($query) use ($idHotel) {
             $query->where('hotel_id', $idHotel);
         })
@@ -206,19 +214,25 @@ class ReservasController extends Controller
                 ->with('error', 'La habitació ja està ocupada en aquestes dates');
         }
 
-        $habitacio = Habitacion::findOrFail($habitacionId);
         $serveis = $validatedData['serveis'] ?? [];
-        $habitacio->serveis()->sync($serveis);
+       
 
         Reservas::create([
             'habitacion_id' => $habitacionId,
             'usuari_id' => $usuariId,
             'data_entrada' => $validatedData['data_inici'],
             'data_sortida' => $validatedData['data_fi'],
-            'preu_total' => Reservas::calcularPreuTotal($serveis, $habitacio, $validatedData['data_inici'], $validatedData['data_fi']),
+            'preu_total' => Reservas::calcularPreuTotal($serveis, $habitacionId, $validatedData['data_inici'], $validatedData['data_fi']),
             'estat' => 'reservada',
             'comentaris' => $request->input('comentaris')
         ]);
+        
+        $reservaId = Reservas::latest()->first()->id;
+
+        $reservas = Reservas::findOrFail($reservaId);
+
+        $reservas->serveis()->sync($serveis);
+        
 
         return redirect()->route('recepcio', ['id' => $hotelId])
             ->with('success', 'Reserva completada correctament');

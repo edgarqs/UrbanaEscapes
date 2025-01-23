@@ -20,6 +20,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function showPopup(habitacioId) {
+    // Verificar si el clic proviene de un botón con la clase 'no-popup'
+    if (event.target.closest('.no-popup')) {
+        return;
+    }
+
     // Hacer una llamada AJAX para obtener los detalles de la habitación
     fetch(`/habitacions/${habitacioId}/detalls`)
         .then(response => response.text())
@@ -32,18 +37,14 @@ function showPopup(habitacioId) {
                 // Mostrar el popup
                 document.querySelector("#popup").style.display = "grid";
             } else {
-                console.error('Elemento #popup-details no encontrado');
+                // console.error('Elemento #popup-details no encontrado');
             }
         })
-        .catch(error => console.error('Error:', error));
+        // .catch(error => console.error('Error:', error));
 }
 
 function hidePopup() {
     document.querySelector("#popup").style.display = "none";
-}
-
-function updateValue(val) {
-    document.querySelector('#preu-value').textContent = val;
 }
 
 // Cerrar el popup cuando se hace clic fuera de él

@@ -49,20 +49,22 @@ class DatabaseSeeder extends Seeder
         }
         Log::channel('info_log')->info("Afegides habitacions", ['habitacionsNumber' => $num_habitacions]);
 
-        // Asignar serveis a habitacions
-        $habitacions = Habitacion::where('hotel_id', $hotel_id)->get();
+        // Creació reserves
+        Reservas::factory($num_reserves)->create();
+        Log::channel('info_log')->info("Afegides reserves", ['reservesNumber' => $num_reserves, 'hotel_id' => $hotel_id]);
+
+
+        // Asignar serveis a reservas
+        $reservas = Reservas::all();
         $serveis = Serveis::all();
-        foreach ($habitacions as $habitacio) {
+        foreach ($reservas as $reserva) {
             $randomServeis = $serveis->random(min($serveis->count(), rand(0, 5)))->pluck('id');
             if ($randomServeis->isNotEmpty()) {
-                $habitacio->serveis()->attach($randomServeis);
+                $reserva->serveis()->attach($randomServeis);
             }
         }
         Log::channel('info_log')->info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel_id]);
         
-        // Creació reserves
-        Reservas::factory($num_reserves)->create();
-        Log::channel('info_log')->info("Afegides reserves", ['reservesNumber' => $num_reserves, 'hotel_id' => $hotel_id]);
 
         // Creació usuari recepcionista
         $recepcionista = Usuari::factory()->create([

@@ -14,10 +14,12 @@ Route::get('/', [HotelController::class, 'index'])
 
 //? Página y post de login y logout
 Route::get('/login', [AuthController::class, 'showLoginForm'])
-    ->name('login');
+    ->name('login')
+    ->middleware('guest'); // Middleware guest para que no se pueda acceder a la página de login si ya estás logueado
 
 Route::post('/login', [AuthController::class, 'login'])
-    ->name('login.post');
+    ->name('login.post')
+    ->middleware('guest');
 
 Route::get('/logout', [AuthController::class, 'logout'])
     ->name('logout');
