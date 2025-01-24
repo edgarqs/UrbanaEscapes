@@ -1,13 +1,3 @@
 {
-    "search-bar": {
-        "placeholder": "Cerca...",
-        "search": "Cerca"
-    },
-    "header": {
-        "home": "Inici",
-        "about": "Sobre nosaltres",
-        "services": "Serveis",
-        "contact": "Contacte"
-    },
-    "nombre de usuario": "nom d'usuari"
+    "I love programming.": "M'agrada programar."
 }

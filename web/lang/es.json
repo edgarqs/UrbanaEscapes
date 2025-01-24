@@ -1,12 +1,3 @@
 {
-    "search-bar": {
-        "placeholder": "Buscar...",
-        "search": "Buscar"
-    },
-    "header": {
-        "home": "Inicio",
-        "about": "Sobre nosotros",
-        "services": "Servicios",
-        "contact": "Contacto"
-    }
+    "I love programming.": "Me encanta programar."
 }
