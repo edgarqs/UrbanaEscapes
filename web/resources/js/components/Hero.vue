@@ -23,8 +23,6 @@ video[poster] {
 <template>
     <video loop muted autoplay playsinline poster="" class="background-video">
         <source src="../../video/videohotel.mp4" type="video/mp4">
-        <source src="../../video/videohotel.webm" type="video/webm">
-        <source src="../../video/videohotel.ogv" type="video/ogv">
     </video>
 </template>
 
