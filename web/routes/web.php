@@ -10,5 +10,5 @@ Route::get('/lang/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'es', 'ca'])) {
         session(['locale' => $locale]);
     }
-    return redirect()->back(); // Redirige a la página actual
+    return redirect()->back();
 });

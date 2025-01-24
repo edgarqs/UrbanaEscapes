@@ -11,7 +11,7 @@
 
     <div id="app" class="m-auto"></div>
 
-    <h1>{{ __('test') }}</h1>
+    <h1>{{ __('nombre de usuario') }}</h1>
 
     @vite('resources/js/app.js')
 </body>
