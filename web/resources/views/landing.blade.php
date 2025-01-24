@@ -16,6 +16,7 @@
     <div id="vcorpo" class="m-auto"></div>
 
 
+
     @vite('resources/js/app.js')
 </body>
 </html>
