@@ -13,7 +13,7 @@
     
     <div id="hero" class="m-auto"></div>
 
-    <div id="vcorpo" class="m-auto"></div>
+    <div id="valorscorporatius" class="m-auto"></div>
 
 
 

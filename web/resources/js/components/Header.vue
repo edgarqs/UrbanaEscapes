@@ -24,7 +24,7 @@ header.visible {
 </style>
 
 <template>
-  <header :class="{ visible: isHeaderVisible }" class="bg-gray-50">
+  <header :class="{ visible: isHeaderVisible }" class="bg-gray-50 bg-opacity-80 backdrop-blur-sm">
     <nav class="max-w-7xl mx-auto flex items-center justify-between p-4">
       <!-- Logo -->
       <div class="flex items-center">
@@ -57,7 +57,7 @@ header.visible {
           <a href="#"
             class="text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300">
             About
-          </a>
+          </a>hover:scale-105
           <a href="#"
             class="text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300">
             Services
