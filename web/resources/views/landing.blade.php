@@ -7,7 +7,7 @@
     <title>UrbanaEscapes</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-black text-white">
+<body >
 
     <div id="header" class="m-auto"></div>
     
