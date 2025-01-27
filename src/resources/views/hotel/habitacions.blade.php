@@ -15,12 +15,24 @@
         </div>
     @endif
 
-    <h1>Habitacions</h1>
+    @php
+    $estado = request()->query('estat', 'totes');
+    $titulo = 'Habitacions';
+    if ($estado === 'Lliure') {
+        $titulo = 'Habitacions Lliures';
+    } elseif ($estado === 'Bloquejada') {
+        $titulo = 'Habitacions Bloquejades';
+    } elseif ($estado === 'Ocupada') {
+        $titulo = 'Habitacions Ocupades';
+    }
+    @endphp
+
+    <h1>{{ $titulo }}</h1>
 
 
     <div class="cards cards--habitacions">
         @foreach ($habitacions as $habitacio)
-            <a class="card" onclick="showPopup({{ $habitacio->id }})">
+            <a class="card card--tamany-fix" onclick="showPopup({{ $habitacio->id }})">
                 <h2 class="card__header">{{ $habitacio->numHabitacion }}</h2>
                 <div class="card__body">
                     <p>{{ $habitacio->tipus }}</p>
@@ -42,7 +54,7 @@
                         <form action="{{ route('habitacions.bloquejar', $habitacio->id) }}" method="POST">
                             @csrf
                             <button class="button button--orange">
-                                <span class="material-symbols-outlined">mop</span>
+                                <span class="material-symbols-outlined">mop</span>Bloquejar
                             </button>
                         </form>
                     @endif

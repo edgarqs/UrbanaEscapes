@@ -17,7 +17,7 @@
             <h4>Dades del client</h4>
             <div class="form-row d-flex">
                 <div class="form-group flex-fill mr-3">
-                    <label for="dni">Document d'identitat <i>(DNI/NIE/NIF)</i></label>
+                    <label for="dni">Document d'identitat</label>
                     <input type="text" name="dni" id="dni"
                         class="form-control @error('dni') is-invalid @enderror" value="{{ old('dni') }}" maxlength="10"
                         required>
