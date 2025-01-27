@@ -1,0 +1,54 @@
+@use "../abstracts/variables" as *;
+
+.checkbox-contenedor {
+    max-width: 500px;
+    margin: 10px auto;
+
+    .checkbox {
+        width: 100%;
+
+        ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap; // Permite que los elementos se ajusten en varias líneas
+            justify-content: center;
+            align-items: center;
+            gap: 10px; // Espaciado entre elementos
+
+            li {
+                display: inline-block;
+                width: 150px; // Tamaño fijo para cada elemento
+                margin: 5px 0; // Espaciado vertical entre filas
+
+                label {
+                    position: relative;
+                    display: block; // Forza que el `label` ocupe el ancho completo del `li`
+                    text-align: center; // Centra el contenido del texto
+                    border: 1px solid black;
+                    border-radius: $card-border-radius;
+                    transition: 0.2s all ease;
+                    padding: 8px 12px;
+                    cursor: pointer;
+
+                    &:hover {
+                        border-color: $primary-color;
+                        background-color: #f0f8ff;
+                        color: $text-color;
+                    }
+                }
+
+                // Ocultar el checkbox real
+                input[type="checkbox"] {
+                    position: absolute;
+                    opacity: 0;
+                    pointer-events: none;
+
+                    &:checked + label {
+                        border-color: $primary-color-dark;
+                        background-color: #1f75cb48;
+                    }
+                }
+            }
+        }
+    }
+}
