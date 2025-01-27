@@ -3,6 +3,11 @@
 h1 {
     text-align: center;
     margin: 20px 0;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 1rem;
 }
 
 .cards {
@@ -17,13 +22,6 @@ h1 {
 
 .card {
     background-color: rgb(219, 213, 213);
-}
-h1{
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.5;
-    color: #333;
-    margin-bottom: 1rem;
 }
 </style>
 
