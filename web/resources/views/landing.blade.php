@@ -10,7 +10,7 @@
 <body class="bg-black text-white flex">
 
     <div id="hero" class="m-auto"></div>
-
+    <div id="Footer" class="m-auto"></
     @vite('resources/js/app.js')
 </body>
 </html>

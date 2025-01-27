@@ -1,5 +1,5 @@
 import './bootstrap';
 import { createApp } from 'vue';
-import App from './components/Landing.vue';
+import Footer from './components/Footer.vue';
 
-createApp(App).mount('#app');
+createApp(Footer).mount('#Footer');
