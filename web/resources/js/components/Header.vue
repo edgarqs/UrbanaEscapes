@@ -2,7 +2,7 @@
 .logo {
   width: 50%;
   height: auto;
-  aspect-ratio: 2/1;
+  aspect-ratio: 2 / 1;
 }
 
 header {
@@ -10,21 +10,39 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 50;
+  z-index: 10;
   opacity: 0;
   transform: translateY(-100%);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.8); /* Blanco semitransparente */
+  backdrop-filter: blur(10px); /* Difuminado */
+  -webkit-backdrop-filter: blur(10px); /* Soporte en navegadores WebKit */
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px;
 }
 
+/* Header visible */
 header.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Siempre mostrar el header en pantallas pequeñas */
+@media (max-width: 1024px) {
+  header {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+/* Adicional para contenido debajo del header */
+body {
+  margin-top: 70px; /* Ajusta según la altura del header */
+}
 </style>
 
+
 <template>
-  <header :class="{ visible: isHeaderVisible }" class="bg-gray-50 bg-opacity-80 backdrop-blur-sm">
+  <header :class="{ visible: isHeaderVisible }" class="bg-gray-50">
     <nav class="max-w-7xl mx-auto flex items-center justify-between p-4">
       <!-- Logo -->
       <div class="flex items-center">
@@ -57,7 +75,7 @@ header.visible {
           <a href="#"
             class="text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300">
             About
-          </a>hover:scale-105
+          </a>
           <a href="#"
             class="text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300">
             Services
@@ -91,6 +109,22 @@ header.visible {
         </div>
       </div>
     </nav>
+
+    <!-- Mobile menu -->
+    <div v-if="menuOpen" class="block lg:hidden bg-gray-50 p-4">
+      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded">
+        Home
+      </a>
+      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded">
+        About
+      </a>
+      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded">
+        Services
+      </a>
+      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded">
+        Contact
+      </a>
+    </div>
   </header>
 </template>
 
@@ -101,7 +135,6 @@ export default {
     return {
       isHeaderVisible: false,
       menuOpen: false,
-      mobileSearchOpen: false,
       languageDropdownOpen: false,
       currentLanguage: {
         code: "es",
@@ -114,7 +147,7 @@ export default {
         {
           code: "ca",
           label: "Visca Catalunya",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/320px-Flag_of_Catalonia.svg.png",
+          flag: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/320px-Flag_of_Catalonia.svg.png"
         },
       ],
     };
@@ -122,7 +155,6 @@ export default {
   methods: {
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
-      this.mobileSearchOpen = false;
     },
     toggleLanguageDropdown() {
       this.languageDropdownOpen = !this.languageDropdownOpen;
