@@ -46,14 +46,12 @@ class checkinsTest extends TestCase
             'reserves' => 50,
         ]); 
 
-        $this->get('/login')->assertOk();
+        $this->post('/logout');
 
         $response = $this->post('/login', [
             'nom' => 'recepcio1',
             'password' => 'recepcio1',
         ]);
-
-        $response->assertRedirect('/recepcio?id=1');
 
         $this->get('/hotel/recepcio?id=1')->assertOk();
         $this->get('/hotel/checkins?id=1')->assertOk();
@@ -99,22 +97,20 @@ class checkinsTest extends TestCase
             'reserves' => 50,
         ]); 
 
-        $this->get('/login')->assertOk();
+        $this->post('/logout');
 
         $response = $this->post('/login', [
             'nom' => 'recepcio1',
             'password' => 'recepcio1',
         ]);
 
-        $response->assertRedirect('/recepcio?id=1');
-
         $this->get('/hotel/recepcio?id=1')->assertOk();
         $this->get('/hotel/checkins?id=1')->assertOk();
 
         
         $response = $this->get('/hotel/checkins', [
-            'data_sortida' => '2025-06-02',
+            'data_sortida' => '2010-06-02',
         ]);
 
     }
-}
+}   

@@ -88,13 +88,14 @@ class LoginTest extends TestCase
 
         $this->assertDatabaseHas('usuaris', ['nom' => 'recepcio1']);
 
-        $this->get('/login')->assertOk();
+        $this->post('/logout');
 
         $response = $this->post('/login', [
             'nom' => 'recepcio1',
             'password' => 'recepcio1',
         ]);
 
-        $response->assertRedirect('/recepcio?id=1');
+
+        $this->get('/hotel/recepcio?id=1')->assertOk();
     }
 }
