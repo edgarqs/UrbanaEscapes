@@ -1,5 +1,5 @@
 import './bootstrap';
 import { createApp } from 'vue';
-import App from './components/Hero.vue';
+import App from './components/Landing.vue';
 
-createApp(App).mount('#hero');
+createApp(App).mount('#app');
