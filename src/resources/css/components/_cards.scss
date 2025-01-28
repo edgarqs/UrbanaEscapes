@@ -32,7 +32,7 @@
     justify-content: space-between;
 
     @media (max-width: 600px) {
-        padding: $base-spacing; // Menos padding en móvil
+        padding: $base-spacing; // Menos padding en móvil   
     }
 
     &--resum-hotels {
@@ -43,6 +43,10 @@
 
     &--botons-gestioHotel:hover {
         background-color: #1f75cb61;
+    }
+
+    &--tamany-fix {
+        max-width: 232px;
     }
 }
 

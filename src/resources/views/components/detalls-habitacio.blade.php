@@ -90,7 +90,7 @@
             <form action="{{ route('habitacions.bloquejar', $habitacio->id) }}" method="POST">
                 @csrf
                 <button class="button button--orange">
-                    <span class="material-symbols-outlined">mop</span>
+                    <span class="material-symbols-outlined">mop</span>Bloquejar
                 </button>
             </form>
         @endif

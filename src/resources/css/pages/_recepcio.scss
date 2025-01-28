@@ -1,5 +1,6 @@
 @use '../abstracts/variables' as *;
 
+
 table {
     table-layout: fixed;
     border-collapse: collapse;
@@ -8,33 +9,37 @@ table {
 
 th,
 td {
-    border: 1px solid black;
+    border: 0.1px solid black;
     text-align: center;
     vertical-align: middle;
     width: 10px !important;
     height: 10px !important;
     overflow: hidden;
     word-wrap: break-word;
+    cursor: pointer;
 }
 
 th.th-day {
     background-color: #f3f3f3;
     font-weight: bold;
     text-align: center;
+    cursor: default;
 }
 
 td.reservation-cell.reserved {
-    background-color: rgb(209, 127, 127);
+    background-color: $primary-color;
     color: white;
     white-space: nowrap; // Deshabilitat el salts de línea
     word-break: break-all; // Si no cap, la paraula es talla
     overflow: hidden;
     text-align: center;
+    cursor: pointer;
 }
 
 td.reservation-cell.available {
-    background-color: lightgreen;
+    background-color: lightgray;
     color: black;
+    cursor: copy;
 }
 
 .reservation-details {
