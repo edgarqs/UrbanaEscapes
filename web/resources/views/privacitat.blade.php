@@ -20,7 +20,6 @@
 </head>
 <body>
     <h1>Política de Privacitat</h1>
-    <p>Última actualización: 1 de enero de 2024</p>
 
     <h2>1. Introducció</h2>
     <p>Aquesta política de privacitat descriu com recollim, utilitzem i protegim la teva informació personal quan utilitzes el nostre lloc web.</p>

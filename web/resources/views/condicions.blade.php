@@ -20,7 +20,6 @@
 </head>
 <body>
     <h1>Condicions d'ús</h1>
-    <p>Última actualización: 1 de enero de 2024</p>
 
     <h2>1. Aceptación de las condiciones</h2>
     <p>Al acceder y utilizar nuestro sitio web, aceptas cumplir y estar sujeto a las siguientes condiciones de uso. Si no estás de acuerdo con alguna parte de estas condiciones, no debes utilizar nuestro sitio web.</p>
