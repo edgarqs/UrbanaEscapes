@@ -8,22 +8,12 @@ h1 {
     color: #333;
     margin-bottom: 1rem;
 }
+h2{
+    color: white;
+}
 </style>
 
 <template>
-    <h1>Ofertas</h1>
-    <div class="container flex items-center justify-center">
-        <div>
-            <img src="./img/urbana_logo-sinFondo.avif" alt="Logo" class="">
-        </div>
-        <div>
-            <h2>25% DESCOMPTE</h2>
-            <h2>25% DESCOMPTE</h2>
-        </div>
-        <div>
-
-        </div>
-    </div>
 </template>
 
 <script setup>
