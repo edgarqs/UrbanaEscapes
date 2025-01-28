@@ -1,6 +1,6 @@
 <style scoped>
 .logo {
-  width: 50%;
+  width: 20%;
   height: auto;
   aspect-ratio: 2 / 1;
 }
@@ -49,12 +49,6 @@ body {
         <a href="#" class="text-xl font-bold text-gray-800">
           <img src="./img/urbana_logo-sinFondo.avif" alt="logo urbana escapes" class="logo">
         </a>
-      </div>
-
-      <!-- Search bar for desktop -->
-      <div class="hidden lg:flex w-full max-w-md items-center mx-6">
-        <input type="text" placeholder="Search..."
-          class="text-black w-full px-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-300" />
       </div>
 
       <!-- Navigation and icons -->
