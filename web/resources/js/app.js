@@ -17,5 +17,4 @@ createApp(hotels).mount('#hotels');
 createApp(ofertas).mount('#ofertas');
 createApp(footer).mount('#footer');
 createApp(noticies).mount('#noticies');
-
 createApp(habitacionsdisponibles).mount('#habitacionsdisponibles');
