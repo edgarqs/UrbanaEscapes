@@ -155,15 +155,15 @@ class ReservasController extends Controller
             'dataSortida' => $dataSortida
         ]);
     }
-
-    public function index($habitacionId)
+    public function index($habitacionId, Request $request)
     {
         $usuaris = Usuari::all();
         $habitacio = Habitacion::findOrFail($habitacionId);
         $serveis = Serveis::all();
         $diaActual = Carbon::now()->format('Y-m-d');
-        $diaSeguent = Carbon::now()->addDays(1)->format('Y-m-d');
-        $preuPerDies = Reservas::calcularPreuPerDies($habitacio, $diaActual, $diaSeguent);
+        $startDate = $request->query('start_date', $diaActual);
+        $endDate = Carbon::parse($startDate)->addDay()->format('Y-m-d');
+        $preuPerDies = Reservas::calcularPreuPerDies($habitacio, $startDate, $endDate);
 
         return view('recepcio.reservas', [
             'habitacionId' => $habitacionId,
@@ -171,7 +171,8 @@ class ReservasController extends Controller
             'habitacio' => $habitacio,
             'serveis' => $serveis,
             'diaActual' => $diaActual,
-            'diaSeguent' => $diaSeguent,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
             'preuPerDies' => $preuPerDies
         ]);
     }
@@ -215,7 +216,7 @@ class ReservasController extends Controller
         }
 
         $serveis = $validatedData['serveis'] ?? [];
-       
+
 
         Reservas::create([
             'habitacion_id' => $habitacionId,
@@ -226,13 +227,13 @@ class ReservasController extends Controller
             'estat' => 'reservada',
             'comentaris' => $request->input('comentaris')
         ]);
-        
+
         $reservaId = Reservas::latest()->first()->id;
 
         $reservas = Reservas::findOrFail($reservaId);
 
         $reservas->serveis()->sync($serveis);
-        
+
 
         return redirect()->route('recepcio', ['id' => $hotelId])
             ->with('success', 'Reserva completada correctament');

@@ -20,7 +20,7 @@ function generateWeekCalendar(date) {
     weekDays.forEach(day => {
         const headerCell = document.createElement('th');
         headerCell.className = 'th-day';
-        headerCell.textContent = `${day.toLocaleString('es', { weekday: 'short' })} ${day.getDate()}`;
+        headerCell.textContent = `${day.toLocaleString('ca', { month: 'short' })} ${day.getDate()}`;
         headerRow.appendChild(headerCell);
     });
 
@@ -42,69 +42,79 @@ function renderCalendar(data) {
 
     data.habitacions.forEach(habitacio => {
         const row = document.createElement('tr');
-        const cell = document.createElement('td');
-        cell.onclick = () => {
-            window.location.href = `/reserves/${habitacio.numHabitacion}`;
-        }
-        const link = document.createElement('a');
-        cell.textContent = habitacio.numHabitacion;
         
-        cell.appendChild(link);
+        if (habitacio.estat === 'Bloquejada') {
+            row.classList.add('blocked-row');
+            const numCell = document.createElement('td');
+            numCell.textContent = habitacio.numHabitacion;
+            row.appendChild(numCell);
+            const cell = document.createElement('td');
+            cell.colSpan = 31;
+            cell.textContent = 'Bloquejada';
+            row.appendChild(cell);
+        } else {
+            const cell = document.createElement('td');
+            cell.onclick = () => {
+                const selectedDate = currentDay.toISOString().split('T')[0];
+                window.location.href = `/reserves/${habitacio.numHabitacion}?start_date=${selectedDate}`;
+            }
+            const link = document.createElement('a');
+            cell.textContent = habitacio.numHabitacion;
+            cell.appendChild(link);
+            row.appendChild(cell);
 
-        row.appendChild(cell);
-
-        let remainingDays = Array.from({ length: 31 }, (_, i) => {
-            const day = new Date(data.startDate);
-            day.setDate(day.getDate() + i);
-            return day;
-        });
-
-        while (remainingDays.length > 0) {
-            const currentDay = new Date(remainingDays.shift());
-            const reserva = data.reservas.find(r => {
-                const entrada = new Date(r.data_entrada);
-                const sortida = new Date(r.data_sortida);
-                const current = new Date(currentDay);
-                return r.habitacion_id === habitacio.id && entrada <= current && current <= sortida;
+            let remainingDays = Array.from({ length: 31 }, (_, i) => {
+                const day = new Date(data.startDate);
+                day.setDate(day.getDate() + i);
+                return day;
             });
 
-            let colspan = 1;
-            if (reserva) {
-                colspan = remainingDays.findIndex(day => 
-                    new Date(day) > new Date(reserva.data_sortida)
-                ) + 1;
+            while (remainingDays.length > 0) {
+                const currentDay = new Date(remainingDays.shift());
+                const reserva = data.reservas.find(r => {
+                    const entrada = new Date(r.data_entrada);
+                    const sortida = new Date(r.data_sortida);
+                    const current = new Date(currentDay);
+                    return r.habitacion_id === habitacio.id && entrada <= current && current <= sortida;
+                });
 
-                if (colspan === 0) colspan = remainingDays.length + 1;
-                remainingDays = remainingDays.slice(colspan - 1);
-            }
-
-            const cell = document.createElement('td');
-            cell.className = `reservation-cell ${reserva ? 'reserved' : 'available'} fixed-width-cell`;
-            cell.addEventListener('click', () => {
+                let colspan = 1;
                 if (reserva) {
-                    fetch(`/habitacions/${habitacio.id}/detalls`)
-                        .then(response => response.text())
-                        .then(data => {
-                            document.querySelector("#popup-details").innerHTML = data;
-                            document.querySelector("#popup").style.display = "grid";
-                        })
-                        // .catch(error => console.error('Error:', error));
-                }else{
-                    window.location.href = `/reserves/${habitacio.numHabitacion}`;
-                }
-            }
-            );
-            cell.colSpan = colspan;
+                    colspan = remainingDays.findIndex(day => 
+                        new Date(day) > new Date(reserva.data_sortida)
+                    ) + 1;
 
-            if (reserva) {
-                const details = document.createElement('div');
-                details.className = 'reservation-details';
-                const usuari = data.usuaris.find(u => u.id === reserva.usuari_id); 
-                details.innerHTML = `<p>${usuari ? usuari.nom : reserva.usuari_id}</p>`;
-                cell.appendChild(details);
+                    if (colspan === 0) colspan = remainingDays.length + 1;
+                    remainingDays = remainingDays.slice(colspan - 1);
+                }
+
+                const cell = document.createElement('td');
+                cell.className = `reservation-cell ${reserva ? 'reserved' : 'available'} fixed-width-cell`;
+                cell.addEventListener('click', () => {
+                    if (reserva) {
+                        fetch(`/habitacions/${habitacio.id}/detalls`)
+                            .then(response => response.text())
+                            .then(data => {
+                                document.querySelector("#popup-details").innerHTML = data;
+                                document.querySelector("#popup").style.display = "grid";
+                            });
+                    } else {
+                        const selectedDate = currentDay.toISOString().split('T')[0];
+                        window.location.href = `/reserves/${habitacio.numHabitacion}?start_date=${selectedDate}`;
+                    }
+                });
+                cell.colSpan = colspan;
+
+                if (reserva) {
+                    const details = document.createElement('div');
+                    details.className = 'reservation-details';
+                    const usuari = data.usuaris.find(u => u.id === reserva.usuari_id); 
+                    details.innerHTML = `<p>${usuari ? usuari.nom : reserva.usuari_id}</p>`;
+                    cell.appendChild(details);
+                }
+                
+                row.appendChild(cell);
             }
-            
-            row.appendChild(cell);
         }
 
         calendarBody.appendChild(row);

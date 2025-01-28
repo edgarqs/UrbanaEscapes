@@ -7,6 +7,8 @@ import hotels from './components/Hotels.vue';
 import footer from './components/Footer.vue';
 import ofertas from './components/Ofertas.vue';
 import noticies from './components/Noticies.vue';
+import habitacionsdisponibles from './components/HabitacionsDispo.vue';
+
 
 createApp(Header).mount('#header');
 createApp(App).mount('#hero');
@@ -16,3 +18,4 @@ createApp(ofertas).mount('#ofertas');
 createApp(footer).mount('#footer');
 createApp(noticies).mount('#noticies');
 
+createApp(habitacionsdisponibles).mount('#habitacionsdisponibles');

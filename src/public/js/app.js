@@ -73,3 +73,12 @@ function mostrarFormUsuari() {
         usuariNou.style.display = 'none';
     }
 }
+
+// Función para manejar el botón de "Tornar" sin redirigir a /login
+function Tornar() {
+    if (document.referrer.includes('/login')) {
+        window.location.href = '/'; // Redirigir a la página principal o cualquier otra página
+    } else {
+        window.history.back();
+    }
+}
