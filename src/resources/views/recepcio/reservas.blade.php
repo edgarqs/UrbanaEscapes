@@ -1,4 +1,4 @@
-@extends('layouts.master')
+    @extends('layouts.master')
 
 @section('title', 'Recepció')
 
@@ -109,15 +109,14 @@
                     <div class="form-row d-flex">
                         <div class="form-group flex-fill">
                             <label for="data_inici">Data Inici</label>
-                            <input type="date" name="data_inici" id="data_inici" class="@error('data_inici') is-invalid @enderror" value="{{ old('data_inici') ?? $diaActual }}"
-                                required>
+                            <input type="date" name="data_inici" id="data_inici" class="form-control @error('data_inici') is-invalid @enderror" value="{{ old('data_inici') ?? $startDate }}" required>
                             @error('data_inici')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group flex-fill">
                             <label for="data_fi">Data Fi</label>
-                            <input type="date" name="data_fi" id="data_fi" class="@error('data_fi') is-invalid @enderror" value="{{ old('data_fi') ?? $diaSeguent }}" required>
+                            <input type="date" name="data_fi" id="data_fi" class="form-control @error('data_fi') is-invalid @enderror" value="{{ old('data_fi') ?? $endDate }}" required>
                             @error('data_fi')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
