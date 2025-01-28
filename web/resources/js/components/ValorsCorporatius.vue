@@ -1,108 +1,130 @@
 <style scoped>
-/* Add your styles here */
-h1 {
-    text-align: center;
-    margin: 20px 0;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.5;
-    color: #333;
-    margin-bottom: 1rem;
+.content {
+    margin: 4rem 0;
+
+    h2 {
+        margin-bottom: 2rem;
+    }
 }
 
-.cards {
+.card-list {
+    width: 80%;
+    /* Aumentar el ancho del contenedor */
+    margin: 0 auto;
+    /* Centrar horizontalmente */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Aumentar el ancho mínimo de las tarjetas */
+    grid-gap: 4em;
+    /* Espaciado entre las tarjetas */
+    justify-content: center;
+    /* Centrar las tarjetas en el contenedor */
+}
+
+.card,
+.card-body {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 10px auto;
-    padding: 30px;
-
-
+    flex-direction: column;
+    align-items: center;
 }
 
 .card {
-    background-color: rgb(219, 213, 213);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    transition: transform 0.4s;
+}
+
+/*.card:hover {
+    transform: scale(1.05);
+    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.2);
+}
+*/
+
+.card-image {
+    display: block;
+    width: 100%;
+    /* Asegura que el div ocupe todo el ancho de la tarjeta */
+    height: 200px;
+    /* Ajusta según la altura deseada */
+    overflow: hidden;
+    /* Oculta las partes que excedan del contenedor */
+    position: relative;
+    /* Necesario para que las imágenes queden en su lugar */
+}
+
+.card-image img {
+    width: 100%;
+    /* La imagen ocupa el ancho del div */
+    height: 100%;
+    /* La imagen ocupa la altura del div */
+    object-fit: cover;
+    /* La imagen se recorta para llenar el contenedor proporcionalmente */
+    object-position: center;
+    /* Centra el recorte de la imagen */
+}
+
+
+.card-body {
+    padding: 20px 28px;
+}
+
+.card-body h2 {
+    font-size: 1.8em;
+    margin: 2px auto 12px;
+}
+
+.card-body p {
+    color: gray;
+    font-size: 1.1em;
+    line-height: 22px;
+    text-align: center;
 }
 </style>
 
 <template>
-    <h1>Valors Corporatius</h1>
-    <div class="cards">
-        <div class="card max-w-sm rounded overflow-hidden shadow-lg">
-            <div class="px-6 py-4">
-                <img class="w-full h-full" src="./img/reunio.jpeg" alt="Reunio">
-                <div class="font-bold text-xl mb-2 pt-4">La Nostra Història</div>
-                <p class=" text-base">
-                    La nostra cadena d’hotels va néixer amb l’objectiu de redefinir l’hospitalitat, oferint espais on
-                    cada detall està pensat per garantir el màxim confort i benestar. Des dels inicis hem crescut amb
-                    una filosofia clara: combinar elegància, calidesa i una atenció impecable per crear experiències
-                    inoblidables. Amb presència en diverses destinacions, seguim fidels als nostres valors fundacionals,
-                    esdevenint el refugi perfecte per als viatgers d’avui.
-                </p>
+    <div class="content">
+        <h2 class="center">Valors Corporatius</h2>
+
+        <div class="card-list">
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="./img/reunio.jpeg" alt="London trip">
+                </div>
+                <div class="card-body">
+                    <h2>La Nostra Història</h2>
+                    <p>Des dels inicis, vam néixer amb la missió de redefinir l’hospitalitat, combinant elegància,
+                        confort i atenció al detall. Amb presència en diverses destinacions, seguim creant experiències
+                        inoblidables que són refugi per als viatgers d’avui.</p>
+                </div>
             </div>
-            <div class="px-6 pt-4 pb-2">
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#tradiciohotelera</span>
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#lanostrahistoria</span>
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#arrelsdhospitalitat</span>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="./img/placas.jpg" alt="New York trip">
+                </div>
+                <div class="card-body">
+                    <h2>Els Nostres Valors</h2>
+                    <p><b>Sostenibilitat:</b> Reduïm residus, fomentem l’eficiència energètica i col·laborem amb
+                        iniciatives locals.</p>
+                    <p><b>Atenció al Client:</b> Servei personalitzat i atent, amb cura pels detalls que marquen la
+                        diferència.</p>
+                    <p><b>Compromís amb la Comunitat:</b> Integram la cultura local i donem suport al desenvolupament
+                        d’empreses i comunitats locals.</p>
+                </div>
             </div>
-        </div>
-        <div class=" card max-w-sm rounded overflow-hidden shadow-lg">
-            <div class="px-6 py-4">
-                <img class="w-full h-full" src="./img/placas.jpg" alt="Plaques solars">
-                <div class="font-bold text-xl mb-2 pt-4">Els Nostres Valors</div>
-                <p class="text-base">
-                    <li>Sostenibilitat
-                        <ul>Ens comprometem amb el planeta mitjançant pràctiques responsables, com la reducció de
-                            residus, l’eficiència energètica i el suport a iniciatives locals de conservació.</ul>
-                    </li>
-                    <li>Atenció al Client
-                        <ul>La satisfacció dels nostres hostes és la nostra prioritat. Oferim un servei personalitzat,
-                            atent i proper, posant èmfasi en els petits detalls que marquen la diferència.</ul>
-                    </li>
-                    <li>Compromís amb les Comunitats
-                        <ul>Cada hotel integra i reflecteix la cultura local, donant suport a empreses locals i
-                            fomentant el desenvolupament de les comunitats on operem.</ul>
-                    </li>
-                </p>
-            </div>
-            <div class="px-6 pt-4 pb-2">
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#viatjarsostenible</span>
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#experiencialocal</span>
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#excel·lènciaenelservei</span>
-            </div>
-        </div>
-        <div class="card max-w-sm rounded overflow-hidden shadow-lg">
-            <div class="px-6 py-4 p">
-                <img class="w-full" src="./img/hotel.jpg" alt="Habitacio de l'hotel">
-                <div class="font-bold text-xl mb-2 pt-4">La Nostra Filosofia</div>
-                <p class="text-base">
-                <li>
-                    Apostem per incorporar la tecnologia més avançada al servei de l’hospitalitat, sense perdre el
-                    tracte humà.
-                </li>
-                <li>
-                    Ens inspirem en la cultura, la gastronomia i l’essència de cada destinació per oferir experiències
-                    autèntiques.
-                </li>
-                <li>
-                    Ens esforcem per crear espais on cada hoste se senti com a casa, connectant amb les seves
-                    necessitats i expectatives.
-                </li>
-                </p>
-            </div>
-            <div class="px-6 pt-4 pb-2">
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#viatjaambpropòsit</span>
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#innovacióhotelera</span>
-                <span
-                    class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#sentircomacasa</span>
+
+            <div class="card">
+                <div class="card-image">
+                    <img src="./img/hotel.jpg" alt="Marrakech trip">
+                </div>
+                <div class="card-body">
+                    <h2>La Nostra Filosofia</h2>
+                    <p>Cadena d’hotels amb l’objectiu de redefinir l’hospitalitat, combinant elegància, calidesa i
+                        atenció impecable per oferir experiències úniques en diverses destinacions.</p>
+                </div>
             </div>
         </div>
     </div>

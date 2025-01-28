@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,13 @@
     <link rel="icon" href="{{ asset('img/urbana.ico') }}" type="image/x-icon">
     @vite(['resources/css/main.scss'])
 </head>
+
 <body>
+
     <div id="header" class="m-auto"></div>
+
     <div id="hero" class="m-auto"></div>
+    
     <div id="valorscorporatius" class="m-auto"></div>
     <div id="hotels" class="m-auto"></div>
     <div id="ofertas" class="m-auto"></div>
@@ -18,4 +23,5 @@
     
     @vite('resources/js/app.js')
 </body>
+
 </html>
