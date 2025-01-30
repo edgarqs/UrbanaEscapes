@@ -15,8 +15,8 @@
     <div id="header" class="m-auto"></div>
     <div id="hero" class="m-auto"></div>
     <div id="valorscorporatius" class="m-auto"></div>
-    <div id="hotels" class="m-auto"></div>
     <div id="ofertas" class="m-auto"></div>
+    <div id="noticies" class="m-auto"></div>
     <div id="footer" class="m-auto"></div>
     
     @vite('resources/js/app.js')

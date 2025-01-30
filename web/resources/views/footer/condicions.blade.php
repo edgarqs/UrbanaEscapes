@@ -19,6 +19,7 @@
     </style>
 </head>
 <body>
+<div id="header" class="m-auto"></div>
     <h1>Condicions d'ús</h1>
 
     <h2>1. Aceptación de las condiciones</h2>

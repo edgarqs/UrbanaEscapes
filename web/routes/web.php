@@ -11,9 +11,9 @@ Route::get('/habitacions', [HabitacionsController::class, 'index'])
     ->name('habitacionsDisponibles');
 
 Route::get('/condicions', function () {
-    return view('condicions');
+    return view('footer/condicions');
 })->name('condicions');
 
 Route::get('/privacitat', function () {
-    return view('privacitat');
+    return view('footer/privacitat');
 })->name('privacitat');
