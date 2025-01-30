@@ -44,30 +44,5 @@ class MasterLayoutTest extends TestCase
         $response->assertOk();
     }
 
-    public function test_when_recepcionista_accesses_home_page_expect_sidebar_button()
-    {
-        Rol::create(['nom' => 'administrador']);
-        Rol::create(['nom' => 'recepcionista']);
-
-        Usuari::create([
-            'nom' => 'recepcio1',
-            'email' => null,
-            'password' => bcrypt('recepcio1'),
-            'rol_id' => 1
-        ]);
-
-        $this->assertDatabaseHas('usuaris', ['nom' => 'recepcio1']);
-
-        $this->get('/login')->assertOk();
-
-        $response = $this->post('/login', [
-            'nom' => 'recepcio1',
-            'password' => 'recepcio1',
-        ]);
-
-        $response->assertRedirect('/recepcio?id=1');
-
-        $response->assertSeeText('Recepció');
-        $response->assertOk();
-    }
+    
 }

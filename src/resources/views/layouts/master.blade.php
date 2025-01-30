@@ -69,9 +69,9 @@
 
                 <!-- Tornar (/) -->
                 <li>
-                    <a href="javascript:window.history.back();"><span
-                            class="material-symbols-outlined">arrow_back</span>Tornar</a>
+                    <a href="javascript:void(0);" onclick="Tornar()"><span class="material-symbols-outlined">arrow_back</span>Tornar</a>
                 </li>
+                
 
                 <!-- Tancar sessió -->
                 <li>
