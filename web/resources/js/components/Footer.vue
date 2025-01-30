@@ -52,8 +52,8 @@ a:hover {
           <div>
             <h3 class="text-lg font-semibold mb-4">Polítiques</h3>
             <ul class="space-y-2">
-              <li><a href="#" class="text-sm">Condicions d'ús</a></li>
-              <li><a href="#" class="text-sm">Privacitat</a></li>
+              <li><a href="condicions" class="text-sm">Condicions d'ús</a></li>
+              <li><a href="privacitat" class="text-sm">Privacitat</a></li>
             </ul>
           </div>
 
@@ -63,19 +63,19 @@ a:hover {
             <ul class="flex space-x-4">
               <li>
                 <a href="#" class="text-sm">
-                  <img src="" alt="YouTube" class="w-5 h-5 inline-block mr-2" />
+                  <img src="https://cdn-icons-png.flaticon.com/512/174/174883.png" alt="YouTube" class="w-5 h-5 inline-block mr-2" />
                   YouTube
                 </a>
               </li>
               <li>
                 <a href="#" class="text-sm">
-                  <img src="" alt="TikTok" class="w-5 h-5 inline-block mr-2" />
+                  <img src="https://cdn-icons-png.flaticon.com/512/3116/3116491.png" alt="TikTok" class="w-5 h-5 inline-block mr-2" />
                   TikTok
                 </a>
               </li>
               <li>
                 <a href="#" class="text-sm">
-                  <img src="" alt="Facebook" class="w-5 h-5 inline-block mr-2" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1200px-2021_Facebook_icon.svg.png" alt="Facebook" class="w-5 h-5 inline-block mr-2" />
                   Facebook
                 </a>
               </li>
