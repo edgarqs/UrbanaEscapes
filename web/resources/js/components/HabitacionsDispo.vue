@@ -1,53 +1,3 @@
-<style scoped>
-h1 {
-    text-align: center;
-    margin: 20px 0;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.5;
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-.card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 1rem 0;
-    overflow: hidden;
-    padding: 1rem;
-}
-
-.card img {
-    border-radius: 0.5rem;
-    object-fit: cover;
-    width: 200px;
-    height: 150px;
-    margin-right: 1rem;
-}
-
-.card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.card-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.card-text {
-    font-size: 1rem;
-    color: #4a5568;
-    margin-bottom: 0.5rem;
-}
-</style>
-
 <template>
     <h1>Habitacions</h1>
     <div class="container mx-auto p-4">
@@ -65,7 +15,8 @@ h1 {
             No s'ha pogut conectar amb el servidor. Si us plau, torna a intentar-ho més tard.
         </div>
     </div>
-</template> 
+</template>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     fetch('http://localhost:8000/api/v1/habitacions')
@@ -79,34 +30,34 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data && data.length > 0) {
                 data.forEach(habitacio => {
                     const card = document.createElement('div');
-                    card.classList.add('bg-gray-100', 'rounded-lg', 'shadow-lg', 'w-72', 'p-4', 'm-4', 'h-auto');
+                    card.classList.add('card');
 
                     const cardBody = document.createElement('div');
-                    cardBody.classList.add('space-y-4');
+                    cardBody.classList.add('card-body');
 
                     const cardTitle = document.createElement('h5');
-                    cardTitle.classList.add('text-xl', 'font-bold');
+                    cardTitle.classList.add('card-title');
                     cardTitle.textContent = `Habitació ${habitacio.numHabitacion}`;
 
                     // Add a single image
                     const imageContainer = document.createElement('div');
-                    imageContainer.classList.add('image-container', 'space-y-2');
+                    imageContainer.classList.add('image-container');
 
                     const cardImage = document.createElement('img');
                     cardImage.src = `https://picsum.photos/200/150?random=${Math.floor(Math.random() * 1000)}`;
                     cardImage.alt = `Habitació ${habitacio.numHabitacion}`;
-                    cardImage.classList.add('w-full', 'h-48', 'object-cover', 'rounded-t-lg');
+                    cardImage.classList.add('card-image');
                     imageContainer.appendChild(cardImage);
 
                     const dataFields = [
                         { label: 'Tipus', value: habitacio.tipus },
-                        { label: 'Descripció', value: habitacio.descripcio },
+                        { label: 'Descripció', value: 'Aquesta és una descripció falsa.' },
                         { label: 'Capacitat', value: `${habitacio.llits + habitacio.llits_supletoris} persones` }
                     ];
 
                     dataFields.forEach(field => {
                         const fieldElement = document.createElement('p');
-                        fieldElement.classList.add('text-sm');
+                        fieldElement.classList.add('card-text');
                         fieldElement.innerHTML = `<strong>${field.label}:</strong> ${field.value}`;
                         cardBody.appendChild(fieldElement);
                     });
