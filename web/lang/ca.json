@@ -1,0 +1,43 @@
+{
+  "politiques": "Polítiques",
+  "condicions-us": "Condicions d'ús",
+  "privacitat": "Privacitat",
+  "xarxes": "Xarxes Socials",
+
+  "habitacions-titol": "Habitacions",
+
+  "inicio": "Inici",
+  "sobre-nosaltres": "Sobre nosaltres",
+  "serveis": "Serveis",
+  "contacte": "Contacte",
+
+  "noticies-titol": "Notícies",
+  "noticia-1-titol": "Obertura d'un nou resort a Bali",
+  "noticia-1-descripcio": "Aquest mes, inaugurem el nostre nou resort a Bali, amb vistes espectaculars a l'oceà i activitats exclusives per als hostes.",
+  "noticia-2-titol": "Promoció especial per a parelles",
+  "noticia-2-descripcio": "Gaudeix d'un paquet romàntic a qualsevol de les nostres seus amb descomptes exclusius per a parelles fins a final de mes.",
+  "noticia-3-titol": "Renovació a les nostres instal·lacions",
+  "noticia-3-descripcio": "Hem renovat les nostres habitacions i àrees comunes per garantir la màxima comoditat i luxe a la teva estada.",
+  "noticia-4-titol": "El nostre compromís amb la sostenibilitat",
+  "noticia-4-descripcio": "Ens enorgulleix anunciar la nostra certificació com un hotel eco-friendly, amb pràctiques sostenibles a totes les nostres operacions.",
+
+  "ofertas-titol": "¡¡OFERTAS EXCLUSIVAS!",
+  "ofertas-subtitulo": "Reserva ahora y ahorra hasta un 30%",
+  "ofertas-boto": "VER OFERTAS",
+
+  "cerca-destinacio": "Destinació",
+  "cerca-inici": "Data d'inici",
+  "cerca-final": "Data final",
+  "cerca-persones": "Quantitat de persones",
+  "cerca-boto": "Cerca",
+
+  "valors-titol": "Valors Corporatius",
+  "valors-historia-titol": "La Nostra Història",
+  "valors-historia-descripcio": "Des dels inicis, vam néixer amb la missió de redefinir l’hospitalitat, combinant elegància, confort i atenció al detall. Amb presència en diverses destinacions, seguim creant experiències inoblidables que són refugi per als viatgers d’avui.",
+  "valors-valors-titol": "Els Nostres Valors",
+  "valors-sostenibilitat": "Sostenibilitat: Reduïm residus, fomentem l’eficiència energètica i col·laborem amb iniciatives locals.",
+  "valors-atencio-client": "Atenció al Client: Servei personalitzat i atent, amb cura pels detalls que marquen la diferència.",
+  "valors-compromis-comunitat": "Compromís amb la Comunitat: Integram la cultura local i donem suport al desenvolupament d’empreses i comunitats locals.",
+  "valors-filosofia-titol": "La Nostra Filosofia",
+  "valors-filosofia-descripcio": "Cadena d’hotels amb l’objectiu de redefinir l’hospitalitat, combinant elegància, calidesa i atenció impecable per oferir experiències úniques en diverses destinacions."
+}

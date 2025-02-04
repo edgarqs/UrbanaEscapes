@@ -20,7 +20,7 @@
                 "cwd": "${workspaceFolder}/src"
             },
             "problemMatcher": []
-        },
+        },/*
         {
             "label": "Servidor PHP - Proyecto 2",
             "type": "shell",
@@ -30,7 +30,7 @@
                 "cwd": "${workspaceFolder}/web"
             },
             "problemMatcher": []
-        },
+        },*/
         {
             "label": "Frontend - Proyecto 2",
             "type": "shell",
@@ -46,8 +46,8 @@
             "type": "shell",
             "dependsOn": [
                 "Servidor PHP - Proyecto 1",
-                "Frontend - Proyecto 1",
-                "Servidor PHP - Proyecto 2",
+                "Frontend - Proyecto 1",/*
+                "Servidor PHP - Proyecto 2",*/
                 "Frontend - Proyecto 2"
             ],
             "problemMatcher": []
