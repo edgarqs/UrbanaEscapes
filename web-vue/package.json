@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "sass public/sass/main.scss public/css/styles.css && vite build",
+    "build": "sass src/sass/main.scss public/css/styles.css && vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
@@ -13,11 +13,12 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "sass": "sass --watch scss:css",
-    "build-css": "sass public/sass/main.scss public/css/styles.css"
+    "build-css": "sass src/sass/main.scss public/css/styles.css && vite build"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.3",
     "vue": "^3.5.13",
+    "vue-i18n": "^10.0.5",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {

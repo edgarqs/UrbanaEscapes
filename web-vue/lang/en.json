@@ -1,0 +1,43 @@
+{
+  "politiques": "Policies",
+  "condicions-us": "Terms of Use",
+  "privacitat": "Privacy",
+  "xarxes": "Social Media",
+
+  "habitacions-titol": "Rooms",
+
+  "inicio": "Home",
+  "sobre-nosaltres": "About Us",
+  "serveis": "Services",
+  "contacte": "Contact",
+
+  "noticies-titol": "News",
+  "noticia-1-titol": "Opening of a New Resort in Bali",
+  "noticia-1-descripcio": "This month, we are opening our new resort in Bali, with spectacular ocean views and exclusive activities for guests.",
+  "noticia-2-titol": "Special Promotion for Couples",
+  "noticia-2-descripcio": "Enjoy a romantic package at any of our locations with exclusive discounts for couples until the end of the month.",
+  "noticia-3-titol": "Renovation of Our Facilities",
+  "noticia-3-descripcio": "We have renovated our rooms and common areas to ensure maximum comfort and luxury during your stay.",
+  "noticia-4-titol": "Our Commitment to Sustainability",
+  "noticia-4-descripcio": "We are proud to announce our certification as an eco-friendly hotel, with sustainable practices in all our operations.",
+
+  "ofertas-titol": "EXCLUSIVE OFFERS!",
+  "ofertas-subtitulo": "Book now and save up to 30%",
+  "ofertas-boto": "VIEW OFFERS",
+
+  "cerca-destinacio": "Destination",
+  "cerca-inici": "Start Date",
+  "cerca-final": "End Date",
+  "cerca-persones": "Number of People",
+  "cerca-boto": "Search",
+
+  "valors-titol": "Corporate Values",
+  "valors-historia-titol": "Our History",
+  "valors-historia-descripcio": "Since the beginning, we have been committed to redefining hospitality, combining elegance, comfort, and attention to detail. With a presence in various destinations, we continue creating unforgettable experiences that serve as a refuge for today’s travelers.",
+  "valors-valors-titol": "Our Values",
+  "valors-sostenibilitat": "Sustainability: We reduce waste, promote energy efficiency, and collaborate with local initiatives.",
+  "valors-atencio-client": "Customer Service: Personalized and attentive service, with attention to details that make a difference.",
+  "valors-compromis-comunitat": "Commitment to the Community: We integrate local culture and support the development of local businesses and communities.",
+  "valors-filosofia-titol": "Our Philosophy",
+  "valors-filosofia-descripcio": "A hotel chain with the goal of redefining hospitality, combining elegance, warmth, and impeccable service to offer unique experiences in various destinations."
+}
