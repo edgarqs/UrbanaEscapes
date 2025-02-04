@@ -54,7 +54,7 @@ a:hover {
             <h3 class="text-lg font-semibold mb-4">{{ $t('politiques') }}</h3>
             <ul class="space-y-2">
               <li><a href="condicions" class="text-sm">{{ $t('condicions-us') }}</a></li>
-              <li><a href="privacitat" class="text-sm">{{ $t('privacitat') }}</a></li>
+              <li><a href="politica" class="text-sm">{{ $t('privacitat') }}</a></li>
             </ul>
           </div>
 

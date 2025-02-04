@@ -4,7 +4,6 @@
   "privacitat": "Privacy",
   "xarxes": "Social Media",
 
-  "habitacions-titol": "Rooms",
 
   "inici": "Home",
   "sobre-nosaltres": "About Us",
@@ -39,5 +38,58 @@
   "valors-atencio-client": "Customer Service: Personalized and attentive service, with attention to details that make a difference.",
   "valors-compromis-comunitat": "Commitment to the Community: We integrate local culture and support the development of local businesses and communities.",
   "valors-filosofia-titol": "Our Philosophy",
-  "valors-filosofia-descripcio": "A hotel chain with the goal of redefining hospitality, combining elegance, warmth, and impeccable service to offer unique experiences in various destinations."
+  "valors-filosofia-descripcio": "A hotel chain with the goal of redefining hospitality, combining elegance, warmth, and impeccable service to offer unique experiences in various destinations.",
+
+  "habitacions-titol": "Habitacions",
+  "habitacions-habitacio": "Habitació:",
+  "habitacions-tipus": "Tipus:",
+  "habitacions-descripcio": "Descripció:",
+  "habitacions-capacitat": "Capacitat:",
+  "habitaciones-preu": "€ /nit",
+
+  "condicions-acceptacio": "1. Acceptance of Terms",
+  "condicions-acceptacio-descripcio": "By accessing and using our website, you agree to comply with and be bound by the following terms of use. If you do not agree with any part of these terms, you must not use our website.",
+  "condicions-modificacions": "2. Modifications to Terms",
+  "condicions-modificacions-descripcio": "We reserve the right to modify these terms of use at any time. Modifications will be effective immediately upon posting on the website. It is your responsibility to review these terms periodically to be aware of any changes.",
+  "condicions-uso": "3. Use of the Website",
+  "condicions-uso-descripcio": "The content of this website is for your general information and personal use only. It is subject to change without notice. Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose.",
+  "condicions-propiedad": "4. Intellectual Property",
+  "condicions-propiedad-descripcio": "This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited except in accordance with the copyright notice, which forms part of these terms.",
+  "condicions-enlaces": "5. Links to Other Websites",
+  "condicions-enlaces-descripcio": "This website may include links to other websites. These links are provided for your convenience and to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).",
+  "condicions-limitacion": "6. Limitation of Liability",
+  "condicions-limitacion-descripcio": "In no event will we be liable for any loss or damage, including without limitation, indirect or consequential damages, or any loss or damage whatsoever arising from the use of or in connection with the use of this website.",
+  "condicions-ley": "7. Governing Law",
+  "condicions-ley-descripcio": "Your use of this website and any dispute arising out of such use of the website is subject to the laws of [Your Country].",
+  "condicions-contacto": "If you have any questions about these terms of use, please contact us at [your email address].",
+
+
+  "politica-introduccio": "1. Introduction",
+  "politica-introduccio-descripcio": "This privacy policy describes how we collect, use, and protect your personal information when you use our website.",
+  "politica-informacio": "2. Information We Collect",
+  "politica-informacio-descripcio": "We may collect the following information:",
+  "politica-informacio-contacte": "Contact information, including your name, email address, and phone number.",
+  "politica-informacio-demografica": "Demographic information, such as your postal code, preferences, and interests.",
+  "politica-informacio-altres": "Other information relevant to customer surveys and/or offers.",
+  "politica-us": "3. How We Use the Information",
+  "politica-us-descripcio": "We use the information collected to:",
+  "politica-us-serveis": "Provide you with our services.",
+  "politica-us-millorar": "Improve our products and services.",
+  "politica-us-promocions": "Send promotional emails about new products, special offers, or other information we think you may find interesting.",
+  "politica-us-contacte": "Contact you for market research purposes.",
+  "politica-seguretat": "4. Security",
+  "politica-seguretat-descripcio": "We are committed to ensuring that your information is secure. In order to prevent unauthorized access or disclosure, we have put in place suitable physical, electronic, and managerial procedures to safeguard and secure the information we collect online.",
+  "politica-cookies": "5. How We Use Cookies",
+  "politica-cookies-descripcio": "A cookie is a small file which asks permission to be placed on your computer's hard drive. Once you agree, the file is added and the cookie helps analyze web traffic or lets you know when you visit a particular site. Cookies allow web applications to respond to you as an individual. The web application can tailor its operations to your needs, likes, and dislikes by gathering and remembering information about your preferences.",
+  "politica-enllacos": "6. Links to Other Websites",
+  "politica-enllacos-descripcio": "Our website may contain links to other websites of interest. However, once you have used these links to leave our site, you should note that we do not have any control over that other website. Therefore, we cannot be responsible for the protection and privacy of any information which you provide whilst visiting such sites and such sites are not governed by this privacy statement.",
+  "politica-control": "7. Controlling Your Personal Information",
+  "politica-control-descripcio": "You may choose to restrict the collection or use of your personal information in the following ways:",
+  "politica-control-formulari": "Whenever you are asked to fill in a form on the website, look for the box that you can click to indicate that you do not want the information to be used by anybody for direct marketing purposes.",
+  "politica-control-canvi": "If you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by writing to or emailing us at [your email address].",
+  "politica-contacte": "8. Contact",
+  "politica-contacte-descripcio": "If you have any questions about this privacy policy, please contact us at [your email address]."
+
+
+  
 }
