@@ -119,8 +119,8 @@ button {
 
 <template>
   <div class="oferta-container">
-    <h2>¡OFERTAS EXCLUSIVAS!</h2>
-    <h3>Reserva ahora y ahorra hasta un 30%</h3>
-    <button>VER OFERTAS</button>
+    <h2>{{ $t('ofertas-titol')}}</h2>
+    <h3>{{ $t('ofertas-subtitulo')}}</h3>
+    <button>{{ $t('ofertas-boto')}}</button>
   </div>
 </template>

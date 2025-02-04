@@ -94,7 +94,7 @@ h2 {
 
 <template>
   <div class="content">
-    <h2 class="center">Valors Corporatius</h2>
+    <h2 class="center">{{ $t('valors-titol')}}</h2>
 
     <div class="card-list">
       <div class="card">
@@ -102,11 +102,9 @@ h2 {
           <img src="./img/reunio.jpeg" alt="London trip" />
         </div>
         <div class="card-body">
-          <h2>La Nostra Història</h2>
+          <h2>{{ $t('valors-historia-titol') }}</h2>
           <p>
-            Des dels inicis, vam néixer amb la missió de redefinir l’hospitalitat, combinant
-            elegància, confort i atenció al detall. Amb presència en diverses destinacions, seguim
-            creant experiències inoblidables que són refugi per als viatgers d’avui.
+            {{ $t('valors-historia-descripcio') }}
           </p>
         </div>
       </div>
@@ -116,18 +114,15 @@ h2 {
           <img src="./img/placas.jpg" alt="New York trip" />
         </div>
         <div class="card-body">
-          <h2>Els Nostres Valors</h2>
+          <h2>{{ $t('valors-valors-titol') }}</h2>
           <p>
-            <b>Sostenibilitat:</b> Reduïm residus, fomentem l’eficiència energètica i col·laborem
-            amb iniciatives locals.
+            {{ $t('valors-sostenibilitat') }}
           </p>
           <p>
-            <b>Atenció al Client:</b> Servei personalitzat i atent, amb cura pels detalls que
-            marquen la diferència.
+            {{ $t('valors-atencio-client') }}
           </p>
           <p>
-            <b>Compromís amb la Comunitat:</b> Integram la cultura local i donem suport al
-            desenvolupament d’empreses i comunitats locals.
+            {{ $t('valors-compromis-comunitat') }}
           </p>
         </div>
       </div>
@@ -137,10 +132,9 @@ h2 {
           <img src="./img/hotel.jpg" alt="Marrakech trip" />
         </div>
         <div class="card-body">
-          <h2>La Nostra Filosofia</h2>
+          <h2>{{ $t('valors-filosofia-titol')}}</h2>
           <p>
-            Cadena d’hotels amb l’objectiu de redefinir l’hospitalitat, combinant elegància,
-            calidesa i atenció impecable per oferir experiències úniques en diverses destinacions.
+            {{ $t('valors-filosofia-descripcio') }}
           </p>
         </div>
       </div>
