@@ -8,9 +8,10 @@ import ofertas from './components/Ofertas.vue';
 import noticies from './components/Noticies.vue';
 import habitacionsdisponibles from './components/HabitacionsDispo.vue';
 import SearchBar from './components/SearchBar.vue';
-
+import Header1 from './components/Header1.vue';
 
 createApp(Header).mount('#header');
+createApp(Header1).mount('#header1');
 createApp(App).mount('#hero');
 createApp(Vcorpo).mount('#valorscorporatius');
 createApp(ofertas).mount('#ofertas');
