@@ -2,35 +2,30 @@
   <div class="search-bar">
     <!-- Camp de destinació -->
     <div class="search-field">
-      <label for="destination">Destinació</label>
-      <input
-        type="text"
-        id="destination"
-        v-model="destination"
-        placeholder="Ciutat, zona o hotel"
-      />
+      <label for="destination">{{ $t('cerca-destinacio') }}</label>
+      <input type="text" id="destination" v-model="destination" placeholder="Ciutat, zona o hotel" />
     </div>
 
     <!-- Data d'inici -->
     <div class="search-field">
-      <label for="start-date">Data d'inici</label>
+      <label for="start-date">{{ $t('cerca-inici') }}</label>
       <input type="date" id="start-date" v-model="startDate" :min="today" />
     </div>
 
     <!-- Data final -->
     <div class="search-field">
-      <label for="end-date">Data final</label>
+      <label for="end-date">{{ $t('cerca-final') }}</label>
       <input type="date" id="end-date" v-model="endDate" :min="startDate || today" />
     </div>
 
     <!-- Quantitat de persones -->
     <div class="search-field">
-      <label for="people">Quantitat de persones</label>
+      <label for="people">{{ $t('cerca-persones') }}</label>
       <input type="number" id="people" v-model="people" min="1" placeholder="Nombre de persones" />
     </div>
 
     <!-- Botó de cerca -->
-    <button class="search-button" @click="handleSearch">Cerca</button>
+    <button class="search-button" @click="handleSearch">{{ $t('cerca-boto') }}</button>
   </div>
 </template>
 
@@ -77,6 +72,8 @@ export default {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 1000px;
   margin: 0 auto;
+  transform: translateY(-50%);
+  z-index: 2;
 }
 
 .search-field {
