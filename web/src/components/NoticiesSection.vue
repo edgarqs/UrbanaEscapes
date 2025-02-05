@@ -1,53 +1,64 @@
 <style scoped>
+/* Estilos generales */
 h1 {
   text-align: center;
   margin: 20px 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   line-height: 1.5;
   color: #333;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 h2 {
-  font-size: 20px;
-  margin: 0;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  color: #555;
 }
 
 p {
-  font-size: 14px;
+  font-size: 1rem;
   margin: 0.5rem 0;
+  color: #666;
 }
 
-section {
-  width: 100%;
-  max-width: 800px;
-  padding: 4rem 1rem;
-  margin: 0 auto;
-}
-
-section img {
-  width: 100%;
-  max-width: 520px;
-  height: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  margin: 1rem 0;
-  display: block;
-  border-radius: 8px;
-  transform-origin: center;
-}
-
+/* Contenedor de las tarjetas */
 .card-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   @media screen and (max-width: 580px) {
     grid-template-columns: 1fr;
   }
 }
 
+/* Estilo de las tarjetas */
+.card {
+  width: 100%;
+  max-width: 520px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  animation: fade-in linear both;
+  /* view function */
+  animation-timeline: view();
+  animation-range: entry 10% entry 80%;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Animaciones */
 @keyframes scaleProgress {
   from {
     transform: scalex(0);
@@ -70,23 +81,14 @@ section img {
   }
 }
 
-.card {
-  width: 100%;
-  max-width: 520px;
-  padding: 16px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-  animation: fade-in linear both;
-  /* view function */
-  animation-timeline: view();
-  animation-range: entry 10% entry 80%;
+/* Agregar padding al contenedor principal */
+.section-container {
+  padding: 20px 100px; /* Aumentar el padding en los lados */
 }
 </style>
 
 <template>
-  <section>
+  <section class="section-container">
     <h1>{{ $t('noticies-titol')}}</h1>
     <div class="card-container">
       <div class="card">
@@ -112,7 +114,7 @@ section img {
       <div class="card">
         <h2>{{ $t('noticia-3-titol')}}</h2>
         <img
-          src="https://media.discordapp.net/attachments/974294400475738132/1333860959877595156/StayIn_Landing.jpg?ex=679a6e52&is=67991cd2&hm=f5bea5675c04e5cd2fce7dc157805a95a752f0d9ebe2502d9bc5dd5e5619d205&=&format=webp&width=885&height=498"
+          src="https://mep-painting.com/wp-content/uploads/2018/10/hotel-renovation-projects-with-mep-on-hilton-hotel.jpg"
           alt="Renovación hotelera"
         />
         <p>
@@ -127,6 +129,26 @@ section img {
         />
         <p>
           {{ $t('noticia-4-descripcio')}}
+        </p>
+      </div>
+      <div class="card">
+        <h2>{{ $t('noticia-5-titol')}}</h2>
+        <img
+          src="https://www.revistagranhotel.com/wp-content/uploads/HotelTheOriginalsParisMaisonMontmartre-03.jpg"
+          alt="Foto hotel París"
+        />
+        <p>
+          {{ $t('noticia-5-descripcio')}}
+        </p>
+      </div>
+      <div class="card">
+        <h2>{{ $t('noticia-6-titol')}}</h2>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnWiX8RVnb3cYoQs2Ks_TrdmK902ZHUyt2-w&s"
+          alt="Foto de platos de comida"
+        />
+        <p>
+          {{ $t('noticia-6-descripcio')}}
         </p>
       </div>
     </div>
