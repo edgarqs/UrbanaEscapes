@@ -50,11 +50,14 @@ export default {
       }
 
       // Redirigir a la pàgina d'habitacions disponibles (RW03)
-      this.$emit('search', {
-        destination: this.destination,
-        startDate: this.startDate,
-        endDate: this.endDate,
-        people: this.people,
+      this.$router.push({
+        name: 'habitacions',
+        query: {
+          destination: this.destination,
+          startDate: this.startDate,
+          endDate: this.endDate,
+          people: this.people,
+        },
       })
     },
   },
