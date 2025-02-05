@@ -11,12 +11,7 @@ class Habitacion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'hotel_id',
-        'numero',
-        'tipo',
-        'precio',
-        'numHabitacion',
-        'estat'
+        'hotel_id', 'tipus', 'llits', 'llits_supletoris', 'preu', 'numHabitacion', 'estat'
     ];
 
     public function reservas()
@@ -46,5 +41,10 @@ class Habitacion extends Model
 
         $capacitat = $llits + $llitsSupletoris;
         return $capacitat;
+    }
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
     }
 }
