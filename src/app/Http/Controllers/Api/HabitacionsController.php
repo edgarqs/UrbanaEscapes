@@ -14,7 +14,7 @@ class HabitacionsController extends Controller
      */
     public function index(): JsonResponse
     {
-        $habitacions = Habitacion::all();
+        $habitacions = Habitacion::with('hotel')->get();
         return response()->json($habitacions);
     }
 
@@ -26,8 +26,8 @@ class HabitacionsController extends Controller
 
     public function show($id): JsonResponse
     {
-        $hotel = Habitacion::findOrFail($id);
-        return response()->json($hotel);
+        $habitacio = Habitacion::with('hotel')->findOrFail($id);
+        return response()->json($habitacio);
     }
 
     public function update(Request $request, $id): JsonResponse

@@ -24,16 +24,16 @@ class HabitacionFactory extends Factory
 
         switch ($tipus) {
             case 'Estandar':
-                $preu = $faker->randomFloat(2, 50, 100);
+                $preu = $faker->randomFloat(2, 40, 80);
                 break;
             case 'Deluxe':
-                $preu = $faker->randomFloat(2, 100, 150);
+                $preu = $faker->randomFloat(2, 80, 130);
                 break;
             case 'Suite':
-                $preu = $faker->randomFloat(2, 150, 200);
+                $preu = $faker->randomFloat(2, 130, 200);
                 break;
             case 'Adaptada':
-                $preu = $faker->randomFloat(2, 100, 200);
+                $preu = $faker->randomFloat(2, 80, 130);
                 break;
         }
         

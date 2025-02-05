@@ -11,7 +11,7 @@ class ReservesController extends Controller
 {
     public function index(): JsonResponse
     {
-        $reserves = Reservas::all();
+        $reserves = Reservas::with(['habitacion.hotel', 'usuari'])->get();
         return response()->json($reserves);
     }
 
@@ -23,7 +23,7 @@ class ReservesController extends Controller
 
     public function show($id): JsonResponse
     {
-        $reserva = Reservas::findOrFail($id);
+        $reserva = Reservas::with(['habitacion.hotel', 'usuari'])->findOrFail($id);
         return response()->json($reserva);
     }
 
