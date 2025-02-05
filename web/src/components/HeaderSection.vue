@@ -82,13 +82,13 @@ body {
             to="/"
             class="text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300"
           >
-            Home
+          {{ $t('inici') }}
           </RouterLink>
           <RouterLink
             to="/about"
             class="text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300"
           >
-            About
+          {{ $t('sobre-nosaltres') }}
           </RouterLink>
 
           <RouterLink
@@ -145,10 +145,9 @@ body {
 
     <!-- Mobile menu -->
     <div v-if="menuOpen" class="block lg:hidden bg-gray-50 p-4">
-      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded"> Home </a>
-      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded"> About </a>
-      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded"> Services </a>
-      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded"> Contact </a>
+      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded"> {{ $t('inici') }} </a>
+      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded"> {{ $t('sobre-nosaltres') }} </a>
+      <a href="#" class="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded"> Login </a>
     </div>
   </header>
 </template>

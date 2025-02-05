@@ -51,16 +51,16 @@ a:hover {
 
           <!-- Políticas -->
           <div>
-            <h3 class="text-lg font-semibold mb-4">Polítiques</h3>
+            <h3 class="text-lg font-semibold mb-4">{{ $t('politiques') }}</h3>
             <ul class="space-y-2">
-              <li><a href="condicions" class="text-sm">Condicions d'ús</a></li>
-              <li><a href="privacitat" class="text-sm">Privacitat</a></li>
+              <li><a href="condicions" class="text-sm">{{ $t('condicions-us') }}</a></li>
+              <li><a href="politica" class="text-sm">{{ $t('privacitat') }}</a></li>
             </ul>
           </div>
 
           <!-- Redes sociales -->
           <div>
-            <h3 class="text-lg font-semibold mb-4">Xarxes Socials</h3>
+            <h3 class="text-lg font-semibold mb-4">{{ $t('xarxes') }}</h3>
             <ul class="flex space-x-4">
               <li>
                 <a href="#" class="text-sm">
