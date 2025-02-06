@@ -4,7 +4,6 @@
   "privacitat": "Privacidad",
   "xarxes": "Redes Sociales",
 
-
   "inici": "Inicio",
   "sobre-nosaltres": "Sobre Nosotros",
   "serveis": "Servicios",
@@ -19,7 +18,7 @@
   "noticia-3-descripcio": "Hemos renovado nuestras habitaciones y áreas comunes para garantizar la máxima comodidad y lujo durante tu estancia.",
   "noticia-4-titol": "Compromiso con la Sostenibilidad",
   "noticia-4-descripcio": "Nos enorgullece anunciar nuestra certificación como un hotel ecológico, con prácticas sostenibles en todas nuestras operaciones.",
-    "noticia-5-titol": "Nueva Apertura en París",
+  "noticia-5-titol": "Nueva Apertura en París",
   "noticia-5-descripcio": "Estamos emocionados de anunciar la apertura de nuestro nuevo hotel en París, ubicado en el corazón de la ciudad.",
   "noticia-6-titol": "Evento de Gastronomía",
   "noticia-6-descripcio": "Únete a nosotros para un evento exclusivo de gastronomía con chefs de renombre mundial.",
@@ -33,6 +32,9 @@
   "cerca-final": "Fecha final",
   "cerca-persones": "Cantidad de personas",
   "cerca-boto": "Buscar",
+  "error-destinacio": "Debes completar el campo de destino",
+  "error-start-date": "El campo de fecha de inicio es obligatorio y debe ser una fecha futura",
+  "error-end-date": "El campo de fecha final es obligatorio y debe ser una fecha posterior a la fecha de inicio",
 
   "valors-titol": "Valores Corporativos",
   "valors-historia-titol": "Nuestra Historia",
@@ -92,5 +94,4 @@
   "politica-control-canvi": "Si previamente has aceptado que utilicemos tu información personal para fines de marketing directo, puedes cambiar de opinión en cualquier momento escribiéndonos o enviándonos un correo electrónico a [tu correo electrónico].",
   "politica-contacte": "8. Contacto",
   "politica-contacte-descripcio": "Si tienes alguna pregunta sobre esta política de privacidad, por favor contáctanos en [tu correo electrónico]."
-
 }

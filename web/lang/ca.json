@@ -4,7 +4,6 @@
   "privacitat": "Privacitat",
   "xarxes": "Xarxes Socials",
 
-
   "inici": "Inici",
   "sobre-nosaltres": "Sobre nosaltres",
   "serveis": "Serveis",
@@ -23,7 +22,7 @@
   "noticia-5-descripcio": "Estem emocionats d'anunciar l'obertura del nostre nou hotel a París, situat al cor de la ciutat.",
   "noticia-6-titol": "Esdeveniment de Gastronomia",
   "noticia-6-descripcio": "Uneix-te a nosaltres per a un esdeveniment exclusiu de gastronomia amb xefs de renom mundial.",
-  
+
   "ofertas-titol": "OFERTES EXCLUSIVES!",
   "ofertas-subtitulo": "Reserva ara i ahorra fins un 30%",
   "ofertas-boto": "VER OFERTAS",
@@ -33,6 +32,9 @@
   "cerca-final": "Data final",
   "cerca-persones": "Quantitat de persones",
   "cerca-boto": "Cerca",
+  "error-destinacio": "Has d'omplir el camp de destinació",
+  "error-start-date": "El camp de data d'inici és obligatori i ha de ser una data futura",
+  "error-end-date": "El camp de data final és obligatori i ha de ser una data posterior a la data d'inici",
 
   "valors-titol": "Valors Corporatius",
   "valors-historia-titol": "La Nostra Història",
@@ -92,6 +94,4 @@
   "politica-control-canvi": "Si prèviament has acceptat que utilitzem la teva informació personal per a finalitats de màrqueting directe, pots canviar d'opinió en qualsevol moment escrivint-nos o enviant-nos un correu electrònic a [tu correu electrònic].",
   "politica-contacte": "8. Contacte",
   "politica-contacte-descripcio": "Si tens alguna pregunta sobre aquesta política de privacitat, si us plau contacta'ns a [tu correu electrònic]."
-
-
 }
