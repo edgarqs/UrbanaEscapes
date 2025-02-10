@@ -8,12 +8,29 @@
         </a>
       </div>
 
-      <!-- Hamburger Menu Button -->
-      <button @click="toggleMenu" class="lg:hidden" :class="{'text-white': !scrolled, 'text-gray-800': scrolled}">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
-      </button>
+      <!-- Navigation and icons -->
+      <div class="flex items-center space-x-6">
+        <!-- Hamburger menu button -->
+        <button
+          @click="toggleMenu"
+          class="block lg:hidden focus:outline-none text-gray-800"
+          aria-label="Toggle Menu"
+        > 
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
 
       <!-- Navigation -->
       <div :class="{'block': menuOpen, 'hidden': !menuOpen}" class="lg:flex lg:items-center lg:space-x-6 absolute lg:relative top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-lg lg:shadow-none p-4 lg:p-0">
