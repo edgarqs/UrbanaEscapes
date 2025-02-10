@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
 import emailjs from 'emailjs-com';
-import Header from '../components/HeaderSection.vue';
+import Header from '../components/HeaderStaticSection.vue';
 import Footer from '../components/FooterSection.vue';
 
 const habitacio = ref(null);
@@ -66,7 +66,7 @@ const verificarCodigo = () => {
 <template>
   <main>
     <Header />
-    <RouterLink to="/habitacions" class="tornar text-blue-500">Tornar</RouterLink>
+    <RouterLink to="/habitacions" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Tornar</RouterLink>
 
     <div v-if="mostrarReserva" class="reservas flex flex-col m-4 justify-center items-center">
       <div class="flex justify-between p-4 px-8">
