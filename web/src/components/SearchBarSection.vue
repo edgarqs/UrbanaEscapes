@@ -227,7 +227,7 @@ export default {
 .search-button {
   flex: 1;
   padding: 0.75rem;
-  background-color: rgb(255, 136, 0);
+  background-color: #f97316;
   color: white;
   border: none;
   border-radius: 8px;
@@ -243,7 +243,7 @@ export default {
 }
 
 .search-button:hover {
-  background-color: rgb(220, 100, 0);
+  background-color: #fb923c;
 }
 
 .error-message {

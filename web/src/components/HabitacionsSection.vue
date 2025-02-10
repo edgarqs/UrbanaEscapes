@@ -24,7 +24,7 @@
                                 </span>
                                 <p class="text-s text-gray-500">(Preu per {{ numNights }} nits i {{ numPeople }} persones)</p>
                             </div>
-                            <button class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mt-4">Reservar</button>
+                            <button class="focus:outline-none text-white bg-orange-500 hover:bg-orange-400 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mt-4">Reservar</button>
                         </div>
                     </div>
                 </div>
