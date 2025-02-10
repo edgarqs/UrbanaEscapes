@@ -1,47 +1,3 @@
-<style scoped>
-.logo {
-  width: 20%;
-  height: auto;
-  aspect-ratio: 2 / 1;
-}
-
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  opacity: 0;
-  transform: translateY(-100%);
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.8); /* Blanco semitransparente */
-  backdrop-filter: blur(10px); /* Difuminado */
-  -webkit-backdrop-filter: blur(10px); /* Soporte en navegadores WebKit */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px;
-}
-
-/* Header visible */
-header.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Siempre mostrar el header en pantallas pequeñas */
-@media (max-width: 1024px) {
-  header {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-}
-
-/* Adicional para contenido debajo del header */
-body {
-  margin-top: 70px; /* Ajusta según la altura del header */
-}
-</style>
-
 <template>
   <header :class="{ visible: isHeaderVisible }" class="bg-gray-50">
     <nav class="max-w-7xl mx-auto flex items-center justify-between p-4">
@@ -153,6 +109,8 @@ body {
 </template>
 
 <script>
+import i18n from '../../plugins/i18n'
+
 export default {
   name: 'Navbar',
   data() {
@@ -185,6 +143,7 @@ export default {
     },
     changeLanguage(lang) {
       this.currentLanguage = lang
+      i18n.global.locale.value = lang.code
       this.languageDropdownOpen = false
     },
     handleScroll() {
@@ -199,3 +158,47 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.logo {
+  width: 20%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.8); /* Blanco semitransparente */
+  backdrop-filter: blur(10px); /* Difuminado */
+  -webkit-backdrop-filter: blur(10px); /* Soporte en navegadores WebKit */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px;
+}
+
+/* Header visible */
+header.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Siempre mostrar el header en pantallas pequeñas */
+@media (max-width: 1024px) {
+  header {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+/* Adicional para contenido debajo del header */
+body {
+  margin-top: 70px; /* Ajusta según la altura del header */
+}
+</style>

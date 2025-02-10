@@ -4,7 +4,6 @@
   "privacitat": "Privacy",
   "xarxes": "Social Media",
 
-
   "inici": "Home",
   "sobre-nosaltres": "About Us",
   "serveis": "Services",
@@ -33,6 +32,9 @@
   "cerca-final": "End Date",
   "cerca-persones": "Number of People",
   "cerca-boto": "Search",
+  "error-destinacio": "You must complete the destination field",
+  "error-start-date": "The start date field is required and must be a future date",
+  "error-end-date": "The end date field is required and must be a date after the start date",
 
   "valors-titol": "Corporate Values",
   "valors-historia-titol": "Our History",
@@ -49,7 +51,7 @@
   "habitacions-tipus": "Tipus:",
   "habitacions-descripcio": "Descripció:",
   "habitacions-capacitat": "Capacitat:",
-  "habitaciones-preu": "€ /nit",
+  "habitacions-preu": "€ /nit",
 
   "condicions-acceptacio": "1. Acceptance of Terms",
   "condicions-acceptacio-descripcio": "By accessing and using our website, you agree to comply with and be bound by the following terms of use. If you do not agree with any part of these terms, you must not use our website.",
@@ -66,7 +68,6 @@
   "condicions-ley": "7. Governing Law",
   "condicions-ley-descripcio": "Your use of this website and any dispute arising out of such use of the website is subject to the laws of [Your Country].",
   "condicions-contacto": "If you have any questions about these terms of use, please contact us at [your email address].",
-
 
   "politica-introduccio": "1. Introduction",
   "politica-introduccio-descripcio": "This privacy policy describes how we collect, use, and protect your personal information when you use our website.",
@@ -93,7 +94,4 @@
   "politica-control-canvi": "If you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by writing to or emailing us at [your email address].",
   "politica-contacte": "8. Contact",
   "politica-contacte-descripcio": "If you have any questions about this privacy policy, please contact us at [your email address]."
-
-
-  
 }
