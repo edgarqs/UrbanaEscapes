@@ -4,7 +4,9 @@ import LoginView from '@/views/LoginView.vue'
 import AboutView from '@/views/AboutView.vue'
 import HabitacionsView from '@/views/HabitacionsView.vue'
 import PoliticaView from '../views/PoliticaView.vue'
+import CompraView from '../views/CompraView.vue'
 import CondicionsView from '../views/CondicionsView.vue'
+import ReservaView from '../views/ReservaView.vue'
 
 
 const router = createRouter({
@@ -42,6 +44,16 @@ const router = createRouter({
       name: 'condicions',
       component: CondicionsView,
     },
+    {
+      path: '/reserva/:id',
+      name: 'reserva',
+      component: ReservaView,
+    },
+    {
+      path: '/compra/:id',
+      name: 'compra',
+      component: CompraView,
+    }
   ],
 })
 
