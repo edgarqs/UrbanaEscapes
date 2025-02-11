@@ -93,5 +93,12 @@
   "politica-control-formulari": "Quan se't demani que omplis un formulari al lloc web, busca la casella que pots fer clic per indicar que no vols que la informació sigui utilitzada per ningú amb finalitats de màrqueting directe.",
   "politica-control-canvi": "Si prèviament has acceptat que utilitzem la teva informació personal per a finalitats de màrqueting directe, pots canviar d'opinió en qualsevol moment escrivint-nos o enviant-nos un correu electrònic a [tu correu electrònic].",
   "politica-contacte": "8. Contacte",
-  "politica-contacte-descripcio": "Si tens alguna pregunta sobre aquesta política de privacitat, si us plau contacta'ns a [tu correu electrònic]."
+  "politica-contacte-descripcio": "Si tens alguna pregunta sobre aquesta política de privacitat, si us plau contacta'ns a [tu correu electrònic].",
+
+  "dades-reserva-titol": "Dades de la Reserva",
+  "resum-pagament-titol": "Resum del Pagament",
+  "boton-copia-adreca": "Copia l'adreça",
+  "boton-pagar": "Pagar",
+
+  "cargando-datos": "Carregant dades..."
 }

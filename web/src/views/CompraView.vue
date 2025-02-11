@@ -40,6 +40,11 @@ onMounted(() => {
       console.error('Error fetching data:', error);
     });
 });
+
+function copyAddress() {
+  const address = `${hotels.value.adreca}, ${hotels.value.ciutat}, ${hotels.value.pais}`;
+  navigator.clipboard.writeText(address);
+}
 </script>
 
 <template>
@@ -64,7 +69,8 @@ onMounted(() => {
               Habitació {{ habitacio.tipus }}
             </p>
             <p class="text-gray-600 text-sm mt-2" v-if="habitacio">
-              Habitació {{ habitacio.tipus }} amb {{ habitacio.llits }} llits y {{ habitacio.llits_supletoris }} llits supletoris.
+              Habitació {{ habitacio.tipus }} amb {{ habitacio.llits }} llits y {{ habitacio.llits_supletoris }} llits
+              supletoris.
             </p>
             <p class="text-gray-600 text-sm mt-2" v-if="habitacio">
               {{ habitacio.preu }} € per nit
@@ -83,10 +89,11 @@ onMounted(() => {
                 class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
                 Aparcament</span>
             </div>
-            <button class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full" v-if="habitacio">
-              Copia l'adreça
+            <button @click="copyAddress" class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+              v-if="habitacio">
+              {{ $t('boton-copia-adreca') }}
             </button>
-            <p v-else>Cargando datos...</p>
+            <p v-else>{{ $t('cargando-datos') }}</p>
           </div>
         </div>
 
@@ -94,7 +101,7 @@ onMounted(() => {
         <div class="col-span-2"> <!-- Ocupa 1 columna -->
           <!-- Tarjeta 2: Detalles de la Reserva -->
           <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-            <div class="font-bold text-xl mb-4">Dades de la teva reserva</div>
+            <div class="font-bold text-xl mb-4">{{ $t('dades-reserva-titol') }}</div>
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <p class="text-gray-700 font-semibold">Entrada</p>
@@ -120,7 +127,7 @@ onMounted(() => {
 
           <!-- Tarjeta 3: Resumen del Pago -->
           <div class="bg-white rounded-lg shadow-lg p-6">
-            <div class="font-bold text-xl mb-4">Resum del que pagaràs</div>
+            <div class="font-bold text-xl mb-4">{{ $t('resum-pagament-titol') }}</div>
             <div class="space-y-4" v-if="habitacio">
               <div class="flex justify-between">
                 <p class="text-gray-700">Preu original</p>
@@ -134,14 +141,18 @@ onMounted(() => {
                 <div class="flex justify-between">
                   <p class="text-gray-700 font-semibold">TOTAL</p>
                   <p class="text-2xl font-bold text-orange-500">{{ (habitacio.preu * diesTotals - ((habitacio.preu *
-                    diesTotals) /100 * 30)).toFixed(2) }} €</p>
+                    diesTotals) / 100 * 30)).toFixed(2) }} €</p>
                 </div>
               </div>
             </div>
             <div v-else>
-              <p class="text-gray-700">Cargando datos...</p>
+              <p class="text-gray-700">{{ $t('cargando-datos') }}</p>
             </div>
-            <RouteLink class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full">Pagar</RouteLink>
+            <RouterLink to="/review-compra" class="mt-4 w-full">
+              <button class="bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full">
+                {{ $t('boton-pagar') }}
+              </button>
+            </RouterLink>
           </div>
         </div>
       </div>
@@ -163,22 +174,7 @@ h3 {
   margin-bottom: 1.5rem;
 }
 
-.button-pagar{
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  width: 100%;
-
-  
-}
-
-.button-pagar:hover {
-  background-color: #2c5282;
-}
-
-button{
+.button-pagar {
   text-align: center;
   display: inline-block;
   font-size: 16px;
@@ -186,7 +182,11 @@ button{
   cursor: pointer;
   width: 100%;
 }
-button:hover {
-  background-color: #2c5282;
+
+button {
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 </style>
