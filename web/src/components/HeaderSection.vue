@@ -4,7 +4,7 @@
       <!-- Logo -->
       <div class="flex items-center">
         <a href="#" class="text-xl font-bold" :class="{'text-white': !scrolled, 'text-gray-800': scrolled}">
-          <img src="./img/urbana_logo-sinFondo.avif" alt="logo urbana escapes" class="logo" />
+          <img src="./img/urbana_logo-sinFondo.avif" alt="logo urbana escapes" class="logo w-20 h-20 lg:w-24 lg:h-24" />
         </a>
       </div>
 
@@ -17,14 +17,14 @@
 
       <!-- Navigation -->
       <div :class="{'block': menuOpen, 'hidden': !menuOpen}" class="lg:flex lg:items-center lg:space-x-6 absolute lg:relative top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent shadow-lg lg:shadow-none p-4 lg:p-0">
-        <RouterLink to="/" class="block lg:inline-block px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300" :class="{'text-white': !scrolled, 'text-gray-600': scrolled}">{{ $t('inici') }}</RouterLink>
-        <RouterLink to="/about" class="block lg:inline-block px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300" :class="{'text-white': !scrolled, 'text-gray-600': scrolled}">{{ $t('sobre-nosaltres') }}</RouterLink>
-        <RouterLink to="/login" class="block lg:inline-block px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300" :class="{'text-white': !scrolled, 'text-gray-600': scrolled}">Login</RouterLink>
+        <RouterLink to="/" class="block lg:inline-block px-3 py-1 rounded-full hover:bg-gray-100 hover:text-black transition duration-300" :class="{'text-white': !scrolled, 'text-gray-600': scrolled}">{{ $t('inici') }}</RouterLink>
+        <RouterLink to="/about" class="block lg:inline-block px-3 py-1 rounded-full hover:bg-gray-100 hover:text-black transition duration-300" :class="{'text-white': !scrolled, 'text-gray-600': scrolled}">{{ $t('sobre-nosaltres') }}</RouterLink>
+        <RouterLink to="/login" class="block lg:inline-block px-3 py-1 rounded-full hover:bg-gray-100 hover:text-black transition duration-300" :class="{'text-white': !scrolled, 'text-gray-600': scrolled}">Login</RouterLink>
       </div>
 
       <!-- Language selector -->
       <div class="relative hidden lg:block">
-        <button @click="toggleLanguageDropdown" class="flex items-center space-x-2 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 focus:outline-none" :class="{'bg-gray-100 text-gray-800': scrolled, 'bg-transparent text-white': !scrolled}" aria-label="Select Language">
+        <button @click="toggleLanguageDropdown" class="hover:text-black flex items-center space-x-2 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 focus:outline-none" :class="{'bg-gray-100 text-gray-800': scrolled, 'bg-transparent text-white': !scrolled}" aria-label="Select Language">
           <img :src="currentLanguage.flag" alt="Language Flag" class="h-5 w-5 rounded-full" />
           <span class="hidden lg:block">{{ currentLanguage.label }}</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,7 +91,7 @@ export default {
 
 <style scoped>
 .logo {
-  width: auto;
-  height: 50px;
+  width: 8rem;
+  height: auto;
 }
 </style>
