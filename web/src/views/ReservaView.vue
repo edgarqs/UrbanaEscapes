@@ -49,7 +49,7 @@ const sendEmail = () => {
   };
 
   emailjs.send('service_ibvhq01', 'template_h2287v9', templateParams, 'RZvzJ3Yx8E4c1O3tK')
-    .then((response) => {
+    .then(() => {
       mostrarReserva.value = false;
       mostrarVerificacio.value = true;
     })

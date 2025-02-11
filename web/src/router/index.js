@@ -7,6 +7,7 @@ import PoliticaView from '../views/PoliticaView.vue'
 import CompraView from '../views/CompraView.vue'
 import CondicionsView from '../views/CondicionsView.vue'
 import ReservaView from '../views/ReservaView.vue'
+import ReviewCompraView from '@/views/ReviewCompraView.vue'
 
 
 const router = createRouter({
@@ -53,6 +54,11 @@ const router = createRouter({
       path: '/compra/:id',
       name: 'compra',
       component: CompraView,
+    },
+    {
+      path: '/review-compra',
+      name: 'review-compra',
+      component: ReviewCompraView,
     }
   ],
 })
