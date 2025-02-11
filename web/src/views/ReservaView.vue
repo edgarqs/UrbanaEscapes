@@ -31,13 +31,17 @@ const nom = ref('');
 const email = ref('');
 const token = ref(generateToken);
 
-// Manejo de visibilidad de los divs
+
 const mostrarReserva = ref(true);
 const mostrarVerificacio = ref(false);
 const codigoIngresado = ref('');
 const errorMensaje = ref('');
 
+const isLoading = ref(false);
+
 const sendEmail = () => {
+  isLoading.value = true;
+
   const templateParams = {
     to_name: nom.value,
     to_email: email.value,
@@ -46,11 +50,14 @@ const sendEmail = () => {
 
   emailjs.send('service_ibvhq01', 'template_h2287v9', templateParams, 'RZvzJ3Yx8E4c1O3tK')
     .then((response) => {
-      console.log('SUCCESS!', response.status, response.text);
       mostrarReserva.value = false;
       mostrarVerificacio.value = true;
-    }, (error) => {
+    })
+    .catch((error) => {
       console.error('FAILED...', error);
+    })
+    .finally(() => {
+      isLoading.value = false;
     });
 };
 
@@ -96,7 +103,7 @@ const verificarCodigo = () => {
               <label for="to_email">Correu electrònic:</label>
               <input type="email" id="to_email" v-model="email" required>
             </div>
-            <button type="submit">Enviar</button>
+            <button type="submit" :disabled="isLoading">Enviar</button>
           </form>
         </div>
       </div>
@@ -111,6 +118,11 @@ const verificarCodigo = () => {
       <button @click="verificarCodigo">Confirmar reserva</button>
 
       <p v-if="errorMensaje" class="text-red-500 mt-2">{{ errorMensaje }}</p>
+    </div>
+
+  
+    <div v-if="isLoading" class="loading-overlay">
+      <div class="loading-spinner"></div>
     </div>
 
     <Footer />
@@ -151,5 +163,32 @@ button:hover {
 
 .text-red-500 {
   color: red;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
