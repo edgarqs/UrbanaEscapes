@@ -5,48 +5,59 @@
       <nav class="max-w-7xl mx-auto flex items-center justify-between p-4 h-full">
         <!-- Logo -->
         <div class="flex items-center">
-          <a href="#" class="text-xl font-bold text-gray-800">
+          <a href="/" class="text-xl font-bold text-gray-800">
             <img src="./img/urbana_logo-sinFondo.avif" alt="logo urbana escapes" class="logo" />
           </a>
         </div>
 
-        <!-- Hamburger Menu Button -->
-        <button @click="toggleMenu" class="lg:hidden text-gray-800 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
-
-        <!-- Navigation -->
-        <div :class="{'block': menuOpen, 'hidden': !menuOpen}" class="lg:flex lg:items-center lg:justify-center lg:space-x-6 lg:static lg:bg-transparent lg:shadow-none lg:p-0 absolute top-16 left-0 w-full bg-white shadow-lg p-4 text-center">
-          <RouterLink to="/" class="block lg:inline-block text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300">{{ $t('inici') }}</RouterLink>
-          <RouterLink to="/about" class="block lg:inline-block text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300">{{ $t('sobre-nosaltres') }}</RouterLink>
-          <RouterLink to="/login" class="block lg:inline-block text-gray-600 hover:text-gray-800 px-3 py-1 rounded-full hover:bg-gray-100 transition duration-300">Login</RouterLink>
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center justify-center flex-grow space-x-6">
+          <a href="/" class="text-gray-800 hover:text-gray-600">{{ $t('inici') }}</a>
+          <span class="text-orange-500">|</span>
+          <a href="/about" class="text-gray-800 hover:text-gray-600">{{ $t('sobre-nosaltres') }}</a>
+          <span class="text-orange-500">|</span>
+          <a href="/contact" class="text-gray-800 hover:text-gray-600">{{ $t('contacte') }}</a>
         </div>
 
-        <!-- Language selector -->
-        <div class="relative hidden lg:block">
-          <button @click="toggleLanguageDropdown" class="flex items-center space-x-2 px-3 py-1 bg-gray-100 text-gray-800 rounded-full hover:bg-gray-200 transition duration-300 focus:outline-none" aria-label="Select Language">
-            <img :src="currentLanguage.flag" alt="Language Flag" class="h-5 w-5 rounded-full" />
-            <span class="hidden lg:block">{{ currentLanguage.label }}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        <div class="flex items-center space-x-4">
+          <!-- Hamburger Menu Button -->
+          <button @click="toggleMenu" class="lg:hidden text-gray-800 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
             </svg>
           </button>
-          <div v-if="languageDropdownOpen" class="absolute right-0 mt-2 bg-white shadow-lg rounded-lg py-2 z-10 w-40">
-            <button v-for="lang in languages" :key="lang.code" @click="changeLanguage(lang)" class="flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none transition duration-300">
-              <img :src="lang.flag" alt="Language Flag" class="h-5 w-5 rounded-full" />
-              <span>{{ lang.label }}</span>
+
+          <!-- Language selector -->
+          <div class="relative">
+            <button @click="toggleLanguageDropdown" class="flex items-center space-x-2 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 focus:outline-none" :class="{'bg-gray-100 text-gray-800': scrolled, 'bg-transparent text-black': !scrolled}" aria-label="Select Language">
+              <img :src="currentLanguage.flag" alt="Language Flag" class="h-5 w-5 rounded-full" />
+              <span class="hidden lg:block">{{ currentLanguage.label }}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
             </button>
+            <div v-if="languageDropdownOpen" class="absolute right-0 mt-2 bg-white shadow-lg rounded-lg py-2 z-10 w-40">
+              <button v-for="lang in languages" :key="lang.code" @click="changeLanguage(lang)" class="flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none transition duration-300">
+                <img :src="lang.flag" alt="Language Flag" class="h-5 w-5 rounded-full" />
+                <span>{{ lang.label }}</span>
+              </button>
+            </div>
           </div>
         </div>
       </nav>
+
+      <!-- Mobile Menu -->
+      <div v-if="menuOpen" class="lg:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-10">
+        <nav class="flex flex-col items-center space-y-4 p-4">
+          <a href="/" class="text-gray-800 hover:text-gray-600">{{ $t('inici') }}</a>
+          <a href="/about" class="text-gray-800 hover:text-gray-600">{{ $t('sobre-nosaltres') }}</a>
+          <a href="/contact" class="text-gray-800 hover:text-gray-600">{{ $t('contacte') }}</a>
+        </nav>
+      </div>
     </header>
 
     <!-- Espacio reservado para el contenido -->
-    <div class="pt-16"> <!-- Padding-top igual a la altura del header -->
-      <slot></slot> <!-- Aquí irá el contenido que pases al componente -->
-    </div>
+    <div class="pt-16"></div>
   </div>
 </template>
 
@@ -91,5 +102,8 @@ export default {
 .logo {
   width: auto;
   height: 50px;
+}
+.text-orange-500 {
+  color: #FFA500; /* Ajusta este color según el color naranja principal de tu web */
 }
 </style>
