@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import Header from '../components/HeaderSection.vue';
+import Header from '../components/HeaderStaticSection.vue';
 import Footer from '../components/FooterSection.vue';
 
 const habitacio = ref(null);
@@ -45,6 +45,7 @@ onMounted(() => {
 <template>
   <Header />
   <div class="bg-gray-100 p-6 min-h-screen">
+    <RouterLink to="" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Cancelar</RouterLink>
     <div class="container mx-auto">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <!-- Tarjeta 1: Información del Hotel -->
@@ -134,8 +135,8 @@ onMounted(() => {
               <div class="border-t pt-4">
                 <div class="flex justify-between">
                   <p class="text-gray-700 font-semibold">TOTAL</p>
-                  <p class="text-2xl font-bold text-blue-500">{{ habitacio.preu * diesTotals - ((habitacio.preu *
-                    diesTotals) /100 * 30) }} €</p>
+                  <p class="text-2xl font-bold text-blue-500">{{ (habitacio.preu * diesTotals - ((habitacio.preu *
+                    diesTotals) /100 * 30)).toFixed(2) }} €</p>
                 </div>
               </div>
             </div>
