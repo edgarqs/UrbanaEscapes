@@ -45,11 +45,10 @@ onMounted(() => {
 <template>
   <Header />
   <div class="bg-gray-100 p-6 min-h-screen">
-    <RouterLink to="" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Cancelar</RouterLink>
-    <div class="container mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="container mx-auto px-4 max-w-4xl mt-10"> <!-- Ajusta el ancho máximo del contenedor -->
+      <div class="grid grid-cols-4 gap-6"> <!-- Usa 3 columnas -->
         <!-- Tarjeta 1: Información del Hotel -->
-        <div class="col-span-1">
+        <div class="col-span-2"> <!-- Ocupa 2 columnas -->
           <div class="bg-white rounded-lg shadow-lg p-6">
             <div class="flex items-center justify-between">
               <div class="text-xl font-bold" v-if="hotels">{{ hotels.nom }}</div>
@@ -84,16 +83,17 @@ onMounted(() => {
                 class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
                 Aparcament</span>
             </div>
-            <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded w-full" v-if="habitacio">
+            <button class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full" v-if="habitacio">
               Copia l'adreça
             </button>
             <p v-else>Cargando datos...</p>
           </div>
         </div>
 
-        <!-- Tarjeta 2: Detalles de la Reserva -->
-        <div class="col-span-1">
-          <div class="bg-white rounded-lg shadow-lg p-6">
+        <!-- Tarjeta 2 y 3: Detalles de la Reserva y Resumen del Pago -->
+        <div class="col-span-2"> <!-- Ocupa 1 columna -->
+          <!-- Tarjeta 2: Detalles de la Reserva -->
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
             <div class="font-bold text-xl mb-4">Dades de la teva reserva</div>
             <div class="grid grid-cols-2 gap-4">
               <div>
@@ -117,10 +117,8 @@ onMounted(() => {
               </span>
             </p>
           </div>
-        </div>
 
-        <!-- Tarjeta 3: Resumen del Pago -->
-        <div class="col-span-1 md:col-span-1">
+          <!-- Tarjeta 3: Resumen del Pago -->
           <div class="bg-white rounded-lg shadow-lg p-6">
             <div class="font-bold text-xl mb-4">Resum del que pagaràs</div>
             <div class="space-y-4" v-if="habitacio">
@@ -135,7 +133,7 @@ onMounted(() => {
               <div class="border-t pt-4">
                 <div class="flex justify-between">
                   <p class="text-gray-700 font-semibold">TOTAL</p>
-                  <p class="text-2xl font-bold text-blue-500">{{ (habitacio.preu * diesTotals - ((habitacio.preu *
+                  <p class="text-2xl font-bold text-orange-500">{{ (habitacio.preu * diesTotals - ((habitacio.preu *
                     diesTotals) /100 * 30)).toFixed(2) }} €</p>
                 </div>
               </div>
@@ -143,7 +141,7 @@ onMounted(() => {
             <div v-else>
               <p class="text-gray-700">Cargando datos...</p>
             </div>
-            <button class="mt-4 bg-blue-500 text-white py-2 px-4 rounded w-full">Pagar</button>
+            <RouteLink class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full">Pagar</RouteLink>
           </div>
         </div>
       </div>
@@ -151,6 +149,7 @@ onMounted(() => {
   </div>
   <Footer />
 </template>
+
 
 <style scoped>
 /* CSS */
@@ -164,6 +163,29 @@ h3 {
   margin-bottom: 1.5rem;
 }
 
+.button-pagar{
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100%;
+
+  
+}
+
+.button-pagar:hover {
+  background-color: #2c5282;
+}
+
+button{
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100%;
+}
 button:hover {
   background-color: #2c5282;
 }
