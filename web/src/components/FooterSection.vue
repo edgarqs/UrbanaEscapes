@@ -63,7 +63,7 @@ a:hover {
             <h3 class="text-lg font-semibold mb-4">{{ $t('xarxes') }}</h3>
             <ul class="flex space-x-4">
               <li>
-                <a href="#" class="text-sm">
+                <a href="https://www.youtube.com/@airbnb" class="text-sm">
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/174/174883.png"
                     alt="YouTube"
@@ -73,7 +73,7 @@ a:hover {
                 </a>
               </li>
               <li>
-                <a href="#" class="text-sm">
+                <a href="https://www.tiktok.com/@airbnb?lang=es" class="text-sm">
                   <img
                     src="https://cdn-icons-png.flaticon.com/512/3116/3116491.png"
                     alt="TikTok"
@@ -83,7 +83,7 @@ a:hover {
                 </a>
               </li>
               <li>
-                <a href="#" class="text-sm">
+                <a href="https://www.facebook.com/AirbnbEspana/?locale=es_ES" class="text-sm">
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1200px-2021_Facebook_icon.svg.png"
                     alt="Facebook"
@@ -97,7 +97,7 @@ a:hover {
         </div>
 
         <!-- Separador -->
-        <hr class="my-8 border-gray-300" />
+        <hr class="my-8 border-orange-300" />
 
         <!-- Créditos -->
         <div class="text-center text-sm text-gray-500">
