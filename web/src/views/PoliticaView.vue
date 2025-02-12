@@ -1,5 +1,5 @@
 <script setup>
-import Header from '../components/HeaderSection.vue'
+import Header1 from '../components/HeaderStatic Section.vue'
 import Footer from '../components/FooterSection.vue'
 import Politica from '../components/PoliticaSection.vue'
 </script>
@@ -7,7 +7,7 @@ import Politica from '../components/PoliticaSection.vue'
 
 <template>
   <main>
-    <Header />
+    <Header1 />
     <Politica />
     <Footer />
   </main>
