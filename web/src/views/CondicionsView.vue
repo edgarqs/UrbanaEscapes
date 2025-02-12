@@ -1,5 +1,5 @@
 <script setup>
-import Header from '../components/HeaderSection.vue'
+import Header1 from '../components/HeaderStaticSection.vue'
 import Footer from '../components/FooterSection.vue'
 import Condicions from '../components/CondicionsSection.vue'
 </script>
@@ -7,7 +7,7 @@ import Condicions from '../components/CondicionsSection.vue'
 
 <template>
   <main>
-    <Header />
+    <Header1 />
     <Condicions />
     <Footer />
   </main>
