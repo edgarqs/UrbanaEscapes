@@ -94,7 +94,7 @@ h2 {
 
 <template>
   <div class="content">
-    <h2 class="center">{{ $t('valors-titol')}}</h2>
+    <h2 class="center">{{ $t('valors-titol') }}</h2>
 
     <div class="card-list">
       <div class="card">
@@ -132,7 +132,7 @@ h2 {
           <img src="./img/hotel.jpg" alt="Marrakech trip" />
         </div>
         <div class="card-body">
-          <h2>{{ $t('valors-filosofia-titol')}}</h2>
+          <h2>{{ $t('valors-filosofia-titol') }}</h2>
           <p>
             {{ $t('valors-filosofia-descripcio') }}
           </p>

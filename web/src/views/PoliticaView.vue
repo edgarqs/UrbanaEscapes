@@ -4,7 +4,6 @@ import Footer from '../components/FooterSection.vue'
 import Politica from '../components/PoliticaSection.vue'
 </script>
 
-
 <template>
   <main>
     <Header1 />

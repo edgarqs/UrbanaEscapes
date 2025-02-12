@@ -8,7 +8,6 @@ import Ofertas from '../components/OfertasSection.vue'
 import Footer from '../components/FooterSection.vue'
 </script>
 
-
 <template>
   <main>
     <Header />

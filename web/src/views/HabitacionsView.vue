@@ -5,7 +5,6 @@ import Habitacions from '../components/HabitacionsSection.vue'
 import SearchBar from '../components/SearchBarSection.vue'
 </script>
 
-
 <template>
   <main>
     <Header1 />

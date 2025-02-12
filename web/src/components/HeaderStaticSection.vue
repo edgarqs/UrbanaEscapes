@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- Header fijo -->
-    <header class="bg-white shadow-md fixed top-0 left-0 w-full z-10 h-16"> <!-- Altura fija de 64px (h-16 en Tailwind) -->
+    <header class="bg-white shadow-md fixed top-0 left-0 w-full z-10 h-16">
+      <!-- Altura fija de 64px (h-16 en Tailwind) -->
       <nav class="max-w-7xl mx-auto flex items-center justify-between p-4 h-full">
         <!-- Logo -->
         <div class="flex items-center">
@@ -22,22 +23,60 @@
         <div class="flex items-center space-x-4">
           <!-- Hamburger Menu Button -->
           <button @click="toggleMenu" class="lg:hidden text-gray-800 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7"
+              ></path>
             </svg>
           </button>
 
           <!-- Language selector -->
           <div class="relative">
-            <button @click="toggleLanguageDropdown" class="flex items-center space-x-2 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 focus:outline-none" :class="{'bg-gray-100 text-gray-800': scrolled, 'bg-transparent text-black': !scrolled}" aria-label="Select Language">
+            <button
+              @click="toggleLanguageDropdown"
+              class="flex items-center space-x-2 px-3 py-1 rounded-full hover:bg-gray-200 transition duration-300 focus:outline-none"
+              :class="{
+                'bg-gray-100 text-gray-800': scrolled,
+                'bg-transparent text-black': !scrolled,
+              }"
+              aria-label="Select Language"
+            >
               <img :src="currentLanguage.flag" alt="Language Flag" class="h-5 w-5 rounded-full" />
               <span class="hidden lg:block">{{ currentLanguage.label }}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
-            <div v-if="languageDropdownOpen" class="absolute right-0 mt-2 bg-white shadow-lg rounded-lg py-2 z-10 w-40">
-              <button v-for="lang in languages" :key="lang.code" @click="changeLanguage(lang)" class="flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none transition duration-300">
+            <div
+              v-if="languageDropdownOpen"
+              class="absolute right-0 mt-2 bg-white shadow-lg rounded-lg py-2 z-10 w-40"
+            >
+              <button
+                v-for="lang in languages"
+                :key="lang.code"
+                @click="changeLanguage(lang)"
+                class="flex items-center w-full space-x-2 px-4 py-2 hover:bg-gray-100 text-gray-700 focus:outline-none transition duration-300"
+              >
                 <img :src="lang.flag" alt="Language Flag" class="h-5 w-5 rounded-full" />
                 <span>{{ lang.label }}</span>
               </button>
@@ -78,23 +117,27 @@ export default {
       languages: [
         { code: 'es', label: 'Español', flag: 'https://flagcdn.com/w320/es.png' },
         { code: 'en', label: 'English', flag: 'https://flagcdn.com/w320/us.png' },
-        { code: 'ca', label: 'Visca Catalunya', flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/320px-Flag_of_Catalonia.svg.png' },
+        {
+          code: 'ca',
+          label: 'Visca Catalunya',
+          flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/320px-Flag_of_Catalonia.svg.png',
+        },
       ],
     }
   },
   methods: {
     toggleMenu() {
-      this.menuOpen = !this.menuOpen;
+      this.menuOpen = !this.menuOpen
     },
     toggleLanguageDropdown() {
-      this.languageDropdownOpen = !this.languageDropdownOpen;
+      this.languageDropdownOpen = !this.languageDropdownOpen
     },
     changeLanguage(lang) {
-      this.currentLanguage = lang;
-      i18n.global.locale.value = lang.code;
-      this.languageDropdownOpen = false;
-    }
-  }
+      this.currentLanguage = lang
+      i18n.global.locale.value = lang.code
+      this.languageDropdownOpen = false
+    },
+  },
 }
 </script>
 
@@ -104,6 +147,6 @@ export default {
   height: 50px;
 }
 .text-orange-500 {
-  color: #FFA500; /* Ajusta este color según el color naranja principal de tu web */
+  color: #ffa500; /* Ajusta este color según el color naranja principal de tu web */
 }
 </style>

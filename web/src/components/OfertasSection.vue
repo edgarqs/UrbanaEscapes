@@ -119,8 +119,8 @@ button {
 
 <template>
   <div class="oferta-container">
-    <h2>{{ $t('ofertas-titol')}}</h2>
-    <h3>{{ $t('ofertas-subtitulo')}}</h3>
-    <button>{{ $t('ofertas-boto')}}</button>
+    <h2>{{ $t('ofertas-titol') }}</h2>
+    <h3>{{ $t('ofertas-subtitulo') }}</h3>
+    <button>{{ $t('ofertas-boto') }}</button>
   </div>
 </template>

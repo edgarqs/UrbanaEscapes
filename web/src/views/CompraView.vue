@@ -1,70 +1,74 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { useRoute } from 'vue-router';
-import Header from '../components/HeaderStaticSection.vue';
-import Footer from '../components/FooterSection.vue';
+import { ref, onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import Header from '../components/HeaderStaticSection.vue'
+import Footer from '../components/FooterSection.vue'
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL
 
-const habitacio = ref(null);
-const hotels = ref(null);
-const route = useRoute();
+const habitacio = ref(null)
+const hotels = ref(null)
+const route = useRoute()
 
-const startDate = ref(localStorage.getItem('startDate'));
-const endDate = ref(localStorage.getItem('endDate'));
+const startDate = ref(localStorage.getItem('startDate'))
+const endDate = ref(localStorage.getItem('endDate'))
 
-console.log(startDate.value);
-console.log(endDate.value);
+console.log(startDate.value)
+console.log(endDate.value)
 
 const diesTotals = computed(() => {
   if (startDate.value && endDate.value) {
-    return Math.ceil((new Date(endDate.value) - new Date(startDate.value)) / (1000 * 60 * 60 * 24));
+    return Math.ceil((new Date(endDate.value) - new Date(startDate.value)) / (1000 * 60 * 60 * 24))
   }
-  return 0;
-});
+  return 0
+})
 
 onMounted(() => {
   fetch(`${API_URL}/v1/habitacions/${route.params.id}`)
-    .then(response => response.json())
-    .then(data => {
-      habitacio.value = data;
+    .then((response) => response.json())
+    .then((data) => {
+      habitacio.value = data
       fetch(`${API_URL}/v1/hotels/${habitacio.value.hotel_id}`)
-        .then(response => response.json())
-        .then(data => {
-          hotels.value = data;
+        .then((response) => response.json())
+        .then((data) => {
+          hotels.value = data
         })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
+        .catch((error) => {
+          console.error('Error fetching data:', error)
+        })
     })
-    .catch(error => {
-      console.error('Error fetching data:', error);
-    });
-});
+    .catch((error) => {
+      console.error('Error fetching data:', error)
+    })
+})
 
 function copyAddress() {
-  const address = `${hotels.value.adreca}, ${hotels.value.ciutat}, ${hotels.value.pais}`;
-  navigator.clipboard.writeText(address);
+  const address = `${hotels.value.adreca}, ${hotels.value.ciutat}, ${hotels.value.pais}`
+  navigator.clipboard.writeText(address)
 }
 
 function formatDate(date) {
-  const isoString = date.toISOString();
-  const [datePart, timePart] = isoString.split('T');
-  const [hour, minute, second] = timePart.split(':');
-  const [sec, ms] = second.split('.');
+  const isoString = date.toISOString()
+  const [datePart, timePart] = isoString.split('T')
+  const [hour, minute, second] = timePart.split(':')
+  const [sec, ms] = second.split('.')
 
-  return `${datePart}T${hour}:${minute}:${sec}.000000Z`;
+  return `${datePart}T${hour}:${minute}:${sec}.000000Z`
 }
 
-
 const dadesReserva = computed(() => ({
-  'habitacion_id': habitacio.value ? habitacio.value.id : null,
-  'usuari_id': 1,
-  'data_entrada': formatDate(new Date(startDate.value)),
-  'data_sortida': formatDate(new Date(endDate.value)),
-  'preu_total': habitacio.value ? (habitacio.value.preu * diesTotals.value - ((habitacio.value.preu * diesTotals.value) / 100 * 30)).toFixed(2) : 0,
-  'estat': 'Reservada'
-}));
+  habitacion_id: habitacio.value ? habitacio.value.id : null,
+  usuari_id: 1,
+  data_entrada: formatDate(new Date(startDate.value)),
+  data_sortida: formatDate(new Date(endDate.value)),
+  preu_total: habitacio.value
+    ? (
+        habitacio.value.preu * diesTotals.value -
+        ((habitacio.value.preu * diesTotals.value) / 100) * 30
+      ).toFixed(2)
+    : 0,
+  estat: 'Reservada',
+}))
 
 function crearReserva(data) {
   fetch(`${API_URL}/v1/reserves`, {
@@ -72,27 +76,29 @@ function crearReserva(data) {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok')
       }
-      return response.json();
+      return response.json()
     })
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error))
+    .then((data) => console.log(data))
+    .catch((error) => console.error('Error:', error))
 }
-
 </script>
 
 <template>
   <Header />
   <div class="bg-gray-100 p-6 min-h-screen">
-    <div class="container mx-auto px-4 max-w-4xl mt-10"> <!-- Ajusta el ancho máximo del contenedor -->
-      <div class="grid grid-cols-4 gap-6"> <!-- Usa 3 columnas -->
+    <div class="container mx-auto px-4 max-w-4xl mt-10">
+      <!-- Ajusta el ancho máximo del contenedor -->
+      <div class="grid grid-cols-4 gap-6">
+        <!-- Usa 3 columnas -->
         <!-- Tarjeta 1: Información del Hotel -->
-        <div class="col-span-2"> <!-- Ocupa 2 columnas -->
+        <div class="col-span-2">
+          <!-- Ocupa 2 columnas -->
           <div class="bg-white rounded-lg shadow-lg p-6">
             <div class="flex items-center justify-between">
               <div class="text-xl font-bold" v-if="hotels">{{ hotels.nom }}</div>
@@ -101,15 +107,13 @@ function crearReserva(data) {
             <p class="text-gray-700 mt-2" v-if="hotels">
               {{ hotels.adreca }}
             </p>
-            <p class="text-gray-700 mt-2" v-if="hotels">
-              {{ hotels.ciutat }}, {{ hotels.pais }}
-            </p>
+            <p class="text-gray-700 mt-2" v-if="hotels">{{ hotels.ciutat }}, {{ hotels.pais }}</p>
             <p class="text-gray-900 font-semibold mt-2" v-if="habitacio">
               Habitació {{ habitacio.tipus }}
             </p>
             <p class="text-gray-600 text-sm mt-2" v-if="habitacio">
-              Habitació {{ habitacio.tipus }} amb {{ habitacio.llits }} llits y {{ habitacio.llits_supletoris }} llits
-              supletoris.
+              Habitació {{ habitacio.tipus }} amb {{ habitacio.llits }} llits y
+              {{ habitacio.llits_supletoris }} llits supletoris.
             </p>
             <p class="text-gray-600 text-sm mt-2" v-if="habitacio">
               {{ habitacio.preu }} € per nit
@@ -119,18 +123,23 @@ function crearReserva(data) {
             </p>
             <div class="px-6 pt-4 pb-2" v-if="habitacio">
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✔
-                Animals admesos</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✔ Animals admesos</span
+              >
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
-                WiFi gratis</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✅ WiFi gratis</span
+              >
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
-                Aparcament</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✅ Aparcament</span
+              >
             </div>
-            <button @click="copyAddress"
+            <button
+              @click="copyAddress"
               class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
-              v-if="habitacio">
+              v-if="habitacio"
+            >
               {{ $t('boton-copia-adreca') }}
             </button>
             <p v-else>{{ $t('cargando-datos') }}</p>
@@ -138,7 +147,8 @@ function crearReserva(data) {
         </div>
 
         <!-- Tarjeta 2 y 3: Detalles de la Reserva y Resumen del Pago -->
-        <div class="col-span-2"> <!-- Ocupa 1 columna -->
+        <div class="col-span-2">
+          <!-- Ocupa 1 columna -->
           <!-- Tarjeta 2: Detalles de la Reserva -->
           <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
             <div class="font-bold text-xl mb-4">{{ $t('dades-reserva-titol') }}</div>
@@ -159,9 +169,7 @@ function crearReserva(data) {
               </div>
             </div>
             <p class="text-gray-700 mt-4">
-              Durada total de l’estada: <span class="font-semibold">
-                {{ diesTotals }} nits
-              </span>
+              Durada total de l’estada: <span class="font-semibold"> {{ diesTotals }} nits </span>
             </p>
           </div>
 
@@ -175,13 +183,22 @@ function crearReserva(data) {
               </div>
               <div class="flex justify-between">
                 <p class="text-gray-700">Descompte</p>
-                <p class="text-green-500">- {{ ((habitacio.preu * diesTotals) / 100 * 30).toFixed(2) }} €</p>
+                <p class="text-green-500">
+                  - {{ (((habitacio.preu * diesTotals) / 100) * 30).toFixed(2) }} €
+                </p>
               </div>
               <div class="border-t pt-4">
                 <div class="flex justify-between">
                   <p class="text-gray-700 font-semibold">TOTAL</p>
-                  <p class="text-2xl font-bold text-orange-500">{{ (habitacio.preu * diesTotals - ((habitacio.preu *
-                    diesTotals) / 100 * 30)).toFixed(2) }} €</p>
+                  <p class="text-2xl font-bold text-orange-500">
+                    {{
+                      (
+                        habitacio.preu * diesTotals -
+                        ((habitacio.preu * diesTotals) / 100) * 30
+                      ).toFixed(2)
+                    }}
+                    €
+                  </p>
                 </div>
               </div>
             </div>
@@ -189,8 +206,10 @@ function crearReserva(data) {
               <p class="text-gray-700">{{ $t('cargando-datos') }}</p>
             </div>
             <RouterLink to="/review-compra" class="mt-4 w-full">
-              <button @click="crearReserva(dadesReserva)"
-                class="bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full">
+              <button
+                @click="crearReserva(dadesReserva)"
+                class="bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+              >
                 {{ $t('boton-pagar') }}
               </button>
             </RouterLink>
@@ -201,7 +220,6 @@ function crearReserva(data) {
   </div>
   <Footer />
 </template>
-
 
 <style scoped>
 /* CSS */
