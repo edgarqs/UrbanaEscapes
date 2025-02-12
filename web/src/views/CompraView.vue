@@ -55,6 +55,7 @@ function formatDate(date) {
   return `${datePart}T${hour}:${minute}:${sec}.000000Z`;
 }
 
+
 const dadesReserva = computed(() => ({
   'habitacion_id': habitacio.value ? habitacio.value.id : null,
   'usuari_id': 1,
