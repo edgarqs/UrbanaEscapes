@@ -67,6 +67,16 @@ Docker ens permet provar l’aplicació en un entorn controlat, assegurant que e
 
 Aquestes proves ens ajuden a detectar i solucionar possibles problemes abans de posar el sistema en funcionament, garantint una millor experiència per als usuaris.
 
+### Postman
+
+Per realitzar proves d'API, validant el correcte funcionament de les peticions i respostes entre el front-end i el back-end.
+
+* link:https://app.getpostman.com/join-team?invite_code=2c1199cbf197e17d6c2d0e3c4b17054585b861325b077c4b824b2fe4ca13c36f&target_code=7c71e9225b8bb35b4490520f0e194bc8[🔗 Enllaç Postman]
+
+image::img-postman/postman1.png[Test con Postman]
+image::img-postman/postman2.png[Test con Postman]
+image::img-postman/postman3.png[Test con Postman]
+
 ## Manual d'instal·lació i distribució
 
 En aquesta secció es detallen els passos necessaris per instal·lar i distribuir el sistema de manera correcta.
