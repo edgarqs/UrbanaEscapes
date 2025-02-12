@@ -45,6 +45,7 @@ function copyAddress() {
   const address = `${hotels.value.adreca}, ${hotels.value.ciutat}, ${hotels.value.pais}`;
   navigator.clipboard.writeText(address);
 }
+
 </script>
 
 <template>
