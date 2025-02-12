@@ -192,12 +192,12 @@ export default {
                                 <p class="text-s text-gray-500">(Preu per {{ numNights }} nits i {{ numPeople }}
                                     persones)</p>
                             </div>
-
-
-                            <button
-                                class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mt-4">
-                                <RouterLink :to="`/reserva/${habitacio.id}`" class="text-white">Reservar</RouterLink>
-                            </button>
+                            <RouterLink :to="`/reserva/${habitacio.id}`">
+                                <button
+                                    class="focus:outline-none text-white bg-orange-500 hover:bg-orange-400 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mt-4 w-full cursor-pointer">
+                                    Reservar
+                                </button>
+                            </RouterLink>
                         </div>
                     </div>
                 </div>

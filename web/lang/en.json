@@ -93,5 +93,12 @@
   "politica-control-formulari": "Whenever you are asked to fill in a form on the website, look for the box that you can click to indicate that you do not want the information to be used by anybody for direct marketing purposes.",
   "politica-control-canvi": "If you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by writing to or emailing us at [your email address].",
   "politica-contacte": "8. Contact",
-  "politica-contacte-descripcio": "If you have any questions about this privacy policy, please contact us at [your email address]."
+  "politica-contacte-descripcio": "If you have any questions about this privacy policy, please contact us at [your email address].",
+
+  "dades-reserva-titol": "Reservation Details",
+  "resum-pagament-titol": "Payment Summary",
+  "boton-copia-adreca": "Copy Address",
+  "boton-pagar": "Pay",
+
+  "cargando-datos": "Loading data..."
 }
