@@ -32,7 +32,6 @@ onMounted(() => {
         .then(response => response.json())
         .then(data => {
           hotels.value = data;
-
         })
         .catch(error => {
           console.error('Error fetching data:', error);
