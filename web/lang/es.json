@@ -93,5 +93,12 @@
   "politica-control-formulari": "Cuando se te pida que completes un formulario en el sitio web, busca la casilla que puedes hacer clic para indicar que no deseas que la información sea utilizada por nadie con fines de marketing directo.",
   "politica-control-canvi": "Si previamente has aceptado que utilicemos tu información personal para fines de marketing directo, puedes cambiar de opinión en cualquier momento escribiéndonos o enviándonos un correo electrónico a [tu correo electrónico].",
   "politica-contacte": "8. Contacto",
-  "politica-contacte-descripcio": "Si tienes alguna pregunta sobre esta política de privacidad, por favor contáctanos en [tu correo electrónico]."
+  "politica-contacte-descripcio": "Si tienes alguna pregunta sobre esta política de privacidad, por favor contáctanos en [tu correo electrónico].",
+
+  "dades-reserva-titol": "Datos de la Reserva",
+  "resum-pagament-titol": "Resumen del Pago",
+  "boton-copia-adreca": "Copia la dirección",
+  "boton-pagar": "Pagar",
+
+  "cargando-datos": "Cargando datos..."
 }

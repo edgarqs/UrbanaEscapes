@@ -104,8 +104,8 @@ export default {
 
 <style scoped>
 .logo {
-  width: auto;
-  height: 50px;
+  width: 8rem;
+  height: auto;
 }
 .text-orange-500 {
   color: #FFA500; /* Ajusta este color según el color naranja principal de tu web */
