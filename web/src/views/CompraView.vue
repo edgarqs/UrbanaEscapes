@@ -46,6 +46,42 @@ function copyAddress() {
   navigator.clipboard.writeText(address);
 }
 
+function formatDate(date) {
+  const isoString = date.toISOString();
+  const [datePart, timePart] = isoString.split('T');
+  const [hour, minute, second] = timePart.split(':');
+  const [sec, ms] = second.split('.');
+
+  return `${datePart}T${hour}:${minute}:${sec}.000000Z`;
+}
+
+const dadesReserva = computed(() => ({
+  'habitacion_id': habitacio.value ? habitacio.value.id : null,
+  'usuari_id': 1,
+  'data_entrada': formatDate(new Date(startDate.value)),
+  'data_sortida': formatDate(new Date(endDate.value)),
+  'preu_total': habitacio.value ? (habitacio.value.preu * diesTotals.value - ((habitacio.value.preu * diesTotals.value) / 100 * 30)).toFixed(2) : 0,
+  'estat': 'Reservada'
+}));
+
+function crearReserva(data) {
+  fetch('http://localhost:8000/api/v1/reserves', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error))
+}
+
 </script>
 
 <template>
@@ -90,7 +126,8 @@ function copyAddress() {
                 class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
                 Aparcament</span>
             </div>
-            <button @click="copyAddress" class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+            <button @click="copyAddress"
+              class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
               v-if="habitacio">
               {{ $t('boton-copia-adreca') }}
             </button>
@@ -150,7 +187,8 @@ function copyAddress() {
               <p class="text-gray-700">{{ $t('cargando-datos') }}</p>
             </div>
             <RouterLink to="/review-compra" class="mt-4 w-full">
-              <button class="bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full">
+              <button @click="crearReserva(dadesReserva)"
+                class="bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full">
                 {{ $t('boton-pagar') }}
               </button>
             </RouterLink>

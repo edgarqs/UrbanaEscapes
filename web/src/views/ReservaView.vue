@@ -6,7 +6,7 @@ import Header from '../components/HeaderStaticSection.vue';
 import Footer from '../components/FooterSection.vue';
 
 const habitacio = ref(null);
-
+const hotels = ref(null);
 const route = useRoute();
 const router = useRouter();
 
@@ -19,6 +19,15 @@ onMounted(() => {
     .then(response => response.json())
     .then(data => {
       habitacio.value = data;
+      fetch(`http://localhost:8000/api/v1/hotels/${habitacio.value.hotel_id}`)
+        .then(response => response.json())
+        .then(data => {
+          hotels.value = data;
+
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
     })
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -73,38 +82,96 @@ const verificarCodigo = () => {
 <template>
   <main>
     <Header />
-    <RouterLink to="/habitacions" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Tornar</RouterLink>
+    <RouterLink to="/habitacions" class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full">Tornar</RouterLink>
 
     <div v-if="mostrarReserva" class="reservas flex flex-col m-4 justify-center items-center">
       <div class="flex justify-between p-4 px-8">
-        <div class="detallsReserva">
-          <div class="reserva" v-if="habitacio">
-            <h2 class="text-2xl font-bold">Habitació {{ habitacio.tipus }}</h2>
-            <p><strong>Descripció:</strong> Habitació {{ habitacio.tipus }} amb {{ habitacio.llits }} llits y {{
-              habitacio.llits_supletoris }} llits supletoris.</p>
-            <p><strong>Capacitat:</strong> {{ habitacio.llits + habitacio.llits_supletoris }} persones</p>
-            <p><strong>Preu total:</strong> {{ habitacio.preu * diesTotals }} €</p>
-            <p><strong>Data d'entrada:</strong> {{ startDate }}</p>
-            <p><strong>Data de sortida:</strong> {{ endDate }}</p>
-          </div>
-          <div v-else>
-            <p>Carregant dades de la habitació...</p>
+
+        <div class="detallsReserva col-span-2"> <!-- Ocupa 2 columnas -->
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex items-center justify-between">
+              <div class="text-xl font-bold" v-if="hotels">{{ hotels.nom }}</div>
+              <div class="text-yellow-400">★★★★</div>
+            </div>
+            <p class="text-gray-700 mt-2" v-if="hotels">
+              {{ hotels.adreca }}
+            </p>
+            <p class="text-gray-700 mt-2" v-if="hotels">
+              {{ hotels.ciutat }}, {{ hotels.pais }}
+            </p>
+            <p class="text-gray-900 font-semibold mt-2" v-if="habitacio">
+              Habitació {{ habitacio.tipus }}
+            </p>
+            <p class="text-gray-600 text-sm mt-2" v-if="habitacio">
+              Habitació {{ habitacio.tipus }} amb {{ habitacio.llits }} llits y {{ habitacio.llits_supletoris }} llits
+              supletoris.
+            </p>
+            <p class="text-gray-600 text-sm mt-2" v-if="habitacio">
+              {{ habitacio.preu }} € per nit
+            </p>
+            <p class="text-gray-600 text-sm mt-2" v-if="habitacio">
+              {{ habitacio.llits + habitacio.llits_supletoris }} persones
+            </p>
+            <div class="px-6 pt-4 pb-2" v-if="habitacio">
+              <span
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✔
+                Animals admesos</span>
+              <span
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
+                WiFi gratis</span>
+              <span
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
+                Aparcament</span>
+            </div>
+            <button @click="copyAddress"
+              class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+              v-if="habitacio">
+              {{ $t('boton-copia-adreca') }}
+            </button>
+            <p v-else>{{ $t('cargando-datos') }}</p>
           </div>
         </div>
+        <div class="col-span-2">
 
-        <div class="detallsClient">
-          <form @submit.prevent="sendEmail">
-            <h2 class="text-2xl font-bold">Dades del client</h2>
-            <div class="form-group">
-              <label for="to_name">Nom:</label>
-              <input type="text" id="to_name" v-model="nom" required>
+          <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+              <div class="font-bold text-xl mb-4">{{ $t('dades-reserva-titol') }}</div>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <p class="text-gray-700 font-semibold">Entrada</p>
+                  <p class="text-gray-600">
+                    {{ startDate }}
+                  </p>
+                  <p class="text-gray-600">A partir de les 14:00</p>
+                </div>
+                <div>
+                  <p class="text-gray-700 font-semibold">Sortida</p>
+                  <p class="text-gray-600">
+                    {{ endDate }}
+                  </p>
+                  <p class="text-gray-600">Fins a les 12:00</p>
+                </div>
+              </div>
+              <p class="text-gray-700 mt-4">
+                Durada total de l’estada: <span class="font-semibold">
+                  {{ diesTotals }} nits
+                </span>
+              </p>
             </div>
-            <div class="form-group">
-              <label for="to_email">Correu electrònic:</label>
-              <input type="email" id="to_email" v-model="email" required>
-            </div>
-            <button type="submit" :disabled="isLoading">Enviar</button>
-          </form>
+  
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <form @submit.prevent="sendEmail">
+              <h2 class="text-2xl font-bold">Dades del client</h2>
+              <div class="form-group">
+                <label for="to_name">Nom:</label>
+                <input type="text" id="to_name" v-model="nom" required>
+              </div>
+              <div class="form-group">
+                <label for="to_email">Correu electrònic:</label>
+                <input type="email" id="to_email" v-model="email" required>
+              </div>
+              <button class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full" type="submit" :disabled="isLoading">Enviar</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -115,7 +182,7 @@ const verificarCodigo = () => {
       <p>Si us plau, introdueixi el codi de verificació per confirmar la seva reserva.</p>
 
       <input type="text" v-model="codigoIngresado" required>
-      <button @click="verificarCodigo">Confirmar reserva</button>
+      <button class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full" @click="verificarCodigo">Confirmar reserva</button>
 
       <p v-if="errorMensaje" class="text-red-500 mt-2">{{ errorMensaje }}</p>
     </div>
@@ -130,10 +197,9 @@ const verificarCodigo = () => {
 </template>
 
 <style scoped>
-.detallsReserva,
-.detallsClient {
-  width: 50%;
-}
+
+
+
 
 .form-group {
   margin-bottom: 1rem;
@@ -147,18 +213,6 @@ input {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #ccc;
-}
-
-button {
-  padding: 0.5rem 1rem;
-  background-color: #3182ce;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #2c5282;
 }
 
 .text-red-500 {
