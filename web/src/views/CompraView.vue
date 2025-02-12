@@ -4,6 +4,8 @@ import { useRoute } from 'vue-router';
 import Header from '../components/HeaderStaticSection.vue';
 import Footer from '../components/FooterSection.vue';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const habitacio = ref(null);
 const hotels = ref(null);
 const route = useRoute();
@@ -22,11 +24,11 @@ const diesTotals = computed(() => {
 });
 
 onMounted(() => {
-  fetch(`http://localhost:8000/api/v1/habitacions/${route.params.id}`)
+  fetch(`${API_URL}/v1/habitacions/${route.params.id}`)
     .then(response => response.json())
     .then(data => {
       habitacio.value = data;
-      fetch(`http://localhost:8000/api/v1/hotels/${habitacio.value.hotel_id}`)
+      fetch(`${API_URL}/v1/hotels/${habitacio.value.hotel_id}`)
         .then(response => response.json())
         .then(data => {
           hotels.value = data;
@@ -66,7 +68,7 @@ const dadesReserva = computed(() => ({
 }));
 
 function crearReserva(data) {
-  fetch('http://localhost:8000/api/v1/reserves', {
+  fetch(`${API_URL}/v1/reserves`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

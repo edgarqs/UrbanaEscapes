@@ -5,6 +5,8 @@ import emailjs from 'emailjs-com';
 import Header from '../components/HeaderStaticSection.vue';
 import Footer from '../components/FooterSection.vue';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const habitacio = ref(null);
 const hotels = ref(null);
 const route = useRoute();
@@ -15,11 +17,11 @@ const endDate = ref(localStorage.getItem('endDate'));
 const diesTotals = Math.ceil((new Date(endDate.value) - new Date(startDate.value)) / (1000 * 60 * 60 * 24));
 
 onMounted(() => {
-  fetch(`http://localhost:8000/api/v1/habitacions/${route.params.id}`)
+  fetch(`${API_URL}/v1/habitacions/${route.params.id}`)
     .then(response => response.json())
     .then(data => {
       habitacio.value = data;
-      fetch(`http://localhost:8000/api/v1/hotels/${habitacio.value.hotel_id}`)
+      fetch(`${API_URL}/v1/hotels/${habitacio.value.hotel_id}`)
         .then(response => response.json())
         .then(data => {
           hotels.value = data;

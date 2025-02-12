@@ -7,5 +7,3 @@ trim_trailing_whitespace = true
 
 end_of_line = lf
 max_line_length = 100
-
-pagament_simulat = true
