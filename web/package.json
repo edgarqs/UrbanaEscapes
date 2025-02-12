@@ -13,7 +13,8 @@
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "sass": "sass --watch scss:css",
-    "build-css": "sass src/sass/main.scss public/css/styles.css && vite build"
+    "build-css": "sass src/sass/main.scss public/css/styles.css && vite build",
+    "prepare": "cd .. && husky web/.husky"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.3",
@@ -33,6 +34,7 @@
     "eslint": "^9.18.0",
     "eslint-plugin-cypress": "^4.1.0",
     "eslint-plugin-vue": "^9.32.0",
+    "husky": "^9.1.7",
     "jsdom": "^26.0.0",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
