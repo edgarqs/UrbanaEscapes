@@ -53,7 +53,7 @@ const router = createRouter({
       component: CompraView,
     },
     {
-      path: '/review-compra',
+      path: '/review-compra/:id',
       name: 'review-compra',
       component: ReviewCompraView,
     },

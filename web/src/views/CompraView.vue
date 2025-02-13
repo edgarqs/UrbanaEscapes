@@ -54,7 +54,7 @@ function formatDate(date) {
 }
 
 const userID = ref(localStorage.getItem('userId'))
-
+const idHabitacio = route.params.id
 const dadesReserva = computed(() => ({
   habitacion_id: habitacio.value ? habitacio.value.id : null,
   usuari_id: userID.value,
@@ -176,7 +176,7 @@ function crearReserva(data) {
             <div class="space-y-4" v-if="habitacio">
               <div class="flex justify-between">
                 <p class="text-gray-700">Preu original</p>
-                <p class="text-gray-700">{{ habitacio.preu * diesTotals }} €</p>
+                <p class="text-gray-700">{{ (habitacio.preu * diesTotals).toFixed(2) }} €</p>
               </div>
               <div class="flex justify-between">
                 <p class="text-gray-700">Descompte</p>
@@ -202,7 +202,7 @@ function crearReserva(data) {
             <div v-else>
               <p class="text-gray-700">{{ $t('cargando-datos') }}</p>
             </div>
-            <RouterLink to="/review-compra" class="mt-4 w-full">
+            <RouterLink :to="`/review-compra/${idHabitacio}`" class="mt-4 w-full">
               <button
                 @click="crearReserva(dadesReserva)"
                 class="bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
