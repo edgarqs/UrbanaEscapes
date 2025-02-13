@@ -109,9 +109,9 @@ const verificarCodigo = () => {
       v-if="mostrarReserva"
       class="reservas flex flex-col m-4 justify-center items-center mt-10 mb-20"
     >
-      <div class="grid grid-cols-4 gap-6">
-        <div class="detallsReserva col-span-2">
-          <!-- Ocupa 2 columnas -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="detallsReserva md:col-span-2">
+          <!-- Ocupa 2 columnas en pantallas medianas y grandes -->
           <div class="bg-white rounded-lg shadow-lg p-6">
             <div class="flex items-center justify-between">
               <div class="text-xl font-bold" v-if="hotels">{{ hotels.nom }}</div>
@@ -158,10 +158,10 @@ const verificarCodigo = () => {
             <p v-else>{{ $t('cargando-datos') }}</p>
           </div>
         </div>
-        <div class="col-span-2">
+        <div class="md:col-span-2">
           <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
             <div class="font-bold text-xl mb-4">{{ $t('dades-reserva-titol') }}</div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <p class="text-gray-700 font-semibold">Entrada</p>
                 <p class="text-gray-600">
