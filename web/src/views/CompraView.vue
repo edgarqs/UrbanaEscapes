@@ -94,11 +94,10 @@ function crearReserva(data) {
   <div class="bg-gray-100 p-6 min-h-screen">
     <div class="container mx-auto px-4 max-w-4xl mt-10">
       <!-- Ajusta el ancho máximo del contenedor -->
-      <div class="grid grid-cols-4 gap-6">
-        <!-- Usa 3 columnas -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <!-- Tarjeta 1: Información del Hotel -->
-        <div class="col-span-2">
-          <!-- Ocupa 2 columnas -->
+        <div class="md:col-span-2">
+          <!-- Ocupa 2 columnas en pantallas medianas y grandes -->
           <div class="bg-white rounded-lg shadow-lg p-6">
             <div class="flex items-center justify-between">
               <div class="text-xl font-bold" v-if="hotels">{{ hotels.nom }}</div>
@@ -147,12 +146,12 @@ function crearReserva(data) {
         </div>
 
         <!-- Tarjeta 2 y 3: Detalles de la Reserva y Resumen del Pago -->
-        <div class="col-span-2">
-          <!-- Ocupa 1 columna -->
+        <div class="md:col-span-2">
+          <!-- Ocupa 2 columnas en pantallas medianas y grandes -->
           <!-- Tarjeta 2: Detalles de la Reserva -->
           <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
             <div class="font-bold text-xl mb-4">{{ $t('dades-reserva-titol') }}</div>
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <p class="text-gray-700 font-semibold">Entrada</p>
                 <p class="text-gray-600">
