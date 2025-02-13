@@ -73,14 +73,13 @@ const sendEmail = () => {
     })
 }
 const dadesReserva = {
-  nom : nom.value,
-  email : email.value
+  nom: nom.value,
+  email: email.value,
 }
-
 
 localStorage.setItem('emailusuari', email.value)
 
-function crearUsuari(dades){
+function crearUsuari(dades) {
   fetch(`${API_URL}/v1/usuaris`, {
     method: 'POST',
     headers: {
@@ -89,8 +88,7 @@ function crearUsuari(dades){
     body: JSON.stringify(dades),
   })
     .then((response) => response.json())
-    .catch(() => {
-    })
+    .catch(() => {})
 }
 
 const verificarCodigo = () => {
