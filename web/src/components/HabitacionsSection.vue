@@ -1,4 +1,6 @@
 <script>
+const API_URL = import.meta.env.VITE_API_URL
+
 export default {
   data() {
     return {
@@ -83,7 +85,7 @@ export default {
       localStorage.setItem('endDate', query.endDate)
       localStorage.setItem('numPeople', query.people)
 
-      fetch('http://localhost:8000/api/v1/reserves')
+      fetch(`${API_URL}/v1/reserves`)
         .then((response) => response.json())
         .then((reserves) => {
           const reservedHabitacions = reserves
