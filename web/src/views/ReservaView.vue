@@ -77,16 +77,16 @@ function getIdUsuari(email) {
   return fetch(`${API_URL}/v1/usuaris/${email}`)
     .then((response) => {
       if (!response.ok) {
-        return null;
+        return null
       }
       return response.json().then((data) => {
-        return data.id;
-      });
+        return data.id
+      })
     })
     .catch((error) => {
-      console.error('Error fetching user data:', error);
-      return null;
-    });
+      console.error('Error fetching user data:', error)
+      return null
+    })
 }
 
 function crearUsuari(dades) {
@@ -100,20 +100,20 @@ function crearUsuari(dades) {
     .then((response) => {
       if (!response.ok) {
         return response.text().then((errorText) => {
-          console.error('Server response:', errorText);
-          throw new Error('Error creating user');
-        });
+          console.error('Server response:', errorText)
+          throw new Error('Error creating user')
+        })
       }
-      return response.json();
+      return response.json()
     })
     .then((data) => {
-      return data.id; 
+      return data.id
     })
     .catch((error) => {
-      console.error('Error creating user:', error);
-      errorMensaje.value = 'Error creating user. Please try again later.';
-      throw error; 
-    });
+      console.error('Error creating user:', error)
+      errorMensaje.value = 'Error creating user. Please try again later.'
+      throw error
+    })
 }
 
 const verificarCodigo = async () => {
@@ -121,29 +121,28 @@ const verificarCodigo = async () => {
     const dadesReserva = {
       nom: nom.value,
       email: email.value,
-    };
-    localStorage.setItem('emailusuari', email.value);
+    }
+    localStorage.setItem('emailusuari', email.value)
 
     try {
-      const usuarioId = await getIdUsuari(email.value);
+      const usuarioId = await getIdUsuari(email.value)
 
       if (usuarioId) {
-        localStorage.setItem('userId', usuarioId);
-        router.push(`/compra/${habitacio.value.id}`);
+        localStorage.setItem('userId', usuarioId)
+        router.push(`/compra/${habitacio.value.id}`)
       } else {
-        
-        const nuevoUsuarioId = await crearUsuari(dadesReserva);
-        localStorage.setItem('userId', nuevoUsuarioId); 
-        router.push(`/compra/${habitacio.value.id}`);
+        const nuevoUsuarioId = await crearUsuari(dadesReserva)
+        localStorage.setItem('userId', nuevoUsuarioId)
+        router.push(`/compra/${habitacio.value.id}`)
       }
     } catch (error) {
-      console.error('Error en el proceso de verificación:', error);
-      errorMensaje.value = 'Error en el proceso de verificación. Por favor, inténtelo de nuevo.';
+      console.error('Error en el proceso de verificación:', error)
+      errorMensaje.value = 'Error en el proceso de verificación. Por favor, inténtelo de nuevo.'
     }
   } else {
-    errorMensaje.value = 'El código no es correcto. Inténtelo de nuevo.';
+    errorMensaje.value = 'El código no es correcto. Inténtelo de nuevo.'
   }
-};
+}
 </script>
 
 <template>
