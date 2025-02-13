@@ -10,7 +10,11 @@ const route = useRoute()
 const isLoading = ref(true)
 const habitacio = ref(null)
 const hotels = ref(null)
-const dataActual = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' })
+const dataActual = new Date().toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+})
 const startDate = ref(localStorage.getItem('startDate'))
 const endDate = ref(localStorage.getItem('endDate'))
 const email = ref(localStorage.getItem('emailusuari'))
@@ -53,7 +57,7 @@ onMounted(() => {
     <div class="flex flex-col items-center min-h-screen bg-gray-100 p-4">
       <div class="w-full max-w-lg bg-white rounded-2xl shadow-md p-6">
         <div class="flex flex-col items-center">
-          <span class="material-symbols-outlined" style="color: green; font-size: 3rem;">
+          <span class="material-symbols-outlined" style="color: green; font-size: 3rem">
             check_circle
           </span>
           <h2 class="text-lg font-semibold">GRÀCIES PER LA TEVA COMANDA!</h2>
@@ -108,10 +112,7 @@ onMounted(() => {
         <div class="mt-4 border-t pt-4 text-right">
           <p class="text-2xl font-bold text-black-500" v-if="habitacio">
             {{
-              (
-                habitacio.preu * diesTotals -
-                ((habitacio.preu * diesTotals) / 100) * 30
-              ).toFixed(2)
+              (habitacio.preu * diesTotals - ((habitacio.preu * diesTotals) / 100) * 30).toFixed(2)
             }}
             €
           </p>
