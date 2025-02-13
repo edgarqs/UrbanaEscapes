@@ -13,9 +13,6 @@ const route = useRoute()
 const startDate = ref(localStorage.getItem('startDate'))
 const endDate = ref(localStorage.getItem('endDate'))
 
-console.log(startDate.value)
-console.log(endDate.value)
-
 const diesTotals = computed(() => {
   if (startDate.value && endDate.value) {
     return Math.ceil((new Date(endDate.value) - new Date(startDate.value)) / (1000 * 60 * 60 * 24))
@@ -56,9 +53,11 @@ function formatDate(date) {
   return `${datePart}T${hour}:${minute}:${sec}.000000Z`
 }
 
+const userID = ref(localStorage.getItem('userId'))
+
 const dadesReserva = computed(() => ({
   habitacion_id: habitacio.value ? habitacio.value.id : null,
-  usuari_id: 1,
+  usuari_id: userID.value,
   data_entrada: formatDate(new Date(startDate.value)),
   data_sortida: formatDate(new Date(endDate.value)),
   preu_total: habitacio.value
@@ -84,7 +83,6 @@ function crearReserva(data) {
       }
       return response.json()
     })
-    .then((data) => console.log(data))
     .catch((error) => console.error('Error:', error))
 }
 </script>
