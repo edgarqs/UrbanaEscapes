@@ -60,7 +60,7 @@ const sendEmail = () => {
   }
 
   emailjs
-    .send('service_ibvhq01', 'template_h2287v9', templateParams, 'RZvzJ3Yx8E4c1O3tK')
+    .send('service_sdxck6f', 'template_g6pkddi', templateParams, '7TB2Yf7rUGPIaApvH')
     .then(() => {
       mostrarReserva.value = false
       mostrarVerificacio.value = true
@@ -85,14 +85,9 @@ const verificarCodigo = () => {
 <template>
   <main>
     <Header />
-    <RouterLink
-      to="/habitacions"
-      class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
-      >Tornar</RouterLink
-    >
 
-    <div v-if="mostrarReserva" class="reservas flex flex-col m-4 justify-center items-center">
-      <div class="flex justify-between p-4 px-8">
+    <div v-if="mostrarReserva" class="reservas flex flex-col m-4 justify-center items-center mt-10 mb-20">
+      <div class="grid grid-cols-4 gap-6">
         <div class="detallsReserva col-span-2">
           <!-- Ocupa 2 columnas -->
           <div class="bg-white rounded-lg shadow-lg p-6">
@@ -119,23 +114,18 @@ const verificarCodigo = () => {
             </p>
             <div class="px-6 pt-4 pb-2" v-if="habitacio">
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                >✔ Animals admesos</span
-              >
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✔
+                Animals admesos</span>
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                >✅ WiFi gratis</span
-              >
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
+                WiFi gratis</span>
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                >✅ Aparcament</span
-              >
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
+                Aparcament</span>
             </div>
-            <button
-              @click="copyAddress"
+            <button @click="copyAddress"
               class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
-              v-if="habitacio"
-            >
+              v-if="habitacio">
               {{ $t('boton-copia-adreca') }}
             </button>
             <p v-else>{{ $t('cargando-datos') }}</p>
@@ -167,7 +157,7 @@ const verificarCodigo = () => {
 
           <div class="bg-white rounded-lg shadow-lg p-6">
             <form @submit.prevent="sendEmail">
-              <h2 class="text-2xl font-bold">Dades del client</h2>
+              <h2 class="text-2xl font-bold">{{ $t('dades-client-titol') }}</h2>
               <div class="form-group">
                 <label for="to_name">Nom:</label>
                 <input type="text" id="to_name" v-model="nom" required />
@@ -176,12 +166,9 @@ const verificarCodigo = () => {
                 <label for="to_email">Correu electrònic:</label>
                 <input type="email" id="to_email" v-model="email" required />
               </div>
-              <button
-                class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
-                type="submit"
-                :disabled="isLoading"
-              >
-                Enviar
+              <button class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+                type="submit" :disabled="isLoading">
+                {{ $t('enviar-boton') }}
               </button>
             </form>
           </div>
@@ -189,20 +176,29 @@ const verificarCodigo = () => {
       </div>
     </div>
 
-    <div v-if="mostrarVerificacio" class="verificacio flex flex-col items-center">
-      <h2 class="text-2xl font-bold">Verificació</h2>
-      <p>Un correu electrònic ha estat enviat a {{ email }} amb un codi de verificació.</p>
-      <p>Si us plau, introdueixi el codi de verificació per confirmar la seva reserva.</p>
+    <div v-if="mostrarVerificacio" class="flex justify-center items-center bg-gray-100 p-4">
+      <div class="verificacio bg-white shadow-lg rounded-lg p-6 w-full sm:w-96 text-center mt-20 mb-20">
+        <h2 class="text-2xl font-bold text-gray-700">{{ $t('titol-verificacio') }}</h2>
+        <p class="text-gray-600 mt-2">
+          Un correu electrònic ha estat enviat a <span class="font-semibold">{{ email }}</span> amb un codi de
+          verificació.
+        </p>
+        <p class="text-gray-600 mt-1">
+          Si us plau, introdueixi el codi de verificació per confirmar la seva reserva.
+        </p>
 
-      <input type="text" v-model="codigoIngresado" required />
-      <button
-        class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
-        @click="verificarCodigo"
-      >
-        Confirmar reserva
-      </button>
+        <input type="text" v-model="codigoIngresado" required
+          class="mt-4 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
+          placeholder="Introduïu el codi" />
 
-      <p v-if="errorMensaje" class="text-red-500 mt-2">{{ errorMensaje }}</p>
+        <button
+          class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full transition duration-300"
+          @click="verificarCodigo">
+          {{ $t('verificar-boton') }}
+        </button>
+
+        <p v-if="errorMensaje" class="text-red-500 mt-2">{{ errorMensaje }}</p>
+      </div>
     </div>
 
     <div v-if="isLoading" class="loading-overlay">
@@ -216,10 +212,6 @@ const verificarCodigo = () => {
 <style scoped>
 .form-group {
   margin-bottom: 1rem;
-}
-
-.tornar {
-  margin-top: 1rem;
 }
 
 input {
@@ -258,6 +250,7 @@ input {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
