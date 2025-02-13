@@ -72,9 +72,30 @@ const sendEmail = () => {
       isLoading.value = false
     })
 }
+const dadesReserva = {
+  nom : nom.value,
+  email : email.value
+}
+
+
+localStorage.setItem('emailusuari', email.value)
+
+function crearUsuari(dades){
+  fetch(`${API_URL}/v1/usuaris`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dades),
+  })
+    .then((response) => response.json())
+    .catch(() => {
+    })
+}
 
 const verificarCodigo = () => {
   if (codigoIngresado.value == token.value) {
+    crearUsuari(dadesReserva)
     router.push(`/compra/${habitacio.value.id}`)
   } else {
     errorMensaje.value = 'El código no es correcto. Inténtelo de nuevo.'
