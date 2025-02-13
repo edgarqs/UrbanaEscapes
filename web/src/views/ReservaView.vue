@@ -86,7 +86,10 @@ const verificarCodigo = () => {
   <main>
     <Header />
 
-    <div v-if="mostrarReserva" class="reservas flex flex-col m-4 justify-center items-center mt-10 mb-20">
+    <div
+      v-if="mostrarReserva"
+      class="reservas flex flex-col m-4 justify-center items-center mt-10 mb-20"
+    >
       <div class="grid grid-cols-4 gap-6">
         <div class="detallsReserva col-span-2">
           <!-- Ocupa 2 columnas -->
@@ -114,18 +117,23 @@ const verificarCodigo = () => {
             </p>
             <div class="px-6 pt-4 pb-2" v-if="habitacio">
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✔
-                Animals admesos</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✔ Animals admesos</span
+              >
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
-                WiFi gratis</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✅ WiFi gratis</span
+              >
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
-                Aparcament</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✅ Aparcament</span
+              >
             </div>
-            <button @click="copyAddress"
+            <button
+              @click="copyAddress"
               class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
-              v-if="habitacio">
+              v-if="habitacio"
+            >
               {{ $t('boton-copia-adreca') }}
             </button>
             <p v-else>{{ $t('cargando-datos') }}</p>
@@ -166,8 +174,11 @@ const verificarCodigo = () => {
                 <label for="to_email">Correu electrònic:</label>
                 <input type="email" id="to_email" v-model="email" required />
               </div>
-              <button class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
-                type="submit" :disabled="isLoading">
+              <button
+                class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+                type="submit"
+                :disabled="isLoading"
+              >
                 {{ $t('enviar-boton') }}
               </button>
             </form>
@@ -177,23 +188,30 @@ const verificarCodigo = () => {
     </div>
 
     <div v-if="mostrarVerificacio" class="flex justify-center items-center bg-gray-100 p-4">
-      <div class="verificacio bg-white shadow-lg rounded-lg p-6 w-full sm:w-96 text-center mt-20 mb-20">
+      <div
+        class="verificacio bg-white shadow-lg rounded-lg p-6 w-full sm:w-96 text-center mt-20 mb-20"
+      >
         <h2 class="text-2xl font-bold text-gray-700">{{ $t('titol-verificacio') }}</h2>
         <p class="text-gray-600 mt-2">
-          Un correu electrònic ha estat enviat a <span class="font-semibold">{{ email }}</span> amb un codi de
-          verificació.
+          Un correu electrònic ha estat enviat a <span class="font-semibold">{{ email }}</span> amb
+          un codi de verificació.
         </p>
         <p class="text-gray-600 mt-1">
           Si us plau, introdueixi el codi de verificació per confirmar la seva reserva.
         </p>
 
-        <input type="text" v-model="codigoIngresado" required
+        <input
+          type="text"
+          v-model="codigoIngresado"
+          required
           class="mt-4 w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
-          placeholder="Introduïu el codi" />
+          placeholder="Introduïu el codi"
+        />
 
         <button
           class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full transition duration-300"
-          @click="verificarCodigo">
+          @click="verificarCodigo"
+        >
           {{ $t('verificar-boton') }}
         </button>
 
