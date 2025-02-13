@@ -99,6 +99,10 @@
   "resum-pagament-titol": "Resumen del Pago",
   "boton-copia-adreca": "Copia la dirección",
   "boton-pagar": "Pagar",
+  "dades-client-titol": "Datos del Cliente",
+  "enviar-boton": "Enviar",
+  "titol-verificacio": "Verificación",
+  "verificar-boton": "Verificar Datos",
 
   "cargando-datos": "Cargando datos..."
 }

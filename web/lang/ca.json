@@ -99,6 +99,10 @@
   "resum-pagament-titol": "Resum del Pagament",
   "boton-copia-adreca": "Copia l'adreça",
   "boton-pagar": "Pagar",
+  "dades-client-titol": "Dades del Client",
+  "enviar-boton": "Enviar",
+  "titol-verificacio": "Verificació",
+  "verificar-boton": "Verificar Dades",
 
   "cargando-datos": "Carregant dades..."
 }

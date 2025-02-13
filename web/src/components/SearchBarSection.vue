@@ -46,23 +46,14 @@
       <label for="people">{{ $t('cerca-persones') }}</label>
       <div class="people-input">
         <button @click="changePeople(-1)" :disabled="people <= 1">-</button>
-        <input
-          type="text"
-          id="people"
-          v-model="people"
-          readonly
-        />
+        <input type="text" id="people" v-model="people" readonly />
         <button @click="changePeople(1)" :disabled="people >= 5">+</button>
       </div>
       <p v-if="errors.people" class="error-message">{{ $t('error-people') }}</p>
     </div>
 
     <!-- Botó de cerca -->
-    <button 
-      class="search-button" 
-      @click="handleSearch"
-      :disabled="isFormInvalid"
-    >
+    <button class="search-button" @click="handleSearch" :disabled="isFormInvalid">
       {{ $t('cerca-boto') }}
     </button>
   </div>
@@ -82,8 +73,8 @@ export default {
         destination: false,
         startDate: false,
         endDate: false,
-        people: false
-      }
+        people: false,
+      },
     }
   },
   computed: {
@@ -94,20 +85,25 @@ export default {
         this.errors.startDate ||
         this.errors.endDate ||
         this.errors.people
-      );
-    }
+      )
+    },
   },
   methods: {
     handleSearch() {
       // Validar que tots els camps estiguin omplerts
-      this.errors.destination = !this.destination;
-      this.errors.startDate = !this.startDate;
-      this.errors.endDate = !this.endDate;
-      this.errors.people = this.people < 1 || this.people > 5;
+      this.errors.destination = !this.destination
+      this.errors.startDate = !this.startDate
+      this.errors.endDate = !this.endDate
+      this.errors.people = this.people < 1 || this.people > 5
 
       // Si hi ha errors, no continuar
-      if (this.errors.destination || this.errors.startDate || this.errors.endDate || this.errors.people) {
-        return; // Evitar l'enviament del formulari
+      if (
+        this.errors.destination ||
+        this.errors.startDate ||
+        this.errors.endDate ||
+        this.errors.people
+      ) {
+        return // Evitar l'enviament del formulari
       }
 
       // Redirigir a la pàgina d'habitacions disponibles (RW03)
@@ -125,38 +121,38 @@ export default {
     validateStartDate() {
       // Si la data d'inici és posterior a la data d'avui, mostrar error
       if (new Date(this.startDate) < new Date(this.today)) {
-        this.errors.startDate = true;
+        this.errors.startDate = true
       } else {
-        this.errors.startDate = false;
+        this.errors.startDate = false
       }
     },
 
     validateEndDate() {
       // Si la data final és anterior a la data d'inici, mostrar error
       if (this.endDate && new Date(this.endDate) < new Date(this.startDate)) {
-        this.errors.endDate = true;
+        this.errors.endDate = true
       } else {
-        this.errors.endDate = false;
+        this.errors.endDate = false
       }
     },
 
     checkField(field) {
       // Validar si el camp ha estat omplert correctament
       if (this[field] && this[field].trim() !== '') {
-        this.errors[field] = false;
+        this.errors[field] = false
       } else {
-        this.errors[field] = true;
+        this.errors[field] = true
       }
     },
 
     changePeople(amount) {
       // Canviar la quantitat de persones amb els botons
-      const newPeople = this.people + amount;
+      const newPeople = this.people + amount
       if (newPeople >= 1 && newPeople <= 5) {
-        this.people = newPeople;
+        this.people = newPeople
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -1,10 +1,7 @@
 <script setup>
 import Header from '../components/HeaderSection.vue'
 import Footer from '../components/FooterSection.vue'
-
-
 </script>
-
 
 <template>
   <main>

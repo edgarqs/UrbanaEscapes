@@ -9,7 +9,6 @@ import CondicionsView from '../views/CondicionsView.vue'
 import ReservaView from '../views/ReservaView.vue'
 import ReviewCompraView from '@/views/ReviewCompraView.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -32,13 +31,11 @@ const router = createRouter({
       path: '/habitacions',
       name: 'habitacions',
       component: HabitacionsView,
-
     },
     {
       path: '/politica',
       name: 'politica',
       component: PoliticaView,
-
     },
     {
       path: '/condicions',
@@ -59,7 +56,7 @@ const router = createRouter({
       path: '/review-compra',
       name: 'review-compra',
       component: ReviewCompraView,
-    }
+    },
   ],
 })
 

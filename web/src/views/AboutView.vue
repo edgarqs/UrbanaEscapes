@@ -4,7 +4,6 @@ import Footer from '../components/FooterSection.vue'
 import About from '../components/AboutSection.vue'
 </script>
 
-
 <template>
   <main>
     <Header1 />

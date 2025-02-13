@@ -99,6 +99,10 @@
   "resum-pagament-titol": "Payment Summary",
   "boton-copia-adreca": "Copy Address",
   "boton-pagar": "Pay",
+  "dades-client-titol": "Client Details",
+  "enviar-boton": "Send",
+  "titol-verificacio": "Verification",
+  "verificar-boton": "Verify Data",
 
   "cargando-datos": "Loading data..."
 }
