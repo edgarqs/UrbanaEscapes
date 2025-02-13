@@ -21,11 +21,11 @@ class UsuariController extends Controller
         return response()->json($usuari, 201);
     }
 
-    public function show($id): JsonResponse
-    {
-        $usuari = Usuari::findOrFail($id);
-        return response()->json($usuari);
-    }
+    public function show($identifier): JsonResponse
+{
+    $usuari = Usuari::where('id', $identifier)->orWhere('email', $identifier)->firstOrFail();
+    return response()->json($usuari);
+}
 
     public function update(Request $request, $id): JsonResponse
     {
