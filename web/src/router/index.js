@@ -1,6 +1,6 @@
+'use strict'
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import LoginView from '@/views/LoginView.vue'
 import AboutView from '@/views/AboutView.vue'
 import HabitacionsView from '@/views/HabitacionsView.vue'
 import PoliticaView from '../views/PoliticaView.vue'
@@ -21,11 +21,6 @@ const router = createRouter({
       path: '/about',
       name: 'about',
       component: AboutView,
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: LoginView,
     },
     {
       path: '/habitacions',

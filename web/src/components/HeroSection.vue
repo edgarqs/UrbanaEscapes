@@ -1,4 +1,5 @@
 <script>
+'use strict'
 export default {
   name: 'HeroSection',
 }

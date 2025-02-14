@@ -104,5 +104,9 @@
   "titol-verificacio": "Verification",
   "verificar-boton": "Verify Data",
 
-  "cargando-datos": "Loading data..."
+  "cargando-datos": "Loading data...",
+
+  "gracies-comanda": "Thank you for your order!",
+
+  "boton-torna-inici": "Back to Home"
 }

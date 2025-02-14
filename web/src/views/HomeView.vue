@@ -1,4 +1,5 @@
 <script setup>
+'use strict'
 import Header from '../components/HeaderSection.vue'
 import Hero from '../components/HeroSection.vue'
 import Noticies from '../components/NoticiesSection.vue'

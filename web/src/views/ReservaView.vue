@@ -1,6 +1,7 @@
 <script setup>
+'use strict'
 import { ref, onMounted } from 'vue'
-import { RouterLink, useRoute, useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import emailjs from 'emailjs-com'
 import Header from '../components/HeaderStaticSection.vue'
 import Footer from '../components/FooterSection.vue'

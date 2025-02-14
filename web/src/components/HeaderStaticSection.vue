@@ -16,8 +16,6 @@
           <a href="/" class="text-gray-800 hover:text-gray-600">{{ $t('inici') }}</a>
           <span class="text-orange-500">|</span>
           <a href="/about" class="text-gray-800 hover:text-gray-600">{{ $t('sobre-nosaltres') }}</a>
-          <span class="text-orange-500">|</span>
-          <a href="/contact" class="text-gray-800 hover:text-gray-600">{{ $t('contacte') }}</a>
         </div>
 
         <div class="flex items-center space-x-4">
