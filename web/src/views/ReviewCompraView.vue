@@ -1,4 +1,5 @@
 <script setup>
+'use strict'
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Header from '../components/HeaderStaticSection.vue'
@@ -60,7 +61,7 @@ onMounted(() => {
           <span class="material-symbols-outlined" style="color: green; font-size: 3rem">
             check_circle
           </span>
-          <h2 class="text-lg font-semibold">GRÀCIES PER LA TEVA COMANDA!</h2>
+          <h2 class="text-lg font-semibold">{{ $t('gracies-comanda') }}</h2>
           <p class="text-gray-500 text-sm text-center">
             La teva confirmació de la comanda ha estat enviada al correu electrònic
             {{ email }}.
@@ -121,7 +122,7 @@ onMounted(() => {
           <button
             class="w-full mt-6 bg-orange-500 text-white py-2 rounded-lg font-medium hover:bg-orange-400 transition"
           >
-            Torna a l'inici
+            {{ $t('boton-torna-inici') }}
           </button>
         </RouterLink>
       </div>

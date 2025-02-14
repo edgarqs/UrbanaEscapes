@@ -1,4 +1,5 @@
 <script setup>
+'use strict'
 import Header1 from '../components/HeaderStaticSection.vue'
 import Footer from '../components/FooterSection.vue'
 import Habitacions from '../components/HabitacionsSection.vue'

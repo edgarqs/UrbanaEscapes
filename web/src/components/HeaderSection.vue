@@ -30,13 +30,6 @@
           class="hover:text-gray-600"
           >{{ $t('sobre-nosaltres') }}</a
         >
-        <span class="text-orange-500">|</span>
-        <a
-          href="/contact"
-          :class="{ 'text-white': !scrolled, 'text-gray-800': scrolled }"
-          class="hover:text-gray-600"
-          >{{ $t('contacte') }}</a
-        >
       </div>
 
       <div class="flex items-center space-x-4">
@@ -120,6 +113,7 @@
 </template>
 
 <script>
+'use strict'
 import i18n from '../../plugins/i18n'
 
 export default {
