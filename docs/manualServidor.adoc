@@ -1,3 +1,175 @@
+# Manual d'instal·lació del servidor a AWS (Desplegament)
+
+## Instal·lació Web Pública
+
+### 1. Requisits previs
+
+- Cal tenir un Ubuntu Server ja instal·lat i amb accés SSH.
+- Domini (opcional): Si vols utilitzar HTTPS amb Let's Encrypt, necessites un domini apuntant al teu servidor.
+
+### 2. Instal·lació de Nginx
+
+Actualitzem els paquets i instal·lem Nginx:
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install nginx -y
+```
+
+Comprovem que Nginx està funcionant:
+
+```bash
+sudo systemctl status nginx
+```
+
+Pots comprovar-ho obrint un navegador i accedint a http://IP_DEL_SERVIDOR. Si tot funciona bé, es pot veure la pàgina de Nginx.
+
+### 3. Instal·lació de npm i Vue CLI
+
+```bash
+sudo apt install -y npm
+npm install -g @vue/cli
+npm install vite-plugin-vue-devtools -D
+```
+
+Podem comprobar la instal·lació amb:
+
+```bash
+npm -v
+```
+
+### 4. Pujar i compilar el projecte Vue.js
+
+Puja el projecte Vue.js al servidor i compila els assets:
+
+```bash
+cd /var/www/html
+git clone https://gitlab.com/hotel8035648/grup6-hotel.git
+```
+
+Segurament, ens demarà les credencials de GitLab. Un cop fet, podem compilar els assets:
+
+```bash
+cd grup6-hotel/web
+npm install
+npm run build
+```
+
+Aquesta ordre generarà un directori `dist` que conté els arxius estàtics de l’aplicació.
+
+### 5. Configuració de Nginx
+
+Creem un nou bloc de servidor per servir l’aplicació Vue:
+
+```bash
+sudo nano /etc/nginx/sites-available/vue-web
+```
+
+Afegim el següent contingut:
+
+```nginx
+server {
+    listen 80;
+    server_name _;
+    
+    root /var/www/html/grup6-hotel/web/dist;
+    index index.html;
+    
+    location / {
+        try_files $uri /index.html;
+    }
+    
+    location /api/ {
+        proxy_pass http://bko.pgonzalez.info;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    error_page 404 /index.html;
+
+    access_log /var/log/nginx/vue-app_access.log;
+    error_log /var/log/nginx/vue-app_error.log;
+}
+```
+
+Habilitem el lloc web:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/vue-web /etc/nginx/sites-enabled/
+```
+
+Podem verificar que la configuració és correcta:
+
+```bash
+sudo nginx -t
+```
+
+Si no hi ha errors, recarreguem Nginx:
+
+```bash
+sudo systemctl reload nginx
+```
+
+### 6. Configuració de permisos
+
+Per evitar problemes de permisos, canviem el propietari del directori del projecte:
+
+```bash
+sudo chown -R www-data:www-data /var/www/html/grup6-hotel
+sudo chmod -R 755 /var/www/html/grup6-hotel
+```
+
+### 7. Configuració de SSL amb Let's Encrypt
+
+```bash
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx -d web.pgonzalez.info
+```
+
+Automatitzem la renovació del certificat:
+
+```bash
+sudo crontab -e
+```
+
+Afegim aquesta línia al final:
+
+```
+0 0 * * * /usr/bin/certbot renew --quiet
+```
+
+### 8. Possibles problemes
+
+#### 8.1. A l'accedir a l'aplicació, es mostra la pàgina per defecte de Nginx
+
+Això pot ser degut a que el bloc de servidor per l'aplicació Vue no està habilitat. Per habilitar-lo, executa:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/vue-web /etc/nginx/sites-enabled/
+sudo systemctl reload nginx
+```
+
+Potser s'ha de deshabilitar la pàgina per defecte de Nginx:
+
+Executa aquest comandament per veure els llocs actius:
+
+```bash
+ls -l /etc/nginx/sites-enabled/
+```
+
+Si encara hi apareix `default`, cal desactivar-lo. Fes-ho amb:
+
+```bash
+sudo rm /etc/nginx/sites-enabled/default
+sudo systemctl reload nginx
+```
+
+
+
+
 === Manual d'instalacio del servidor AWS
 
 Per instalar el servidor AWS cal seguir els següents passos:
