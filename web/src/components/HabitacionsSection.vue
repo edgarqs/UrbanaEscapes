@@ -44,7 +44,7 @@ export default {
   },
   mounted() {
     const query = this.$route.query
-    fetch('http://localhost:8000/api/v1/habitacions')
+    fetch(`${API_URL}/v1/habitacions`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch data')
