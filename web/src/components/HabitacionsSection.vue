@@ -136,11 +136,14 @@ export default {
     },
 
     matchDestination(habitacio, destination) {
+      if (!habitacio.hotel) {
+        return false
+      }
+
       const searchString = destination.trim().toLowerCase()
       const hotelDetails = [habitacio.hotel.adreca, habitacio.hotel.ciutat, habitacio.hotel.pais]
         .map((detail) => detail.toLowerCase())
         .join(' ')
-
       return hotelDetails.includes(searchString)
     },
   },
