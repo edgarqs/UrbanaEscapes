@@ -105,7 +105,9 @@
     <div v-if="menuOpen" class="lg:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-10">
       <nav class="flex flex-col items-center space-y-4 p-4">
         <a href="/" class="text-gray-800 hover:text-gray-600">{{ $t('inici') }}</a>
-        <a href="/nosaltres" class="text-gray-800 hover:text-gray-600">{{ $t('sobre-nosaltres') }}</a>
+        <a href="/nosaltres" class="text-gray-800 hover:text-gray-600">{{
+          $t('sobre-nosaltres')
+        }}</a>
         <a href="/contact" class="text-gray-800 hover:text-gray-600">{{ $t('contacte') }}</a>
       </nav>
     </div>
