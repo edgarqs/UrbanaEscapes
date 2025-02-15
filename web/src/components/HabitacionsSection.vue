@@ -186,6 +186,7 @@ export default {
                 :src="getImageForRoomType(habitacio.tipus)"
                 :alt="`Habitación ${habitacio.id}`"
                 class="w-full h-full object-cover transition-transform transform hover:scale-110"
+                loading="lazy"
               />
             </div>
             <div class="p-4 flex flex-col justify-between w-2/3">

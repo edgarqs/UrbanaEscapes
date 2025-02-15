@@ -72,6 +72,7 @@ a:hover {
                     src="https://cdn-icons-png.flaticon.com/512/174/174883.png"
                     alt="YouTube"
                     class="w-5 h-5 inline-block mr-2"
+                    loading="lazy"
                   />
                   YouTube
                 </a>
@@ -82,6 +83,7 @@ a:hover {
                     src="https://cdn-icons-png.flaticon.com/512/3116/3116491.png"
                     alt="TikTok"
                     class="w-5 h-5 inline-block mr-2"
+                    loading="lazy"
                   />
                   TikTok
                 </a>
@@ -92,6 +94,7 @@ a:hover {
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/1200px-2021_Facebook_icon.svg.png"
                     alt="Facebook"
                     class="w-5 h-5 inline-block mr-2"
+                    loading="lazy"
                   />
                   Facebook
                 </a>

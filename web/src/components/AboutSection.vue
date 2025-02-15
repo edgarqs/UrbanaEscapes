@@ -89,7 +89,7 @@ h2 {
         <div class="card-image">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkGoDqDQkEQHZa5AuEarpjS3kcC9aSbEXJyg&s"
-            alt="Foto del Pol González"
+            alt="Foto del Pol González" loading="lazy"
           />
         </div>
         <div class="card-body">
@@ -101,7 +101,7 @@ h2 {
         <div class="card-image">
           <img
             src="https://plus.unsplash.com/premium_photo-1689568158814-3b8e9c1a9618?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D"
-            alt="Foto del Edgar Quirante"
+            alt="Foto del Edgar Quirante" loading="lazy"
           />
         </div>
         <div class="card-body">
@@ -113,7 +113,7 @@ h2 {
         <div class="card-image">
           <img
             src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?cs=srgb&dl=pexels-justin-shaifer-501272-1222271.jpg&fm=jpg"
-            alt="Foto del Jon Perea"
+            alt="Foto del Jon Perea" loading="lazy"
           />
         </div>
         <div class="card-body">

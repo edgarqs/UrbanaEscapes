@@ -93,42 +93,42 @@ p {
     <div class="card-container">
       <div class="card">
         <h2>{{ $t('noticia-1-titol') }}</h2>
-        <img src="./img/noticia1.avif" alt="Resort en Bali" />
+        <img src="./img/noticia1.avif" alt="Resort en Bali" loading="lazy" />
         <p>
           {{ $t('noticia-1-descripcio') }}
         </p>
       </div>
       <div class="card">
         <h2>{{ $t('noticia-2-titol') }}</h2>
-        <img src="./img/noticia2.avif" alt="Promoción romántica" />
+        <img src="./img/noticia2.avif" alt="Promoción romántica" loading="lazy" />
         <p>
           {{ $t('noticia-2-descripcio') }}
         </p>
       </div>
       <div class="card">
         <h2>{{ $t('noticia-3-titol') }}</h2>
-        <img src="./img/noticia3.avif" alt="Renovación hotelera" />
+        <img src="./img/noticia3.avif" alt="Renovación hotelera" loading="lazy" />
         <p>
           {{ $t('noticia-3-descripcio') }}
         </p>
       </div>
       <div class="card">
         <h2>{{ $t('noticia-4-titol') }}</h2>
-        <img src="./img/noticia4.avif" alt="Sostenibilidad" />
+        <img src="./img/noticia4.avif" alt="Sostenibilidad" loading="lazy" />
         <p>
           {{ $t('noticia-4-descripcio') }}
         </p>
       </div>
       <div class="card">
         <h2>{{ $t('noticia-5-titol') }}</h2>
-        <img src="./img/noticia5.avif" alt="Foto hotel París" />
+        <img src="./img/noticia5.avif" alt="Foto hotel París" loading="lazy" />
         <p>
           {{ $t('noticia-5-descripcio') }}
         </p>
       </div>
       <div class="card">
         <h2>{{ $t('noticia-6-titol') }}</h2>
-        <img src="./img/noticia6.avif" alt="Foto de platos de comida" />
+        <img src="./img/noticia6.avif" alt="Foto de platos de comida" loading="lazy" />
         <p>
           {{ $t('noticia-6-descripcio') }}
         </p>
