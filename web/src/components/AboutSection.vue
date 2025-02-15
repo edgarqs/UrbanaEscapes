@@ -85,7 +85,7 @@ h2 {
     <h2 class="center">Nuestro Equipo</h2>
 
     <div class="card-list">
-      <a href="https://portfolio1.com" class="card" target="_blank">
+      <a href="https://pgonzalez.info/" class="card" target="_blank">
         <div class="card-image">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkGoDqDQkEQHZa5AuEarpjS3kcC9aSbEXJyg&s"
@@ -94,11 +94,10 @@ h2 {
         </div>
         <div class="card-body">
           <h2>Pol González</h2>
-          <p>Descripció del Pol González</p>
         </div>
       </a>
 
-      <a href="https://portfolio2.com" class="card" target="_blank">
+      <a href="https://portfolio.edgarqs.dev/" class="card" target="_blank">
         <div class="card-image">
           <img
             src="https://plus.unsplash.com/premium_photo-1689568158814-3b8e9c1a9618?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D"
@@ -107,7 +106,6 @@ h2 {
         </div>
         <div class="card-body">
           <h2>Edgar Quirante</h2>
-          <p>Descripción del Edgar Quirante.</p>
         </div>
       </a>
 
@@ -120,7 +118,6 @@ h2 {
         </div>
         <div class="card-body">
           <h2>Jon Perea</h2>
-          <p>Descripción del Jon Perea.</p>
         </div>
       </a>
     </div>
