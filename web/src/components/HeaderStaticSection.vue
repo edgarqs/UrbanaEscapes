@@ -15,7 +15,7 @@
         <div class="hidden lg:flex items-center justify-center flex-grow space-x-6">
           <a href="/" class="text-gray-800 hover:text-gray-600">{{ $t('inici') }}</a>
           <span class="text-orange-500">|</span>
-          <a href="/about" class="text-gray-800 hover:text-gray-600">{{ $t('sobre-nosaltres') }}</a>
+          <a href="/nosaltres" class="text-gray-800 hover:text-gray-600">{{ $t('sobre-nosaltres') }}</a>
         </div>
 
         <div class="flex items-center space-x-4">
@@ -87,7 +87,7 @@
       <div v-if="menuOpen" class="lg:hidden absolute top-16 left-0 w-full bg-white shadow-lg z-10">
         <nav class="flex flex-col items-center space-y-4 p-4">
           <a href="/" class="text-gray-800 hover:text-gray-600">{{ $t('inici') }}</a>
-          <a href="/about" class="text-gray-800 hover:text-gray-600">{{ $t('sobre-nosaltres') }}</a>
+          <a href="/nosaltres" class="text-gray-800 hover:text-gray-600">{{ $t('sobre-nosaltres') }}</a>
           <a href="/contact" class="text-gray-800 hover:text-gray-600">{{ $t('contacte') }}</a>
         </nav>
       </div>
@@ -117,7 +117,7 @@ export default {
         { code: 'en', label: 'English', flag: 'https://flagcdn.com/w320/us.png' },
         {
           code: 'ca',
-          label: 'Visca Catalunya',
+          label: 'Català',
           flag: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Flag_of_Catalonia.svg/320px-Flag_of_Catalonia.svg.png',
         },
       ],
