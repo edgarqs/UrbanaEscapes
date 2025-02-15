@@ -9,7 +9,7 @@
 ## WEBS:
 
 - link:https://web.pgonzalez.info[web.pgonzalez.info] - Edgar Quirante Sánchez
-- link:http://bko.jonperea.info[bko.pgonzalez.info] - Jon Perea Garcia
+- link:https://bko.pgonzalez.info[bko.pgonzalez.info] - Pol Gonzalez Miranda
 
 ## Documentació:
 
