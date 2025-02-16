@@ -85,13 +85,12 @@ h2 {
     <h2 class="center">Nuestro Equipo</h2>
 
     <div class="card-list">
-      <a href="https://pgonzalez.info" class="card" target="_blank">
+      <a href="https://pgonzalez.info/" class="card" target="_blank">
         <div class="card-image">
           <img src="./img/Pol.png" alt="Foto del Pol González" />
         </div>
         <div class="card-body">
           <h2>Pol González</h2>
-          <p>Descripció del Pol González</p>
         </div>
       </a>
 
@@ -101,7 +100,6 @@ h2 {
         </div>
         <div class="card-body">
           <h2>Edgar Quirante</h2>
-          <p>Descripción del Edgar Quirante.</p>
         </div>
       </a>
 
@@ -111,7 +109,6 @@ h2 {
         </div>
         <div class="card-body">
           <h2>Jon Perea</h2>
-          <p>Descripción del Jon Perea.</p>
         </div>
       </a>
     </div>
