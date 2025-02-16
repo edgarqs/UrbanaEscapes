@@ -13,11 +13,19 @@
 
         <!-- Desktop Navigation -->
         <div class="hidden lg:flex items-center justify-center flex-grow space-x-6">
-          <a href="/" class="text-gray-800 hover:text-gray-600">{{ $t('inici') }}</a>
+          <RouterLink
+            to="/"
+            :class="{ 'text-white': !scrolled, 'text-gray-800': scrolled }"
+            class="hover:text-gray-600"
+            >{{ $t('inici') }}</RouterLink
+          >
           <span class="text-orange-500">|</span>
-          <a href="/nosaltres" class="text-gray-800 hover:text-gray-600">{{
-            $t('sobre-nosaltres')
-          }}</a>
+          <RouterLink
+            to="/nosaltres"
+            :class="{ 'text-white': !scrolled, 'text-gray-800': scrolled }"
+            class="hover:text-gray-600"
+            >{{ $t('sobre-nosaltres') }}</RouterLink
+          >
         </div>
 
         <div class="flex items-center space-x-4">
