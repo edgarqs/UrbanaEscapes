@@ -195,7 +195,7 @@ const verificarCodigo = async () => {
             </div>
             <button
               @click="copyAddress"
-              class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+              class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full cursor-pointer"
               v-if="habitacio"
             >
               {{ $t('boton-copia-adreca') }}
@@ -239,7 +239,7 @@ const verificarCodigo = async () => {
                 <input type="email" id="to_email" v-model="email" required />
               </div>
               <button
-                class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+                class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full cursor-pointer"
                 type="submit"
                 :disabled="isLoading"
               >
@@ -273,7 +273,7 @@ const verificarCodigo = async () => {
         />
 
         <button
-          class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full transition duration-300"
+          class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full transition duration-300 cursor-pointer"
           @click="verificarCodigo"
         >
           {{ $t('verificar-boton') }}
