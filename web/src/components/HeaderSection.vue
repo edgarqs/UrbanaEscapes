@@ -17,18 +17,18 @@
 
       <!-- Desktop Navigation -->
       <div class="hidden lg:flex items-center justify-center flex-grow space-x-6">
-        <a
-          href="/"
+        <RouterLink
+          to="/"
           :class="{ 'text-white': !scrolled, 'text-gray-800': scrolled }"
           class="hover:text-gray-600"
-          >{{ $t('inici') }}</a
+          >{{ $t('inici') }}</RouterLink
         >
         <span class="text-orange-500">|</span>
-        <a
-          href="/nosaltres"
+        <RouterLink
+          to="/nosaltres"
           :class="{ 'text-white': !scrolled, 'text-gray-800': scrolled }"
           class="hover:text-gray-600"
-          >{{ $t('sobre-nosaltres') }}</a
+          >{{ $t('sobre-nosaltres') }}</RouterLink
         >
       </div>
 
