@@ -120,7 +120,7 @@ onMounted(() => {
         </div>
         <RouterLink to="/" class="mt-4 w-full">
           <button
-            class="w-full mt-6 bg-orange-500 text-white py-2 rounded-lg font-medium hover:bg-orange-400 transition"
+            class="w-full mt-6 bg-orange-500 text-white py-2 rounded-lg font-medium hover:bg-orange-400 transition cursor-pointer"
           >
             {{ $t('boton-torna-inici') }}
           </button>

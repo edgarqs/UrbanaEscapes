@@ -1,7 +1,10 @@
 <template>
   <div>
     <!-- Header fijo -->
-    <header class="bg-white shadow-md fixed top-0 left-0 w-full z-10 h-16">
+    <header
+      :class="{ 'bg-transparent': !scrolled, 'bg-white shadow-md': scrolled }"
+      class="fixed top-0 left-0 w-full z-10 transition-colors duration-300 h-16"
+    >
       <!-- Altura fija de 64px (h-16 en Tailwind) -->
       <nav class="max-w-7xl mx-auto flex items-center justify-between p-4 h-full">
         <!-- Logo -->
@@ -109,6 +112,7 @@ export default {
   name: 'HeaderStatic',
   data() {
     return {
+      scrolled: false,
       menuOpen: false,
       languageDropdownOpen: false,
       currentLanguage: {
@@ -127,7 +131,16 @@ export default {
       ],
     }
   },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
   methods: {
+    handleScroll() {
+      this.scrolled = window.scrollY > 50;
+    },
     toggleMenu() {
       this.menuOpen = !this.menuOpen
     },
