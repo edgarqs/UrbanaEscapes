@@ -87,10 +87,7 @@ h2 {
     <div class="card-list">
       <a href="https://pgonzalez.info" class="card" target="_blank">
         <div class="card-image">
-          <img
-            src="./img/Pol.png"
-            alt="Foto del Pol González"
-          />
+          <img src="./img/Pol.png" alt="Foto del Pol González" />
         </div>
         <div class="card-body">
           <h2>Pol González</h2>
@@ -100,10 +97,7 @@ h2 {
 
       <a href="https://portfolio.edgarqs.dev/" class="card" target="_blank">
         <div class="card-image">
-          <img
-            src="./img/Edgar.png"
-            alt="Foto del Edgar Quirante"
-          />
+          <img src="./img/Edgar.png" alt="Foto del Edgar Quirante" />
         </div>
         <div class="card-body">
           <h2>Edgar Quirante</h2>
@@ -113,10 +107,7 @@ h2 {
 
       <a href="https://jonjoestarr.github.io/CurriculumVitae/" class="card" target="_blank">
         <div class="card-image">
-          <img
-            src="./img/Jon.png"
-            alt="Foto del Jon Perea"
-          />
+          <img src="./img/Jon.png" alt="Foto del Jon Perea" />
         </div>
         <div class="card-body">
           <h2>Jon Perea</h2>
