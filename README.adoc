@@ -1,12 +1,20 @@
 # Grup 6 - UrbanaEscapes
 
-#### Pol González Miranda, Jon Perea Garcia, Edgar Quirante Sánchez
+## Integrants:
 
-Servidor: Pol Gonzalez Miranda
+- Pol Gonzalez Miranda
+- Jon Perea Garcia
+- Edgar Quirante Sánchez
 
-## Enllaços
+## WEBS:
 
-link:https://www.figma.com/design/9rXC4C1gOy8ahfwJ5BZKMj/Guia-d'estils-UrbanaEscapes?node-id=159-50&t=Zvof1nqXFgUDUuFC-1[Guía d'estils UrbanaEscapes]
+- link:https://web.pgonzalez.info[web.pgonzalez.info] - Edgar Quirante Sánchez
+- link:https://bko.pgonzalez.info[bko.pgonzalez.info] - Pol Gonzalez Miranda
 
-### Webgrafía:
-https://www.youtube.com/watch?v=nTlq_73zRm8
+## Documentació:
+
+- link:docs/memoria.adoc[🔗 Memòria]
+
+- link:docs/manualServidor.adoc[🔗 Manual del Servidor]
+
+- link:docs/tests.adoc[🔗 Tests Laravel]
