@@ -15,14 +15,12 @@
         <div class="hidden lg:flex items-center justify-center flex-grow space-x-6">
           <RouterLink
             to="/"
-            :class="{ 'text-white': !scrolled, 'text-gray-800': scrolled }"
             class="hover:text-gray-600"
             >{{ $t('inici') }}</RouterLink
           >
           <span class="text-orange-500">|</span>
           <RouterLink
             to="/nosaltres"
-            :class="{ 'text-white': !scrolled, 'text-gray-800': scrolled }"
             class="hover:text-gray-600"
             >{{ $t('sobre-nosaltres') }}</RouterLink
           >
