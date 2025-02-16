@@ -4,7 +4,6 @@ export default {
   name: 'HeroSection',
 }
 </script>
-
 <template>
   <video loop muted autoplay playsinline poster="" class="background-video">
     <source src="./../video/videohotel.mp4" type="video/mp4" />
