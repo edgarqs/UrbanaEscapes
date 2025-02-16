@@ -99,7 +99,7 @@ h2 {
     <div class="card-list">
       <div class="card">
         <div class="card-image">
-          <img src="./img/reunio.jpeg" alt="London trip" />
+          <img src="./img/reunion.avif" alt="London trip" loading="lazy" />
         </div>
         <div class="card-body">
           <h2>{{ $t('valors-historia-titol') }}</h2>
@@ -111,7 +111,7 @@ h2 {
 
       <div class="card">
         <div class="card-image">
-          <img src="./img/placas.jpg" alt="New York trip" />
+          <img src="./img/placas.avif" alt="New York trip" loading="lazy" />
         </div>
         <div class="card-body">
           <h2>{{ $t('valors-valors-titol') }}</h2>
@@ -129,7 +129,7 @@ h2 {
 
       <div class="card">
         <div class="card-image">
-          <img src="./img/hotel.jpg" alt="Marrakech trip" />
+          <img src="./img/habitacion.avif" alt="Marrakech trip" loading="lazy" />
         </div>
         <div class="card-body">
           <h2>{{ $t('valors-filosofia-titol') }}</h2>

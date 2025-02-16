@@ -51,7 +51,7 @@ h2 {
 .card-image {
   display: block;
   width: 100%;
-  height: 200px;
+  height: 400px;
   overflow: hidden;
   position: relative;
 }
@@ -87,10 +87,7 @@ h2 {
     <div class="card-list">
       <a href="https://pgonzalez.info/" class="card" target="_blank">
         <div class="card-image">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkGoDqDQkEQHZa5AuEarpjS3kcC9aSbEXJyg&s"
-            alt="Foto del Pol González"
-          />
+          <img src="./img/Pol.png" alt="Foto del Pol González" />
         </div>
         <div class="card-body">
           <h2>Pol González</h2>
@@ -99,22 +96,16 @@ h2 {
 
       <a href="https://portfolio.edgarqs.dev/" class="card" target="_blank">
         <div class="card-image">
-          <img
-            src="https://plus.unsplash.com/premium_photo-1689568158814-3b8e9c1a9618?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29uYXxlbnwwfHwwfHx8MA%3D%3D"
-            alt="Foto del Edgar Quirante"
-          />
+          <img src="./img/Edgar.png" alt="Foto del Edgar Quirante" />
         </div>
         <div class="card-body">
           <h2>Edgar Quirante</h2>
         </div>
       </a>
 
-      <a href="https://portfolio3.com" class="card" target="_blank">
+      <a href="https://jonjoestarr.github.io/CurriculumVitae/" class="card" target="_blank">
         <div class="card-image">
-          <img
-            src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?cs=srgb&dl=pexels-justin-shaifer-501272-1222271.jpg&fm=jpg"
-            alt="Foto del Jon Perea"
-          />
+          <img src="./img/Jon.png" alt="Foto del Jon Perea" />
         </div>
         <div class="card-body">
           <h2>Jon Perea</h2>
