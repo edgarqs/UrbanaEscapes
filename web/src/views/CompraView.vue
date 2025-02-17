@@ -63,9 +63,9 @@ const dadesReserva = computed(() => ({
   data_sortida: formatDate(new Date(endDate.value)),
   preu_total: habitacio.value
     ? (
-      habitacio.value.preu * diesTotals.value -
-      ((habitacio.value.preu * diesTotals.value) / 100) * 30
-    ).toFixed(2)
+        habitacio.value.preu * diesTotals.value -
+        ((habitacio.value.preu * diesTotals.value) / 100) * 30
+      ).toFixed(2)
     : 0,
   estat: 'Reservada',
 }))
@@ -121,18 +121,23 @@ function crearReserva(data) {
             </p>
             <div class="px-6 pt-4 pb-2" v-if="habitacio">
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✔
-                Animals admesos</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✔ Animals admesos</span
+              >
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
-                WiFi gratis</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✅ WiFi gratis</span
+              >
               <span
-                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">✅
-                Aparcament</span>
+                class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >✅ Aparcament</span
+              >
             </div>
-            <button @click="copyAddress"
+            <button
+              @click="copyAddress"
               class="mt-4 bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
-              v-if="habitacio">
+              v-if="habitacio"
+            >
               {{ $t('boton-copia-adreca') }}
             </button>
             <p v-else>{{ $t('cargando-datos') }}</p>
@@ -199,8 +204,10 @@ function crearReserva(data) {
               <p class="text-gray-700">{{ $t('cargando-datos') }}</p>
             </div>
             <RouterLink :to="`/review-compra/${idHabitacio}`" class="mt-4 w-full">
-              <button @click="crearReserva(dadesReserva)"
-                class="bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full">
+              <button
+                @click="crearReserva(dadesReserva)"
+                class="bg-orange-500 hover:bg-orange-400 font-bold text-white py-2 px-4 rounded w-full"
+              >
                 {{ $t('boton-pagar') }}
               </button>
             </RouterLink>
