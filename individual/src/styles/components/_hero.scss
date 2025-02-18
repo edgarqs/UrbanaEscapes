@@ -3,13 +3,18 @@
 .hero {
 	position: relative;
 	height: 20vh;
+	background-image: url('../../../public/japon-bk3-2.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: hidden; /* Evita que el contenido se desborde */
 
 	h2 {
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		padding: 0 1rem;
-		margin-bottom: 0;
+		margin: 0;
 		font-family: $font-instrument-serif;
 		color: $primary-color;
 		font-size: 4rem;
@@ -17,6 +22,7 @@
 		font-weight: 400;
 		text-align: center;
 		width: 100%;
+		line-height: 1;
 	}
 
 	// Media query para PC
@@ -25,7 +31,7 @@
 
 		h2 {
 			padding: 0 2rem;
-			font-size: 10rem;
+			font-size: 20rem;
 			text-align: left;
 			width: auto;
 		}
