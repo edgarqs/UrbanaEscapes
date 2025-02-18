@@ -1,18 +1,25 @@
+import { NavLink } from 'react-router';
+
 export default function HeaderComponent() {
-	return (
-		<header className="header">
-			<a href="/"><h2 className="header__logo">sakura</h2></a>
-			{/* <img src="./../../public/sakura-logo.avif" alt="logo sakura" /> */}
-			<nav className="header__nav">
-				<ul className="header__menu">
-					<li className="header__item">
-						<a href="/" className="header__link">Inicio</a>
-					</li>
-					<li className="header__item">
-						<a href="/noticies" className="header__link">Notícies</a>
-					</li>
-				</ul>
-			</nav>
-		</header>
-	);
+    return (
+        <header className="header">
+            <a href="/" className="header__logo">
+                <img src="./../../public/sakura-icono.avif" alt="logo sakura" />
+            </a>
+            <nav className="header__nav">
+                <ul className="header__menu">
+                    <li className="header__item">
+                        <NavLink to="/" className={({ isActive }) => isActive ? "header__link header__link--active" : "header__link"}>
+                            Inicio
+                        </NavLink>
+                    </li>
+                    <li className="header__item">
+                        <NavLink to="/noticies" className={({ isActive }) => isActive ? "header__link header__link--active" : "header__link"}>
+                            Notícies
+                        </NavLink>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+    );
 }
