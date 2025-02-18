@@ -8,23 +8,10 @@ export default function HabitacionsComponent() {
     useEffect(() => {
         const fetchHabitacions = async () => {
             try {
-                const response = await fetch(`${apiUrl}/v1/habitacions`);
+                const response = await fetch(`${apiUrl}/v2/hotels/${hotelId}/tipos-habitaciones`);
                 const data = await response.json();
-                const filteredHabitacions = data.filter(
-                    (habitacio) => habitacio.hotel.codi_hotel === hotelId
-                );
 
-                const uniqueHabitacions = [];
-                const tipusSet = new Set();
-
-                filteredHabitacions.forEach((habitacio) => {
-                    if (!tipusSet.has(habitacio.tipus)) {
-                        tipusSet.add(habitacio.tipus);
-                        uniqueHabitacions.push(habitacio);
-                    }
-                });
-
-                setHabitacions(uniqueHabitacions);
+                setHabitacions(data);
             } catch (error) {
                 console.error("Error llistant habitacions:", error);
             }
@@ -39,10 +26,9 @@ export default function HabitacionsComponent() {
             <div className="habitacionsTipus__cards">
                 {habitacions.map((habitacio, index) => (
                     <div 
-                        key={habitacio.id} 
+                        key={index} 
                         className="habitacionsTipus__cards__card"
                         style={{ backgroundImage: `url(/img/habitacio-${index + 1}.jpg)` }}
-
                     >
                         <h3 className="habitacionsTipus__cards__card__title">{habitacio.tipus}</h3>
                         {/*<button className="habitacionsTipus__cards__card__btn">Reservar</button>*/}

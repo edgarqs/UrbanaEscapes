@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\ApiV2;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hotel;
+use App\Models\Habitacion;
 use Illuminate\Http\Request;
 
 class HotelsCercaController extends Controller
@@ -12,7 +14,8 @@ class HotelsCercaController extends Controller
      */
     public function index()
     {
-        //
+        $hotels = Hotel::all();
+        return response()->json($hotels);
     }
 
     /**
@@ -26,9 +29,10 @@ class HotelsCercaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $hotel = Hotel::where('id', $id)->orWhere('codi_hotel', $id)->firstOrFail();
+        return response()->json($hotel);
     }
 
     /**
@@ -45,5 +49,19 @@ class HotelsCercaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Get unique room types for a specific hotel.
+     */
+    public function getTiposHabitaciones($id)
+    {
+        $hotel = Hotel::where('id', $id)->orWhere('codi_hotel', $id)->firstOrFail();
+        $tiposHabitaciones = Habitacion::where('hotel_id', $hotel->id)
+            ->select('tipus')
+            ->distinct()
+            ->get();
+
+        return response()->json($tiposHabitaciones);
     }
 }
