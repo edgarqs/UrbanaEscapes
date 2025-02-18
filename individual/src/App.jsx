@@ -9,8 +9,7 @@ import FooterComponent from '@components/FooterComponent';
 import MainPage from '@pages/Home/HomePage';
 import NoticiesPages from '@pages/Noticies/NoticiesPage';
 
-function App() {
-
+export default function App() {
   return (
     <Router>
       <HeaderComponent />
@@ -22,5 +21,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

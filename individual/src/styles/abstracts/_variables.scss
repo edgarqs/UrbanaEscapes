@@ -1,9 +1,27 @@
-// Colores
-$primary-color: #007bff;
-$secondary-color: #6c757d;
-$background-color: #f8f9fa;
-$text-color: #333;
+// Instrument Serif
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-// Tipografía
-$font-family: 'Arial', sans-serif;
-$font-size-base: 16px;
+// Variables de color
+$primary-color: #89201d;
+$secondary-color: #6c757d;
+$error-color: #c21f30;
+$succes-color: #28a745;
+$background-color: #F7F4E6;
+$text-color: #333;
+$link-color: $primary-color;
+
+// Variables de espaciado
+$base-spacing: 1rem;
+$large-spacing: 2rem;
+
+// Otras Variables
+$card-border-radius: 10px;
+
+// Fuente y tipografía
+$font-family: "Poppins", sans-serif;
+$heading-font: "Poppins", sans-serif;
+$body-font: "Poppins", sans-serif;
+
+$font-instrument-serif: "Instrument Serif", serif;
+
+// #F7F4E6 - #F4FFF8
