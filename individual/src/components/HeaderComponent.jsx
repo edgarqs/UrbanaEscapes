@@ -18,6 +18,11 @@ export default function HeaderComponent() {
                             Notícies
                         </NavLink>
                     </li>
+                    <li className="header__item">
+                        <NavLink to="/reserves" className={({ isActive }) => isActive ? "header__link header__link--active" : "header__link"}>
+                            Reservar Habitació
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
         </header>

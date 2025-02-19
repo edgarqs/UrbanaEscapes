@@ -6,8 +6,9 @@ import HeaderComponent from '@components/HeaderComponent';
 import FooterComponent from '@components/FooterComponent';
 
 //? Páginas:
-import MainPage from '@pages/Home/HomePage';
-import NoticiesPages from '@pages/Noticies/NoticiesPage';
+import MainPage from '@pages/HomePage';
+import NoticiesPage from '@pages/NoticiesPage';
+import ReservesPage from '@pages/ReservesPage';
 
 export default function App() {
   return (
@@ -15,7 +16,8 @@ export default function App() {
       <HeaderComponent />
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/noticies" element={<NoticiesPages />} />
+        <Route path="/noticies" element={<NoticiesPage />} />
+        <Route path="/reserves" element={<ReservesPage />} />
       </Routes>
       <FooterComponent />
     </Router>
