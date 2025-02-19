@@ -1,7 +1,7 @@
 export default function HeroComponent() {
 	return (
 		<div className="hero">
-			<h2>sakura</h2>
+			<h2 className="font-primary">sakura</h2>
 		</div>
 	);
 }

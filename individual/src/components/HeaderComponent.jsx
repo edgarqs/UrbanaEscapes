@@ -10,7 +10,7 @@ export default function HeaderComponent() {
                 <ul className="header__menu">
                     <li className="header__item">
                         <NavLink to="/" className={({ isActive }) => isActive ? "header__link header__link--active" : "header__link"}>
-                            Inicio
+                            Inici
                         </NavLink>
                     </li>
                     <li className="header__item">

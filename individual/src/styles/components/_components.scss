@@ -1,0 +1,36 @@
+@use '../abstracts/variables' as *;
+
+.buttons {
+	display: flex;
+	gap: 1.5rem;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-bottom: 2.5rem;
+
+	&__btn {
+		text-decoration: none;
+		color: $primary-color;
+		font-weight: 500;
+		font-size: 1rem;
+		border: 1px solid $primary-color;
+		padding: 0.5rem 1rem;
+		transition:
+			color 0.3s ease-in-out,
+			background-color 0.3s ease-in-out;
+		cursor: pointer;
+		background-color: transparent;
+		font-family: $font-secondary;
+
+		&:hover {
+			color: white;
+			background-color: $primary-color-transparente;
+			border-color: $primary-color-transparente;
+		}
+
+		&--active {
+			color: white;
+			background-color: $primary-color;
+			border-color: $primary-color;
+		}
+	}
+}

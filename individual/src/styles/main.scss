@@ -1,6 +1,15 @@
-@use "abstracts/variables";
-@use "base/reset";
-@use "components/header";
-@use "components/footer";
-@use "components/habitacions";
-@use "components/hero";
+// abstracts
+@use 'abstracts/mixins';
+@use 'abstracts/variables';
+
+// base
+@use 'base/global';
+@use 'base/reset';
+@use 'base/typography';
+
+// components
+@use 'components/components';
+@use 'components/footer';
+@use 'components/habitacions';
+@use 'components/header';
+@use 'components/hero';
