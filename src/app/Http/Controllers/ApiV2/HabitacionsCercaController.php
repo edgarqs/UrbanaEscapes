@@ -87,19 +87,30 @@ class HabitacionsCercaController extends Controller
         //
     }
 
-    public function cercaHabitacions(Request $request)
+    public function buscarHabitacionsDisponibles(Request $request, $hotelId)
     {
-        $dataEntrada = $request->input('data_entrada');
-        $dataSortida = $request->input('data_sortida');
-        $tipus = $request->input('tipus');
-        $capacitat = $request->input('capacitat');
-        $hotelId = $request->input('hotel_id');
+        $dataEntrada = $request->query('data_entrada');
+        $dataSortida = $request->query('data_sortida');
+        $capacitat = $request->query('capacitat');
 
-        $habitacions = Habitacion::where('hotel_id', $hotelId)
-            ->where('tipus', $tipus)
-            ->whereRaw('llits + llits_supletoris = ?', [$capacitat])
-            ->whereDoesntHave('reservas', function ($query) use ($dataEntrada, $dataSortida) {
-                $query->where(function ($query) use ($dataEntrada, $dataSortida) {
+        // Convertir fechas a objetos Carbon
+        $dataEntrada = \Carbon\Carbon::parse($dataEntrada);
+        $dataSortida = \Carbon\Carbon::parse($dataSortida);
+
+        // Obtener habitaciones del hotel que cumplan con la capacidad
+        $habitacions = Habitacion::where(function ($query) use ($hotelId) {
+            $query->where('hotel_id', $hotelId)
+                ->orWhereHas('hotel', function ($query) use ($hotelId) {
+                    $query->where('codi_hotel', $hotelId);
+                });
+        })
+            ->whereRaw('llits + llits_supletoris >= ?', [$capacitat])
+            ->get();
+
+        // Filtrar habitaciones que no tienen reservas en el intervalo de fechas
+        $habitacionsDisponibles = $habitacions->filter(function ($habitacio) use ($dataEntrada, $dataSortida) {
+            $reservas = $habitacio->reservas()
+                ->where(function ($query) use ($dataEntrada, $dataSortida) {
                     $query->where('estat', 'Reservada')
                         ->orWhere('estat', 'Checkin');
                 })
@@ -110,10 +121,15 @@ class HabitacionsCercaController extends Controller
                             $query->where('data_entrada', '<=', $dataEntrada)
                                 ->where('data_sortida', '>=', $dataSortida);
                         });
-                });
-            })
-            ->get();
+                })
+                ->exists();
 
-        return response()->json($habitacions);
+            return !$reservas;
+        });
+
+        // Obtener una habitación de cada tipo
+        $habitacionsPorTipus = $habitacionsDisponibles->unique('tipus')->values();
+
+        return response()->json($habitacionsPorTipus);
     }
 }

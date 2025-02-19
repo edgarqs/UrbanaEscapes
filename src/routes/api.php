@@ -24,5 +24,5 @@ Route::prefix('v2')->group(function () {
     Route::apiResource('/reserves', ReservesCercaController::class);
 
     Route::get('/hotels/{id}/tipos-habitaciones', [HotelsCercaController::class, 'getTiposHabitaciones']);
-    Route::get('/habitacions/cerca', [HabitacionsCercaController::class, 'cercaHabitacions']);
+    Route::get('/habitacions/{hotelId}/disponibles', [HabitacionsCercaController::class, 'buscarHabitacionsDisponibles']);
 });

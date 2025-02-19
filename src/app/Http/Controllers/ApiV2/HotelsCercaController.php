@@ -32,7 +32,8 @@ class HotelsCercaController extends Controller
     public function show($id)
     {
         $hotel = Hotel::where('id', $id)->orWhere('codi_hotel', $id)->firstOrFail();
-        return response()->json($hotel);
+        $hotelData = $hotel->only(['nom', 'adreca', 'ciutat', 'pais', 'email', 'telefon']);
+        return response()->json($hotelData);
     }
 
     /**
