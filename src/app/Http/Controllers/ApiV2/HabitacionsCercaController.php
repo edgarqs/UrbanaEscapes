@@ -92,6 +92,7 @@ class HabitacionsCercaController extends Controller
         $dataEntrada = $request->query('data_entrada');
         $dataSortida = $request->query('data_sortida');
         $capacitat = $request->query('capacitat');
+        $tipus = $request->query('tipus');
 
         // Convertir fechas a objetos Carbon
         $dataEntrada = \Carbon\Carbon::parse($dataEntrada);
@@ -104,8 +105,14 @@ class HabitacionsCercaController extends Controller
                     $query->where('codi_hotel', $hotelId);
                 });
         })
-            ->whereRaw('llits + llits_supletoris >= ?', [$capacitat])
-            ->get();
+            ->whereRaw('llits + llits_supletoris >= ?', [$capacitat]);
+
+        // Filtrar por tipus si se proporciona
+        if ($tipus) {
+            $habitacions->where('tipus', $tipus);
+        }
+
+        $habitacions = $habitacions->get();
 
         // Filtrar habitaciones que no tienen reservas en el intervalo de fechas
         $habitacionsDisponibles = $habitacions->filter(function ($habitacio) use ($dataEntrada, $dataSortida) {
@@ -127,8 +134,12 @@ class HabitacionsCercaController extends Controller
             return !$reservas;
         });
 
-        // Obtener una habitación de cada tipo
-        $habitacionsPorTipus = $habitacionsDisponibles->unique('tipus')->values();
+        // Obtener una habitación de cada tipo o una habitación del tipo especificado
+        if ($tipus) {
+            $habitacionsPorTipus = $habitacionsDisponibles->first();
+        } else {
+            $habitacionsPorTipus = $habitacionsDisponibles->unique('tipus')->values();
+        }
 
         return response()->json($habitacionsPorTipus);
     }
