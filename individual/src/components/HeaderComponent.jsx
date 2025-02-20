@@ -4,7 +4,7 @@ export default function HeaderComponent() {
     return (
         <header className="header">
             <a href="/" className="header__logo">
-                <img src="./../../public/sakura-icono.avif" alt="logo sakura" />
+                <img src="./sakura-icono.avif" alt="logo sakura" />
             </a>
             <nav className="header__nav">
                 <ul className="header__menu">
