@@ -7,7 +7,7 @@ cd /var/www/html/grup-6-edgar-quirante/individual || exit
 
 # Hacer pull de la última versión desde GitLab
 echo "📥 Descargando últimos cambios..."
-git pull
+git pull origin main
 
 # Instalar dependencias por si hay cambios
 echo "📦 Instalando paquetes..."
