@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
+            $table->string('codi_hotel', 10)->unique();
             $table->string('nom');
             $table->string('adreca');
             $table->string('ciutat');

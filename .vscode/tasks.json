@@ -20,6 +20,16 @@
                 "cwd": "${workspaceFolder}/src"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "Frontend - Proyecto 3",
+            "type": "shell",
+            "command": "npm run dev",
+            "group": "build",
+            "options": {
+                "cwd": "${workspaceFolder}/individual"
+            },
+            "problemMatcher": []
         },/*
         {
             "label": "Servidor PHP - Proyecto 2",
@@ -30,7 +40,7 @@
                 "cwd": "${workspaceFolder}/web"
             },
             "problemMatcher": []
-        },*/
+        },
         {
             "label": "Frontend - Proyecto 2",
             "type": "shell",
@@ -40,15 +50,16 @@
                 "cwd": "${workspaceFolder}/web"
             },
             "problemMatcher": []
-        },
+        },*/
         {
             "label": "Ejecutar todo",
             "type": "shell",
             "dependsOn": [
                 "Servidor PHP - Proyecto 1",
                 "Frontend - Proyecto 1",/*
-                "Servidor PHP - Proyecto 2",*/
-                "Frontend - Proyecto 2"
+                "Servidor PHP - Proyecto 2",
+                "Frontend - Proyecto 2",*/
+                "Frontend - Proyecto 3"
             ],
             "problemMatcher": []
         }

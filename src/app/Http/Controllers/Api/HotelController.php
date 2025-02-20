@@ -23,7 +23,7 @@ class HotelController extends Controller
 
     public function show($id): JsonResponse
     {
-        $hotel = Hotel::findOrFail($id);
+        $hotel = Hotel::where('id', $id)->orWhere('codi_hotel', $id)->firstOrFail();
         return response()->json($hotel);
     }
 
