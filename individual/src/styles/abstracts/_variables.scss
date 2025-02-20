@@ -1,0 +1,57 @@
+// Instrument Serif
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// 🎨 Colores principales
+$primary-color: #89201d;
+$primary-color-transparente: #89211d9d;
+$secondary-color: #ffffff;
+$accent-color: #f8d210;
+$background-color: #f7f4e6;
+$text-color: #333;
+$error-color: #c21f30;
+$success-color: #28a745;
+
+// 🔤 Tipografía
+$font-primary: 'Instrument Serif', serif;
+$font-secondary: 'Poppins', sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.5;
+
+// 📏 Espaciado
+$spacing-unit: 8px;
+
+// 🖥 Breakpoints para Mobile First
+$breakpoints: (
+	'sm': 576px,
+	'md': 768px,
+	'lg': 992px,
+	'xl': 1200px,
+);
+
+// 🎨 Tamaños de fuente
+$font-sizes: (
+	'xs': 12px,
+	'sm': 14px,
+	'base': 16px,
+	'lg': 18px,
+	'xl': 24px,
+	'2xl': 32px,
+	'3xl': 40px,
+	'4xl': 48px,
+);
+
+// 🔤 Pesos de fuente
+$font-weights: (
+	'light': 300,
+	'regular': 400,
+	'medium': 500,
+	'bold': 700,
+	'black': 900,
+);
+
+// 🏛 Alturas de línea
+$line-heights: (
+	'tight': 1.2,
+	'normal': 1.5,
+	'relaxed': 1.8,
+);

@@ -22,10 +22,10 @@ class UsuariController extends Controller
     }
 
     public function show($identifier): JsonResponse
-{
-    $usuari = Usuari::where('id', $identifier)->orWhere('email', $identifier)->firstOrFail();
-    return response()->json($usuari);
-}
+    {
+        $usuari = Usuari::where('id', $identifier)->orWhere('email', $identifier)->firstOrFail();
+        return response()->json($usuari);
+    }
 
     public function update(Request $request, $id): JsonResponse
     {

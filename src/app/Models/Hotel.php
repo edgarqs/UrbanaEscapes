@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class Hotel extends Model
 {
@@ -18,6 +19,15 @@ class Hotel extends Model
         'email',
         'telefon',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($hotel) {
+            $hotel->codi_hotel = Str::random(10);
+        });
+    }
 
     public function habitacions()
     {

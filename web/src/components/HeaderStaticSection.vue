@@ -132,14 +132,14 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll)
   },
   beforeUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     handleScroll() {
-      this.scrolled = window.scrollY > 50;
+      this.scrolled = window.scrollY > 50
     },
     toggleMenu() {
       this.menuOpen = !this.menuOpen
