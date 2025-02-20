@@ -24,7 +24,7 @@
     }
 
     // Media query para tablets
-    @media (min-width: map-get($breakpoints, 'md')) {
+    @media (min-width: map.get($breakpoints, 'md')) {
         height: 40vh;
 
         h2 {
@@ -33,7 +33,7 @@
     }
 
     // Media query para PC
-    @media (min-width: map-get($breakpoints, 'lg')) {
+    @media (min-width: map.get($breakpoints, 'lg')) {
         height: 80vh;
 
         h2 {
@@ -45,7 +45,7 @@
     }
 
     // Media query para pantallas grandes
-    @media (min-width: map-get($breakpoints, 'xl')) {
+    @media (min-width: map.get($breakpoints, 'xl')) {
         h2 {
             font-size: 10rem;
         }

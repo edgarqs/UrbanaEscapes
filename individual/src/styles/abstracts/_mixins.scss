@@ -2,29 +2,29 @@
 
 // Mixin para Media Queries (Mobile First)
 @mixin respond-to($breakpoint) {
-	@media (min-width: map-get($breakpoints, $breakpoint)) {
-		@content;
-	}
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+        @content;
+    }
 }
 
 // Mixin para flexbox
 @mixin flex-center($direction: row, $justify: center, $align: center) {
-	display: flex;
-	flex-direction: $direction;
-	justify-content: $justify;
-	align-items: $align;
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
 }
 
 // Mixin para botones
 @mixin button-style($bg-color, $text-color) {
-	background-color: $bg-color;
-	color: $text-color;
-	padding: $spacing-unit * 1.5 $spacing-unit * 3;
-	border-radius: $border-radius;
-	font-size: 1rem;
-	font-weight: bold;
-	transition: 0.3s ease;
-	&:hover {
-		background-color: darken($bg-color, 10%);
-	}
+    background-color: $bg-color;
+    color: $text-color;
+    padding: $spacing-unit * 1.5 $spacing-unit * 3;
+    border-radius: $border-radius;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: 0.3s ease;
+    &:hover {
+        background-color: color.adjust($bg-color, $lightness: -10%);
+    }
 }

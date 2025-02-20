@@ -1,34 +1,33 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-
 body {
-	font-family: $font-secondary;
-	font-size: map-get($font-sizes, 'base');
-	font-weight: map-get($font-weights, 'regular');
-	line-height: map-get($line-heights, 'normal');
-	color: $text-color;
+    font-family: $font-secondary;
+    font-size: map.get($font-sizes, 'base');
+    font-weight: map.get($font-weights, 'regular');
+    line-height: map.get($line-heights, 'normal');
+    color: $text-color;
 }
   
 h1, h2, h3, h4, h5, h6 {
-	font-family: $font-secondary;
-	font-weight: map-get($font-weights, 'bold');
-	line-height: map-get($line-heights, 'tight');
-	color: $text-color;
+    font-family: $font-secondary;
+    font-weight: map.get($font-weights, 'bold');
+    line-height: map.get($line-heights, 'tight');
+    color: $text-color;
 }
 
 .font-primary {
-	font-family: $font-primary;
-	color: $primary-color;
-	font-weight: map-get($font-weights, 'regular');
-	font-style: italic;
+    font-family: $font-primary;
+    color: $primary-color;
+    font-weight: map.get($font-weights, 'regular');
+    font-style: italic;
 }
   
 p {
-	font-size: map-get($font-sizes, 'base');
-	color: $text-color;
-	line-height: map-get($line-heights, 'relaxed');
-	margin-bottom: 1rem;
+    font-size: map.get($font-sizes, 'base');
+    color: $text-color;
+    line-height: map.get($line-heights, 'relaxed');
+    margin-bottom: 1rem;
 }
   
 .text-muted { color: #adb5bd; }
@@ -36,17 +35,17 @@ p {
 .text-danger { color: $error-color; }
 .text-success { color: $success-color; }
 
-.font-light { font-weight: map-get($font-weights, 'light'); }
-.font-regular { font-weight: map-get($font-weights, 'regular'); }
-.font-medium { font-weight: map-get($font-weights, 'medium'); }
-.font-bold { font-weight: map-get($font-weights, 'bold'); }
-.font-black { font-weight: map-get($font-weights, 'black'); }
+.font-light { font-weight: map.get($font-weights, 'light'); }
+.font-regular { font-weight: map.get($font-weights, 'regular'); }
+.font-medium { font-weight: map.get($font-weights, 'medium'); }
+.font-bold { font-weight: map.get($font-weights, 'bold'); }
+.font-black { font-weight: map.get($font-weights, 'black'); }
 
 @include respond-to('md') {
-	h1 { font-size: 56px; }
-	h2 { font-size: 44px; }
-	h3 { font-size: 36px; }
-	h4 { font-size: 28px; }
-	h5 { font-size: 20px; }
-	h6 { font-size: 18px; }
+    h1 { font-size: 56px; }
+    h2 { font-size: 44px; }
+    h3 { font-size: 36px; }
+    h4 { font-size: 28px; }
+    h5 { font-size: 20px; }
+    h6 { font-size: 18px; }
 }
