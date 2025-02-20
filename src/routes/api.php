@@ -9,6 +9,7 @@ use App\Http\Controllers\ApiV2\HotelsCercaController;
 use App\Http\Controllers\ApiV2\UsuarisCercaController;
 use App\Http\Controllers\ApiV2\ReservesCercaController;
 use App\Http\Controllers\ApiV2\HabitacionsCercaController;
+use App\Http\Controllers\ApiV2\FeedbackController;
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('/usuaris', UsuariController::class);
@@ -25,4 +26,8 @@ Route::prefix('v2')->group(function () {
 
     Route::get('/hotels/{id}/tipos-habitaciones', [HotelsCercaController::class, 'getTiposHabitaciones']);
     Route::get('/habitacions/{hotelId}/disponibles', [HabitacionsCercaController::class, 'buscarHabitacionsDisponibles']);
+
+    Route::post('/feedback/test', [FeedbackController::class, 'test']);
+    Route::post("/feedback/submit", [FeedbackController::class, 'enviarFeedback']);
+    //Route::get('/feedback/{token}', [FeedbackController::class, 'verificarToken']);
 });

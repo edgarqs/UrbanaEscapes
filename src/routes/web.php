@@ -1,12 +1,20 @@
 <?php
 
-use App\Http\Controllers\HotelController;
-use App\Http\Controllers\ReservasController;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HabitacionsController;
+use App\Http\Controllers\HotelController;
 use App\Http\Middleware\CheckHotelAccess;
 use App\Http\Middleware\EnsureUserHasRole;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReservasController;
+use App\Http\Controllers\HabitacionsController;
+use App\Mail\TestMail;
+
+// ? EMAILS:
+Route::get('/send-test-email', function () {
+    Mail::to('edgar345.eq@gmail.com')->send(new TestMail());
+    return 'Correo enviado!';
+});
 
 Route::get('/', [HotelController::class, 'index'])
     ->name('hotel.selector')
