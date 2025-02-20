@@ -7,9 +7,13 @@ use App\Models\Usuari;
 use App\Models\Serveis;
 use App\Models\Reservas;
 use App\Models\Habitacion;
+use App\Models\ReservaToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use App\Mail\ReservaTokenMail;
 
 class ReservasController extends Controller
 {
@@ -82,7 +86,7 @@ class ReservasController extends Controller
     public function checkout($id)
     {
         $habitacio = Habitacion::findOrFail($id);
-        $reserva = $habitacio->reservas()->where('estat', 'checkin')->first();
+        $reserva = $habitacio->reservas()->where('estat', 'Checkin')->first();
 
         if ($reserva) {
             $reserva->estat = 'Checkout';
@@ -90,10 +94,24 @@ class ReservasController extends Controller
 
             $habitacio->estat = 'Bloquejada';
             $habitacio->save();
+
+            // Crear un registro en la tabla reserva_token
+            $token = (string) Str::uuid();
+            //$token = Str::random(10);
+            ReservaToken::create([
+                'reserva_id' => $reserva->id,
+                'token' => $token,
+            ]);
+
+            // Enviar un correo al usuario de la reserva con el token creado
+            Mail::to($reserva->usuari->email)->send(new ReservaTokenMail($reserva, $token));
+
+            return redirect()->back()
+                ->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
         }
 
         return redirect()->back()
-            ->with('success', 'Check-Out completat correctament per a l\'habitació número ' . $habitacio->numHabitacion);
+            ->with('error', 'No s\'ha pogut completar el Check-Out.');
     }
 
     public function bloquejar($id)
