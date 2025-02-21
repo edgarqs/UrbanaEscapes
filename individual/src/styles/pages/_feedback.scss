@@ -1,0 +1,82 @@
+@use 'sass:map';
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.feedback-container {
+	text-align: center;
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 2rem;
+	background-color: $background-color;
+	color: $text-color;
+
+	h1 {
+		font-size: 2.5rem;
+		color: $primary-color;
+	}
+
+	p {
+		font-size: 1.2rem;
+		margin-bottom: 2rem;
+	}
+
+	.rating {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 2rem;
+
+		button {
+			background: none;
+			border: none;
+			cursor: pointer;
+			font-size: 2rem;
+			color: $text-color;
+
+			.material-icons,
+			.material-symbols-outlined {
+				font-size: 3rem; // Ajusta este valor para cambiar el tamaño de las estrellas
+			}
+
+			&.on .star {
+				color: $accent-color;
+			}
+
+			&.off .star {
+				color: #ccc;
+			}
+
+			&:hover .star {
+				color: lighten($accent-color, 20%);
+			}
+		}
+	}
+
+	.form-group {
+		margin-bottom: 2rem;
+
+		textarea {
+			width: 100%;
+			height: 150px;
+			padding: 1rem;
+			border: 1px solid $primary-color;
+			border-radius: 5px;
+			font-size: 1rem;
+			font-family: $font-secondary;
+			resize: none;
+		}
+	}
+
+	.submit-btn {
+		background-color: $primary-color;
+		color: $secondary-color;
+		width: 100%;
+		padding: $spacing-unit * 1.5 $spacing-unit * 3;
+				font-size: 1rem;
+		font-weight: bold;
+		transition: 0.3s ease;
+		&:hover {
+			background-color: $primary-color-transparente;
+		}
+	}
+}

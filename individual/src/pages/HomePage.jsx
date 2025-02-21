@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import HabitacionsComponent from '@components/HabitacionsComponent';
 import HeroComponent from '@components/HeroComponent';
 

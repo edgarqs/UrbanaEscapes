@@ -45,11 +45,11 @@ class FeedbackController extends Controller
         // Para saber el id de la reserva a trves del token
         $reserva_id = $reservaToken->reserva_id;
 
-        /*$feedback = Feedbacks::create([
+        $feedback = Feedbacks::create([
             'reserva_id' => $reserva_id,
             'estrelles' => $request->estrelles,
             'comentari' => $request->comentari,
-        ]);*/
+        ]);
 
         // Elimina el token
         ReservaToken::where('token', $request->token)->delete();
