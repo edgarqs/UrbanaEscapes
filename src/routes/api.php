@@ -27,7 +27,6 @@ Route::prefix('v2')->group(function () {
     Route::get('/hotels/{id}/tipos-habitaciones', [HotelsCercaController::class, 'getTiposHabitaciones']);
     Route::get('/habitacions/{hotelId}/disponibles', [HabitacionsCercaController::class, 'buscarHabitacionsDisponibles']);
 
-    Route::post('/feedback/test', [FeedbackController::class, 'test']);
     Route::post("/feedback/submit", [FeedbackController::class, 'enviarFeedback']);
-    //Route::get('/feedback/{token}', [FeedbackController::class, 'verificarToken']);
+    Route::get('/feedback/{token}', [FeedbackController::class, 'verificarToken']);
 });
