@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 
+import estandarImg from "@/assets/habitacio-estandar.avif";
+import deluxeImg from "@/assets/habitacio-deluxe.avif";
+import suiteImg from "@/assets/habitacio-suite.avif";
+import adaptadaImg from "@/assets/habitacio-adaptada.avif";
+
 export default function HabitacionsComponent() {
     const [habitacions, setHabitacions] = useState([]);
     const [selectedHabitacio, setSelectedHabitacio] = useState(0);
@@ -9,30 +14,29 @@ export default function HabitacionsComponent() {
         {
             tipus: "Estandar",
             descripcio: "La nostra habitació estàndar ofereix tot el necessari per a una estada còmoda i agradable. Amb un disseny modern i acollidor, és perfecta per a viatgers que busquen tranquil·litat i funcionalitat.",
-            foto: "./habitacio-estandar.avif",
+            foto: estandarImg,
         },
         {
             tipus: "Deluxe",
             descripcio: "L'habitació Deluxe és la combinació perfecta entre luxe i comoditat. Amb detalls d'alta gamma i un ambient relaxant, et sentiràs com a casa però amb un toc especial.",
-            foto: "./habitacio-deluxe.avif",
+            foto: deluxeImg,
         },
         {
             tipus: "Suite",
             descripcio: "Viu una experiència de luxe a la nostra suite. Amb espaiós interiors, vista panoràmica i serveis exclusius, aquesta habitació és ideal per a qui busca un toc d'elegància i sofisticació.",
-            foto: "./habitacio-suite.avif",
+            foto: suiteImg,
         },
         {
             tipus: "Adaptada",
             descripcio: "Pensada per a tothom, la nostra habitació adaptada ofereix accessibilitat sense renunciar a la comoditat i l'estil. Amb espais amplis i disseny funcional, és ideal per a persones amb mobilitat reduïda.",
-            foto: "./habitacio-adaptada.avif",
+            foto: adaptadaImg,
         },
     ];
 
     useEffect(() => {
         const fetchTipusHabitacions = async () => {
             try {
-                //const api = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_URL : import.meta.env.VITE_PROD_API_URL;
-                const api = import.meta.env.VITE_DEV_API_URL;
+                const api = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_URL : import.meta.env.VITE_PROD_API_URL;
                 const codiHotel = import.meta.env.VITE_HOTEL_ID;
                 const response = await fetch(`${api}/v2/hotels/${codiHotel}/tipos-habitaciones`);
                 const data = await response.json();
@@ -51,13 +55,12 @@ export default function HabitacionsComponent() {
             tipusHabitacions.includes(habitacio.tipus)
         );
         setHabitacions(filteredHabitacions);
-    }, [tipusHabitacions]);
+    }, [tipusHabitacions, habitacionsLocals]);
 
     return (
         <div className="habitacionsTipus">
             <h2 className="margin-top habitacionsTipus__title">Descobreix les nostres habitacions</h2>
             
-            {/* Botones para seleccionar el tipo de habitación */}
             <div className="buttons">
                 {habitacions.map((habitacio, index) => (
                     <button
