@@ -55,13 +55,12 @@ export default function HabitacionsComponent() {
             tipusHabitacions.includes(habitacio.tipus)
         );
         setHabitacions(filteredHabitacions);
-    }, [tipusHabitacions]);
+    }, [tipusHabitacions, habitacionsLocals]);
 
     return (
         <div className="habitacionsTipus">
             <h2 className="margin-top habitacionsTipus__title">Descobreix les nostres habitacions</h2>
             
-            {/* Botones para seleccionar el tipo de habitación */}
             <div className="buttons">
                 {habitacions.map((habitacio, index) => (
                     <button

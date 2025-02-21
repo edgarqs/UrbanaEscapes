@@ -19,7 +19,7 @@ export default function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/noticies" element={<NoticiesPage />} />
         <Route path="/reserves" element={<ReservesPage />} />
-        <Route path="/feedback" element={<FeedbackPage />} />
+        <Route path="/feedback/:token" element={<FeedbackPage />} />
       </Routes>
       <FooterComponent />
     </Router>
