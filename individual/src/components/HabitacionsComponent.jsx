@@ -55,7 +55,7 @@ export default function HabitacionsComponent() {
             tipusHabitacions.includes(habitacio.tipus)
         );
         setHabitacions(filteredHabitacions);
-    }, [tipusHabitacions, habitacionsLocals]);
+    }, [tipusHabitacions]); //! Revisar: tipusHabitacions, habitacionsLocals da error en la consola
 
     return (
         <div className="habitacionsTipus">
