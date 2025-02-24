@@ -65,6 +65,7 @@ export default function HabitacionsComponent() {
 			tipusHabitacions.includes(habitacio.tipus)
 		);
 		setHabitacions(filteredHabitacions);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tipusHabitacions]); //! Revisar: tipusHabitacions, habitacionsLocals da error en la consola
 
 	const handleReservar = () => {
