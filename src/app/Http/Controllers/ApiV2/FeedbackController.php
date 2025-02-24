@@ -56,7 +56,7 @@ class FeedbackController extends Controller
     }
 
     //? Retorna els feedbacks d'un hotel
-    public function getFeedbacksByHotel($hotelId)
+    public function getFeedbacksByHotel(Request $request, $hotelId)
     {
         // Buscar el hotel por id o codi_hotel
         $hotel = Hotel::where('id', $hotelId)->orWhere('codi_hotel', $hotelId)->first();
@@ -65,13 +65,22 @@ class FeedbackController extends Controller
             return response()->json(['message' => 'Hotel no encontrado'], 404);
         }
 
-        // Obtener todas las habitaciones del hotel
         $habitacions = $hotel->habitacions()->pluck('id');
 
         $reservas = \App\Models\Reservas::whereIn('habitacion_id', $habitacions)->pluck('id');
 
-        $feedbacks = Feedbacks::whereIn('reserva_id', $reservas)->get();
+        $limit = $request->query('limit', 5);
+        $feedbacks = Feedbacks::whereIn('reserva_id', $reservas)->paginate($limit);
 
-        return response()->json($feedbacks);
+        // Només mostra id, estrelles y comentaris
+        $feedbackData = $feedbacks->map(function ($feedback) {
+            return [
+                'id' => $feedback->id,
+                'estrelles' => $feedback->estrelles,
+                'comentari' => $feedback->comentari,
+            ];
+        });
+
+        return response()->json($feedbackData);
     }
 }
