@@ -29,4 +29,5 @@ Route::prefix('v2')->group(function () {
 
     Route::post("/feedback/submit", [FeedbackController::class, 'enviarFeedback']);
     Route::get('/feedback/{token}', [FeedbackController::class, 'verificarToken']);
+    Route::get('/feedbacks/{hotelId}', [FeedbackController::class, 'getFeedbacksByHotel']);
 });
