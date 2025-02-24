@@ -98,6 +98,9 @@ class HabitacionsCercaController extends Controller
         $dataEntrada = \Carbon\Carbon::parse($dataEntrada);
         $dataSortida = \Carbon\Carbon::parse($dataSortida);
 
+        // Calcular el número de días de estancia
+        $diasEstancia = $dataEntrada->diffInDays($dataSortida);
+
         // Obtener habitaciones del hotel que cumplan con la capacidad
         $habitacions = Habitacion::where(function ($query) use ($hotelId) {
             $query->where('hotel_id', $hotelId)
@@ -140,6 +143,11 @@ class HabitacionsCercaController extends Controller
         } else {
             $habitacionsPorTipus = $habitacionsDisponibles->unique('tipus')->values();
         }
+
+        // Calcular el precio total preu*capacitat*diasEstancia
+        $habitacionsPorTipus->each(function ($habitacio) use ($capacitat, $diasEstancia) {
+            $habitacio->preuTotal = number_format($habitacio->preu * $capacitat * $diasEstancia, 2);
+        });
 
         return response()->json($habitacionsPorTipus);
     }

@@ -1,0 +1,63 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.form-buscador {
+	@include flex-center(column, center, center);
+	gap: $espaciado * 2;
+	width: 90%; // Para q tenga separación en los lados
+	margin: 0 auto; // Se centra en móvil
+	background-color: $background-color;
+
+	&__input {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: $espaciado * 0.5;
+
+		label {
+			font-family: $font-secondary;
+			color: $primary-color;
+		}
+
+		input {
+			width: 100%;
+			padding: $espaciado;
+			border: 2px solid $primary-color;
+			background-color: $secondary-color;
+			color: $text-color;
+			outline: none;
+
+			&:focus {
+				border-color: $accent-color;
+			}
+		}
+	}
+
+	button {
+		@include button-style($primary-color, $secondary-color);
+		width: 100%;
+		border: none;
+	}
+
+	@include respond-to(sm) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		max-width: 900px;
+		margin: 0 auto;
+		padding: $espaciado * 2;
+		border: 1px solid $primary-color;
+
+		&__input {
+			width: auto;
+			flex: 1;
+			min-width: 200px;
+		}
+
+		button {
+			flex: 0 0 auto;
+			width: auto;
+			margin-top: 20px;
+		}
+	}
+}

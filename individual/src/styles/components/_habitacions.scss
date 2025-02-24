@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "sass:color";
+@use 'sass:map';
+@use 'sass:color';
 @use '../abstracts/variables' as *;
 
 .habitacionsTipus {
@@ -93,18 +93,23 @@
 			}
 
 			&__btn {
-				background: $primary-color;
-				border: none;
-				padding: 0.8rem 1.5rem;
-				font-size: 1rem;
+				text-decoration: none;
 				color: white;
+				font-weight: 500;
+				font-size: 1rem;
+				//border: 1px solid $primary-color;
+				padding: 0.5rem 1rem;
+				transition:
+					color 0.3s ease-in-out,
+					background-color 0.3s ease-in-out;
 				cursor: pointer;
-				border-radius: 5px;
-				transition: background 0.3s ease;
-				align-self: flex-start;
+				background-color: $primary-color;
+				font-family: $font-secondary;
 
 				&:hover {
-					background: color.adjust($primary-color, $lightness: -10%);
+					color: white;
+					background-color: $primary-color-transparente;
+					border-color: $primary-color-transparente;
 				}
 			}
 		}

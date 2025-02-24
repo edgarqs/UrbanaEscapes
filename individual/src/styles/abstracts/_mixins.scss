@@ -20,12 +20,11 @@
 @mixin button-style($bg-color, $text-color) {
     background-color: $bg-color;
     color: $text-color;
-    padding: $spacing-unit * 1.5 $spacing-unit * 3;
-    border-radius: $border-radius;
+    padding: $espaciado * 1.5 $espaciado * 3;
     font-size: 1rem;
     font-weight: bold;
     transition: 0.3s ease;
     &:hover {
-        background-color: color.adjust($bg-color, $lightness: -10%);
+        background-color: $primary-color-transparente;
     }
 }
