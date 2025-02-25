@@ -8,8 +8,8 @@ class Feedbacks extends Model
 {
     protected $fillable = ['reserva_id', 'estrelles', 'comentari'];
 
-    public function fotos()
+    public function reserva()
     {
-        return $this->hasMany(FotosFeedback::class, 'feedback_id');
+        return $this->belongsTo(Reservas::class, 'reserva_id');
     }
 }
