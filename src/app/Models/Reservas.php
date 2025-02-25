@@ -30,7 +30,7 @@ class Reservas extends Model
 
     public function habitacion()
     {
-        return $this->belongsTo(Habitacion::class);
+        return $this->belongsTo(Habitacion::class, 'habitacion_id');
     }
 
     public function serveis()
@@ -41,6 +41,11 @@ class Reservas extends Model
     public function usuari()
     {
         return $this->belongsTo(Usuari::class);
+    }
+
+    public function feedbacks()
+    {
+        return $this->hasMany(Feedbacks::class, 'reserva_id');
     }
 
     // Habitacions ocupades

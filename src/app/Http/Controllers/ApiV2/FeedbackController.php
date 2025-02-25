@@ -70,14 +70,19 @@ class FeedbackController extends Controller
         $reservas = \App\Models\Reservas::whereIn('habitacion_id', $habitacions)->pluck('id');
 
         $limit = $request->query('limit', 5);
-        $feedbacks = Feedbacks::whereIn('reserva_id', $reservas)->paginate($limit);
+        $feedbacks = Feedbacks::whereIn('reserva_id', $reservas)
+            ->orderBy('created_at', 'desc') // Ordenar por fecha de creación en orden descendente
+            ->paginate($limit);
 
-        // Només mostra id, estrelles y comentaris
+        // Només mostra id, estrelles, comentaris y tipus de habitació
         $feedbackData = $feedbacks->map(function ($feedback) {
+            $reserva = $feedback->reserva;
+            $habitacio = $reserva->habitacion;
             return [
                 'id' => $feedback->id,
                 'estrelles' => $feedback->estrelles,
                 'comentari' => $feedback->comentari,
+                'tipus_habitacio' => $habitacio->tipus,
             ];
         });
 

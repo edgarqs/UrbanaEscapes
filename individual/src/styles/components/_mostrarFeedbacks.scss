@@ -1,26 +1,52 @@
-.feedback-carousel {
-	display: flex;
-	overflow-x: auto;
-	scroll-snap-type: x mandatory;
-	gap: 1rem;
-	padding: 1rem;
-	max-width: 100%;
-	margin: 0 auto;
-	scroll-behavior: smooth;
-	white-space: nowrap; /* Para evitar el salto de línea */
-}
+@use '../abstracts/variables' as *;
 
-.feedback-item {
-	display: inline-block; /* Para mantener los elementos en línea */
-	scroll-snap-align: start;
-	background: #fff;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	padding: 1rem;
-	min-width: 300px;
-	max-width: 300px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	overflow: hidden; /* Asegura que el texto no salga de la tarjeta */
-	text-overflow: ellipsis; /* Añade puntos suspensivos si el texto es demasiado largo */
-	white-space: normal; /* Permite que el texto se ajuste dentro de la tarjeta */
+.feedbacks-component {
+	margin: 50px 0;
+
+	&__title {
+		font-size: 2rem;
+		text-align: center;
+		margin-bottom: 1rem;
+		font-style: italic;
+		margin-bottom: 20px;
+
+		@media (min-width: 768px) {
+			text-align: left;
+			font-size: 3rem;
+			padding-left: 150px;
+		}
+	}
+
+	.feedbacks-container {
+		display: flex;
+		overflow-x: auto;
+		gap: 30px;
+		padding: 20px;
+		height: 250px;
+
+		@media (min-width: 768px) {
+			height: 270px;
+		}
+
+		.feedback-item {
+			min-width: 300px;
+			padding: 15px;
+			border: 1px solid $primary-color;
+			background-color: #f9f9f9c7;
+
+			.material-icons {
+				color: gold;
+				font-size: 20px;
+			}
+
+			.feedback-habitacio {
+				color: $primary-color;
+			}
+
+			.feedback-comment {
+				margin-top: 10px;
+				font-size: 16px;
+			}
+		}
+	}
 }

@@ -1,96 +1,90 @@
-import { useState, useEffect, useRef } from 'react';
+import {useState, useEffect} from 'react';
 
 export default function FeedbacksComponent() {
-  const [feedbacks, setFeedbacks] = useState([]);
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const containerRef = useRef(null);
+	const [feedbacks, setFeedbacks] = useState([]); // Se guardan los feedbacks
+	const [page, setPage] = useState(1); // Guarda la pag actual (scroll = cambio de página)
+	const [loading, setLoading] = useState(false); // TODO: Chapuza, solucionar - Evita q carguen datos duplicados
 
-  const apiUrl = import.meta.env.VITE_DEV_API_URL;
-  const tokenHotel = import.meta.env.VITE_HOTEL_ID;
+	useEffect(() => {
+		const getFeedbacks = async () => {
+			if (loading) return; // Si está cargando no hace nada
+			setLoading(true);
 
-  const fetchFeedbacks = async (page) => {
-    setLoading(true);
-    try {
-      const response = await fetch(`${apiUrl}/v2/feedbacks/${tokenHotel}?page=${page}`);
-      const data = await response.json();
+			try {
+				const response = await fetch(
+					`${import.meta.env.VITE_DEV_API_URL}/v2/feedbacks/${import.meta.env.VITE_HOTEL_ID}?page=${page}`
+				);
+				const data = await response.json();
 
-      // Evitar duplicados usando un Set
-      const newFeedbacks = data.filter(
-        (newFeedback) => !feedbacks.some((existingFeedback) => existingFeedback.id === newFeedback.id)
-      );
+				// TODO: Chapuza, solucionar - Evita q carguen datos duplicados
+				const existingIds = new Set(
+					feedbacks.map((feedback) => feedback.id)
+				);
+				const newFeedbacks = data.filter(
+					(feedback) => !existingIds.has(feedback.id)
+				);
 
-      if (newFeedbacks.length > 0) {
-        setFeedbacks((prevFeedbacks) => [...prevFeedbacks, ...newFeedbacks]);
-      } else {
-        setHasMore(false); // No hay más feedbacks para cargar
-      }
-    } catch (error) {
-      console.error('Error fetching feedbacks:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+				setFeedbacks([...feedbacks, ...newFeedbacks]);
+			} catch (error) {
+				console.error('Error al cargar los feedbacks:', error);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-  // Cargar los primeros feedbacks al montar el componente
-  useEffect(() => {
-    setFeedbacks([]); // Resetear los feedbacks al inicio
-    setPage(1); // Resetear la página al inicio
-    setHasMore(true); // Resetear el estado de "hasMore"
-    fetchFeedbacks(1); // Cargar la primera página
-  }, [apiUrl, tokenHotel]); // Resetear si cambian la API o el token
+		getFeedbacks();
+	}, [page]); // Se ejecuta cada vez q cambia la página (scroll)
 
-  // Cargar más feedbacks cuando cambia la página
-  useEffect(() => {
-    if (page > 1) {
-      fetchFeedbacks(page);
-    }
-  }, [page]);
+	const handleScroll = (e) => {
+		const container = e.target;
 
-  // Manejar el scroll horizontal
-  useEffect(() => {
-    const container = containerRef.current;
+		if (
+			container.scrollLeft + container.clientWidth >=
+				container.scrollWidth &&
+			!loading
+		) {
+			setPage(page + 1);
+		}
+	};
 
-    const handleScroll = () => {
-      if (
-        container.scrollLeft + container.clientWidth >= container.scrollWidth - 100 &&
-        !loading &&
-        hasMore
-      ) {
-        setPage((prevPage) => prevPage + 1); // Cargar la siguiente página
-      }
-    };
+	// Funció per limitar el texto a 100 caracteres
+	const limitarTexto = (texto) => {
+		if (texto.length > 100) {
+			return texto.slice(0, 100) + '...';
+		}
+		return texto;
+	};
 
-    container.addEventListener('scroll', handleScroll);
-    return () => {
-      container.removeEventListener('scroll', handleScroll);
-    };
-  }, [loading, hasMore]);
-
-  return (
-    <div className="feedbacks">
-      <h2 className="margin-top feedbacks__title">Feedbacks dels clients</h2>
-
-      <div
-        ref={containerRef}
-        className="feedbacks__list"
-        style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}
-      >
-        {feedbacks.map((feedback) => (
-          <div
-            key={feedback.id}
-            className="feedbacks__item"
-            style={{ display: 'inline-block', margin: '10px', padding: '10px', border: '1px solid #ccc' }}
-          >
-            <div className="feedbacks__item__stars">ID: {feedback.id}</div>
-            <div className="feedbacks__item__stars">Estrelles: {feedback.estrelles}</div>
-            <div className="feedbacks__item__comment">Comentari: {feedback.comentari}</div>
-          </div>
-        ))}
-        {loading && <div className="feedbacks__loading">Carregant més feedbacks...</div>}
-        {!hasMore && <div className="feedbacks__no-more">No hi ha més feedbacks per mostrar.</div>}
-      </div>
-    </div>
-  );
+	return (
+		<div className="feedbacks-component">
+			<h2 className="feedbacks-component__title font-primary">
+				Qué pensen els nostres clients?
+			</h2>
+			<div
+				className="feedbacks-container"
+				onScroll={handleScroll}>
+				{feedbacks.map((feedback) => (
+					<div
+						key={feedback.id}
+						className="feedback-item">
+						<div>
+							{[...Array(feedback.estrelles)].map((_, index) => (
+								<span
+									key={index}
+									className="material-icons star">
+									star
+								</span>
+							))}
+						</div>
+						<div className="feedback-habitacio">
+							Habitació {feedback.tipus_habitacio}
+						</div>
+						<div className="feedback-comment">
+							{limitarTexto(feedback.comentari)}{' '}
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
 }
