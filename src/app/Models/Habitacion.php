@@ -11,7 +11,13 @@ class Habitacion extends Model
     use HasFactory;
 
     protected $fillable = [
-        'hotel_id', 'tipus', 'llits', 'llits_supletoris', 'preu', 'numHabitacion', 'estat'
+        'hotel_id',
+        'tipus',
+        'llits',
+        'llits_supletoris',
+        'preu',
+        'numHabitacion',
+        'estat'
     ];
 
     public function reservas()

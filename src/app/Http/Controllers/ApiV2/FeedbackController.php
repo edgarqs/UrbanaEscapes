@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\ApiV2;
 
-use App\Http\Controllers\Controller;
-use App\Models\ReservaToken;
+use App\Models\Hotel;
 use App\Models\Feedbacks;
-use App\Models\FotosFeedback;
+use App\Models\ReservaToken;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 
 class FeedbackController extends Controller
 {
@@ -55,5 +53,39 @@ class FeedbackController extends Controller
         ReservaToken::where('token', $request->token)->delete();
 
         return response()->json(['message' => 'Feedback enviado correctamente'], 200);
+    }
+
+    //? Retorna els feedbacks d'un hotel
+    public function getFeedbacksByHotel(Request $request, $hotelId)
+    {
+        // Buscar el hotel por id o codi_hotel
+        $hotel = Hotel::where('id', $hotelId)->orWhere('codi_hotel', $hotelId)->first();
+
+        if (!$hotel) {
+            return response()->json(['message' => 'Hotel no encontrado'], 404);
+        }
+
+        $habitacions = $hotel->habitacions()->pluck('id');
+
+        $reservas = \App\Models\Reservas::whereIn('habitacion_id', $habitacions)->pluck('id');
+
+        $limit = $request->query('limit', 5);
+        $feedbacks = Feedbacks::whereIn('reserva_id', $reservas)
+            ->orderBy('created_at', 'desc') // Ordenar por fecha de creación en orden descendente
+            ->paginate($limit);
+
+        // Només mostra id, estrelles, comentaris y tipus de habitació
+        $feedbackData = $feedbacks->map(function ($feedback) {
+            $reserva = $feedback->reserva;
+            $habitacio = $reserva->habitacion;
+            return [
+                'id' => $feedback->id,
+                'estrelles' => $feedback->estrelles,
+                'comentari' => $feedback->comentari,
+                'tipus_habitacio' => $habitacio->tipus,
+            ];
+        });
+
+        return response()->json($feedbackData);
     }
 }
