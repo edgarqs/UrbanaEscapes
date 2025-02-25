@@ -36,6 +36,16 @@
                     @endif
                 </li>
 
+                @if (auth()->user()->hasRole('administrador'))
+                <li>
+                        <a href="{{ route('hotel.noticies') }}"
+                            class="{{ Route::currentRouteNamed('hotel.noticies') ? 'active' : '' }}">
+                            <span class="material-symbols-outlined">news</span>Notícies
+                        </a>
+                    
+                    </li>
+                    @endif
+
 
                 <!-- Crear Hotel (admin) -->
                 @if (auth()->user()->hasRole('administrador'))
