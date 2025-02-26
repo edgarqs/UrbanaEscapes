@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="form card">
+    <div class="form-noticia card">
         <h3 class="center">Editar Notícia</h3>
         <form action="{{ route('noticies.update', $noticia->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

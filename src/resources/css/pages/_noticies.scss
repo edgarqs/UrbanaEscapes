@@ -1,58 +1,98 @@
 @use "../abstracts/variables" as *;
 
 .noticies-table {
+    background-color: white;
+    border-radius: $card-border-radius;
+    box-shadow: 0 5px 10px rgba(128, 128, 128, 0.174);
+    overflow: hidden;
     width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
 
     &__header,
     &__row {
         display: flex;
-        justify-content: space-between;
-        padding: 10px;
+        text-align: center;
+        align-items: center;
         border-bottom: 1px solid #ddd;
     }
 
     &__header {
-        background-color: $primary-color;
-        color: #fff;
+        background-color: #d4def7;
         font-weight: bold;
+        padding: 0.8rem 0;
     }
 
     &__header__cell,
     &__row__cell {
         flex: 1;
-        padding: 10px;
-        text-align: left;
+        padding: 0.5rem 0.2rem;
     }
 
-    &__row__cell {
-        &:nth-child(odd) {
-            background-color: #f9f9f9;
+    &__row {
+        &:nth-child(even) {
+            background-color: #f4f6fb;
+        }
+
+        &:hover {
+            background-color: #e0e0e0;
         }
     }
 
+    // Contenedor de botones en columna
+    &__actions {
+        display: flex;
+        flex-direction: column; // Hace que los botones estén en columna
+        align-items: center; // Centra los botones
+        gap: 0.4rem; // Espacio entre botones
+    }
+
+    // Botones en formato cuadrado con iconos
     .button {
-        padding: 5px 10px;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-        text-decoration: none;
-        color: #fff;
-        font-size: 14px;
+        &--icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px; // Cuadrado
+            height: 36px; // Cuadrado
+            border: none;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 0;
+
+            .material-icons {
+                font-size: 20px;
+                color: white;
+            }
+        }
 
         &--edit {
-            background-color: $primary-color;
-            margin-right: 5px;
+            background-color: #ffc107;
+
+            &:hover {
+                background-color: #e0a800;
+            }
         }
 
         &--delete {
-            background-color: $error-color;
+            background-color: #dc3545;
+
+            &:hover {
+                background-color: #c82333;
+            }
+        }
+
+        &--publish {
+            background-color: #28a745;
+
+            &:hover {
+                background-color: #218838;
+            }
         }
     }
 }
 
-.form {
+.form-noticia {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem;
