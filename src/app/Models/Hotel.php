@@ -44,6 +44,11 @@ class Hotel extends Model
         return $this->hasMany(Usuari::class);
     }
 
+    public function noticies()
+    {
+        return $this->belongsToMany(Noticia::class, 'noticies_hotel');
+    }
+
     public function toggleComplete()
     {
         $this->completado = !$this->completado;
