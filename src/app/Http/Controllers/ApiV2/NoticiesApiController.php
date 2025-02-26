@@ -14,8 +14,7 @@ class NoticiesApiController extends Controller
     public function index()
     {
         $noticies = Noticia::where('publicada', 1)
-            ->with('fotos:id,noticia_id,foto')
-            ->orderBy('created_at', 'desc')
+            ->with('fotos')
             ->get(['id', 'titol', 'descripcio_curta', 'descripcio_llarga']);
 
         return response()->json($noticies);

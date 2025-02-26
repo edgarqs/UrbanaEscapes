@@ -1,0 +1,127 @@
+@use '../abstracts/variables' as *;
+
+.noticies {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.noticies__title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.noticies__no-news {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Elemento: .noticies__card */
+.noticies__card {
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid $primary-color;
+  display: flex;
+  flex-direction: column;
+}
+
+.noticies__card-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.noticies__card-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Elemento: .noticies__card-photos */
+.noticies__card-photos {
+  display: flex;
+  flex-wrap: wrap; /* Permitir que las imágenes se ajusten en múltiples filas si es necesario */
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: center; /* Centramos las imágenes cuando no se ajusten */
+}
+
+/* Las imágenes serán cuadradas con tamaño específico */
+.noticies__card-photo {
+  width: 100%;  /* Imagen ocupa el 100% del ancho del contenedor */
+  max-width: 300px;  /* Tamaño máximo en escritorios, puedes cambiarlo según lo necesites */
+  height: 300px;  /* Altura igual al ancho para hacerlo cuadrado */
+  object-fit: cover;  /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+}
+
+/* En pantallas móviles */
+@media (max-width: 767px) {
+  .noticies__card-photo {
+    width: 100%;  /* Imagen ocupa todo el ancho disponible */
+    height: auto;  /* La altura será proporcional */
+    aspect-ratio: 1 / 1; /* Asegura que las imágenes sean cuadradas */
+  }
+
+  .noticies__card-photos {
+    justify-content: center;  /* Centramos las imágenes en móvil */
+  }
+}
+
+/* En pantallas de escritorio (desde 768px) */
+@media (min-width: 768px) {
+  .noticies__title {
+    font-size: 2rem; /* Aumentamos el tamaño del título */
+  }
+
+  .noticies__card {
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .noticies__card-title {
+    font-size: 1.8rem; /* Aumentamos el tamaño del título */
+  }
+
+  .noticies__card-description {
+    font-size: 1.2rem; /* Aumentamos el tamaño de la descripción */
+  }
+
+  .noticies__card-photo {
+    width: 300px; /* Imagen cuadrada en escritorio */
+    height: 300px; /* Mantener la proporción cuadrada */
+  }
+
+  .noticies__card-photos {
+    flex-wrap: wrap; /* Las imágenes se mueven a una nueva fila si no caben */
+    justify-content: flex-start; /* Alineamos las imágenes al principio en pantallas grandes */
+  }
+}
+
+/* En pantallas grandes (desde 1024px) */
+@media (min-width: 1024px) {
+  .noticies__card {
+    padding: 25px; /* Más espacio para pantallas grandes */
+  }
+
+  .noticies__card-title {
+    font-size: 2rem; /* Título aún más grande en pantallas grandes */
+  }
+
+  .noticies__card-description {
+    font-size: 1.4rem; /* Descripción más grande */
+  }
+
+  .noticies__card-photo {
+    width: 200px; /* Mantener tamaño cuadrado en pantallas grandes */
+    height: 200px; /* Mantener la proporción cuadrada */
+  }
+}
