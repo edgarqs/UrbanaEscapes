@@ -42,12 +42,12 @@ export default function HabitacionsComponent() {
 	useEffect(() => {
 		const fetchTipusHabitacions = async () => {
 			try {
-				const api = import.meta.env.DEV
+				const apiUrl = import.meta.env.DEV
 					? import.meta.env.VITE_DEV_API_URL
 					: import.meta.env.VITE_PROD_API_URL;
 				const codiHotel = import.meta.env.VITE_HOTEL_ID;
 				const response = await fetch(
-					`${api}/v2/hotels/${codiHotel}/tipos-habitaciones`
+					`${apiUrl}/v2/hotels/${codiHotel}/tipos-habitaciones`
 				);
 				const data = await response.json();
 				const tipus = data.map((habitacio) => habitacio.tipus);

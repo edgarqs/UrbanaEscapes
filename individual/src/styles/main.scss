@@ -14,7 +14,9 @@
 @use 'components/header';
 @use 'components/hero';
 @use 'components/buscador';
+@use 'components/mostrarFeedbacks';
 
 // pages
 @use 'pages/feedback';
 @use 'pages/reserves';
+@use 'pages/noticies';
