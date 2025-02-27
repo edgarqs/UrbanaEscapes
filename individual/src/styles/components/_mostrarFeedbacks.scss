@@ -1,0 +1,52 @@
+@use '../abstracts/variables' as *;
+
+.feedbacks-component {
+	margin: 50px 0;
+
+	&__title {
+		font-size: 2rem;
+		text-align: center;
+		margin-bottom: 1rem;
+		font-style: italic;
+		margin-bottom: 20px;
+
+		@media (min-width: 768px) {
+			text-align: left;
+			font-size: 3rem;
+			padding-left: 150px;
+		}
+	}
+
+	.feedbacks-container {
+		display: flex;
+		overflow-x: auto;
+		gap: 30px;
+		padding: 20px;
+		height: 250px;
+
+		@media (min-width: 768px) {
+			height: 270px;
+		}
+
+		.feedback-item {
+			min-width: 300px;
+			padding: 15px;
+			border: 1px solid $primary-color;
+			background-color: #f9f9f9c7;
+
+			.material-icons {
+				color: gold;
+				font-size: 20px;
+			}
+
+			.feedback-habitacio {
+				color: $primary-color;
+			}
+
+			.feedback-comment {
+				margin-top: 10px;
+				font-size: 16px;
+			}
+		}
+	}
+}

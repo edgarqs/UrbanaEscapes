@@ -30,6 +30,7 @@ class HotelController extends Controller
             'clients' => 'required|integer',
             'habitacions' => 'required|integer',
             'reserves' => 'required|integer',
+            'feedbacks' => 'required|integer',
         ]);
 
         // Modificado: verificar si el email ya existe en la base de datos
@@ -49,9 +50,10 @@ class HotelController extends Controller
         $numClients = $dades['clients'];
         $numHabitacions = $dades['habitacions'];
         $numReserves = $dades['reserves'];
+        $numFeedbacks = $dades['feedbacks'];
 
         $seeder = new DatabaseSeeder();
-        $seeder->CreateHotelSedder($hotel->id, $numClients, $numHabitacions, $numReserves);
+        $seeder->CreateHotelSedder($hotel->id, $numClients, $numHabitacions, $numReserves, $numFeedbacks);
 
         return redirect()->route('hotel.home', ['id' => $hotel->id])
             ->with('status', 'Hotel creat correctament i dades del hotel creades correctament');

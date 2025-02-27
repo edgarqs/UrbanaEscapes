@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HotelController;
 use App\Http\Controllers\Api\UsuariController;
 use App\Http\Controllers\Api\ReservesController;
+use App\Http\Controllers\ApiV2\FeedbackController;
 use App\Http\Controllers\Api\HabitacionsController;
 use App\Http\Controllers\ApiV2\HotelsCercaController;
+use App\Http\Controllers\ApiV2\NoticiesApiController;
 use App\Http\Controllers\ApiV2\UsuarisCercaController;
 use App\Http\Controllers\ApiV2\ReservesCercaController;
 use App\Http\Controllers\ApiV2\HabitacionsCercaController;
-use App\Http\Controllers\ApiV2\FeedbackController;
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('/usuaris', UsuariController::class);
@@ -29,4 +30,8 @@ Route::prefix('v2')->group(function () {
 
     Route::post("/feedback/submit", [FeedbackController::class, 'enviarFeedback']);
     Route::get('/feedback/{token}', [FeedbackController::class, 'verificarToken']);
+    Route::get('/feedbacks/{hotelId}', [FeedbackController::class, 'getFeedbacksByHotel']);
+
+    Route::get('/noticies', [NoticiesApiController::class, 'index']);
+    Route::get('/noticies/{id_hotel}', [NoticiesApiController::class, 'show']);
 });
