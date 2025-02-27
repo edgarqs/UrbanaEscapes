@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\ApiV2;
 
-use App\Http\Controllers\Controller;
 use App\Models\Usuari;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
 class UsuarisCercaController extends Controller
 {
@@ -30,9 +31,17 @@ class UsuarisCercaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        //
+        $email = $request->input('email');
+        $usuari = Usuari::where('email', $email)->first();
+
+        if ($usuari) {
+            return response()->json($usuari, 200);
+        }
+
+        $usuari = Usuari::create($request->all());
+        return response()->json($usuari, 201);
     }
 
     /**
