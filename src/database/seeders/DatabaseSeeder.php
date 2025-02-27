@@ -10,8 +10,10 @@ use Database\Seeders\HotelSeeder;
 use App\Models\Reservas;
 use App\Models\Serveis;
 use App\Models\Usuari;
+use App\Models\Feedbacks;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
+use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersSeeder::class);
         $this->call(ServeisSeeder::class);
     }
-    public function CreateHotelSedder($hotel_id, $num_clients, $num_habitacions, $num_reserves)
+    public function CreateHotelSedder($hotel_id, $num_clients, $num_habitacions, $num_reserves, $num_feedbacks)
     {
 
         // Crear usuarios adicionales si es necesario
@@ -64,7 +66,19 @@ class DatabaseSeeder extends Seeder
             }
         }
         Log::channel('info_log')->info("Serveis assignats a les habitacions del hotel", ['hotel_id' => $hotel_id]);
-        
+
+        // Creació feedbacks
+        $reservasCheckout = Reservas::where('estat', 'Checkout')->pluck('id')->toArray();
+        $faker = Faker::create();
+
+        for ($i = 0; $i < $num_feedbacks; $i++) {
+            Feedbacks::create([
+                'reserva_id' => $faker->randomElement($reservasCheckout),
+                'estrelles' => $faker->numberBetween(1, 5),
+                'comentari' => $faker->sentence,
+            ]);
+        }
+        Log::channel('info_log')->info("Afegits feedbacks", ['feedbacksNumber' => $num_feedbacks]);
 
         // Creació usuari recepcionista
         $recepcionista = Usuari::factory()->create([
@@ -76,6 +90,5 @@ class DatabaseSeeder extends Seeder
             'rol_id' => 2
         ]);
         Log::channel('info_log')->info("Afegit usuari recepcionista", ['hotel_id' => $hotel_id, 'usuari_id' => $recepcionista->id]);
-        
     }
 }
