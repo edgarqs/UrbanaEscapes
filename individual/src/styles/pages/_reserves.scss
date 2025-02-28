@@ -1,2 +1,197 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
+
+.reserves-page {
+	padding: 20px;
+	max-width: 1200px;
+	margin: 0 auto; // Centra el contenedor
+
+	.habitacions-list {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding-top: 50px;
+	}
+
+	.habitacio-card {
+		background: $secondary-color;
+		border: 1px solid $primary-color;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		width: 100%; // Asegura que ocupe todo el ancho disponible
+
+		&__image {
+			width: 100%; // Imagen ocupa todo el ancho en móviles
+			height: 150px; // Altura pequeña para móviles
+			flex: 0 1 100%;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		&__content {
+			padding: 10px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			.habitacio-card__title {
+				font-size: 2rem;
+				margin-bottom: 10px;
+			}
+
+			.habitacio-card__price {
+				font-size: 1.1rem;
+				color: #555;
+				margin-bottom: 10px;
+				margin-top: -15px;
+			}
+
+			.habitacio-card__total {
+				font-size: 1.2rem;
+				color: $primary-color;
+				font-weight: bold;
+				margin-top: 15px;
+				margin-bottom: 15px;
+			}
+
+			.habitacio-card__button {
+				text-decoration: none;
+				color: white;
+				font-weight: 500;
+				font-size: 1rem;
+				padding: 0.5rem 1rem;
+				transition: color 0.3s ease-in-out,
+					background-color 0.3s ease-in-out;
+				cursor: pointer;
+				background-color: $primary-color;
+				font-family: $font-secondary;
+				margin-top: 10px;
+
+				&:hover {
+					color: white;
+					background-color: $primary-color-transparente;
+					border-color: $primary-color-transparente;
+				}
+			}
+		}
+	}
+
+	.reserva-form {
+		text-align: center;
+		max-width: 500px;
+		margin: 0 auto;
+		padding: 2rem;
+		background-color: $background-color;
+		color: $text-color;
+
+        h1 {
+            color: $primary-color;
+        }
+
+		.form-group {
+			margin-bottom: 2rem;
+
+			input {
+				width: 100%;
+				padding: 1rem;
+				border: 1px solid $primary-color;
+				border-radius: 5px;
+				font-size: 1rem;
+				font-family: $font-secondary;
+			}
+		}
+
+		.submit-btn {
+			background-color: $primary-color;
+			color: $secondary-color;
+			width: 100%;
+			padding: $espaciado * 1.5 $espaciado * 3;
+			font-size: 1rem;
+			font-weight: bold;
+			transition: 0.3s ease;
+
+			&:hover {
+				background-color: $primary-color-transparente;
+			}
+		}
+	}
+
+	.message-container {
+		text-align: center;
+		max-width: 500px;
+		margin: 0 auto;
+		padding: 2rem;
+		background-color: $background-color;
+		color: $text-color;
+
+		p {
+			font-size: 1.2rem;
+			margin-bottom: 2rem;
+		}
+
+		.submit-btn {
+			background-color: $primary-color;
+			color: $secondary-color;
+			width: 100%;
+			padding: $espaciado * 1.5 $espaciado * 3;
+			font-size: 1rem;
+			font-weight: bold;
+			transition: 0.3s ease;
+
+			&:hover {
+				background-color: $primary-color-transparente;
+			}
+		}
+	}
+
+	// Media Queries 768px
+	@media (min-width: 768px) {
+		.habitacio-card {
+			flex-direction: row;
+			height: 250px;
+		}
+
+		.habitacio-card__image {
+			flex: 0 1 40%;
+			height: 100%;
+		}
+
+		.habitacio-card__content {
+			padding: 20px;
+			flex: 1;
+		}
+
+		.habitacio-card__title {
+			margin-bottom: 20px !important;
+		}
+
+		.habitacio-card__button {
+			width: auto;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.habitacio-card {
+			height: 300px;
+		}
+
+		.habitacio-card__image {
+			flex: 0 1 35%;
+			height: 100%;
+		}
+
+		.habitacio-card__content {
+			padding: 25px;
+		}
+
+		.habitacio-card__button {
+			width: auto;
+		}
+	}
+}
