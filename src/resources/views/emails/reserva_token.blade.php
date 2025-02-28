@@ -82,7 +82,7 @@
         <p>Hola <strong>{{ $reserva->usuari->nom }}</strong>,</p>
         <p>Gràcies per allotjar-te al nostre hotel. Ens agradaria conèixer la teva opinió sobre la teva estada.</p>
         <p>Fes-nos saber la teva valoració i comparteix la teva experiència amb nosaltres fent clic al botó següent:</p>
-        <a href="http://localhost:8002/feedback/{{ $token }}" class="button">Donar Feedback</a>
+        <a href="https://edgarquirante.edgarqs.dev/feedback/{{ $token }}" class="button">Donar Feedback</a>
         <p><strong>Data d'entrada:</strong> {{ $reserva->data_entrada->format('d-m-Y') }}</p>
         <p><strong>Data de sortida:</strong> {{ $reserva->data_sortida->format('d-m-Y') }}</p>
         <p>Ens agradaria saber com podem millorar els nostres serveis per fer la teva propera estada encara millor.</p>
