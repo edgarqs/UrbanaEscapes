@@ -24,18 +24,20 @@ export default function ReservesPage() {
     email: '',
   });
   const [message, setMessage] = useState('');
+  const [reserves, setReserves] = useState([]);
+
+  const apiUrl = import.meta.env.DEV
+    ? import.meta.env.VITE_DEV_API_URL
+    : import.meta.env.VITE_PROD_API_URL;
 
   useEffect(() => {
     document.title = 'Sakura | Reserves';
 
     const fetchHabitacions = async () => {
       try {
-        const api = import.meta.env.DEV
-          ? import.meta.env.VITE_DEV_API_URL
-          : import.meta.env.VITE_PROD_API_URL;
         const codiHotel = import.meta.env.VITE_HOTEL_ID;
         const response = await fetch(
-          `${api}/v2/habitacions/${codiHotel}/disponibles?data_entrada=${dataEntrada}&data_sortida=${dataSortida}&capacitat=${numPersones}`
+          `${apiUrl}/v2/habitacions/${codiHotel}/disponibles?data_entrada=${dataEntrada}&data_sortida=${dataSortida}&capacitat=${numPersones}`
         );
         const data = await response.json();
         setHabitacions(data);
@@ -47,7 +49,11 @@ export default function ReservesPage() {
     if (dataEntrada && dataSortida && numPersones) {
       fetchHabitacions();
     }
-  }, [dataEntrada, dataSortida, numPersones]);
+
+    fetch(`${apiUrl}/v2/reserves`)
+      .then((response) => response.json())
+      .then((data) => setReserves(data));
+  }, [dataEntrada, dataSortida, numPersones, apiUrl]);
 
   const handleSelectHabitacio = (habitacio) => {
     setSelectedHabitacio(habitacio);
@@ -65,12 +71,8 @@ export default function ReservesPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const api = import.meta.env.DEV
-        ? import.meta.env.VITE_DEV_API_URL
-        : import.meta.env.VITE_PROD_API_URL;
-
       // Crear o obtener usuario
-      const userResponse = await fetch(`${api}/v2/usuaris`, {
+      const userResponse = await fetch(`${apiUrl}/v2/usuaris`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +96,7 @@ export default function ReservesPage() {
         estat: 'Reservada',
       };
 
-      const reservaResponse = await fetch(`${api}/v1/reserves`, {
+      const reservaResponse = await fetch(`${apiUrl}/v1/reserves`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -210,6 +212,22 @@ export default function ReservesPage() {
           </button>
         </div>
       )}
+      <div className="reserves">
+        {reserves.length === 0 ? (
+          <p className="reserves__no-reserves">
+            No hi han reserves per mostrar.
+          </p>
+        ) : (
+          reserves.map((reserva) => (
+            <div key={reserva.id} className="reserves__card">
+              <h2 className="reserves__card-title">{reserva.titol}</h2>
+              <p className="reserves__card-description">
+                {reserva.descripcio_llarga}
+              </p>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
