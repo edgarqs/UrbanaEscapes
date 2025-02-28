@@ -8,9 +8,10 @@
 }
 
 .noticies__title {
-  font-size: 1.8rem;
+  font-size: 3rem !important;
   margin-bottom: 20px;
   color: #333;
+  text-align: center;
 }
 
 .noticies__no-news {
@@ -20,7 +21,6 @@
   margin-top: 20px;
 }
 
-/* Elemento: .noticies__card */
 .noticies__card {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -46,40 +46,36 @@
   margin-bottom: 15px;
 }
 
-/* Elemento: .noticies__card-photos */
 .noticies__card-photos {
   display: flex;
-  flex-wrap: wrap; /* Permitir que las imágenes se ajusten en múltiples filas si es necesario */
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
-  justify-content: center; /* Centramos las imágenes cuando no se ajusten */
+  justify-content: center;
 }
 
-/* Las imágenes serán cuadradas con tamaño específico */
 .noticies__card-photo {
-  width: 100%;  /* Imagen ocupa el 100% del ancho del contenedor */
-  max-width: 300px;  /* Tamaño máximo en escritorios, puedes cambiarlo según lo necesites */
-  height: 300px;  /* Altura igual al ancho para hacerlo cuadrado */
-  object-fit: cover;  /* Asegura que la imagen cubra el contenedor sin distorsionarse */
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+  object-fit: cover;
 }
 
-/* En pantallas móviles */
 @media (max-width: 767px) {
   .noticies__card-photo {
-    width: 100%;  /* Imagen ocupa todo el ancho disponible */
-    height: auto;  /* La altura será proporcional */
-    aspect-ratio: 1 / 1; /* Asegura que las imágenes sean cuadradas */
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
 
   .noticies__card-photos {
-    justify-content: center;  /* Centramos las imágenes en móvil */
+    justify-content: center;
   }
 }
 
-/* En pantallas de escritorio (desde 768px) */
 @media (min-width: 768px) {
   .noticies__title {
-    font-size: 2rem; /* Aumentamos el tamaño del título */
+    font-size: 2rem;
   }
 
   .noticies__card {
@@ -88,40 +84,74 @@
   }
 
   .noticies__card-title {
-    font-size: 1.8rem; /* Aumentamos el tamaño del título */
+    font-size: 1.8rem;
   }
 
   .noticies__card-description {
-    font-size: 1.2rem; /* Aumentamos el tamaño de la descripción */
+    font-size: 1.2rem;
   }
 
   .noticies__card-photo {
-    width: 300px; /* Imagen cuadrada en escritorio */
-    height: 300px; /* Mantener la proporción cuadrada */
+    width: 300px;
+    height: 300px;
   }
 
   .noticies__card-photos {
-    flex-wrap: wrap; /* Las imágenes se mueven a una nueva fila si no caben */
-    justify-content: flex-start; /* Alineamos las imágenes al principio en pantallas grandes */
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 }
 
-/* En pantallas grandes (desde 1024px) */
 @media (min-width: 1024px) {
   .noticies__card {
-    padding: 25px; /* Más espacio para pantallas grandes */
+    padding: 25px;
   }
 
   .noticies__card-title {
-    font-size: 2rem; /* Título aún más grande en pantallas grandes */
+    font-size: 2rem;
   }
 
   .noticies__card-description {
-    font-size: 1.4rem; /* Descripción más grande */
+    font-size: 1.4rem;
   }
 
   .noticies__card-photo {
-    width: 200px; /* Mantener tamaño cuadrado en pantallas grandes */
-    height: 200px; /* Mantener la proporción cuadrada */
+    width: 200px;
+    height: 200px;
+  }
+}
+
+
+// Component notícies
+.ultimes-noticies {
+  padding: 1rem;
+
+  h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+      
+  }
+
+  .noticies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+  }
+
+  .noticia-card {
+      background-color: #fff;
+      padding: 1rem;
+      border: 1px solid $primary-color;
+
+      h4 {
+          margin-bottom: 0.5rem;
+          font-size: 1.2rem;
+          color: #333;
+      }
+
+      p {
+          font-size: 1rem;
+          color: #666;
+      }
   }
 }

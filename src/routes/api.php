@@ -33,5 +33,6 @@ Route::prefix('v2')->group(function () {
     Route::get('/feedbacks/{hotelId}', [FeedbackController::class, 'getFeedbacksByHotel']);
 
     Route::get('/noticies', [NoticiesApiController::class, 'index']);
+    Route::get('/noticies/latest/{hotel}', [NoticiesApiController::class, 'latest']);
     Route::get('/noticies/{id_hotel}', [NoticiesApiController::class, 'show']);
 });
