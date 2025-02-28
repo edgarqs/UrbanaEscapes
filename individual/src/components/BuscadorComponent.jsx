@@ -73,7 +73,7 @@ export default function BuscadorComponent() {
 	};
 
 	return (
-		<div>
+		<div className="buscador">
 			<form
 				className="form-buscador"
 				onSubmit={handleSubmit}>
