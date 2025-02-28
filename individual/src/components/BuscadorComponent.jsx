@@ -2,13 +2,11 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 export default function BuscadorComponent() {
-	// Obtener parámetros de la URL si existen
 	const params = new URLSearchParams(window.location.search);
 	const urlDataEntrada = params.get('dataEntrada') || '';
 	const urlDataSortida = params.get('dataSortida') || '';
 	const urlNumPersones = params.get('numPersones') || 1;
 
-	// Estados con valores predeterminados de la URL o valores por defecto
 	const [entrada, setEntrada] = useState(urlDataEntrada);
 	const [sortida, setSortida] = useState(urlDataSortida);
 	const [persones, setPersones] = useState(urlNumPersones);
@@ -20,7 +18,7 @@ export default function BuscadorComponent() {
 
 	const navigate = useNavigate();
 
-	// Función para obtener la fecha de hoy en formato YYYY-MM-DD
+	// obtener la fecha de hoy en formato YYYY-MM-DD
 	const getTodayDate = () => {
 		const today = new Date();
 		const yyyy = today.getFullYear();
@@ -29,7 +27,6 @@ export default function BuscadorComponent() {
 		return `${yyyy}-${mm}-${dd}`;
 	};
 
-	// Validaciones
 	const validateForm = () => {
 		const today = getTodayDate();
 		let valid = true;
@@ -60,7 +57,6 @@ export default function BuscadorComponent() {
 		return valid;
 	};
 
-	// Manejar el envío del formulario
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
