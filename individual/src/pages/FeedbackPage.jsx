@@ -19,8 +19,10 @@ export default function FeedbackPage() {
         }
 
         const fetchFeedback = async () => {
-            const api = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_URL : import.meta.env.VITE_PROD_API_URL;
-            const response = await fetch(`${api}/v2/feedback/${token}`);
+            const apiUrl = import.meta.env.DEV
+                ? import.meta.env.VITE_DEV_API_URL
+                : import.meta.env.VITE_PROD_API_URL;
+            const response = await fetch(`${apiUrl}/v2/feedback/${token}`);
             const data = await response.json();
 
             if (!response.ok || !data.id_reserva) {
@@ -35,8 +37,10 @@ export default function FeedbackPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const api = import.meta.env.DEV ? import.meta.env.VITE_DEV_API_URL : import.meta.env.VITE_PROD_API_URL;
-        const response = await fetch(`${api}/v2/feedback/submit`, {
+        const apiUrl = import.meta.env.DEV
+            ? import.meta.env.VITE_DEV_API_URL
+            : import.meta.env.VITE_PROD_API_URL;
+        const response = await fetch(`${apiUrl}/v2/feedback/submit`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

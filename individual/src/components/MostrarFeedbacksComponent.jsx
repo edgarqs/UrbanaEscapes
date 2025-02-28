@@ -11,8 +11,11 @@ export default function FeedbacksComponent() {
 			setLoading(true);
 
 			try {
+				const apiUrl = import.meta.env.DEV
+					? import.meta.env.VITE_DEV_API_URL
+					: import.meta.env.VITE_PROD_API_URL;
 				const response = await fetch(
-					`${import.meta.env.VITE_DEV_API_URL}/v2/feedbacks/${import.meta.env.VITE_HOTEL_ID}?page=${page}`
+					`${apiUrl}/v2/feedbacks/${import.meta.env.VITE_HOTEL_ID}?page=${page}`
 				);
 				const data = await response.json();
 
