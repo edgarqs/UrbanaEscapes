@@ -15,7 +15,7 @@ export default function NoticiesPages() {
     useEffect(() => {
         document.title = 'Sakura | Notícies';
 
-        fetch(`${apiUrl}/v2/noticies`)
+        fetch(`${apiUrl}/v2/noticies/${import.meta.env.VITE_HOTEL_ID}`)
             .then((response) => response.json())
             .then((data) => setNoticies(data));
     }, [apiUrl]);

@@ -1,0 +1,8 @@
+@use '../abstracts/variables' as *;
+
+.home {
+    .buscador {
+        background-color: $secondary-color;
+        padding-top: 25px;
+    }
+}
