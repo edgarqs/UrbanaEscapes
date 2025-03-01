@@ -5,8 +5,9 @@
 @section('content')
     <h1>Notícies</h1>
 
+    <a href="{{ route('hotel.afegirNoticia') }}" class="button button--small"><span class="material-symbols-outlined">add</span>Afegir Notícia</a>
     <div class="noticies-table">
-        <button class="button button--primary">Crear notícia</button>
+
         <div class="noticies-table__header">
             <div class="noticies-table__header__cell">Títol</div>
             <div class="noticies-table__header__cell">Descripció Curta</div>

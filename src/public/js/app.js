@@ -49,8 +49,8 @@ function hidePopup() {
 
 // Cerrar el popup cuando se hace clic fuera de él
 window.onclick = function(event) {
-    const modal = document.getElementById('popup');
-    const backdrop = document.getElementById('popup-backdrop');
+    const modal = document.querySelector('#popup');
+    const backdrop = document.querySelector('#popup-backdrop');
     if (event.target === modal || event.target === backdrop) {
         hidePopup();
     }
