@@ -149,6 +149,19 @@
                 </div>
             </div>
 
+            <!-- Cuarta fila -->
+            <div class="form-row d-flex">
+                <div class="form-group flex-fill">
+                    <label for="noticies">Notícies</label>
+                    <input type="number" name="noticies" id="noticies"
+                        class="form-control @error('noticies') is-invalid @enderror" value="{{ old('noticies', 5) }}"
+                        min="0" placeholder="Quantes notícies vols crear?" required>
+                    @error('noticies')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
             <button type="button" class="button button--secondary button--margin-top"
                 onclick="showStep1()">Volver</button>
             <button type="submit" class="button button--primary button--margin-top">Guardar</button>
@@ -169,27 +182,27 @@
 
             if (valid) {
                 // Hide step 1
-                document.getElementById('form-step-1').style.display = 'none';
+                document.querySelector('#form-step-1').style.display = 'none';
 
                 // Show step 2
-                document.getElementById('form-step-2').style.display = 'block';
+                document.querySelector('#form-step-2').style.display = 'block';
 
                 // Copy values from step 1 to hidden fields in step 2
-                document.getElementById('hidden-nom').value = document.getElementById('nom').value;
-                document.getElementById('hidden-adreca').value = document.getElementById('adreca').value;
-                document.getElementById('hidden-ciutat').value = document.getElementById('ciutat').value;
-                document.getElementById('hidden-pais').value = document.getElementById('pais').value;
-                document.getElementById('hidden-email').value = document.getElementById('email').value;
-                document.getElementById('hidden-telefon').value = document.getElementById('telefon').value;
+                document.querySelector('#hidden-nom').value = document.querySelector('#nom').value;
+                document.querySelector('#hidden-adreca').value = document.querySelector('#adreca').value;
+                document.querySelector('#hidden-ciutat').value = document.querySelector('#ciutat').value;
+                document.querySelector('#hidden-pais').value = document.querySelector('#pais').value;
+                document.querySelector('#hidden-email').value = document.querySelector('#email').value;
+                document.querySelector('#hidden-telefon').value = document.querySelector('#telefon').value;
             }
         }
 
         function showStep1() {
             // Hide step 2
-            document.getElementById('form-step-2').style.display = 'none';
+            document.querySelector('#form-step-2').style.display = 'none';
 
             // Show step 1
-            document.getElementById('form-step-1').style.display = 'block';
+            document.querySelector('#form-step-1').style.display = 'block';
         }
     </script>
 

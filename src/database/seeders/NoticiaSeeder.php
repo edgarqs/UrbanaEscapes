@@ -31,4 +31,16 @@ class NoticiaSeeder extends Seeder
 
         $this->command->info("S'han creat $num_noticies notícies i s'han assignat a tots els hotels.");
     }
+
+    public function createNoticiasForHotel($hotel_id, $num_noticies)
+    {
+        $noticies = Noticia::factory($num_noticies)->create();
+
+        foreach ($noticies as $noticia) {
+            DB::table('noticies_hotel')->insert([
+                'noticia_id' => $noticia->id,
+                'hotel_id' => $hotel_id,
+            ]);
+        }
+    }
 }
