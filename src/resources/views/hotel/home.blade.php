@@ -36,7 +36,7 @@
             <a href="{{ route('hotel.habitacions', ['id' => request()->query('id'), 'estat' => 'Bloquejada']) }}">
                 <div class="card card--resum-hotels">
                     <h2 class="card__header">Habitacions bloquejades</h2>
-                    <h3 class="counter__habitacions">{{ $habitacionsBloquejades  }}</h3>
+                    <h3 class="counter__habitacions">{{ $habitacionsBloquejades }}</h3>
                 </div>
             </a>
         </div>
@@ -57,8 +57,15 @@
                     </div>
                 </a>
 
+                <a href="{{ route('hotel.configHotel', ['id' => request()->query('id')]) }}">
+                    <div class="card card--resum-hotels card--botons-gestioHotel">
+                        <h2 class="card__header"><span class="material-symbols-outlined">settings</span> Configuració</h2>
+                    </div>
+                </a>
+
             </div>
         @endif
+
 
     </div>
 @endsection

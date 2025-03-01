@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\HabitacionsController;
 use App\Http\Controllers\ApiV2\HotelsCercaController;
 use App\Http\Controllers\ApiV2\NoticiesApiController;
 use App\Http\Controllers\ApiV2\UsuarisCercaController;
+use App\Http\Controllers\ApiV2\HotelSettingsController;
 use App\Http\Controllers\ApiV2\ReservesCercaController;
 use App\Http\Controllers\ApiV2\HabitacionsCercaController;
 
@@ -35,4 +36,6 @@ Route::prefix('v2')->group(function () {
     Route::get('/noticies', [NoticiesApiController::class, 'index']);
     Route::get('/noticies/latest/{hotel}', [NoticiesApiController::class, 'latest']);
     Route::get('/noticies/{id_hotel}', [NoticiesApiController::class, 'show']);
+
+    Route::get('/hotels/{hotelId}/settings', [HotelSettingsController::class, 'show']);
 });
