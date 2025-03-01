@@ -20,7 +20,7 @@ Route::middleware(['auth', EnsureUserHasRole::class . ':administrador'])->group(
     Route::get('/noticies/afegir', [NoticiesController::class, 'create'])->name('hotel.afegirNoticia');
     Route::post('/noticies', [NoticiesController::class, 'store'])->name('noticies.store');
     Route::patch('/noticies/{id}/publicar', [NoticiesController::class, 'publicar'])->name('hotel.publicarNoticia');
-    Route::put('/noticies/{id}', [NoticiesController::class, 'update'])->name('noticies.update'); // Añadir esta línea
+    Route::put('/noticies/{id}', [NoticiesController::class, 'update'])->name('noticies.update');
 });
 
 // auth

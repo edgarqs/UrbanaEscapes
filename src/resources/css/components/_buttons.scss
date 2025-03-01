@@ -44,6 +44,13 @@
         margin-top: $base-spacing;
     }
 
+    &--small {
+        width: auto; 
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        margin-bottom: $base-spacing;
+    }
+
     &:hover {
         background-color: $primary-color-dark;
     }
