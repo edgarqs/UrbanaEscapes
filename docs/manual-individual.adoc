@@ -1,0 +1,99 @@
+# Manual d'instal·lació del servidor a AWS (Desplegament) web individual
+
+## 1. Instal·lació de dependències
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install apache2
+```
+
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+```bash
+sudo apt install git
+```
+
+## 2. Clonar el projecte
+
+```bash
+cd /var/www/
+sudo git clone https://gitlab.com/quirante.sanchez.edgar/grup-6-edgar-quirante.git
+cd grup-6-edgar-quirante/individual
+```
+
+## 3. Instal·lació de dependències del server
+
+```bash
+sudo npm install
+```
+
+Configura el .env:
+
+```bash
+sudo cp .env.example .env
+```
+
+I configura el fitxer .env amb les dades de la base de dades.
+
+```bash
+sudo nano .env
+```
+
+Genera la versió de producció:
+
+```bash
+sudo npm run build
+```
+
+## 4. Configuració de l'Apache
+
+Hauràs de crear un virtual host per a la teva aplicació. Per fer-ho, crea un fitxer de configuració per a l'Apache:
+
+```bash
+sudo nano /etc/apache2/sites-available/edgarquirante.conf
+```
+
+I afegeix el següent contingut:
+
+```apache
+<VirtualHost *:80>
+    ServerAdmin admin@tudominio.com
+    ServerName edgarquirante.edgarqs.dev
+    DocumentRoot /var/www/grup-6-edgar-quirante/individual/dist
+
+    <Directory /var/www/grup-6-edgar-quirante/individual/dist>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/edgarquirante-error.log
+    CustomLog ${APACHE_LOG_DIR}/edgarquirante-access.log combined
+</VirtualHost>
+```
+
+Activa el nou virtual host:
+
+```bash
+sudo a2ensite edgarquirante.conf
+sudo a2enmod rewrite
+sudo systemctl restart apache2
+```
+
+## 5. Configuració de permisos
+
+```bash
+sudo chown -R www-data:www-data /var/www/grup-6-edgar-quirante/individual
+sudo chmod -R 775 /var/www/grup-6-edgar-quirante/individual
+```
+
+## 6. Instal·lació de certificats SSL
+
+Per aconseguir un certificat SSL gratuït, pots utilitzar Let's Encrypt. Per instal·lar-lo, executa el següent:
+
+```bash
+sudo apt install certbot python3-certbot-apache
+sudo certbot --apache -d edgarquirante.edgarqs.dev
+```
