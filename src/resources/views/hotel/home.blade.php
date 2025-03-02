@@ -57,11 +57,13 @@
                     </div>
                 </a>
 
+                {{--
                 <a href="{{ route('hotel.configHotel', ['id' => request()->query('id')]) }}">
                     <div class="card card--resum-hotels card--botons-gestioHotel">
                         <h2 class="card__header"><span class="material-symbols-outlined">settings</span> Configuració</h2>
                     </div>
                 </a>
+                --}}
 
             </div>
         @endif
