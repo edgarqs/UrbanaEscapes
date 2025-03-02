@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router';
+import {useNavigate} from 'react-router-dom';
 
 import estandarImg from '@/assets/habitacio-estandar.avif';
 import deluxeImg from '@/assets/habitacio-deluxe.avif';

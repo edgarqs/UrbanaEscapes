@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BuscadorComponent from '@components/BuscadorComponent';
 import estandarImg from '@/assets/habitacio-estandar.avif';
 import deluxeImg from '@/assets/habitacio-deluxe.avif';
