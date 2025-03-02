@@ -8,6 +8,7 @@ use App\Http\Middleware\EnsureUserHasRole;
 use App\Http\Controllers\NoticiesController;
 use App\Http\Controllers\ReservasController;
 use App\Http\Controllers\HabitacionsController;
+use App\Http\Controllers\HotelSettingsController;
 
 // auth y EnsureUserHasRole:administrador
 Route::middleware(['auth', EnsureUserHasRole::class . ':administrador'])->group(function () {

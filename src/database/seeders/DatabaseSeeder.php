@@ -2,18 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\Habitacion;
-use Database\Seeders\ReservasSeeder;
-use Database\Seeders\ServeisSeeder;
-use Database\Seeders\UsersSeeder;
-use Database\Seeders\HotelSeeder;
-use App\Models\Reservas;
-use App\Models\Serveis;
 use App\Models\Usuari;
+use App\Models\Serveis;
+use App\Models\Reservas;
 use App\Models\Feedbacks;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Log;
+use App\Models\Habitacion;
 use Faker\Factory as Faker;
+use App\Models\HotelSetting;
+use Illuminate\Database\Seeder;
+use Database\Seeders\HotelSeeder;
+use Database\Seeders\UsersSeeder;
+use Database\Seeders\ServeisSeeder;
+use Illuminate\Support\Facades\Log;
+use Database\Seeders\ReservasSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -90,5 +91,20 @@ class DatabaseSeeder extends Seeder
             'rol_id' => 2
         ]);
         Log::channel('info_log')->info("Afegit usuari recepcionista", ['hotel_id' => $hotel_id, 'usuari_id' => $recepcionista->id]);
+
+        // Crear configuración del hotel
+        HotelSetting::create([
+            'hotel_id' => $hotel_id,
+            'secciones_visibles' => [
+                'buscador' => true,
+                'habitacions' => true,
+                'feedbacks' => true,
+                'noticies' => true
+            ],
+            'secciones_orden' => ["buscador", "habitacions", "feedbacks", "noticies"],
+            'noticias_cantidad' => 3,
+            'feedbacks_cantidad' => 5
+        ]);
+        Log::channel('info_log')->info("Configuración del hotel creada", ['hotel_id' => $hotel_id]);
     }
 }
