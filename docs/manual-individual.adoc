@@ -48,6 +48,31 @@ Genera la versió de producció:
 sudo npm run build
 ```
 
+Ves a la carpeta de producció:
+
+```bash
+cd dist
+```
+
+Crea un arxiu .htaccess:
+
+```bash
+sudo nano .htaccess
+```
+
+I afegeix el següent contingut:
+
+```apache
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.html [L]
+</IfModule>
+```
+
 ## 4. Configuració de l'Apache
 
 Hauràs de crear un virtual host per a la teva aplicació. Per fer-ho, crea un fitxer de configuració per a l'Apache:
