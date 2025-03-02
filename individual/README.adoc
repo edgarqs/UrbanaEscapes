@@ -1,0 +1,3 @@
+**Manual d'instal·lació del servidor a AWS (Desplegament) web individual:** * link:../docs/manual-individual.adoc[🔗 Manual de React]
+
+**Figma del projecte:** * link:https://https://www.figma.com/design/w2NRXFht4TSQg557Seu8s7/grup-6-edgar-quirante?node-id=1256-1528&t=375bYZetAZb5kcoe-1Z9Jw[🔗 Figma]
