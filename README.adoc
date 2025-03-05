@@ -1,20 +1,12 @@
-# Grup 6 - UrbanaEscapes
+# UrbanaEscapes
 
-## Integrants:
+This project is a Hotel Management Suite consisting of three interconnected websites designed to streamline hotel operations and enhance the booking experience.
 
-- Pol Gonzalez Miranda
-- Jon Perea Garcia
-- Edgar Quirante Sánchez
+## Project Structure
+`src/`: Contains the **Back-Office (BKO)** platform, used by hotel administrators and receptionists to manage hotels, rooms, and reservations.
 
-## WEBS:
+`web/`: Represents the **Hotel Chain Website**, showcasing all hotels in the chain, allowing users to browse rooms and make reservations across the entire hotel network.
 
-- link:https://web.pgonzalez.info[web.pgonzalez.info] - Edgar Quirante Sánchez
-- link:https://bko.pgonzalez.info[bko.pgonzalez.info] - Pol Gonzalez Miranda
+`individual/`: Corresponds to the **Individual Hotel Website**, focused on a single hotel, providing detailed information and enabling direct bookings.
 
-## Documentació:
-
-- link:docs/memoria.adoc[🔗 Memòria]
-
-- link:docs/manualServidor.adoc[🔗 Manual del Servidor]
-
-- link:docs/tests.adoc[🔗 Tests Laravel]
+Each section is designed to work seamlessly together to optimize hotel management and the user booking experience.
