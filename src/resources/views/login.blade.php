@@ -17,6 +17,18 @@
 
     <div class="form card" id="login-form">
         <h3 class="center">Iniciar Sessió</h3>
+        
+        <!-- Alerta de demo -->
+        <div class="alert alert-info demo-alert" style="background-color: #d1ecf1; color: #0c5460; padding: 12px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #bee5eb;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="material-symbols-outlined" style="font-size: 20px;">info</span>
+                <div>
+                    <strong>Demo Mode</strong><br>
+                    <small>Usuari: <code>admin</code> | Contrasenya: <code>admin</code></small>
+                </div>
+            </div>
+        </div>
+        
         <form action="{{ route('login.post') }}" method="post">
             @csrf
             <!-- Primera fila -->
