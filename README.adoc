@@ -3,10 +3,10 @@
 This project is a Hotel Management Suite consisting of three interconnected websites designed to streamline hotel operations and enhance the booking experience.
 
 ## Project Structure
-`src/`: Contains the **Back-Office (BKO)** platform, used by hotel administrators and receptionists to manage hotels, rooms, and reservations.
+`src/`: Contains the **Back-Office (BKO)** platform, used by hotel administrators and receptionists to manage hotels, rooms, and reservations. -> https://urbanasrc.edgarqs.dev
 
-`web/`: Represents the **Hotel Chain Website**, showcasing all hotels in the chain, allowing users to browse rooms and make reservations across the entire hotel network.
+`web/`: Represents the **Hotel Chain Website**, showcasing all hotels in the chain, allowing users to browse rooms and make reservations across the entire hotel network. -> https://urbanaweb.edgarqs.dev/
 
-`individual/`: Corresponds to the **Individual Hotel Website**, focused on a single hotel, providing detailed information and enabling direct bookings.
+`individual/`: Corresponds to the **Individual Hotel Website**, focused on a single hotel, providing detailed information and enabling direct bookings. -> https://urbanasakura.edgarqs.dev/
 
 Each section is designed to work seamlessly together to optimize hotel management and the user booking experience.
